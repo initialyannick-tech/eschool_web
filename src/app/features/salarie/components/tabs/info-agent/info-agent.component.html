@@ -1,0 +1,82 @@
+<!-- Informations principales de l'agent -->
+<div class="card mb-4">
+  <div class="card-header bg-body-primary text-white">
+    <h5>Informations de l'agent</h5>
+  </div>
+</div>
+<div class="card-body">
+  <div class="row">
+    <div class="col-md-6">
+      <p><strong>Matricul Agent :</strong> {{ dossier().matricule }}</p>
+      <p><strong>Nom :</strong> {{ dossier().nom }}</p>
+      <p><strong>Prénom :</strong> {{ dossier().prenom }}</p>
+      <p><strong>Genre :</strong> {{ dossier().sexe }}</p>
+      <p><strong>Date de Naissance :</strong> {{ dossier().date_naissance }}</p>
+    </div>
+    <div class="col-md-6">
+      <p><strong>Téléphone :</strong> {{ dossier().telephone }}</p>
+      <p><strong>Email :</strong> {{ dossier().email }}</p>
+      <p><strong>Adresse :</strong> {{ dossier().adresse }}</p>
+      <p><strong>Etat Civil :</strong> {{ dossier().statut_matrimonial }}</p>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-6">
+    <!-- Contacts -->
+    <div class="card mb-4">
+      <div class="card-header bg-primary text-white">
+        <h5>Personnes à Contacter </h5>
+      </div>
+      <div class="card-body">
+        <div class="row mb-3">
+          <div class="col-4">
+            <a class="btn btn-sm btn-primary">Nouveau Contact</a>
+          </div>
+        </div>
+        <table class="table table-bordered">
+          <thead class="table-primary">
+          <tr>
+            <th>Nom</th>
+            <th>Prénom</th>
+            <th>Téléphone</th>
+            <th>Type</th>
+            <th class="text-end">Action</th>
+          </tr>
+          </thead>
+          <tbody>
+
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  <div class="col-6">
+    <!-- Assurances -->
+    <div class="card mb-4">
+      <div class="card-header bg-primary text-white">
+        <h5>Assurances</h5>
+      </div>
+      <div class="card-body">
+        <div class="row mb-3">
+          <div class="col-4">
+            <a class="btn btn-sm btn-primary">Nouvelle Assurance</a>
+          </div>
+        </div>
+        <table class="table table-responsive">
+          <thead class="table-primary">
+          <tr>
+            <th>Dénomination</th>
+            <th>Type</th>
+            <th>Numéro</th>
+            <th class="text-end">Action</th>
+          </tr>
+          </thead>
+          <tbody>
+
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

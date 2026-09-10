@@ -1,0 +1,137 @@
+<div class="modal-header-gpec">
+  <div class="modal-title-area">
+    <div class="title-icon">
+      <i class="bi bi-person-gear"></i>
+    </div>
+
+    <div>
+      <h5>{{isEdit ? 'Modifier un utilisateur' : 'Nouvel utilisateur'}}</h5>
+
+      <small> Gestion des accès et des rôles </small>
+    </div>
+  </div>
+
+  <button type="button" class="btn-close" (click)="close()"></button>
+</div>
+
+<form (submit)="submit()" [formGroup]="userForm">
+  <div class="modal-body-gpec">
+    <!-- SECTION INFORMATIONS -->
+
+    <div class="form-block">
+      <div class="block-header">
+        <i class="bi bi-person-vcard"></i>
+
+        <span> Informations personnelles </span>
+      </div>
+
+      <div class="row g-3">
+        <div class="col-md-6">
+          <label> Nom </label>
+
+          <div class="input-icon">
+            <i class="bi bi-person"></i>
+
+            <input
+              class="form-control"
+              formControlName="nom"
+              placeholder="Nom"
+            />
+          </div>
+        </div>
+
+        <div class="col-md-6">
+          <label> Prénom </label>
+
+          <div class="input-icon">
+            <i class="bi bi-person"></i>
+
+            <input
+              class="form-control"
+              formControlName="prenom"
+              placeholder="Prénom"
+            />
+          </div>
+        </div>
+
+        <div class="col-md-6">
+          <label> Email professionnel </label>
+
+          <div class="input-icon">
+            <i class="bi bi-envelope"></i>
+
+            <input
+              class="form-control"
+              formControlName="email"
+              type="email"
+              placeholder="nom@entreprise.com"
+            />
+          </div>
+        </div>
+
+        @if(isEdit){
+
+          <div class="col-md-6">
+            <label> Statut </label>
+
+            <select class="form-select" formControlName="status">
+              <option value="active">Actif</option>
+
+              <option value="inactive">Inactif</option>
+            </select>
+          </div>
+
+        }
+      </div>
+    </div>
+
+    <!-- ROLE -->
+
+    <div class="form-block">
+      <div class="block-header">
+        <i class="bi bi-shield-lock"></i>
+
+        <span> Rôle et permissions </span>
+      </div>
+
+      <div class="row">
+        <div class="col-md-6">
+          <label> Profil utilisateur </label>
+
+          <ng-select
+            [items]="roles"
+            bindLabel="libelle"
+            bindValue="id"
+            formControlName="role_id"
+            placeholder="Choisir un rôle"
+          >
+          </ng-select>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal-footer-gpec">
+    <button class="btn btn-cancel" type="button" (click)="close()">
+      Annuler
+    </button>
+
+    @if(isSubmit){
+
+      <button class="btn btn-submit" disabled>
+        <i class="bi bi-arrow-repeat"></i>
+
+        Chargement...
+      </button>
+
+    } @else{
+
+      <button class="btn btn-submit" type="submit">
+        <i class="bi bi-check-circle"></i>
+
+        {{isEdit ? 'Mettre à jour' : 'Créer utilisateur'}}
+      </button>
+
+    }
+  </div>
+</form>

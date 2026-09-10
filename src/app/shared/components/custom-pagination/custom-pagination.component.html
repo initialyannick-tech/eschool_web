@@ -1,0 +1,25 @@
+<nav aria-label="Page navigation example">
+  <ul class="pagination pagination-primary">
+    @for (link of links; track link.url) {
+      @if (link.label == '&laquo; Previous') {
+        <li class="page-item">
+          <a class="page-link" (click)="onPageChange(link.url)">
+            <span aria-hidden="true">«</span>
+          </a>
+        </li>
+      } @else if ((link.label == 'Next &raquo;')) {
+        <li class="page-item">
+          <a (click)="onPageChange(link.url)" class="page-link">
+            <span aria-hidden="true">»</span>
+          </a>
+        </li>
+      } @else {
+        <li class="page-item" [ngClass]="{'active': link.active == true}">
+          <a class="page-link" (click)="onPageChange(link.url)">
+            {{ link.label }}
+          </a>
+        </li>
+      }
+    }
+  </ul>
+</nav>

@@ -1,0 +1,47 @@
+<div class="modal-header">
+  <h5 class="modal-title">Gérer un Poste</h5>
+  <a (click)="close()" class="btn-close"></a>
+</div>
+<form (submit)="submit()" [formGroup]="posteForm">
+  <div class="modal-body">
+    <div class="row">
+      <div class="col-6 mb-3">
+        <label>Libelle : </label>
+        <input class="form-control" formControlName="libelle" type="text">
+      </div>
+      <div class="col-6 mb-3">
+        <label>Métier : </label>
+        <ng-select [items]="metiers" bindLabel="libelle" bindValue="id" formControlName="metier_id" placeholder="Choisir un métier"></ng-select>
+      </div>
+      <div class="col-6 mb-3">
+        <label>Description : </label>
+        <textarea class="form-control" formControlName="description" rows="3"></textarea>
+      </div>
+      @if(isEdit){
+        <div class="col-md-6">
+          <label> Statut </label>
+          <select class="form-select" formControlName="actif">
+            <option value="1">Actif</option>
+            <option value="0">Inactif</option>
+          </select>
+        </div>
+      }
+    </div>
+  </div>
+  <div class="modal-footer">
+    @if (isEdit) {
+      @if (isSubmit) {
+        <button class="btn btn-success" disabled>Chargement...</button>
+      } @else {
+        <button class="btn btn-success" type="submit">Mettre à jour</button>
+      }
+    } @else {
+      @if (isSubmit) {
+        <button class="btn btn-primary" disabled>Chargement...</button>
+      } @else {
+        <button class="btn btn-primary" type="submit">Sauvegarder</button>
+      }
+    }
+  </div>
+</form>
+

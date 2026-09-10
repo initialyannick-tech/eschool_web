@@ -1,0 +1,88 @@
+<app-page-header
+  [backBtn]="true"
+  [titre]="'Liste des Rôles'">
+</app-page-header>
+
+<!-- TOOLBAR -->
+<div class="datatable-toolbar mt-3">
+
+  <div class="toolbar-left">
+    <button class="btn btn-primary" (click)="add()">
+      <i class="bi bi-plus-circle me-1"></i>
+      Ajouter un rôle
+    </button>
+  </div>
+
+  <div class="toolbar-right">
+    <input
+      class="form-control search-input"
+      placeholder="Rechercher un rôle..."
+      type="text">
+  </div>
+
+</div>
+
+<!-- TABLE WRAPPER -->
+<div class="datatable-wrapper mt-3">
+
+  @if (isLoad) {
+    <div class="datatable-loader">
+      <div class="spinner-border text-primary spinner-border-sm"></div>
+    </div>
+  } @else {
+
+    <div class="table-responsive">
+
+      <table class="datatable-table">
+
+        <thead>
+        <tr>
+          <th>Rôle</th>
+          <th class="text-end">Actions</th>
+        </tr>
+        </thead>
+
+        <tbody>
+
+          @for (role of roles; track role.id) {
+            <tr class="datatable-row">
+
+              <td class="role-cell">
+                <div class="role-badge">
+                  <i class="bi bi-shield-shaded"></i>
+                </div>
+                <div class="role-name">
+                  {{ role.libelle }}
+                </div>
+              </td>
+
+              <td class="actions-cell text-end">
+                <button class="btn btn-sm btn-outline-primary" (click)="edit(role)">
+                  <i class="bi bi-pencil"></i>
+                </button>
+
+                <button class="btn btn-sm btn-outline-danger" (click)="delete(role)">
+                  <i class="bi bi-trash"></i>
+                </button>
+              </td>
+
+            </tr>
+          }
+
+        </tbody>
+
+      </table>
+
+    </div>
+
+  }
+
+</div>
+
+<!-- PAGINATION -->
+<div class="datatable-footer">
+  <app-custom-pagination
+    (pageChange)="changePage($event)"
+    [links]="pagination">
+  </app-custom-pagination>
+</div>

@@ -1,0 +1,1721 @@
+/* ==========================================================
+   eSchool — GLOBAL DESIGN SYSTEM
+   Gestion scolaire moderne
+   Palette : Vert institutionnel + Or + Blanc
+========================================================== */
+
+
+/* ==========================================================
+   IMPORTS
+========================================================== */
+
+@import "bootstrap/dist/css/bootstrap.min.css";
+@import "bootstrap-icons/font/bootstrap-icons.css";
+@import "ngx-toastr/toastr";
+@import "@ng-select/ng-select/themes/default.theme.css";
+@import "bootstrap/scss/bootstrap";
+
+
+/* ==========================================================
+   DESIGN TOKENS
+========================================================== */
+
+:root {
+
+  /* --------------------------------------------------------
+     Couleurs principales
+  -------------------------------------------------------- */
+
+  --eschool-green-900: #063b27;
+  --eschool-green-800: #075437;
+  --eschool-green-700: #086b43;
+  --eschool-green-600: #0a7d4d;
+  --eschool-green-500: #14945d;
+
+  --eschool-gold-700: #b8860b;
+  --eschool-gold-600: #c99a18;
+  --eschool-gold-500: #e0b52f;
+  --eschool-gold-400: #edc94f;
+  --eschool-gold-300: #f5dd82;
+
+  /* --------------------------------------------------------
+     Couleurs fonctionnelles
+  -------------------------------------------------------- */
+
+  --eschool-primary: var(--eschool-green-700);
+  --eschool-primary-dark: var(--eschool-green-900);
+  --eschool-primary-light: #e7f4ee;
+
+  --eschool-secondary: var(--eschool-gold-500);
+  --eschool-secondary-dark: var(--eschool-gold-700);
+  --eschool-secondary-light: #fff8dc;
+
+  --eschool-success: #198754;
+  --eschool-success-light: #e8f6ef;
+
+  --eschool-danger: #dc3545;
+  --eschool-danger-light: #fdebed;
+
+  --eschool-warning: #d99a00;
+  --eschool-warning-light: #fff5d6;
+
+  --eschool-info: #168aad;
+  --eschool-info-light: #e7f6fa;
+
+  /* --------------------------------------------------------
+     Arrière-plans
+  -------------------------------------------------------- */
+
+  --eschool-bg: #f5f7f6;
+  --eschool-bg-soft: #f8faf9;
+  --eschool-bg-dark: #edf2ef;
+
+  --eschool-surface: #ffffff;
+  --eschool-surface-hover: #fbfdfc;
+
+  /* --------------------------------------------------------
+     Textes
+  -------------------------------------------------------- */
+
+  --eschool-text: #18332a;
+  --eschool-text-dark: #0c241b;
+  --eschool-text-muted: #6d7d76;
+  --eschool-text-light: #96a39e;
+  --eschool-text-white: #ffffff;
+
+  /* --------------------------------------------------------
+     Bordures
+  -------------------------------------------------------- */
+
+  --eschool-border: #dce6e1;
+  --eschool-border-light: #e9efec;
+  --eschool-border-dark: #c7d5ce;
+
+  /* --------------------------------------------------------
+     Rayons
+  -------------------------------------------------------- */
+
+  --eschool-radius-xs: 6px;
+  --eschool-radius-sm: 8px;
+  --eschool-radius-md: 12px;
+  --eschool-radius-lg: 16px;
+  --eschool-radius-xl: 20px;
+
+  /* --------------------------------------------------------
+     Ombres
+  -------------------------------------------------------- */
+
+  --eschool-shadow-xs:
+    0 2px 6px rgba(6, 59, 39, 0.05);
+
+  --eschool-shadow-sm:
+    0 5px 15px rgba(6, 59, 39, 0.07);
+
+  --eschool-shadow-md:
+    0 10px 30px rgba(6, 59, 39, 0.09);
+
+  --eschool-shadow-lg:
+    0 18px 45px rgba(6, 59, 39, 0.12);
+
+  /* --------------------------------------------------------
+     Espacements
+  -------------------------------------------------------- */
+
+  --eschool-space-1: 4px;
+  --eschool-space-2: 8px;
+  --eschool-space-3: 12px;
+  --eschool-space-4: 16px;
+  --eschool-space-5: 20px;
+  --eschool-space-6: 24px;
+  --eschool-space-7: 32px;
+  --eschool-space-8: 40px;
+  --eschool-space-9: 48px;
+  --eschool-space-10: 64px;
+
+  /* --------------------------------------------------------
+     Typographie
+  -------------------------------------------------------- */
+
+  --eschool-font-family:
+    "Poppins",
+    "Segoe UI",
+    Roboto,
+    Arial,
+    sans-serif;
+
+  --eschool-font-size-xs: 11px;
+  --eschool-font-size-sm: 13px;
+  --eschool-font-size-md: 14px;
+  --eschool-font-size-base: 15px;
+  --eschool-font-size-lg: 16px;
+  --eschool-font-size-xl: 18px;
+
+  --eschool-title-1: 32px;
+  --eschool-title-2: 28px;
+  --eschool-title-3: 24px;
+  --eschool-title-4: 20px;
+  --eschool-title-5: 18px;
+  --eschool-title-6: 16px;
+
+  /* --------------------------------------------------------
+     Transitions
+  -------------------------------------------------------- */
+
+  --eschool-transition-fast: 0.15s ease;
+  --eschool-transition: 0.25s ease;
+  --eschool-transition-slow: 0.35s ease;
+}
+
+
+/* ==========================================================
+   POLICES
+========================================================== */
+
+@font-face {
+
+  font-family: "Poppins";
+
+  src:
+    url("../fonts/poppins/Poppins-Regular.ttf")
+    format("truetype");
+
+  font-weight: 400;
+
+  font-style: normal;
+
+  font-display: swap;
+}
+
+
+@font-face {
+
+  font-family: "Poppins";
+
+  src:
+    url("../fonts/poppins/Poppins-Bold.ttf")
+    format("truetype");
+
+  font-weight: 700;
+
+  font-style: normal;
+
+  font-display: swap;
+}
+
+
+/* ==========================================================
+   RESET
+========================================================== */
+
+*,
+*::before,
+*::after {
+
+  box-sizing: border-box;
+}
+
+
+html,
+body {
+
+  width: 100%;
+
+  min-height: 100%;
+
+  margin: 0;
+
+  padding: 0;
+}
+
+
+html {
+
+  scroll-behavior: smooth;
+}
+
+
+body {
+
+  font-family: var(--eschool-font-family) !important;
+
+  font-size: var(--eschool-font-size-base);
+
+  font-weight: 400;
+
+  line-height: 1.6;
+
+  color: var(--eschool-text);
+
+  background-color: var(--eschool-bg);
+
+  -webkit-font-smoothing: antialiased;
+
+  -moz-osx-font-smoothing: grayscale;
+
+  overflow-x: hidden;
+}
+
+
+/* ==========================================================
+   SELECTION
+========================================================== */
+
+::selection {
+
+  background-color: var(--eschool-gold-300);
+
+  color: var(--eschool-green-900);
+}
+
+
+/* ==========================================================
+   TYPOGRAPHIE
+========================================================== */
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+
+  margin-top: 0;
+
+  color: var(--eschool-text-dark);
+
+  font-family: var(--eschool-font-family);
+
+  font-weight: 700;
+
+  line-height: 1.3;
+}
+
+
+h1 {
+
+  font-size: var(--eschool-title-1);
+}
+
+
+h2 {
+
+  font-size: var(--eschool-title-2);
+}
+
+
+h3 {
+
+  font-size: var(--eschool-title-3);
+}
+
+
+h4 {
+
+  font-size: var(--eschool-title-4);
+}
+
+
+h5 {
+
+  font-size: var(--eschool-title-5);
+}
+
+
+h6 {
+
+  font-size: var(--eschool-title-6);
+}
+
+
+p {
+
+  margin-top: 0;
+
+  color: var(--eschool-text);
+}
+
+
+small {
+
+  font-size: var(--eschool-font-size-sm);
+}
+
+
+.text-muted {
+
+  color: var(--eschool-text-muted) !important;
+}
+
+
+/* ==========================================================
+   LIENS
+========================================================== */
+
+a {
+
+  color: var(--eschool-primary);
+
+  text-decoration: none;
+
+  transition:
+    color var(--eschool-transition-fast),
+    opacity var(--eschool-transition-fast);
+}
+
+
+a:hover {
+
+  color: var(--eschool-primary-dark);
+}
+
+
+/* ==========================================================
+   LABELS
+========================================================== */
+
+label {
+
+  margin-bottom: var(--eschool-space-2);
+
+  color: var(--eschool-text-dark);
+
+  font-size: var(--eschool-font-size-sm);
+
+  font-weight: 600;
+}
+
+
+/* ==========================================================
+   FORMULAIRES
+========================================================== */
+
+.form-control,
+.form-select {
+
+  min-height: 44px;
+
+  padding:
+    9px
+    14px;
+
+  color: var(--eschool-text);
+
+  font-family: var(--eschool-font-family);
+
+  font-size: var(--eschool-font-size-sm);
+
+  background-color: var(--eschool-surface);
+
+  border:
+    1px solid
+    var(--eschool-border);
+
+  border-radius: var(--eschool-radius-sm) !important;
+
+  box-shadow: none;
+
+  transition:
+    border-color var(--eschool-transition),
+    box-shadow var(--eschool-transition),
+    background-color var(--eschool-transition);
+}
+
+
+.form-control:hover,
+.form-select:hover {
+
+  border-color: var(--eschool-border-dark);
+
+  background-color: var(--eschool-surface-hover);
+}
+
+
+.form-control:focus,
+.form-select:focus {
+
+  color: var(--eschool-text);
+
+  background-color: var(--eschool-surface);
+
+  border-color: var(--eschool-primary);
+
+  outline: none;
+
+  box-shadow:
+    0 0 0 3px
+    rgba(8, 107, 67, 0.10);
+}
+
+
+.form-control::placeholder {
+
+  color: var(--eschool-text-light);
+
+  opacity: 1;
+}
+
+
+.form-control:disabled,
+.form-select:disabled {
+
+  background-color: var(--eschool-bg-dark);
+
+  cursor: not-allowed;
+
+  opacity: 0.7;
+}
+
+
+textarea.form-control {
+
+  min-height: 100px;
+
+  resize: vertical !important;
+}
+
+
+/* ==========================================================
+   INPUT GROUP
+========================================================== */
+
+.input-group-text {
+
+  color: var(--eschool-primary);
+
+  background-color: var(--eschool-bg-soft);
+
+  border:
+    1px solid
+    var(--eschool-border);
+
+  font-size: var(--eschool-font-size-base);
+}
+
+
+.input-group .form-control:focus {
+
+  z-index: 3;
+}
+
+
+/* ==========================================================
+   CHECKBOX / RADIO
+========================================================== */
+
+.form-check-input {
+
+  border-color: var(--eschool-border-dark);
+
+  cursor: pointer;
+}
+
+
+.form-check-input:checked {
+
+  background-color: var(--eschool-primary);
+
+  border-color: var(--eschool-primary);
+}
+
+
+.form-check-input:focus {
+
+  border-color: var(--eschool-primary);
+
+  box-shadow:
+    0 0 0 3px
+    rgba(8, 107, 67, 0.10);
+}
+
+
+/* ==========================================================
+   BOUTONS
+========================================================== */
+
+.btn {
+
+  min-height: 42px;
+
+  padding:
+    9px
+    18px;
+
+  border-radius: var(--eschool-radius-sm);
+
+  font-family: var(--eschool-font-family);
+
+  font-size: var(--eschool-font-size-sm);
+
+  font-weight: 600;
+
+  transition:
+    transform var(--eschool-transition),
+    box-shadow var(--eschool-transition),
+    background-color var(--eschool-transition),
+    border-color var(--eschool-transition);
+}
+
+
+.btn:hover {
+
+  transform: translateY(-1px);
+}
+
+
+.btn:active {
+
+  transform: translateY(0);
+}
+
+
+/* ----------------------------------------------------------
+   Bouton principal
+---------------------------------------------------------- */
+
+.btn-primary {
+
+  color: var(--eschool-text-white) !important;
+
+  background-color: var(--eschool-primary) !important;
+
+  border-color: var(--eschool-primary) !important;
+
+  box-shadow:
+    0 4px 12px
+    rgba(8, 107, 67, 0.16);
+}
+
+
+.btn-primary:hover {
+
+  color: var(--eschool-text-white) !important;
+
+  background-color: var(--eschool-primary-dark) !important;
+
+  border-color: var(--eschool-primary-dark) !important;
+
+  box-shadow:
+    0 7px 18px
+    rgba(8, 107, 67, 0.22);
+}
+
+
+/* ----------------------------------------------------------
+   Bouton secondaire
+---------------------------------------------------------- */
+
+.btn-secondary {
+
+  color: var(--eschool-primary) !important;
+
+  background-color: var(--eschool-primary-light) !important;
+
+  border-color: var(--eschool-primary-light) !important;
+}
+
+
+.btn-secondary:hover {
+
+  background-color: #d9eee3 !important;
+
+  border-color: #d9eee3 !important;
+}
+
+
+/* ----------------------------------------------------------
+   Bouton or
+---------------------------------------------------------- */
+
+.btn-warning {
+
+  color: var(--eschool-green-900) !important;
+
+  background-color: var(--eschool-gold-500) !important;
+
+  border-color: var(--eschool-gold-500) !important;
+
+  font-weight: 700;
+}
+
+
+.btn-warning:hover {
+
+  color: var(--eschool-green-900) !important;
+
+  background-color: var(--eschool-gold-400) !important;
+
+  border-color: var(--eschool-gold-400) !important;
+}
+
+
+/* ----------------------------------------------------------
+   Bouton outline
+---------------------------------------------------------- */
+
+.btn-outline-primary {
+
+  color: var(--eschool-primary) !important;
+
+  border-color: var(--eschool-primary) !important;
+}
+
+
+.btn-outline-primary:hover {
+
+  color: white !important;
+
+  background-color: var(--eschool-primary) !important;
+
+  border-color: var(--eschool-primary) !important;
+}
+
+
+/* ==========================================================
+   CARTES
+========================================================== */
+
+.card {
+
+  overflow: hidden;
+
+  background-color: var(--eschool-surface);
+
+  border:
+    1px solid
+    var(--eschool-border-light) !important;
+
+  border-radius: var(--eschool-radius-lg) !important;
+
+  box-shadow: var(--eschool-shadow-sm);
+
+  transition:
+    box-shadow var(--eschool-transition),
+    transform var(--eschool-transition);
+}
+
+
+.card:hover {
+
+  box-shadow: var(--eschool-shadow-md);
+}
+
+
+.card-header {
+
+  padding:
+    16px
+    20px;
+
+  color: var(--eschool-text-dark);
+
+  background-color: var(--eschool-surface);
+
+  border-bottom:
+    1px solid
+    var(--eschool-border-light);
+
+  font-weight: 700;
+}
+
+
+.card-body {
+
+  padding: 20px;
+}
+
+
+.card-footer {
+
+  padding:
+    14px
+    20px;
+
+  background-color: var(--eschool-bg-soft);
+
+  border-top:
+    1px solid
+    var(--eschool-border-light);
+}
+
+
+/* ==========================================================
+   BLOCS / PANELS
+========================================================== */
+
+.eschool-panel {
+
+  padding: var(--eschool-space-6);
+
+  background-color: var(--eschool-surface);
+
+  border:
+    1px solid
+    var(--eschool-border-light);
+
+  border-radius: var(--eschool-radius-lg);
+
+  box-shadow: var(--eschool-shadow-xs);
+}
+
+
+.eschool-panel__title {
+
+  display: flex;
+
+  align-items: center;
+
+  gap: var(--eschool-space-3);
+
+  margin-bottom: var(--eschool-space-5);
+
+  color: var(--eschool-text-dark);
+
+  font-size: var(--eschool-font-size-lg);
+
+  font-weight: 700;
+}
+
+
+.eschool-panel__title i {
+
+  color: var(--eschool-primary);
+
+  font-size: 20px;
+}
+
+
+/* ==========================================================
+   TABLEAUX
+========================================================== */
+
+.table-responsive {
+
+  width: 100%;
+
+  overflow-x: auto;
+
+  -webkit-overflow-scrolling: touch;
+
+  border-radius: var(--eschool-radius-md);
+}
+
+
+.table {
+
+  width: 100%;
+
+  margin-bottom: 0;
+
+  color: var(--eschool-text);
+
+  background-color: var(--eschool-surface);
+
+  vertical-align: middle;
+
+  border-color: var(--eschool-border-light);
+}
+
+
+.table thead {
+
+  color: var(--eschool-text-white);
+
+  background-color: var(--eschool-green-800);
+}
+
+
+.table thead th {
+
+  padding:
+    13px
+    15px;
+
+  border: none;
+
+  font-size: var(--eschool-font-size-sm);
+
+  font-weight: 600;
+
+  white-space: nowrap;
+}
+
+
+.table tbody td {
+
+  padding:
+    13px
+    15px;
+
+  border-color: var(--eschool-border-light);
+
+  font-size: var(--eschool-font-size-sm);
+}
+
+
+.table tbody tr {
+
+  transition:
+    background-color var(--eschool-transition-fast);
+}
+
+
+.table-hover tbody tr:hover {
+
+  background-color: var(--eschool-primary-light);
+}
+
+
+.table-striped > tbody > tr:nth-of-type(odd) > * {
+
+  background-color: #fbfcfb;
+}
+
+
+/* ==========================================================
+   BADGES
+========================================================== */
+
+.badge {
+
+  padding:
+    5px
+    9px;
+
+  border-radius: 20px;
+
+  font-size: 11px;
+
+  font-weight: 600;
+}
+
+
+.badge-primary {
+
+  color: var(--eschool-primary-dark);
+
+  background-color: var(--eschool-primary-light);
+}
+
+
+.badge-success {
+
+  color: #11613b;
+
+  background-color: var(--eschool-success-light);
+}
+
+
+.badge-warning {
+
+  color: #765300;
+
+  background-color: var(--eschool-warning-light);
+}
+
+
+.badge-danger {
+
+  color: #9c1c2b;
+
+  background-color: var(--eschool-danger-light);
+}
+
+
+.badge-info {
+
+  color: #08617a;
+
+  background-color: var(--eschool-info-light);
+}
+
+
+/* ==========================================================
+   ALERTES
+========================================================== */
+
+.alert {
+
+  border-radius: var(--eschool-radius-md);
+
+  border-width: 1px;
+
+  font-size: var(--eschool-font-size-sm);
+}
+
+
+.alert-success {
+
+  color: #145c39;
+
+  background-color: var(--eschool-success-light);
+
+  border-color: #ccebd9;
+}
+
+
+.alert-danger {
+
+  color: #9b2635;
+
+  background-color: var(--eschool-danger-light);
+
+  border-color: #f3c7cd;
+}
+
+
+.alert-warning {
+
+  color: #765300;
+
+  background-color: var(--eschool-warning-light);
+
+  border-color: #f3df9f;
+}
+
+
+.alert-info {
+
+  color: #08617a;
+
+  background-color: var(--eschool-info-light);
+
+  border-color: #c5e8f0;
+}
+
+
+/* ==========================================================
+   BACKGROUNDS BOOTSTRAP
+========================================================== */
+
+.bg-primary {
+
+  background-color: var(--eschool-primary) !important;
+}
+
+
+.bg-success {
+
+  background-color: var(--eschool-success) !important;
+}
+
+
+.bg-warning {
+
+  background-color: var(--eschool-gold-500) !important;
+}
+
+
+.bg-light {
+
+  background-color: var(--eschool-bg-soft) !important;
+}
+
+
+.bg-body-tertiary {
+
+  background-color: var(--eschool-bg-soft) !important;
+}
+
+
+/* ==========================================================
+   TEXTES BOOTSTRAP
+========================================================== */
+
+.text-primary {
+
+  color: var(--eschool-primary) !important;
+}
+
+
+.text-success {
+
+  color: var(--eschool-success) !important;
+}
+
+
+.text-warning {
+
+  color: var(--eschool-gold-700) !important;
+}
+
+
+.text-danger {
+
+  color: var(--eschool-danger) !important;
+}
+
+
+.text-info {
+
+  color: var(--eschool-info) !important;
+}
+
+
+/* ==========================================================
+   BORDURES
+========================================================== */
+
+.border {
+
+  border-color: var(--eschool-border) !important;
+}
+
+
+.border-primary {
+
+  border:
+    1px solid
+    var(--eschool-primary) !important;
+}
+
+
+.border-success {
+
+  border-color: var(--eschool-success) !important;
+}
+
+
+.border-warning {
+
+  border-color: var(--eschool-gold-500) !important;
+}
+
+
+/* ==========================================================
+   PAGINATION
+========================================================== */
+
+.pagination {
+
+  gap: 4px;
+}
+
+
+.page-link {
+
+  min-width: 36px;
+
+  min-height: 36px;
+
+  display: inline-flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  color: var(--eschool-primary);
+
+  background-color: var(--eschool-surface);
+
+  border:
+    1px solid
+    var(--eschool-border);
+
+  border-radius: var(--eschool-radius-xs) !important;
+
+  font-size: var(--eschool-font-size-sm);
+}
+
+
+.page-link:hover {
+
+  color: var(--eschool-primary-dark);
+
+  background-color: var(--eschool-primary-light);
+
+  border-color: var(--eschool-border-dark);
+}
+
+
+.page-item.active .page-link {
+
+  color: white;
+
+  background-color: var(--eschool-primary);
+
+  border-color: var(--eschool-primary);
+}
+
+
+/* ==========================================================
+   DROPDOWNS
+========================================================== */
+
+.dropdown-menu {
+
+  padding: 7px;
+
+  background-color: var(--eschool-surface);
+
+  border:
+    1px solid
+    var(--eschool-border-light);
+
+  border-radius: var(--eschool-radius-md);
+
+  box-shadow: var(--eschool-shadow-md);
+}
+
+
+.dropdown-item {
+
+  padding:
+    9px
+    12px;
+
+  color: var(--eschool-text);
+
+  border-radius: var(--eschool-radius-xs);
+
+  font-size: var(--eschool-font-size-sm);
+
+  transition:
+    background-color var(--eschool-transition-fast),
+    color var(--eschool-transition-fast);
+}
+
+
+.dropdown-item:hover,
+.dropdown-item:focus {
+
+  color: var(--eschool-primary-dark);
+
+  background-color: var(--eschool-primary-light);
+}
+
+
+/* ==========================================================
+   NAVIGATION
+========================================================== */
+
+.nav-link {
+
+  color: var(--eschool-text-muted);
+
+  font-size: var(--eschool-font-size-sm);
+
+  font-weight: 500;
+
+  transition:
+    color var(--eschool-transition),
+    background-color var(--eschool-transition);
+}
+
+
+.nav-link:hover {
+
+  color: var(--eschool-primary);
+}
+
+
+.nav-link.active {
+
+  color: var(--eschool-primary) !important;
+
+  font-weight: 600;
+}
+
+
+/* ==========================================================
+   BREADCRUMB
+========================================================== */
+
+.breadcrumb {
+
+  margin-bottom: 0;
+
+  font-size: var(--eschool-font-size-sm);
+}
+
+
+.breadcrumb-item a {
+
+  color: var(--eschool-primary);
+}
+
+
+.breadcrumb-item.active {
+
+  color: var(--eschool-text-muted);
+}
+
+
+/* ==========================================================
+   MODAL
+========================================================== */
+
+.modal-content {
+
+  overflow: hidden;
+
+  border:
+    1px solid
+    var(--eschool-border-light);
+
+  border-radius: var(--eschool-radius-lg);
+
+  box-shadow: var(--eschool-shadow-lg);
+}
+
+
+.modal-header {
+
+  padding:
+    18px
+    22px;
+
+  background-color: var(--eschool-surface);
+
+  border-bottom:
+    1px solid
+    var(--eschool-border-light);
+}
+
+
+.modal-title {
+
+  color: var(--eschool-text-dark);
+
+  font-size: var(--eschool-font-size-lg);
+
+  font-weight: 700;
+}
+
+
+.modal-body {
+
+  padding: 22px;
+}
+
+
+.modal-footer {
+
+  padding:
+    15px
+    22px;
+
+  background-color: var(--eschool-bg-soft);
+
+  border-top:
+    1px solid
+    var(--eschool-border-light);
+}
+
+
+/* ==========================================================
+   TOOLTIPS / POPOVERS
+========================================================== */
+
+.tooltip-inner {
+
+  padding:
+    7px
+    10px;
+
+  background-color: var(--eschool-green-900);
+
+  border-radius: var(--eschool-radius-xs);
+
+  font-size: 12px;
+}
+
+
+.popover {
+
+  border:
+    1px solid
+    var(--eschool-border);
+
+  border-radius: var(--eschool-radius-md);
+
+  box-shadow: var(--eschool-shadow-md);
+}
+
+
+/* ==========================================================
+   BLOCKQUOTE
+========================================================== */
+
+.blockquote {
+
+  margin: 0;
+
+  padding:
+    16px
+    20px;
+
+  color: var(--eschool-text);
+
+  background-color: var(--eschool-surface);
+
+  border-left:
+    4px solid
+    var(--eschool-gold-500);
+
+  border-radius:
+    0
+    var(--eschool-radius-sm)
+    var(--eschool-radius-sm)
+    0;
+
+  font-size: var(--eschool-font-size-sm);
+}
+
+
+/* ==========================================================
+   ICÔNES
+========================================================== */
+
+.bi {
+
+  vertical-align: -0.1em;
+}
+
+
+.icon-primary {
+
+  color: var(--eschool-primary);
+}
+
+
+.icon-gold {
+
+  color: var(--eschool-gold-600);
+}
+
+
+.icon-success {
+
+  color: var(--eschool-success);
+}
+
+
+.icon-danger {
+
+  color: var(--eschool-danger);
+}
+
+
+/* ==========================================================
+   UTILITAIRES eSchool
+========================================================== */
+
+.eschool-text-primary {
+
+  color: var(--eschool-primary) !important;
+}
+
+
+.eschool-text-gold {
+
+  color: var(--eschool-gold-600) !important;
+}
+
+
+.eschool-bg-primary {
+
+  background-color: var(--eschool-primary) !important;
+}
+
+
+.eschool-bg-light {
+
+  background-color: var(--eschool-primary-light) !important;
+}
+
+
+.eschool-bg-gold {
+
+  background-color: var(--eschool-secondary-light) !important;
+}
+
+
+.eschool-shadow {
+
+  box-shadow: var(--eschool-shadow-md) !important;
+}
+
+
+.eschool-rounded {
+
+  border-radius: var(--eschool-radius-md) !important;
+}
+
+
+/* ==========================================================
+   SCROLLBAR
+========================================================== */
+
+::-webkit-scrollbar {
+
+  width: 7px;
+
+  height: 7px;
+}
+
+
+::-webkit-scrollbar-track {
+
+  background: var(--eschool-bg-soft);
+}
+
+
+::-webkit-scrollbar-thumb {
+
+  background-color: #b7c8c0;
+
+  border-radius: 20px;
+}
+
+
+::-webkit-scrollbar-thumb:hover {
+
+  background-color: var(--eschool-primary);
+}
+
+
+/* ==========================================================
+   CONTAINERS
+========================================================== */
+
+.container-fluid {
+
+  width: 100%;
+
+  padding-right: var(--eschool-space-5);
+
+  padding-left: var(--eschool-space-5);
+}
+
+
+.row {
+
+  margin-right: -8px;
+
+  margin-left: -8px;
+}
+
+
+[class*="col-"] {
+
+  padding-right: 8px;
+
+  padding-left: 8px;
+}
+
+
+/* ==========================================================
+   RESPONSIVE — TABLETTE
+========================================================== */
+
+@media (max-width: 992px) {
+
+  :root {
+
+    --eschool-title-1: 28px;
+
+    --eschool-title-2: 24px;
+
+    --eschool-title-3: 21px;
+  }
+
+
+  .container-fluid {
+
+    padding-right: var(--eschool-space-4);
+
+    padding-left: var(--eschool-space-4);
+  }
+
+
+  .card-body {
+
+    padding: 18px;
+  }
+
+
+  .table {
+
+    min-width: 700px;
+  }
+}
+
+
+/* ==========================================================
+   RESPONSIVE — MOBILE
+========================================================== */
+
+@media (max-width: 768px) {
+
+  body {
+
+    font-size: 14px;
+  }
+
+
+  h1 {
+
+    font-size: 26px;
+  }
+
+
+  h2 {
+
+    font-size: 23px;
+  }
+
+
+  h3 {
+
+    font-size: 20px;
+  }
+
+
+  .container-fluid {
+
+    padding-right: 12px;
+
+    padding-left: 12px;
+  }
+
+
+  .card {
+
+    border-radius: var(--eschool-radius-md) !important;
+  }
+
+
+  .card-body {
+
+    padding: 16px;
+  }
+
+
+  .card-header {
+
+    padding: 14px 16px;
+  }
+
+
+  .btn {
+
+    min-height: 40px;
+  }
+
+
+  .form-control,
+  .form-select {
+
+    min-height: 42px;
+  }
+
+
+  .table thead th,
+  .table tbody td {
+
+    padding:
+      10px
+      12px;
+  }
+
+
+  /*
+     Sur mobile, les boutons Bootstrap
+     restent utilisables sans forcer
+     automatiquement width: 100%.
+  */
+
+  .btn-mobile-full {
+
+    width: 100%;
+  }
+}
+
+
+/* ==========================================================
+   PETITS ÉCRANS
+========================================================== */
+
+@media (max-width: 576px) {
+
+  :root {
+
+    --eschool-title-1: 24px;
+
+    --eschool-title-2: 21px;
+
+    --eschool-title-3: 19px;
+
+    --eschool-space-6: 20px;
+  }
+
+
+  .container-fluid {
+
+    padding-right: 10px;
+
+    padding-left: 10px;
+  }
+
+
+  .modal-body {
+
+    padding: 18px;
+  }
+
+
+  .modal-footer {
+
+    padding: 12px 18px;
+  }
+
+
+  .eschool-panel {
+
+    padding: 18px;
+  }
+}
+
+
+/* ==========================================================
+   ACCESSIBILITÉ
+========================================================== */
+
+:focus-visible {
+
+  outline:
+    2px solid
+    var(--eschool-gold-500);
+
+  outline-offset: 2px;
+}
+
+
+/* ==========================================================
+   PRINT
+========================================================== */
+
+@media print {
+
+  body {
+
+    background: white !important;
+  }
+
+
+  .card {
+
+    box-shadow: none !important;
+
+    border:
+      1px solid
+      #ddd !important;
+  }
+
+
+  .btn {
+
+    box-shadow: none !important;
+  }
+}
+

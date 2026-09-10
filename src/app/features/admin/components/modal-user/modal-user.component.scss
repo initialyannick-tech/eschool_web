@@ -1,0 +1,299 @@
+.modal-header-gpec{
+
+  padding:22px 25px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #123B7A,
+      #1D5DB6
+    );
+
+  display:flex;
+
+  align-items:center;
+
+  justify-content:space-between;
+
+  border-radius:20px 20px 0 0;
+
+  color:white;
+
+}
+
+
+
+.modal-title-area{
+
+  display:flex;
+
+  align-items:center;
+
+  gap:15px;
+
+
+  h5{
+
+    margin:0;
+
+    font-size:19px;
+
+    font-weight:700;
+
+  }
+
+
+  small{
+
+    opacity:.8;
+
+  }
+
+}
+
+
+
+.title-icon{
+
+  width:48px;
+
+  height:48px;
+
+  display:flex;
+
+  align-items:center;
+
+  justify-content:center;
+
+  background:#F7A31B;
+
+  color:#123B7A;
+
+  border-radius:15px;
+
+
+  i{
+
+    font-size:23px;
+
+  }
+
+}
+
+
+
+
+
+.modal-body-gpec{
+
+  padding:25px;
+
+  background:#F4F7FC;
+
+}
+
+
+
+
+.form-block{
+
+  background:white;
+
+  border-radius:18px;
+
+  padding:22px;
+
+  margin-bottom:18px;
+
+  box-shadow:
+
+    0 8px 25px rgba(18,59,122,.08);
+
+
+}
+
+
+
+
+.block-header{
+
+  display:flex;
+
+  align-items:center;
+
+  gap:10px;
+
+  font-weight:700;
+
+  color:#123B7A;
+
+  font-size:15px;
+
+  margin-bottom:20px;
+
+
+  i{
+
+    color:#F7A31B;
+
+    font-size:20px;
+
+  }
+
+}
+
+
+
+
+label{
+
+  font-size:14px;
+
+  font-weight:600;
+
+  color:#344054;
+
+  margin-bottom:7px;
+
+}
+
+
+
+
+.input-icon{
+
+  position:relative;
+
+
+  i{
+
+    position:absolute;
+
+    left:15px;
+
+    top:14px;
+
+    color:#123B7A;
+
+  }
+
+
+  .form-control{
+
+    padding-left:42px;
+
+  }
+
+
+}
+
+
+
+.form-control,
+.form-select{
+
+
+  height:46px;
+
+  border-radius:12px;
+
+  border:1px solid #D7DFEC;
+
+}
+
+
+
+.form-control:focus,
+.form-select:focus{
+
+
+  border-color:#123B7A;
+
+
+  box-shadow:
+
+    0 0 0 .15rem rgba(18,59,122,.15);
+
+
+}
+
+
+
+::ng-deep .ng-select-container{
+
+
+  min-height:46px!important;
+
+  border-radius:12px!important;
+
+  border-color:#D7DFEC!important;
+
+
+}
+
+
+
+
+.modal-footer-gpec{
+
+
+  padding:18px 25px;
+
+  display:flex;
+
+  justify-content:flex-end;
+
+  gap:12px;
+
+  background:white;
+
+  border-radius:0 0 20px 20px;
+
+
+}
+
+
+
+
+.btn-submit{
+
+  background:#123B7A;
+
+  color:white;
+
+  border:none;
+
+  border-radius:12px;
+
+  padding:11px 25px;
+
+  font-weight:600;
+
+
+}
+
+
+
+.btn-submit:hover{
+
+  background:#F7A31B;
+
+  color:#123B7A;
+
+}
+
+
+
+.btn-cancel{
+
+  background:#F4F7FC;
+
+  border:none;
+
+  border-radius:12px;
+
+  padding:11px 25px;
+
+  font-weight:600;
+
+}

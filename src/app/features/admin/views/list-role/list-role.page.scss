@@ -1,0 +1,119 @@
+.datatable-toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+}
+
+.toolbar-right {
+  width: 280px;
+}
+
+.search-input {
+  border-radius: 10px;
+}
+
+/* WRAPPER */
+.datatable-wrapper {
+  background: #fff;
+  border-radius: 14px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.06);
+  overflow: hidden;
+}
+
+/* LOADER */
+.datatable-loader {
+  display: flex;
+  justify-content: center;
+  padding: 2rem;
+}
+
+/* TABLE */
+.datatable-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+/* HEADER */
+.datatable-table thead {
+  background: #f8fafc;
+}
+
+.datatable-table th {
+  text-align: left;
+  font-size: 0.85rem;
+  color: #64748b;
+  padding: 0.9rem 1rem;
+  font-weight: 600;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+/* ROWS */
+.datatable-row {
+  transition: background 0.2s ease;
+}
+
+.datatable-row:hover {
+  background: #f1f5f9;
+}
+
+/* CELLS */
+.datatable-table td {
+  padding: 0.9rem 1rem;
+  border-bottom: 1px solid #f1f1f1;
+}
+
+/* ROLE CELL */
+.role-cell {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+}
+
+.role-badge {
+  width: 34px;
+  height: 34px;
+  border-radius: 10px;
+  background: #e0f2fe;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #0284c7;
+  font-size: 1.1rem;
+}
+
+.role-name {
+  font-weight: 600;
+  color: #111827;
+}
+
+/* ACTIONS */
+.actions-cell button {
+  margin-left: 0.4rem;
+  border-radius: 8px;
+}
+
+/* FOOTER */
+.datatable-footer {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 1rem;
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  .toolbar-right {
+    width: 180px;
+  }
+
+  .datatable-table th,
+  .datatable-table td {
+    padding: 0.7rem;
+  }
+
+  .role-badge {
+    width: 28px;
+    height: 28px;
+    font-size: 1rem;
+  }
+}

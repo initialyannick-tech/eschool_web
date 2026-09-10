@@ -1,0 +1,164 @@
+<div class="auth-page">
+  <!-- =====================================================
+       DÉCORATION DE FOND
+  ====================================================== -->
+  <div class="auth-background">
+    <div class="background-circle background-circle--one"></div>
+    <div class="background-circle background-circle--two"></div>
+    <div class="background-pattern">
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+
+  </div>
+
+  <!-- =====================================================
+       CONTENU PRINCIPAL
+  ====================================================== -->
+
+  <main class="auth-main">
+    <!-- ===================================================
+         EN-TÊTE
+    ==================================================== -->
+    <header class="portal-header">
+      <div class="portal-brand">
+        <div class="portal-brand__logo">
+          <img src="assets/img/eschool_logo.png" alt="Logo eSchool">
+        </div>
+
+        <div class="portal-brand__identity">
+          <strong>eSchool</strong>
+          <span>Gestion scolaire numérique</span>
+        </div>
+      </div>
+      <div class="portal-context">
+        <span class="portal-context__indicator"></span>
+        <span>Portail sécurisé</span>
+      </div>
+    </header>
+    <!-- ===================================================
+         ESPACE DE CONNEXION
+    ==================================================== -->
+    <section class="auth-workspace">
+      <!-- Élément décoratif -->
+      <div class="workspace-decoration">
+        <div class="decoration-icon">
+          <i class="bi bi-mortarboard-fill"></i>
+        </div>
+        <span class="decoration-line"></span>
+      </div>
+      <!-- =================================================
+           BLOC DE CONNEXION
+      ================================================== -->
+      <div class="auth-panel">
+        <!-- En-tête -->
+        <div style="text-align: center" class="auth-panel__header">
+          <div style="text-align: center" class="auth-panel__eyebrow">
+            <span></span>ESPACE ÉTABLISSEMENT
+          </div>
+          <h1>Connexion</h1>
+          <p>Accédez à votre espace de gestion scolaire</p>
+        </div>
+        <!-- =================================================
+             FORMULAIRE
+        ================================================== -->
+        <form class="auth-form" [formGroup]="loginForm" (ngSubmit)="login()">
+          <!-- Email -->
+          <div class="field">
+            <label class="field__label" for="email">Adresse e-mail</label>
+            <div class="field__control">
+              <div class="field__icon">
+                <i class="bi bi-envelope"></i>
+              </div>
+              <input id="email" type="email" class="field__input" formControlName="email" placeholder="Votre adresse e-mail">
+            </div>
+          </div>
+          <!-- Mot de passe -->
+          <div class="field">
+            <label class="field__label" for="password">Mot de passe</label>
+            <div class="field__control">
+              <div class="field__icon">
+                <i class="bi bi-lock"></i>
+              </div>
+              <input id="password" type="password" class="field__input" formControlName="password" placeholder="Votre mot de passe">
+              <span class="field__secure">
+               <i class="bi bi-shield-check"></i>
+          </span>
+            </div>
+          </div>
+          <!-- Options -->
+          <div class="form-options">
+            <label class="remember">
+              <input type="checkbox">
+              <span class="remember__box"><i class="bi bi-check"></i></span>
+              <span class="remember__text">Se souvenir de moi</span>
+            </label>
+            <a href="#" class="forgot-password">Mot de passe oublié ?</a>
+          </div>
+          <!-- =================================================
+               BOUTON CONNEXION
+          ================================================== -->
+          @if(isSubmit){
+            <button class="auth-button" disabled>
+               <span class="spinner-border spinner-border-sm me-2"></span>
+              <span>Connexion en cours...</span>
+            </button>
+          }@else{
+            <button class="auth-button" type="submit">
+
+          <span>Accéder à mon espace</span>
+              <i class="bi bi-arrow-right"></i>
+            </button>
+          }
+        </form>
+        <!-- =================================================
+             GARANTIE DE SÉCURITÉ
+        ================================================== -->
+        <div class="security-banner">
+
+          <div class="security-banner__icon">
+            <i class="bi bi-shield-lock-fill"></i>
+          </div>
+
+          <div class="security-banner__content">
+            <strong>Connexion protégée</strong>
+            <span>Vos données scolaires sont sécurisées.</span>
+          </div>
+          <i class="bi bi-check-circle-fill security-banner__check"></i>
+        </div>
+      </div>
+      <!-- =================================================
+           INFORMATIONS LATÉRALES
+      ================================================== -->
+      <aside class="workspace-info">
+        <div class="workspace-info__number">01</div>
+        <div class="workspace-info__content">
+         <span>VOTRE ÉTABLISSEMENT</span>
+          <strong>Une gestion scolaire<br>centralisée.</strong>
+          <p>Retrouvez vos outils administratifs, pédagogiques et financiers depuis une seule plateforme.</p>
+        </div>
+        <div class="workspace-info__accent">
+          <i class="bi bi-arrow-down-right"></i>
+        </div>
+      </aside>
+    </section>
+    <!-- ===================================================
+         PIED DE PAGE
+    ==================================================== -->
+    <footer class="portal-footer">
+      <div class="portal-footer__left">
+      <span>© 2026 eSchool</span>
+        <span class="portal-footer__separator"></span>
+        <span>Système numérique de gestion scolaire</span>
+      </div>
+      <div class="portal-footer__right">
+        <span><i class="bi bi-geo-alt-fill"></i>Gabon</span>
+        <span><i class="bi bi-shield-check"></i>Accès sécurisé</span>
+      </div>
+    </footer>
+  </main>
+</div>

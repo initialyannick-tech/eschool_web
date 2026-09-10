@@ -1,0 +1,74 @@
+{
+  "name": "e-school-web",
+  "version": "0.0.0",
+  "scripts": {
+    "ng": "ng",
+    "start": "ng serve",
+    "build": "ng build",
+    "watch": "ng build --watch --configuration development",
+    "test": "ng test",
+    "serve:ssr:app-gbl-web": "node dist/e-school-web/server/server.mjs",
+    "g:init": "init-project",
+    "g:component": "create-component",
+    "g:service": "create-service",
+    "g:model": "create-model",
+    "g:page": "create-page",
+    "g:package": "create-package",
+    "g:guard": "create-guard",
+    "g:directive": "create-directive",
+    "g:pipe": "create-pipe",
+    "help": "angular-cli-help"
+  },
+  "prettier": {
+    "printWidth": 100,
+    "singleQuote": true,
+    "overrides": [
+      {
+        "files": "*.html",
+        "options": {
+          "parser": "angular"
+        }
+      }
+    ]
+  },
+  "private": true,
+  "packageManager": "npm@11.6.2",
+  "dependencies": {
+    "@angular/animations": "^21.0.6",
+    "@angular/common": "^21.0.0",
+    "@angular/compiler": "^21.0.0",
+    "@angular/core": "^21.0.0",
+    "@angular/forms": "^21.0.0",
+    "@angular/platform-browser": "^21.0.0",
+    "@angular/platform-server": "^21.0.0",
+    "@angular/router": "^21.0.0",
+    "@angular/ssr": "^21.0.4",
+    "@ng-bootstrap/ng-bootstrap": "^20.0.0",
+    "@ng-select/ng-select": "^21.1.4",
+    "@popperjs/core": "^2.11.8",
+    "bootstrap": "^5.3.8",
+    "bootstrap-icons": "^1.13.1",
+    "chart.js": "^4.5.1",
+    "express": "^5.1.0",
+    "moment": "^2.30.1",
+    "ng-form-validations": "^1.0.4",
+    "ngx-permissions": "^19.0.0",
+    "ngx-toastr": "^19.1.0",
+    "rxjs": "~7.8.0",
+    "sweetalert2": "^11.26.17",
+    "tslib": "^2.3.0",
+    "zone.js": "^0.16.0"
+  },
+  "devDependencies": {
+    "@angular/build": "^21.0.4",
+    "@angular/cli": "^21.0.4",
+    "@angular/compiler-cli": "^21.0.0",
+    "@angular/localize": "^21.0.0",
+    "@types/express": "^5.0.1",
+    "@types/node": "^20.17.19",
+    "angular-cli-helper": "^5.20.0",
+    "jsdom": "^27.1.0",
+    "typescript": "~5.9.2",
+    "vitest": "^4.0.8"
+  }
+}

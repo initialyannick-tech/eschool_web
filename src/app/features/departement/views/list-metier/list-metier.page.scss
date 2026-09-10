@@ -1,0 +1,375 @@
+:host{
+
+  --primary:#123B7A;
+  --primary-light:#1D5DB6;
+  --hover:#0B2854;
+  --accent:#F7A31B;
+  --background:#F4F7FC;
+
+}
+
+
+/* Recherche */
+
+.search-input{
+
+  height:42px;
+
+  border-radius:10px;
+
+  border:1px solid #d9e2f2;
+
+}
+
+
+.search-input:focus{
+
+  border-color:var(--primary);
+
+  box-shadow:0 0 0 .2rem rgba(18,59,122,.15);
+
+}
+
+
+
+/* Bouton ajout */
+
+.btn-primary{
+
+  background:var(--primary);
+
+  border:none;
+
+  padding:10px 18px;
+
+  border-radius:10px;
+
+}
+
+
+.btn-primary:hover{
+
+  background:var(--hover);
+
+}
+
+
+
+/* Loading */
+
+.loading-box{
+
+  height:250px;
+
+  display:flex;
+
+  flex-direction:column;
+
+  justify-content:center;
+
+  align-items:center;
+
+  color:#666;
+
+}
+
+
+
+
+/* CARTE SERVICE */
+
+
+.service-card{
+
+  background:white;
+
+  border-radius:18px;
+
+  overflow:hidden;
+
+  box-shadow:0 8px 25px rgba(0,0,0,.08);
+
+  height:100%;
+
+  transition:.3s;
+
+}
+
+
+.service-card:hover{
+
+  transform:translateY(-5px);
+
+  box-shadow:0 12px 30px rgba(0,0,0,.15);
+
+}
+
+
+
+/* Header service */
+
+
+.service-header{
+
+  background:linear-gradient(
+    135deg,
+    var(--primary),
+    var(--primary-light)
+  );
+
+  padding:18px;
+
+  display:flex;
+
+  justify-content:space-between;
+
+  align-items:center;
+
+  color:white;
+
+}
+
+
+
+.service-title{
+
+  font-size:18px;
+
+  font-weight:600;
+
+}
+
+
+.service-title i{
+
+  margin-right:8px;
+
+}
+
+
+
+.service-count{
+
+  background:var(--accent);
+
+  color:#222;
+
+  padding:5px 12px;
+
+  border-radius:20px;
+
+  font-size:13px;
+
+  font-weight:600;
+
+}
+
+
+
+/* Corps */
+
+
+.service-body{
+
+  padding:15px;
+
+}
+
+
+
+
+/* METIER */
+
+
+.metier-card{
+
+  background:#f9fbff;
+
+  border:1px solid #e6edf8;
+
+  border-radius:12px;
+
+  padding:12px;
+
+  margin-bottom:12px;
+
+  display:flex;
+
+  justify-content:space-between;
+
+  align-items:center;
+
+  transition:.2s;
+
+}
+
+
+
+.metier-card:hover{
+
+  background:white;
+
+  border-color:#c7d8f5;
+
+}
+
+
+
+.metier-code{
+
+  font-size:12px;
+
+  font-weight:bold;
+
+  color:var(--primary);
+
+}
+
+
+
+.metier-info h6{
+
+  margin:4px 0;
+
+  font-size:15px;
+
+  font-weight:600;
+
+  color:#333;
+
+}
+
+
+
+.metier-info p{
+
+  margin:0;
+
+  font-size:13px;
+
+  color:#777;
+
+}
+
+
+
+.metier-info p i{
+
+  color:var(--primary);
+
+}
+
+
+
+/* Statut */
+
+
+.badge-active{
+
+  display:inline-block;
+
+  margin-top:8px;
+
+  background:#d1fae5;
+
+  color:#047857;
+
+  font-size:12px;
+
+  padding:3px 10px;
+
+  border-radius:20px;
+
+}
+
+
+
+.badge-inactive{
+
+  display:inline-block;
+
+  margin-top:8px;
+
+  background:#fee2e2;
+
+  color:#b91c1c;
+
+  font-size:12px;
+
+  padding:3px 10px;
+
+  border-radius:20px;
+
+}
+
+
+
+/* Actions */
+
+
+.metier-actions{
+
+  display:flex;
+
+  gap:5px;
+
+}
+
+
+
+.metier-actions button{
+
+  width:32px;
+
+  height:32px;
+
+  display:flex;
+
+  align-items:center;
+
+  justify-content:center;
+
+  border-radius:8px;
+
+}
+
+
+
+/* Responsive */
+
+
+@media(max-width:768px){
+
+
+  .service-header{
+
+    flex-direction:column;
+
+    align-items:flex-start;
+
+    gap:10px;
+
+  }
+
+
+  .metier-card{
+
+    flex-direction:column;
+
+    align-items:flex-start;
+
+    gap:10px;
+
+  }
+  .service-card{
+    min-height: 350px;
+  }
+
+  .metier-actions{
+
+    width:100%;
+
+  }
+
+
+}
