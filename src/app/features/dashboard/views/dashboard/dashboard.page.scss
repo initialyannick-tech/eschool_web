@@ -1,406 +1,424 @@
-.dashboard-container{
+/* ==========================================================
+eSchool — TABLEAU DE BORD
+========================================================== */
 
-  padding:25px;
+/* ==========================================================
+VARIABLES
+========================================================== */
 
-  background:#F4F7FC;
+:host {
+  --green-950: #062e24;
+  --green-900: #073d2f;
+  --green-800: #07543f;
+  --green-700: #087354;
 
-  min-height:100vh;
+  --green-500: #14966e;
+  --green-100: #e9f6f1;
 
+  --gold-600: #c49318;
+  --gold-500: #d7a92b;
+  --gold-100: #fbf5df;
+
+  --white: #ffffff;
+
+  --gray-950: #17252d;
+  --gray-800: #35454e;
+  --gray-600: #697981;
+  --gray-200: #e3e9ec;
+  --gray-100: #f5f7f8;
+
+  --page-background: #edf2f0;
+
+  --success-bg: #e3f6ea;
+  --success-text: #17803c;
+
+  --warning-bg: var(--gold-100);
+  --warning-text: #a96f00;
 }
 
+/* ==========================================================
+CONTENEUR
+========================================================== */
 
-/* HEADER */
+.dash {
+  padding: 26px;
 
-.dashboard-header{
+  min-height: 100vh;
 
-  display:flex;
+  background: var(--page-background);
+}
 
-  justify-content:space-between;
+/* ==========================================================
+EN-TÊTE
+========================================================== */
 
-  align-items:center;
+.dash-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 
-  margin-bottom:25px;
+  margin-bottom: 26px;
+}
 
+.dash-header__text h2 {
+  color: var(--gray-950);
 
-  h2{
+  font-size: 24px;
+  font-weight: 800;
+}
 
-    color:#123B7A;
+.dash-header__text p {
+  margin-top: 4px;
 
-    font-weight:800;
+  color: var(--gray-600);
 
+  font-size: 13px;
+}
+
+/* ==========================================================
+BOUTON ACTUALISER
+========================================================== */
+
+.dash-refresh {
+  display: flex;
+  align-items: center;
+
+  gap: 9px;
+
+  padding: 11px 20px;
+
+  border: 0;
+  border-radius: 12px;
+
+  background:
+    linear-gradient(135deg, var(--green-900), var(--green-700));
+
+  color: var(--white);
+
+  font-family: inherit;
+
+  font-size: 13px;
+  font-weight: 700;
+
+  cursor: pointer;
+
+  transition:
+    transform 0.2s ease,
+    background 0.2s ease;
+}
+
+.dash-refresh:hover {
+  transform: translateY(-2px);
+
+  background:
+    linear-gradient(135deg, var(--green-800), var(--green-500));
+}
+
+/* ==========================================================
+GRILLE KPI
+========================================================== */
+
+.kpi-grid {
+  display: grid;
+
+  grid-template-columns: repeat(6, 1fr);
+
+  gap: 18px;
+}
+
+.kpi-card {
+  display: flex;
+  align-items: center;
+
+  gap: 14px;
+
+  padding: 20px;
+
+  border-radius: 16px;
+
+  background: var(--white);
+
+  box-shadow: 0 10px 28px rgba(6, 46, 36, 0.07);
+}
+
+/* ==========================================================
+ICÔNES KPI
+========================================================== */
+
+.kpi-card__icon {
+  width: 52px;
+  height: 52px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  flex: 0 0 52px;
+
+  border-radius: 13px;
+
+  font-size: 22px;
+}
+
+.kpi-card__icon--green {
+  background: var(--green-100);
+
+  color: var(--green-700);
+}
+
+.kpi-card__icon--gold {
+  background: var(--gold-100);
+
+  color: var(--gold-600);
+}
+
+/* ==========================================================
+TEXTE KPI
+========================================================== */
+
+.kpi-card__body {
+  min-width: 0;
+}
+
+.kpi-card__body span {
+  color: var(--gray-600);
+
+  font-size: 12px;
+}
+
+.kpi-card__body h3 {
+  margin-top: 2px;
+
+  color: var(--gray-950);
+
+  font-size: 25px;
+  font-weight: 800;
+}
+
+/* ==========================================================
+GRILLE DE CONTENU
+========================================================== */
+
+.dash-grid {
+  display: grid;
+
+  grid-template-columns: 1fr 1fr;
+
+  gap: 18px;
+
+  margin-top: 24px;
+}
+
+/* ==========================================================
+PANNEAU
+========================================================== */
+
+.panel {
+  padding: 24px;
+
+  border-radius: 18px;
+
+  background: var(--white);
+
+  box-shadow: 0 10px 28px rgba(6, 46, 36, 0.07);
+}
+
+.panel--full {
+  grid-column: 1 / -1;
+}
+
+.panel__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  margin-bottom: 18px;
+}
+
+.panel__header h5 {
+  color: var(--gray-950);
+
+  font-size: 14px;
+  font-weight: 750;
+}
+
+.panel__header i {
+  color: var(--gray-400, var(--gray-600));
+}
+
+/* ==========================================================
+BARRES DE PROGRESSION
+========================================================== */
+
+.progress-item {
+  margin-bottom: 18px;
+}
+
+.progress-item:last-child {
+  margin-bottom: 0;
+}
+
+.progress-item__row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  margin-bottom: 7px;
+
+  color: var(--gray-800);
+
+  font-size: 12px;
+}
+
+.progress-item__row strong {
+  color: var(--gray-950);
+}
+
+.progress-track {
+  height: 8px;
+
+  border-radius: 10px;
+
+  background: var(--gray-200);
+}
+
+.progress-track__bar {
+  height: 100%;
+
+  border-radius: 10px;
+
+  background:
+    linear-gradient(90deg, var(--gold-600), var(--gold-500));
+}
+
+/* ==========================================================
+LISTE D'ÉVÉNEMENTS
+========================================================== */
+
+.event-list {
+  list-style: none;
+}
+
+.event-list li {
+  display: flex;
+  align-items: center;
+
+  gap: 12px;
+
+  padding: 13px 0;
+
+  border-bottom: 1px solid var(--gray-200);
+
+  color: var(--gray-800);
+
+  font-size: 12.5px;
+}
+
+.event-list li:last-child {
+  border-bottom: 0;
+}
+
+.event-list i {
+  color: var(--green-700);
+
+  font-size: 15px;
+}
+
+.event-list small {
+  margin-left: auto;
+
+  color: var(--gray-600);
+
+  font-size: 10.5px;
+}
+
+/* ==========================================================
+TABLEAU
+========================================================== */
+
+.dash-table {
+  width: 100%;
+
+  border-collapse: collapse;
+}
+
+.dash-table th {
+  padding: 12px;
+
+  color: var(--gray-600);
+
+  font-size: 11px;
+  font-weight: 700;
+
+  text-align: left;
+
+  text-transform: uppercase;
+
+  letter-spacing: 0.4px;
+}
+
+.dash-table td {
+  padding: 15px 12px;
+
+  border-top: 1px solid var(--gray-200);
+
+  color: var(--gray-950);
+
+  font-size: 13px;
+}
+
+/* ==========================================================
+BADGES
+========================================================== */
+
+.badge {
+  padding: 6px 13px;
+
+  border-radius: 20px;
+
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.badge--success {
+  background: var(--success-bg);
+
+  color: var(--success-text);
+}
+
+.badge--warning {
+  background: var(--warning-bg);
+
+  color: var(--warning-text);
+}
+
+/* ==========================================================
+RESPONSIVE
+========================================================== */
+
+@media (max-width: 1200px) {
+
+  .kpi-grid {
+    grid-template-columns: repeat(3, 1fr);
   }
 
+}
 
-  p{
+@media (max-width: 768px) {
 
-    color:#777;
-
+  .dash-grid {
+    grid-template-columns: 1fr;
   }
 
-}
-
-
-.btn-refresh{
-
-  background:#123B7A;
-
-  color:white;
-
-  border:none;
-
-  padding:10px 18px;
-
-  border-radius:12px;
-
-  font-weight:600;
-
-}
-
-
-.btn-refresh:hover{
-
-  background:#F7A31B;
-
-  color:#123B7A;
-
-}
-
-
-
-
-
-/* KPI */
-
-
-.kpi-grid{
-
-  display:grid;
-
-  grid-template-columns:repeat(6,1fr);
-
-  gap:20px;
-
-}
-
-
-.kpi-card{
-
-
-  background:white;
-
-  padding:20px;
-
-  border-radius:18px;
-
-  display:flex;
-
-  align-items:center;
-
-  gap:15px;
-
-  box-shadow:
-    0 10px 30px rgba(18,59,122,.08);
-
-
-}
-
-
-
-.icon{
-
-
-  width:55px;
-
-  height:55px;
-
-  border-radius:15px;
-
-  display:flex;
-
-  align-items:center;
-
-  justify-content:center;
-
-
-  i{
-
-    font-size:25px;
-
+  .kpi-grid {
+    grid-template-columns: repeat(2, 1fr);
   }
 
-
-}
-
-
-.blue{
-
-  background:#E8F0FF;
-
-  color:#123B7A;
-
-}
-
-
-.orange{
-
-  background:#FFF1DC;
-
-  color:#F7A31B;
-
-}
-
-
-
-.kpi-card span{
-
-  color:#777;
-
-  font-size:13px;
-
-}
-
-
-.kpi-card h3{
-
-  margin:0;
-
-  font-size:28px;
-
-  color:#123B7A;
-
-}
-
-
-
-
-
-/* GRID */
-
-
-.dashboard-grid{
-
-  display:grid;
-
-  grid-template-columns:1fr 1fr;
-
-  gap:20px;
-
-  margin-top:25px;
-
-}
-
-
-.panel-card{
-
-
-  background:white;
-
-  border-radius:20px;
-
-  padding:25px;
-
-  box-shadow:
-    0 10px 30px rgba(18,59,122,.08);
-
-
-}
-
-
-
-.panel-title{
-
-  display:flex;
-
-  justify-content:space-between;
-
-  margin-bottom:20px;
-
-
-  h5{
-
-    color:#123B7A;
-
-    font-weight:700;
-
-  }
-
-}
-
-
-
-
-.progress-item{
-
-  margin-bottom:20px;
-
-
-  div:first-child{
-
-    display:flex;
-
-    justify-content:space-between;
-
-    margin-bottom:8px;
-
-  }
-
-
-  .progress{
-
-    height:8px;
-
-    background:#E9EEF7;
-
-    border-radius:10px;
-
-  }
-
-
-
-  .progress-bar{
-
-    height:100%;
-
-    background:#F7A31B;
-
-    border-radius:10px;
-
-  }
-
-
-}
-
-
-
-
-
-.activity-list{
-
-  list-style:none;
-
-  padding:0;
-
-
-  li{
-
-    padding:15px;
-
-    border-bottom:1px solid #eee;
-
-    display:flex;
-
-    gap:12px;
-
-    align-items:center;
-
-    color:#333;
-
-
-    small{
-
-      margin-left:auto;
-
-      color:#777;
-
-    }
-
-
-  }
-
-
-}
-
-
-
-
-
-.full{
-
-  grid-column:1 / -1;
-
-}
-
-
-
-.table-modern{
-
-  width:100%;
-
-
-  th{
-
-    color:#777;
-
-    padding:12px;
-
-  }
-
-
-  td{
-
-    padding:15px;
-
-    border-top:1px solid #eee;
-
-  }
-
-}
-
-
-
-.badge-success{
-
-  background:#DFF7E8;
-
-  color:#16803C;
-
-  padding:6px 12px;
-
-  border-radius:20px;
-
-}
-
-
-
-.badge-warning{
-
-  background:#FFF1DC;
-
-  color:#B56A00;
-
-  padding:6px 12px;
-
-  border-radius:20px;
-
-}
-
-
-
-@media(max-width:1200px){
-
-  .kpi-grid{
-
-    grid-template-columns:repeat(3,1fr);
-
-  }
-
-}
-
-
-
-@media(max-width:768px){
-
-  .dashboard-grid{
-
-    grid-template-columns:1fr;
-
-  }
-
-
-  .kpi-grid{
-
-    grid-template-columns:repeat(2,1fr);
-
+  .dash-header {
+    flex-direction: column;
+    align-items: flex-start;
+
+    gap: 14px;
   }
 
 }
