@@ -49,7 +49,7 @@ export class ListUserPage {
   }
 
   getUsers() {
-    this.apiService.get('userlist').then((data: any) => {
+    this.apiService.get('userList').then((data: any) => {
       this.users = data.data
       this.pagination = data.meta.links
       this.isLoad = false

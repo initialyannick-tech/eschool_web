@@ -212,65 +212,27 @@
         </a>
 
 
-        <a
-          class="sidebar-nav__link"
-          *ngxPermissionsOnly="['metier.management']"
-          routerLink="/departement/list-metier"
-          routerLinkActive="sidebar-nav__link--active">
-
+        <a class="sidebar-nav__link" *ngxPermissionsOnly="['metier.management']" routerLink="/departement/list-metier" routerLinkActive="sidebar-nav__link--active">
           <i class="bi bi-hdd-network-fill"></i>
-
-          <span>
-            Métiers
-          </span>
-
+          <span>Métiers</span>
         </a>
 
-
-        <a
-          class="sidebar-nav__link"
-          *ngxPermissionsOnly="['poste.management']"
-          routerLink="/departement/list-poste"
-          routerLinkActive="sidebar-nav__link--active">
-
+        <a class="sidebar-nav__link" *ngxPermissionsOnly="['poste.management']" routerLink="/departement/list-poste" routerLinkActive="sidebar-nav__link--active">
           <i class="bi bi-sliders"></i>
-
-          <span>
-            Postes
-          </span>
-
+          <span>Postes</span>
         </a>
 
 
-        <a
-          class="sidebar-nav__link"
-          *ngxPermissionsOnly="['agent.management']"
-          routerLink="/agent/list"
-          routerLinkActive="sidebar-nav__link--active">
-
+        <a class="sidebar-nav__link" *ngxPermissionsOnly="['agent.management']" routerLink="/agent/list" routerLinkActive="sidebar-nav__link--active">
           <i class="bi bi-person-arms-up"></i>
-
-          <span>
-            Agents
-          </span>
-
+          <span>Agents</span>
         </a>
 
 
-        <a
-          class="sidebar-nav__link"
-          *ngxPermissionsOnly="['ligue.management']"
-          routerLink="/ligue/list"
-          routerLinkActive="sidebar-nav__link--active">
-
+        <a class="sidebar-nav__link" *ngxPermissionsOnly="['ligue.management']" routerLink="/ligue/list" routerLinkActive="sidebar-nav__link--active">
           <i class="bi bi-trophy"></i>
-
-          <span>
-            Gestion Ligues
-          </span>
-
+          <span>Gestion Ligues</span>
         </a>
-
       </div>
 
 
@@ -278,41 +240,19 @@
            GROUPE : ADMINISTRATION
       ================================================== -->
       <div class="sidebar-nav__group">
-
         <span class="sidebar-nav__label">
           Administration
         </span>
 
-
-        <a
-          class="sidebar-nav__link"
-          *ngxPermissionsOnly="['user.management']"
-          routerLink="/admin/users"
-          routerLinkActive="sidebar-nav__link--active">
-
+        <a class="sidebar-nav__link"  routerLink="/admin/users" routerLinkActive="sidebar-nav__link--active">
           <i class="bi bi-people-fill"></i>
-
-          <span>
-            Gestion Users
-          </span>
-
+          <span>Gestion Users</span>
         </a>
 
-
-        <a
-          class="sidebar-nav__link"
-          *ngxPermissionsOnly="['role.management']"
-          routerLink="/admin/roles"
-          routerLinkActive="sidebar-nav__link--active">
-
+        <a class="sidebar-nav__link" *ngxPermissionsOnly="['role.management']" routerLink="/admin/roles" routerLinkActive="sidebar-nav__link--active">
           <i class="bi bi-shield-check"></i>
-
-          <span>
-            Gestion Rôles
-          </span>
-
+          <span>Gestion Rôles</span>
         </a>
-
       </div>
 
 
@@ -320,41 +260,20 @@
            GROUPE : SYSTÈME
       ================================================== -->
       <div class="sidebar-nav__group">
-
-        <span class="sidebar-nav__label">
-          Système
-        </span>
-
-
-        <a
-          class="sidebar-nav__link"
-          routerLink="/settings"
-          routerLinkActive="sidebar-nav__link--active">
-
+        <span class="sidebar-nav__label">Système</span>
+        <a class="sidebar-nav__link" routerLink="/settings" routerLinkActive="sidebar-nav__link--active">
           <i class="bi bi-gear"></i>
-
-          <span>
-            Paramètres
-          </span>
-
+          <span>Paramètres</span>
         </a>
-
       </div>
-
     </nav>
-
   </aside>
 
 
   <!-- =================================================
        CONTENU PRINCIPAL
   ================================================== -->
-  <main
-    class="app-content"
-    [class.app-content--expanded]="!isSidebarOpen">
-
+  <main class="app-content" [class.app-content--expanded]="!isSidebarOpen">
     <router-outlet></router-outlet>
-
   </main>
-
 </div>
