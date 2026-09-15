@@ -1,137 +1,361 @@
-<div class="modal-header-gpec">
-  <div class="modal-title-area">
-    <div class="title-icon">
-      <i class="bi bi-person-gear"></i>
-    </div>
+<!-- =========================================================
+     MODAL — UTILISATEUR
+========================================================= -->
 
-    <div>
-      <h5>{{isEdit ? 'Modifier un utilisateur' : 'Nouvel utilisateur'}}</h5>
+<div class="user-modal">
 
-      <small> Gestion des accès et des rôles </small>
-    </div>
-  </div>
+  <!-- =======================================================
+       HEADER
+  ======================================================== -->
 
-  <button type="button" class="btn-close" (click)="close()"></button>
-</div>
+  <div class="user-modal__header">
 
-<form (submit)="submit()" [formGroup]="userForm">
-  <div class="modal-body-gpec">
-    <!-- SECTION INFORMATIONS -->
+    <div class="user-modal__identity">
 
-    <div class="form-block">
-      <div class="block-header">
-        <i class="bi bi-person-vcard"></i>
-
-        <span> Informations personnelles </span>
+      <div class="user-modal__icon">
+        <i class="bi bi-person-gear"></i>
       </div>
 
-      <div class="row g-3">
-        <div class="col-md-6">
-          <label> Nom </label>
+      <div class="user-modal__heading">
 
-          <div class="input-icon">
-            <i class="bi bi-person"></i>
-
-            <input
-              class="form-control"
-              formControlName="nom"
-              placeholder="Nom"
-            />
-          </div>
+        <div class="user-modal__eyebrow">
+          Administration
         </div>
 
-        <div class="col-md-6">
-          <label> Prénom </label>
+        <h4>
+          {{ isEdit ? 'Modifier un utilisateur' : 'Nouvel utilisateur' }}
+        </h4>
 
-          <div class="input-icon">
-            <i class="bi bi-person"></i>
+        <p>
+          {{ isEdit
+          ? 'Modifiez les informations et les droits de cet utilisateur.'
+          : 'Créez un nouveau compte utilisateur et définissez ses accès.'
+          }}
+        </p>
 
-            <input
-              class="form-control"
-              formControlName="prenom"
-              placeholder="Prénom"
-            />
-          </div>
-        </div>
-
-        <div class="col-md-6">
-          <label> Email professionnel </label>
-
-          <div class="input-icon">
-            <i class="bi bi-envelope"></i>
-
-            <input
-              class="form-control"
-              formControlName="email"
-              type="email"
-              placeholder="nom@entreprise.com"
-            />
-          </div>
-        </div>
-
-        @if(isEdit){
-
-          <div class="col-md-6">
-            <label> Statut </label>
-
-            <select class="form-select" formControlName="status">
-              <option value="active">Actif</option>
-
-              <option value="inactive">Inactif</option>
-            </select>
-          </div>
-
-        }
       </div>
+
     </div>
 
-    <!-- ROLE -->
 
-    <div class="form-block">
-      <div class="block-header">
-        <i class="bi bi-shield-lock"></i>
+    <!-- Fermeture -->
 
-        <span> Rôle et permissions </span>
-      </div>
+    <button
+      type="button"
+      class="user-modal__close"
+      (click)="close()"
+      aria-label="Fermer"
+    >
 
-      <div class="row">
-        <div class="col-md-6">
-          <label> Profil utilisateur </label>
+      <i class="bi bi-x-lg"></i>
 
-          <ng-select
-            [items]="roles"
-            bindLabel="libelle"
-            bindValue="id"
-            formControlName="role_id"
-            placeholder="Choisir un rôle"
-          >
-          </ng-select>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="modal-footer-gpec">
-    <button class="btn btn-cancel" type="button" (click)="close()">
-      Annuler
     </button>
 
-    @if(isSubmit){
-
-      <button class="btn btn-submit" disabled>
-        <i class="bi bi-arrow-repeat"></i>
-
-        Chargement...
-      </button>
-
-    } @else{
-
-      <button class="btn btn-submit" type="submit">
-        <i class="bi bi-check-circle"></i>
-
-        {{isEdit ? 'Mettre à jour' : 'Créer utilisateur'}}
-      </button>
-
-    }
   </div>
-</form>
+
+
+  <!-- =======================================================
+       FORMULAIRE
+  ======================================================== -->
+
+  <form
+    (submit)="submit()"
+    [formGroup]="userForm"
+    class="user-modal__form"
+  >
+
+    <div class="user-modal__body">
+
+
+      <!-- ===================================================
+           INFORMATIONS PERSONNELLES
+      ==================================================== -->
+
+      <section class="form-section">
+
+        <div class="form-section__heading">
+
+          <div class="form-section__icon">
+            <i class="bi bi-person-vcard"></i>
+          </div>
+
+          <div>
+
+            <h5>
+              Informations personnelles
+            </h5>
+
+            <p>
+              Identité et coordonnées professionnelles
+            </p>
+
+          </div>
+
+        </div>
+
+
+        <div class="form-grid">
+
+
+          <!-- NOM -->
+
+          <div class="form-field">
+
+            <label for="nom">
+              Nom
+              <span>*</span>
+            </label>
+
+            <div class="form-input">
+
+              <i class="bi bi-person"></i>
+
+              <input
+                id="nom"
+                type="text"
+                formControlName="nom"
+                placeholder="Ex. MOUNGUENGUI"
+                autocomplete="family-name"
+              />
+
+            </div>
+
+          </div>
+
+
+          <!-- PRÉNOM -->
+
+          <div class="form-field">
+
+            <label for="prenom">
+              Prénom
+              <span>*</span>
+            </label>
+
+            <div class="form-input">
+
+              <i class="bi bi-person"></i>
+
+              <input
+                id="prenom"
+                type="text"
+                formControlName="prenom"
+                placeholder="Ex. Maria"
+                autocomplete="given-name"
+              />
+
+            </div>
+
+          </div>
+
+
+          <!-- EMAIL -->
+
+          <div class="form-field form-field--full">
+
+            <label for="email">
+              Email professionnel
+              <span>*</span>
+            </label>
+
+            <div class="form-input">
+
+              <i class="bi bi-envelope"></i>
+
+              <input
+                id="email"
+                type="email"
+                formControlName="email"
+                placeholder="nom@entreprise.com"
+                autocomplete="email"
+              />
+
+            </div>
+
+            <small class="form-help">
+              L'adresse email sera utilisée pour l'identification
+              de l'utilisateur.
+            </small>
+
+          </div>
+
+
+          <!-- STATUT -->
+
+          @if(isEdit) {
+
+            <div class="form-field">
+
+              <label for="status">
+                Statut
+              </label>
+
+              <div class="form-select-wrapper">
+
+                <i class="bi bi-toggle-on"></i>
+
+                <select
+                  id="status"
+                  class="form-select-custom"
+                  formControlName="status"
+                >
+
+                  <option value="active">
+                    Actif
+                  </option>
+
+                  <option value="inactive">
+                    Inactif
+                  </option>
+
+                </select>
+
+                <i class="bi bi-chevron-down select-arrow"></i>
+
+              </div>
+
+            </div>
+
+          }
+
+        </div>
+
+      </section>
+
+
+      <!-- ===================================================
+           RÔLE ET PERMISSIONS
+      ==================================================== -->
+
+      <section class="form-section form-section--permissions">
+
+        <div class="form-section__heading">
+
+          <div class="form-section__icon">
+            <i class="bi bi-shield-lock"></i>
+          </div>
+
+          <div>
+
+            <h5>
+              Rôle et permissions
+            </h5>
+
+            <p>
+              Définissez le niveau d'accès de l'utilisateur
+            </p>
+
+          </div>
+
+        </div>
+
+
+        <div class="role-field">
+
+          <label for="role">
+            Profil utilisateur
+            <span>*</span>
+          </label>
+
+          <div class="role-select">
+
+            <ng-select
+              [items]="roles"
+              bindLabel="libelle"
+              bindValue="id"
+              formControlName="role_id"
+              placeholder="Sélectionner un rôle"
+              [clearable]="false"
+            >
+            </ng-select>
+
+          </div>
+
+          <div class="role-info">
+
+            <i class="bi bi-info-circle"></i>
+
+            <span>
+              Le rôle détermine les fonctionnalités et les
+              permissions accessibles à l'utilisateur.
+            </span>
+
+          </div>
+
+        </div>
+
+      </section>
+
+    </div>
+
+
+    <!-- =====================================================
+         FOOTER
+    ====================================================== -->
+
+    <div class="user-modal__footer">
+
+      <div class="footer-info">
+
+        <i class="bi bi-shield-check"></i>
+
+        <span>
+          Les informations sont sécurisées
+        </span>
+
+      </div>
+
+
+      <div class="footer-actions">
+
+        <button
+          type="button"
+          class="btn-modal-cancel"
+          (click)="close()"
+        >
+          Annuler
+        </button>
+
+
+        @if(isSubmit) {
+
+          <button
+            type="button"
+            class="btn-modal-submit"
+            disabled
+          >
+
+            <span class="submit-spinner"></span>
+
+            <span>
+              Enregistrement...
+            </span>
+
+          </button>
+
+        }
+
+        @else {
+
+          <button
+            type="submit"
+            class="btn-modal-submit"
+          >
+
+            <i class="bi bi-check2"></i>
+
+            <span>
+              {{ isEdit ? 'Enregistrer les modifications' : 'Créer l’utilisateur' }}
+            </span>
+
+          </button>
+
+        }
+
+      </div>
+
+    </div>
+
+  </form>
+
+</div>

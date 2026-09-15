@@ -1,299 +1,900 @@
-.modal-header-gpec{
+/* =========================================================
+   eSchool — MODAL UTILISATEUR
+========================================================= */
 
-  padding:22px 25px;
+.user-modal {
+  width: 100%;
+
+  background: #ffffff;
+
+  border-radius: 15px;
+
+  overflow: hidden;
+
+  box-shadow:
+    0 20px 60px rgba(24, 51, 42, 0.18);
+}
+
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+.user-modal__header {
+  position: relative;
+
+  display: flex;
+
+  align-items: flex-start;
+
+  justify-content: space-between;
+
+  gap: 20px;
+
+  padding: 24px 26px 22px;
 
   background:
     linear-gradient(
       135deg,
-      #123B7A,
-      #1D5DB6
+      #f5faf7 0%,
+      #ffffff 72%
     );
 
-  display:flex;
-
-  align-items:center;
-
-  justify-content:space-between;
-
-  border-radius:20px 20px 0 0;
-
-  color:white;
-
+  border-bottom: 1px solid #e4ece8;
 }
 
 
+/* petite ligne supérieure */
 
-.modal-title-area{
+.user-modal__header::before {
+  content: "";
 
-  display:flex;
+  position: absolute;
 
-  align-items:center;
+  top: 0;
+  left: 0;
 
-  gap:15px;
+  width: 100%;
+  height: 3px;
 
-
-  h5{
-
-    margin:0;
-
-    font-size:19px;
-
-    font-weight:700;
-
-  }
-
-
-  small{
-
-    opacity:.8;
-
-  }
-
+  background:
+    linear-gradient(
+      90deg,
+      #006b3f 0%,
+      #00865a 72%,
+      #f2c94c 100%
+    );
 }
 
 
+/* =========================================================
+   IDENTITÉ
+========================================================= */
 
-.title-icon{
+.user-modal__identity {
+  display: flex;
 
-  width:48px;
+  align-items: center;
 
-  height:48px;
+  gap: 15px;
 
-  display:flex;
-
-  align-items:center;
-
-  justify-content:center;
-
-  background:#F7A31B;
-
-  color:#123B7A;
-
-  border-radius:15px;
-
-
-  i{
-
-    font-size:23px;
-
-  }
-
+  min-width: 0;
 }
 
 
+/* =========================================================
+   ICÔNE
+========================================================= */
 
+.user-modal__icon {
+  display: flex;
 
+  align-items: center;
+  justify-content: center;
 
-.modal-body-gpec{
+  width: 54px;
+  height: 54px;
 
-  padding:25px;
+  flex-shrink: 0;
 
-  background:#F4F7FC;
+  background: #eaf6ef;
 
-}
+  border: 1px solid #d4e9dc;
 
+  border-radius: 12px;
 
+  color: #006b3f;
 
-
-.form-block{
-
-  background:white;
-
-  border-radius:18px;
-
-  padding:22px;
-
-  margin-bottom:18px;
+  font-size: 21px;
 
   box-shadow:
-
-    0 8px 25px rgba(18,59,122,.08);
-
-
+    inset 0 0 0 3px rgba(255, 255, 255, 0.65);
 }
 
 
+/* =========================================================
+   HEADING
+========================================================= */
 
-
-.block-header{
-
-  display:flex;
-
-  align-items:center;
-
-  gap:10px;
-
-  font-weight:700;
-
-  color:#123B7A;
-
-  font-size:15px;
-
-  margin-bottom:20px;
-
-
-  i{
-
-    color:#F7A31B;
-
-    font-size:20px;
-
-  }
-
+.user-modal__heading {
+  min-width: 0;
 }
 
 
+.user-modal__eyebrow {
+  margin-bottom: 3px;
 
+  color: #007a4d;
 
-label{
+  font-size: 10px;
 
-  font-size:14px;
+  font-weight: 700;
 
-  font-weight:600;
+  letter-spacing: 0.07em;
 
-  color:#344054;
-
-  margin-bottom:7px;
-
+  text-transform: uppercase;
 }
 
 
+.user-modal__heading h4 {
+  margin: 0;
 
+  color: #18332a;
 
-.input-icon{
+  font-size: 19px;
 
-  position:relative;
+  font-weight: 750;
 
+  line-height: 1.25;
 
-  i{
-
-    position:absolute;
-
-    left:15px;
-
-    top:14px;
-
-    color:#123B7A;
-
-  }
-
-
-  .form-control{
-
-    padding-left:42px;
-
-  }
-
-
+  letter-spacing: -0.02em;
 }
 
 
+.user-modal__heading p {
+  margin: 5px 0 0;
 
-.form-control,
-.form-select{
+  color: #7b8b83;
 
+  font-size: 11.5px;
 
-  height:46px;
-
-  border-radius:12px;
-
-  border:1px solid #D7DFEC;
-
+  line-height: 1.45;
 }
 
 
+/* =========================================================
+   FERMETURE
+========================================================= */
 
-.form-control:focus,
-.form-select:focus{
+.user-modal__close {
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  width: 34px;
+  height: 34px;
+
+  flex-shrink: 0;
+
+  margin-top: 2px;
+
+  background: #ffffff;
+
+  border: 1px solid #dce6e1;
+
+  border-radius: 8px;
+
+  color: #71827a;
+
+  font-size: 12px;
+
+  cursor: pointer;
+
+  transition: all 0.2s ease;
+}
 
 
-  border-color:#123B7A;
+.user-modal__close:hover {
+  background: #fff4f4;
 
+  border-color: #edcccc;
+
+  color: #bd4b4b;
+}
+
+
+/* =========================================================
+   BODY
+========================================================= */
+
+.user-modal__body {
+  padding: 24px 26px;
+}
+
+
+/* =========================================================
+   SECTION
+========================================================= */
+
+.form-section {
+  padding: 0 0 23px;
+
+  margin-bottom: 23px;
+
+  border-bottom: 1px solid #e8efeb;
+}
+
+
+.form-section:last-child {
+  padding-bottom: 0;
+
+  margin-bottom: 0;
+
+  border-bottom: none;
+}
+
+
+/* =========================================================
+   SECTION HEADING
+========================================================= */
+
+.form-section__heading {
+  display: flex;
+
+  align-items: center;
+
+  gap: 11px;
+
+  margin-bottom: 19px;
+}
+
+
+.form-section__icon {
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  width: 34px;
+  height: 34px;
+
+  flex-shrink: 0;
+
+  background: #f0f7f3;
+
+  border: 1px solid #dcebe3;
+
+  border-radius: 8px;
+
+  color: #007a4d;
+
+  font-size: 14px;
+}
+
+
+.form-section__heading h5 {
+  margin: 0;
+
+  color: #253c32;
+
+  font-size: 13px;
+
+  font-weight: 700;
+}
+
+
+.form-section__heading p {
+  margin: 2px 0 0;
+
+  color: #899790;
+
+  font-size: 10.5px;
+}
+
+
+/* =========================================================
+   FORM GRID
+========================================================= */
+
+.form-grid {
+  display: grid;
+
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+
+  gap: 17px 18px;
+}
+
+
+/* =========================================================
+   FIELD
+========================================================= */
+
+.form-field {
+  min-width: 0;
+}
+
+
+.form-field--full {
+  grid-column: 1 / -1;
+}
+
+
+/* =========================================================
+   LABEL
+========================================================= */
+
+.form-field label,
+.role-field label {
+  display: block;
+
+  margin-bottom: 7px;
+
+  color: #42564d;
+
+  font-size: 11px;
+
+  font-weight: 650;
+}
+
+
+.form-field label span,
+.role-field label span {
+  color: #d25555;
+
+  margin-left: 2px;
+}
+
+
+/* =========================================================
+   INPUT
+========================================================= */
+
+.form-input {
+  position: relative;
+
+  display: flex;
+
+  align-items: center;
+
+  height: 40px;
+}
+
+
+.form-input > i {
+  position: absolute;
+
+  left: 13px;
+
+  color: #91a098;
+
+  font-size: 13px;
+
+  pointer-events: none;
+
+  z-index: 1;
+}
+
+
+.form-input input {
+  width: 100%;
+
+  height: 100%;
+
+  padding: 0 13px 0 36px;
+
+  background: #ffffff;
+
+  border: 1px solid #dbe6e0;
+
+  border-radius: 8px;
+
+  color: #243b31;
+
+  font-size: 12px;
+
+  outline: none;
+
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease,
+    background-color 0.2s ease;
+}
+
+
+.form-input input::placeholder {
+  color: #a4afa9;
+}
+
+
+.form-input input:hover {
+  border-color: #c8d9d0;
+}
+
+
+.form-input input:focus {
+  background: #fcfefd;
+
+  border-color: #72aa8d;
 
   box-shadow:
+    0 0 0 3px rgba(0, 107, 63, 0.07);
+}
 
-    0 0 0 .15rem rgba(18,59,122,.15);
 
+/* =========================================================
+   AIDE
+========================================================= */
+
+.form-help {
+  display: block;
+
+  margin-top: 5px;
+
+  color: #99a59f;
+
+  font-size: 9.5px;
+
+  line-height: 1.4;
+}
+
+
+/* =========================================================
+   SELECT STATUT
+========================================================= */
+
+.form-select-wrapper {
+  position: relative;
+
+  display: flex;
+
+  align-items: center;
+
+  height: 40px;
+}
+
+
+.form-select-wrapper > i:first-child {
+  position: absolute;
+
+  left: 13px;
+
+  color: #007a4d;
+
+  font-size: 13px;
+
+  pointer-events: none;
+
+  z-index: 1;
+}
+
+
+.form-select-custom {
+  width: 100%;
+
+  height: 100%;
+
+  padding: 0 35px 0 36px;
+
+  appearance: none;
+
+  background: #ffffff;
+
+  border: 1px solid #dbe6e0;
+
+  border-radius: 8px;
+
+  color: #334b40;
+
+  font-size: 12px;
+
+  cursor: pointer;
+
+  outline: none;
+
+  transition: all 0.2s ease;
+}
+
+
+.form-select-custom:focus {
+  border-color: #72aa8d;
+
+  box-shadow:
+    0 0 0 3px rgba(0, 107, 63, 0.07);
+}
+
+
+.select-arrow {
+  position: absolute;
+
+  right: 13px;
+
+  color: #899891;
+
+  font-size: 10px;
+
+  pointer-events: none;
+}
+
+
+/* =========================================================
+   PERMISSIONS
+========================================================= */
+
+.form-section--permissions {
+  background: #fbfcfb;
+
+  border: 1px solid #e5ede8;
+
+  border-radius: 11px;
+
+  padding: 17px;
+
+  margin-bottom: 0;
+}
+
+
+.form-section--permissions .form-section__heading {
+  margin-bottom: 17px;
+}
+
+
+/* =========================================================
+   ROLE
+========================================================= */
+
+.role-field {
+  width: 100%;
+}
+
+
+.role-select {
+  width: 100%;
+}
+
+
+/* ng-select */
+
+.role-select ::ng-deep .ng-select {
+  width: 100%;
+
+  font-size: 12px;
+}
+
+
+.role-select ::ng-deep .ng-select .ng-select-container {
+  min-height: 40px;
+
+  height: 40px;
+
+  background: #ffffff;
+
+  border: 1px solid #dbe6e0;
+
+  border-radius: 8px;
+
+  box-shadow: none;
+}
+
+
+.role-select ::ng-deep .ng-select.ng-select-focused
+.ng-select-container {
+  border-color: #72aa8d;
+
+  box-shadow:
+    0 0 0 3px rgba(0, 107, 63, 0.07);
+}
+
+
+.role-select ::ng-deep
+.ng-select .ng-placeholder {
+  color: #a4afa9;
+}
+
+
+.role-select ::ng-deep
+.ng-select .ng-value-label {
+  color: #334b40;
+
+  font-size: 12px;
+}
+
+
+/* =========================================================
+   INFO ROLE
+========================================================= */
+
+.role-info {
+  display: flex;
+
+  align-items: flex-start;
+
+  gap: 7px;
+
+  margin-top: 8px;
+
+  color: #899790;
+
+  font-size: 10px;
+
+  line-height: 1.4;
+}
+
+
+.role-info i {
+  flex-shrink: 0;
+
+  margin-top: 1px;
+
+  color: #76a68e;
+
+  font-size: 11px;
+}
+
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+.user-modal__footer {
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  gap: 20px;
+
+  min-height: 67px;
+
+  padding: 12px 26px;
+
+  background: #f8faf9;
+
+  border-top: 1px solid #e4ece8;
+}
+
+
+/* =========================================================
+   INFO FOOTER
+========================================================= */
+
+.footer-info {
+  display: flex;
+
+  align-items: center;
+
+  gap: 7px;
+
+  color: #8a9891;
+
+  font-size: 10px;
+}
+
+
+.footer-info i {
+  color: #007a4d;
+
+  font-size: 12px;
+}
+
+
+/* =========================================================
+   ACTIONS
+========================================================= */
+
+.footer-actions {
+  display: flex;
+
+  align-items: center;
+
+  gap: 9px;
+}
+
+
+/* =========================================================
+   ANNULER
+========================================================= */
+
+.btn-modal-cancel {
+  height: 37px;
+
+  padding: 0 15px;
+
+  background: #ffffff;
+
+  border: 1px solid #d7e3dd;
+
+  border-radius: 8px;
+
+  color: #63736c;
+
+  font-size: 11.5px;
+
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition: all 0.2s ease;
+}
+
+
+.btn-modal-cancel:hover {
+  background: #f2f6f4;
+
+  border-color: #c5d5cd;
+
+  color: #42564d;
+}
+
+
+/* =========================================================
+   SUBMIT
+========================================================= */
+
+.btn-modal-submit {
+  display: inline-flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  gap: 7px;
+
+  min-width: 145px;
+
+  height: 37px;
+
+  padding: 0 16px;
+
+  background: #006b3f;
+
+  border: 1px solid #006b3f;
+
+  border-radius: 8px;
+
+  color: #ffffff;
+
+  font-size: 11.5px;
+
+  font-weight: 650;
+
+  cursor: pointer;
+
+  transition:
+    background-color 0.2s ease,
+    border-color 0.2s ease,
+    box-shadow 0.2s ease,
+    transform 0.2s ease;
+}
+
+
+.btn-modal-submit:hover:not(:disabled) {
+  background: #005b36;
+
+  border-color: #005b36;
+
+  box-shadow:
+    0 4px 10px rgba(0, 107, 63, 0.18);
+
+  transform: translateY(-1px);
+}
+
+
+.btn-modal-submit:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+
+.btn-modal-submit:disabled {
+  opacity: 0.7;
+
+  cursor: not-allowed;
+}
+
+
+/* =========================================================
+   SPINNER
+========================================================= */
+
+.submit-spinner {
+  width: 13px;
+  height: 13px;
+
+  border: 2px solid rgba(255, 255, 255, 0.35);
+
+  border-top-color: #ffffff;
+
+  border-radius: 50%;
+
+  animation:
+    user-modal-spin 0.7s linear infinite;
+}
+
+
+@keyframes user-modal-spin {
+
+  to {
+    transform: rotate(360deg);
+  }
 
 }
 
 
+/* =========================================================
+   RESPONSIVE
+========================================================= */
 
-::ng-deep .ng-select-container{
+@media (max-width: 650px) {
 
+  .user-modal__header {
+    padding: 20px;
+  }
 
-  min-height:46px!important;
+  .user-modal__body {
+    padding: 20px;
+  }
 
-  border-radius:12px!important;
+  .user-modal__footer {
+    padding: 12px 20px;
+  }
 
-  border-color:#D7DFEC!important;
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
 
+  .form-field--full {
+    grid-column: auto;
+  }
 
-}
+  .footer-info {
+    display: none;
+  }
 
-
-
-
-.modal-footer-gpec{
-
-
-  padding:18px 25px;
-
-  display:flex;
-
-  justify-content:flex-end;
-
-  gap:12px;
-
-  background:white;
-
-  border-radius:0 0 20px 20px;
-
-
-}
-
-
-
-
-.btn-submit{
-
-  background:#123B7A;
-
-  color:white;
-
-  border:none;
-
-  border-radius:12px;
-
-  padding:11px 25px;
-
-  font-weight:600;
-
+  .user-modal__footer {
+    justify-content: flex-end;
+  }
 
 }
 
 
+@media (max-width: 450px) {
 
-.btn-submit:hover{
+  .user-modal__identity {
+    gap: 11px;
+  }
 
-  background:#F7A31B;
+  .user-modal__icon {
+    width: 46px;
+    height: 46px;
 
-  color:#123B7A;
+    font-size: 18px;
+  }
 
-}
+  .user-modal__heading h4 {
+    font-size: 17px;
+  }
 
+  .user-modal__heading p {
+    font-size: 10.5px;
+  }
 
+  .user-modal__close {
+    width: 31px;
+    height: 31px;
+  }
 
-.btn-cancel{
+  .form-section--permissions {
+    padding: 14px;
+  }
 
-  background:#F4F7FC;
+  .footer-actions {
+    width: 100%;
+  }
 
-  border:none;
-
-  border-radius:12px;
-
-  padding:11px 25px;
-
-  font-weight:600;
+  .btn-modal-cancel,
+  .btn-modal-submit {
+    flex: 1;
+  }
 
 }

@@ -1,66 +1,231 @@
-<br/>
 <app-page-header [backBtn]="true" [titre]="'Liste des Utilisateurs'"></app-page-header>
-<div class="row mt-3">
-  <div class="col-3">
-    <div class="btn-group">
-      <a (click)="add()" class="btn btn-primary"><i class="bi bi-plus-circle me-1"></i>Ajouter un utilisateur</a>
+<div class="users-toolbar">
+  <div class="users-toolbar__info">
+    <div class="users-toolbar__title">Utilisateurs</div>
+    <div class="users-toolbar__subtitle">
+      Gérez les comptes utilisateurs de la plateforme
     </div>
   </div>
-  <div class="col-2 ms-auto">
-    <input class="form-control" placeholder="Recherche" type="text">
+
+
+  <!-- Actions -->
+  <div class="users-toolbar__actions">
+    <!-- Recherche -->
+    <div class="users-search">
+      <i class="bi bi-search"></i>
+      <input type="text" class="users-search__input" placeholder="Rechercher un utilisateur...">
+    </div>
+
+    <!-- Ajouter -->
+    <button type="button" class="btn-add-user" (click)="add()">
+      <i class="bi bi-plus-lg"></i>
+      <span>Ajouter un utilisateur</span>
+    </button>
   </div>
 </div>
-<div class="card mt-3">
-  <div class="card-body">
-    <div class="row">
-      <div class="col-12">
-        <table class="table">
-          <thead class="table-primary">
-          <tr style="text-align: center;">
-            <th scope="col">Nom</th>
-            <th scope="col">Prénom</th>
-            <th scope="col">Email</th>
-            <th scope="col">Rôle</th>
-            <th scope="col">Statut</th>
-            <th scope="col">Actions</th>
-          </tr>
-          </thead>
-          <tbody>
-            @if (isLoad) {
-              <tr style="text-align: center;">
-                <td colspan="5" class="text-center">Chargement...</td>
-              </tr>
-            } @else {
-              @for (user of users; track user.id) {
-                <tr style="text-align: center;">
-                  <th> {{ user.nom }} </th>
-                  <th> {{ user.prenom }}</th>
-                  <th> {{ user.email }}</th>
-                  <td> {{ user.role.libelle }}</td>
-                  <td>
-                    @if (user.status === 'active') {
-                      <span class="badge bg-success">Actif</span>
-                    } @else {
-                      <span class="badge bg-warning">Inactif</span>
-                    }
-                  </td>
-                  <td>
-                    <div class="btn-group" role="group" aria-label="Basic outlined example">
-                      <a (click)="edit(user)" class="btn btn-sm btn-outline-primary">
-                        <i class="bi bi-pencil"></i>
-                      </a>
-                    </div>
-                  </td>
-                </tr>
-              }
-            }
-          </tbody>
-        </table>
-      </div>
-    </div>
-    <div class="d-flex justify-content-end p-2">
-      <app-custom-pagination (pageChange)="changePage($event)" [links]="pagination">
-      </app-custom-pagination>
+
+<div class="users-card">
+  <div class="users-card__header">
+    <div>
+      <h4>Liste des comptes</h4>
+      <span>Utilisateurs enregistrés sur la plateforme</span>
     </div>
   </div>
+
+  <div class="users-table-wrapper">
+    <table class="users-table">
+
+      <thead>
+
+      <tr>
+
+        <th>Utilisateur</th>
+
+        <th>Email</th>
+
+        <th>Rôle</th>
+
+        <th>Statut</th>
+
+        <th class="users-table__actions">
+          Actions
+        </th>
+
+      </tr>
+
+      </thead>
+
+
+      <tbody>
+
+      <!-- CHARGEMENT -->
+
+        @if (isLoad) {
+
+          <tr>
+
+            <td
+              colspan="5"
+              class="users-table__loading"
+            >
+
+              <div class="loading-content">
+
+                <span class="loading-spinner"></span>
+
+                <span>
+                  Chargement des utilisateurs...
+                </span>
+
+              </div>
+
+            </td>
+
+          </tr>
+
+        }
+
+      <!-- DONNÉES -->
+
+      @else {
+
+        @for (user of users; track user.id) {
+
+          <tr>
+
+            <!-- Utilisateur -->
+
+            <td>
+
+              <div class="user-cell">
+
+                <div class="user-avatar">
+
+                  {{ user.prenom?.charAt(0) }}
+                  {{ user.nom?.charAt(0) }}
+
+                </div>
+
+                <div class="user-information">
+
+                  <div class="user-name">
+
+                    {{ user.nom }}
+                    {{ user.prenom }}
+
+                  </div>
+
+                  <div class="user-id">
+
+                    ID #{{ user.id }}
+
+                  </div>
+
+                </div>
+
+              </div>
+
+            </td>
+
+
+            <!-- Email -->
+
+            <td>
+
+                <span class="user-email">
+
+                  {{ user.email }}
+
+                </span>
+
+            </td>
+
+
+            <!-- Rôle -->
+
+            <td>
+
+                <span class="role-badge">
+
+                  {{ user.role.libelle }}
+
+                </span>
+
+            </td>
+
+
+            <!-- Statut -->
+
+            <td>
+
+              @if (user.status === 'active') {
+
+                <span class="status-badge status-badge--active">
+
+                    <span class="status-dot"></span>
+
+                    Actif
+
+                  </span>
+
+              }
+
+              @else {
+
+                <span class="status-badge status-badge--inactive">
+
+                    <span class="status-dot"></span>
+
+                    Inactif
+
+                  </span>
+
+              }
+
+            </td>
+
+
+            <!-- Actions -->
+
+            <td class="users-table__actions">
+
+              <button
+                type="button"
+                class="btn-user-action"
+                (click)="edit(user)"
+                title="Modifier l'utilisateur"
+              >
+
+                <i class="bi bi-pencil"></i>
+
+              </button>
+
+            </td>
+
+          </tr>
+
+        }
+
+      }
+
+      </tbody>
+
+    </table>
+
+  </div>
+
+
+  <!-- =======================================================
+       PAGINATION
+  ======================================================== -->
+
+  <div class="users-card__footer">
+
+    <app-custom-pagination
+      (pageChange)="changePage($event)"
+      [links]="pagination">
+    </app-custom-pagination>
+
+  </div>
+
 </div>

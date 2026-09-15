@@ -4,7 +4,8 @@ import {CookieService} from './cookie.service';
 @Injectable({
   providedIn: 'root',
 })
-export class AuthService {
+export class
+AuthService {
 
   cookieService = inject(CookieService)
 

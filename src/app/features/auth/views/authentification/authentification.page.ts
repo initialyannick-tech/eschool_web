@@ -1,5 +1,5 @@
 import {Component, inject} from '@angular/core';
-import {CommonModule, NgOptimizedImage} from '@angular/common';
+import {CommonModule} from '@angular/common';
 import {FormControl, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
 import {ApiService} from '../../../../core/services/api.service';
 import {ShareService} from '../../../../core/services/share.service';
@@ -51,20 +51,6 @@ export class AuthentificationPage {
   isLoading() {
     return false;
   }
-
-  partners = [
-    { name: 'AGL', logo: 'assets/partners/agl.png' },
-    { name: 'Assala', logo: 'assets/partners/assala.png' },
-    { name: 'Dixstone', logo: 'assets/partners/dixstone.png' },
-    { name: 'Gabon Oil', logo: 'assets/partners/gabon-oil.png' },
-    { name: 'IEG Holding', logo: 'assets/partners/ieg.png' },
-
-    { name: 'Maurel & Prom', logo: 'assets/partners/mp.png' },
-    { name: 'Perenco', logo: 'assets/partners/perenco.png' },
-    { name: 'SNPS', logo: 'assets/partners/snps.png' },
-    { name: 'Sogara', logo: 'assets/partners/sogara.png' },
-    { name: 'TotalEnergies', logo: 'assets/partners/total.png' }
-  ];
 
   // Dans votre composant Login
 

@@ -1,4 +1,255 @@
+/* Styles pour app-custom-pagination */
 
-        /* Styles pour app-custom-pagination */
-        
-    
+/* =========================================================
+eSchool — PAGINATION
+Style cohérent avec l'identité graphique globale
+========================================================= */
+
+.eschool-pagination {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  margin-top: 1.5rem;
+}
+
+/* ---------------------------------------------------------
+   LISTE
+--------------------------------------------------------- */
+
+.eschool-pagination .pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+
+  margin: 0;
+  padding: 0;
+
+  list-style: none;
+}
+
+/* ---------------------------------------------------------
+   ÉLÉMENTS
+--------------------------------------------------------- */
+
+.eschool-pagination .page-item {
+  margin: 0;
+}
+
+/* ---------------------------------------------------------
+   LIENS
+--------------------------------------------------------- */
+
+.eschool-pagination .page-link {
+  position: relative;
+
+  min-width: 40px;
+  height: 40px;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 0.5rem 0.75rem;
+
+  border: 1px solid #dce8e1;
+  border-radius: 10px;
+
+  background: #ffffff;
+  color: #18332a;
+
+  font-size: 0.875rem;
+  font-weight: 600;
+  line-height: 1;
+
+  text-decoration: none;
+  cursor: pointer;
+
+  box-shadow: 0 2px 6px rgba(24, 51, 42, 0.05);
+
+  transition:
+    background-color 0.2s ease,
+    border-color 0.2s ease,
+    color 0.2s ease,
+    box-shadow 0.2s ease,
+    transform 0.2s ease;
+}
+
+/* ---------------------------------------------------------
+   HOVER
+--------------------------------------------------------- */
+
+.eschool-pagination .page-link:hover {
+  background: #f4f8f5;
+  border-color: #159a63;
+  color: #006b3f;
+
+  box-shadow: 0 4px 12px rgba(0, 107, 63, 0.12);
+
+  transform: translateY(-1px);
+}
+
+/* ---------------------------------------------------------
+   FOCUS
+--------------------------------------------------------- */
+
+.eschool-pagination .page-link:focus {
+  outline: none;
+
+  border-color: #006b3f;
+
+  box-shadow:
+    0 0 0 3px rgba(0, 107, 63, 0.12);
+}
+
+/* ---------------------------------------------------------
+   PAGE ACTIVE
+--------------------------------------------------------- */
+
+.eschool-pagination .page-item.active .page-link {
+  background: #006b3f;
+  border-color: #006b3f;
+  color: #ffffff;
+
+  box-shadow:
+    0 4px 10px rgba(0, 107, 63, 0.22);
+}
+
+.eschool-pagination .page-item.active .page-link:hover {
+  background: #004d2d;
+  border-color: #004d2d;
+  color: #ffffff;
+
+  transform: translateY(-1px);
+}
+
+/* ---------------------------------------------------------
+   NAVIGATION PRÉCÉDENT / SUIVANT
+--------------------------------------------------------- */
+
+.eschool-pagination .pagination-navigation .page-link {
+  gap: 0.4rem;
+
+  min-width: auto;
+
+  padding-left: 0.85rem;
+  padding-right: 0.85rem;
+
+  color: #006b3f;
+}
+
+/* ---------------------------------------------------------
+   ICÔNES
+--------------------------------------------------------- */
+
+.eschool-pagination .pagination-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 1.25rem;
+  font-weight: 400;
+
+  line-height: 1;
+}
+
+.eschool-pagination .pagination-text {
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+/* ---------------------------------------------------------
+   HOVER NAVIGATION
+--------------------------------------------------------- */
+
+.eschool-pagination
+.pagination-navigation
+.page-link:hover {
+  background: #006b3f;
+  border-color: #006b3f;
+  color: #ffffff;
+}
+
+/* ---------------------------------------------------------
+   ÉTAT DÉSACTIVÉ
+--------------------------------------------------------- */
+
+.eschool-pagination .page-item.disabled .page-link {
+  background: #f4f8f5;
+  border-color: #dce8e1;
+  color: #9aa9a2;
+
+  cursor: not-allowed;
+  pointer-events: none;
+
+  box-shadow: none;
+}
+
+/* ---------------------------------------------------------
+   RESPONSIVE — TABLETTE
+--------------------------------------------------------- */
+
+@media (max-width: 768px) {
+
+  .eschool-pagination {
+    justify-content: center;
+    margin-top: 1.25rem;
+  }
+
+  .eschool-pagination .pagination {
+    gap: 0.3rem;
+  }
+
+  .eschool-pagination .page-link {
+    min-width: 38px;
+    height: 38px;
+
+    padding: 0.45rem 0.65rem;
+  }
+
+}
+
+/* ---------------------------------------------------------
+   RESPONSIVE — MOBILE
+--------------------------------------------------------- */
+
+@media (max-width: 480px) {
+
+  .eschool-pagination {
+    justify-content: center;
+  }
+
+  .eschool-pagination .pagination {
+    gap: 0.25rem;
+  }
+
+  .eschool-pagination .page-link {
+    min-width: 36px;
+    height: 36px;
+
+    padding: 0.4rem 0.55rem;
+
+    font-size: 0.8rem;
+  }
+
+  /*
+   * Sur petit écran, on conserve les icônes
+   * mais on réduit le texte Précédent/Suivant.
+   */
+  .eschool-pagination .pagination-text {
+    display: none;
+  }
+
+  .eschool-pagination
+  .pagination-navigation
+  .page-link {
+    width: 36px;
+    padding: 0;
+  }
+
+  .eschool-pagination .pagination-icon {
+    font-size: 1.3rem;
+  }
+
+}

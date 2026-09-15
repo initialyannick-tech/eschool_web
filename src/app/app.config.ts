@@ -41,9 +41,6 @@ function tokenInterceptor(request: HttpRequest<any>, next: HttpHandlerFn) {
 
 
 
-
-
-
 export const appConfig: ApplicationConfig = {
   providers: [
     provideHttpClient(withFetch(), withInterceptors([tokenInterceptor])),

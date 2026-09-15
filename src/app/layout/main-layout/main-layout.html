@@ -244,7 +244,7 @@
           Administration
         </span>
 
-        <a class="sidebar-nav__link"  routerLink="/admin/users" routerLinkActive="sidebar-nav__link--active">
+        <a class="sidebar-nav__link" *ngxPermissionsOnly="['user.management']"  routerLink="/admin/users" routerLinkActive="sidebar-nav__link--active">
           <i class="bi bi-people-fill"></i>
           <span>Gestion Users</span>
         </a>
