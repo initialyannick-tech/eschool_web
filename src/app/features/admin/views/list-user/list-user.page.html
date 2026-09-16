@@ -34,198 +34,63 @@
 
   <div class="users-table-wrapper">
     <table class="users-table">
-
       <thead>
-
       <tr>
-
         <th>Utilisateur</th>
-
         <th>Email</th>
-
         <th>Rôle</th>
-
         <th>Statut</th>
-
-        <th class="users-table__actions">
-          Actions
-        </th>
-
+        <th class="users-table__actions">Actions</th>
       </tr>
-
       </thead>
-
-
       <tbody>
-
-      <!-- CHARGEMENT -->
-
         @if (isLoad) {
-
           <tr>
-
-            <td
-              colspan="5"
-              class="users-table__loading"
-            >
-
+            <td colspan="5" class="users-table__loading">
               <div class="loading-content">
-
                 <span class="loading-spinner"></span>
-
-                <span>
-                  Chargement des utilisateurs...
-                </span>
-
+                <span>Chargement des utilisateurs...</span>
               </div>
-
             </td>
-
           </tr>
-
         }
-
-      <!-- DONNÉES -->
-
-      @else {
-
+       @else {
         @for (user of users; track user.id) {
-
           <tr>
-
-            <!-- Utilisateur -->
-
             <td>
-
               <div class="user-cell">
-
-                <div class="user-avatar">
-
-                  {{ user.prenom?.charAt(0) }}
-                  {{ user.nom?.charAt(0) }}
-
-                </div>
-
+                <div class="user-avatar">{{ user.prenom?.charAt(0) }}{{ user.nom?.charAt(0) }}</div>
                 <div class="user-information">
-
-                  <div class="user-name">
-
-                    {{ user.nom }}
-                    {{ user.prenom }}
-
-                  </div>
-
-                  <div class="user-id">
-
-                    ID #{{ user.id }}
-
-                  </div>
-
+                  <div class="user-name">{{ user.nom }} {{ user.prenom }}</div>
+                  <div class="user-id">ID #{{ user.id }}</div>
                 </div>
-
               </div>
-
             </td>
 
-
-            <!-- Email -->
-
+            <td><span class="user-email">{{ user.email }}</span></td>
+            <td><span class="role-badge">{{ user.role.libelle }}</span></td>
             <td>
-
-                <span class="user-email">
-
-                  {{ user.email }}
-
-                </span>
-
-            </td>
-
-
-            <!-- Rôle -->
-
-            <td>
-
-                <span class="role-badge">
-
-                  {{ user.role.libelle }}
-
-                </span>
-
-            </td>
-
-
-            <!-- Statut -->
-
-            <td>
-
               @if (user.status === 'active') {
-
                 <span class="status-badge status-badge--active">
-
-                    <span class="status-dot"></span>
-
-                    Actif
-
-                  </span>
-
+                    <span class="status-dot"></span>Actif</span>
               }
-
               @else {
-
                 <span class="status-badge status-badge--inactive">
-
-                    <span class="status-dot"></span>
-
-                    Inactif
-
-                  </span>
-
+                    <span class="status-dot"></span>Inactif</span>
               }
-
             </td>
-
-
-            <!-- Actions -->
-
             <td class="users-table__actions">
-
-              <button
-                type="button"
-                class="btn-user-action"
-                (click)="edit(user)"
-                title="Modifier l'utilisateur"
-              >
-
+              <button type="button" class="btn-user-action" (click)="edit(user)" title="Modifier l'utilisateur">
                 <i class="bi bi-pencil"></i>
-
               </button>
-
             </td>
-
           </tr>
-
         }
-
       }
-
       </tbody>
-
     </table>
-
   </div>
-
-
-  <!-- =======================================================
-       PAGINATION
-  ======================================================== -->
-
   <div class="users-card__footer">
-
-    <app-custom-pagination
-      (pageChange)="changePage($event)"
-      [links]="pagination">
-    </app-custom-pagination>
-
+    <app-custom-pagination (pageChange)="changePage($event)" [links]="pagination"></app-custom-pagination>
   </div>
-
 </div>

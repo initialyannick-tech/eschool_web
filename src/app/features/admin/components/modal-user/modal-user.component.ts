@@ -56,7 +56,7 @@ export class ModalUserComponent {
     if (this.userForm.valid) {
       this.isSubmit = true
       if (this.isEdit) {
-        this.apiService.put('userlist/' + this.user.id, this.userForm.value).then((data: any) => {
+        this.apiService.put('userList/' + this.user.id, this.userForm.value).then((data: any) => {
           if (data.success) {
             this.isSubmit = false
             this.shareService.sweetSuccessUpdate()
@@ -67,7 +67,7 @@ export class ModalUserComponent {
           }
         })
       } else {
-        this.apiService.post('userlist', this.userForm.value).then((data: any) => {
+        this.apiService.post('userList', this.userForm.value).then((data: any) => {
           if (data.success) {
             this.isSubmit = false
             this.shareService.sweetSuccessInsert()

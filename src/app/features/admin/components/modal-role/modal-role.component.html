@@ -1,96 +1,328 @@
-<div class="modal-header border-0 pb-0">
-  <h5 class="modal-title fw-semibold">
-    <i class="bi bi-shield-fill-check me-2 text-primary"></i>
-    Gérer un rôle
-  </h5>
-  <a (click)="close()" class="btn-close"></a>
-</div>
+<div class="role-modal">
 
-<form (submit)="submit()" [formGroup]="roleForm">
-  <div class="modal-body pt-3">
+  <!-- =====================================================
+       HEADER
+  ====================================================== -->
 
-    <!-- Informations générales -->
-    <div class="mb-4">
-      <h6 class="section-title">
-        <i class="bi bi-info-circle me-1"></i>
-        Informations générales
-      </h6>
+  <div class="role-modal__header">
 
-      <div class="row g-3 mt-1">
-        <div class="col-12">
-          <label class="form-label">Libellé</label>
-          <input
-            class="form-control"
-            formControlName="libelle"
-            type="text"
-            placeholder="Nom du rôle">
-        </div>
+    <div class="role-modal__identity">
 
-        <div class="col-12">
-          <label class="form-label">Description</label>
-          <textarea
-            class="form-control"
-            formControlName="description"
-            rows="4"
-            placeholder="Description du rôle">
-          </textarea>
-        </div>
-      </div>
-    </div>
-
-    <!-- Permissions -->
-    <div class="mb-3">
-      <div class="d-flex justify-content-between align-items-center mb-2">
-        <h6 class="section-title mb-0">
-          <i class="bi bi-key-fill me-1"></i>
-          Permissions
-        </h6>
-        <small>Selectionnées ( {{ permissionsSelected.length }} )</small>
+      <div class="role-modal__icon">
+        <i class="bi bi-shield-lock-fill"></i>
       </div>
 
-      @for (permission of permissionItems; track permission.id) {
-        <div class="input-group mb-2 align-items-center">
-          <span class="input-group-text p-2">
-            <input
-              (change)="checkPerm($event)"
-              [checked]="permission.checked"
-              [value]="permission.id"
-              class="form-check-input"
-              type="checkbox">
+      <div class="role-modal__title">
+
+        <div class="role-modal__title-row">
+
+          <h5>
+            {{ isEdit ? 'Modifier un rôle' : 'Nouveau rôle' }}
+          </h5>
+
+          <span class="role-modal__badge">
+            Accès
           </span>
-          <input
-            [value]="permission.libelle"
-            class="form-control"
-            disabled
-            type="text">
+
         </div>
-      }
+
+        <p>
+          Configurez les informations et les permissions du rôle
+        </p>
+
+      </div>
+
     </div>
 
+
+    <!-- Fermeture -->
+
+    <button
+      type="button"
+      class="role-modal__close"
+      (click)="close()"
+      aria-label="Fermer"
+    >
+      <i class="bi bi-x-lg"></i>
+    </button>
+
   </div>
 
-  <!-- Footer -->
-  <div class="modal-footer border-0 pt-0">
-    @if (isEdit) {
-      @if (isSubmit) {
-        <button class="btn btn-success px-4" disabled>
-          <i class="bi bi-arrow-repeat me-1"></i> Chargement...
-        </button>
+
+  <!-- =====================================================
+       FORMULAIRE
+  ====================================================== -->
+
+  <form
+    (submit)="submit()"
+    [formGroup]="roleForm"
+  >
+
+    <div class="role-modal__body">
+
+
+      <!-- =================================================
+           INFORMATIONS GÉNÉRALES
+      ================================================== -->
+
+      <section class="role-section">
+
+        <div class="role-section__header">
+
+          <div class="role-section__icon">
+            <i class="bi bi-info-lg"></i>
+          </div>
+
+          <div>
+
+            <h6>
+              Informations générales
+            </h6>
+
+            <p>
+              Définissez les informations principales du rôle
+            </p>
+
+          </div>
+
+        </div>
+
+
+        <div class="role-fields">
+
+          <!-- Libellé -->
+
+          <div class="role-field">
+
+            <label
+              class="role-field__label"
+              for="role-libelle"
+            >
+              Libellé
+              <span>*</span>
+            </label>
+
+            <input
+              id="role-libelle"
+              class="role-input"
+              formControlName="libelle"
+              type="text"
+              placeholder="Ex. Administrateur"
+            >
+
+          </div>
+
+
+          <!-- Description -->
+
+          <div class="role-field">
+
+            <label
+              class="role-field__label"
+              for="role-description"
+            >
+              Description
+            </label>
+
+            <textarea
+              id="role-description"
+              class="role-input role-textarea"
+              formControlName="description"
+              rows="3"
+              placeholder="Décrivez les responsabilités associées à ce rôle..."
+            ></textarea>
+
+          </div>
+
+        </div>
+
+      </section>
+
+
+      <!-- =================================================
+           PERMISSIONS
+      ================================================== -->
+
+      <section class="role-section role-section--permissions">
+
+        <div class="role-section__header">
+
+          <div class="role-section__icon role-section__icon--key">
+            <i class="bi bi-key-fill"></i>
+          </div>
+
+          <div class="role-section__header-content">
+
+            <div class="role-section__title-line">
+
+              <div>
+
+                <h6>
+                  Permissions
+                </h6>
+
+                <p>
+                  Sélectionnez les droits associés à ce rôle
+                </p>
+
+              </div>
+
+
+              <div class="permissions-counter">
+
+                <span class="permissions-counter__number">
+                  {{ permissionsSelected.length }}
+                </span>
+
+                <span>
+                  sélectionnée{{ permissionsSelected.length > 1 ? 's' : '' }}
+                </span>
+
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+
+        <!-- Liste des permissions -->
+
+        <div class="permissions-list">
+
+          @for (permission of permissionItems; track permission.id) {
+
+            <label
+              class="permission-item"
+              [class.permission-item--checked]="permission.checked"
+            >
+
+              <div class="permission-item__checkbox">
+
+                <input
+                  (change)="checkPerm($event)"
+                  [checked]="permission.checked"
+                  [value]="permission.id"
+                  type="checkbox"
+                >
+
+                <span class="permission-check">
+                  <i class="bi bi-check"></i>
+                </span>
+
+              </div>
+
+
+              <div class="permission-item__content">
+
+                <span class="permission-item__name">
+                  {{ permission.libelle }}
+                </span>
+
+                <span class="permission-item__id">
+                  Permission #{{ permission.id }}
+                </span>
+
+              </div>
+
+
+              <div class="permission-item__arrow">
+                <i class="bi bi-chevron-right"></i>
+              </div>
+
+            </label>
+
+          }
+
+        </div>
+
+      </section>
+
+    </div>
+
+
+    <!-- =====================================================
+         FOOTER
+    ====================================================== -->
+
+    <div class="role-modal__footer">
+
+      <button
+        type="button"
+        class="role-btn role-btn--cancel"
+        (click)="close()"
+      >
+        Annuler
+      </button>
+
+
+      @if (isEdit) {
+
+        @if (isSubmit) {
+
+          <button
+            class="role-btn role-btn--primary"
+            type="button"
+            disabled
+          >
+
+            <span class="role-spinner"></span>
+
+            Mise à jour...
+
+          </button>
+
+        } @else {
+
+          <button
+            class="role-btn role-btn--primary"
+            type="submit"
+          >
+
+            <i class="bi bi-check2"></i>
+
+            Mettre à jour
+
+          </button>
+
+        }
+
       } @else {
-        <button class="btn btn-success px-4" type="submit">
-          <i class="bi bi-check-circle me-1"></i> Mettre à jour
-        </button>
+
+        @if (isSubmit) {
+
+          <button
+            class="role-btn role-btn--primary"
+            type="button"
+            disabled
+          >
+
+            <span class="role-spinner"></span>
+
+            Enregistrement...
+
+          </button>
+
+        } @else {
+
+          <button
+            class="role-btn role-btn--primary"
+            type="submit"
+          >
+
+            <i class="bi bi-check2"></i>
+
+            Créer le rôle
+
+          </button>
+
+        }
+
       }
-    } @else {
-      @if (isSubmit) {
-        <button class="btn btn-primary px-4" disabled>
-          <i class="bi bi-arrow-repeat me-1"></i> Chargement...
-        </button>
-      } @else {
-        <button class="btn btn-primary px-4" type="submit">
-          <i class="bi bi-save me-1"></i> Sauvegarder
-        </button>
-      }
-    }
-  </div>
-</form>
+
+    </div>
+
+  </form>
+
+</div>
