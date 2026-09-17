@@ -1,88 +1,90 @@
-<app-page-header
-  [backBtn]="true"
-  [titre]="'Liste des Rôles'">
-</app-page-header>
+<app-page-header [backBtn]="true" [titre]="'Liste des Rôles'"></app-page-header>
+<div class="users-toolbar">
+  <div class="users-toolbar__info">
+    <div class="users-toolbar__title">
+      Rôles
+    </div>
+    <div class="users-toolbar__subtitle">
+      Gérez les rôles et les niveaux d'accès de la plateforme
+    </div>
+  </div>
 
-<!-- TOOLBAR -->
-<div class="datatable-toolbar mt-3">
-
-  <div class="toolbar-left">
-    <button class="btn btn-primary" (click)="add()">
-      <i class="bi bi-plus-circle me-1"></i>
-      Ajouter un rôle
+  <div class="users-toolbar__actions">
+    <div class="users-search">
+      <i class="bi bi-search"></i>
+      <input type="text" class="users-search__input" placeholder="Rechercher un rôle...">
+    </div>
+    <!-- Ajouter -->
+    <button type="button" class="btn-add-user" (click)="add()">
+      <i class="bi bi-plus-lg"></i>
+      <span>Ajouter un rôle</span>
     </button>
   </div>
-
-  <div class="toolbar-right">
-    <input
-      class="form-control search-input"
-      placeholder="Rechercher un rôle..."
-      type="text">
-  </div>
-
 </div>
 
-<!-- TABLE WRAPPER -->
-<div class="datatable-wrapper mt-3">
-
-  @if (isLoad) {
-    <div class="datatable-loader">
-      <div class="spinner-border text-primary spinner-border-sm"></div>
+<div class="users-card">
+  <div class="users-card__header">
+    <div>
+      <h4>Liste des rôles</h4>
+      <span>Rôles enregistrés sur la plateforme</span>
     </div>
-  } @else {
+  </div>
 
-    <div class="table-responsive">
-
-      <table class="datatable-table">
-
-        <thead>
-        <tr>
-          <th>Rôle</th>
-          <th class="text-end">Actions</th>
-        </tr>
-        </thead>
-
-        <tbody>
-
+  <div class="users-table-wrapper">
+    <table class="users-table">
+      <thead>
+      <tr>
+        <th>Rôle</th>
+        <th class="users-table__actions">Actions</th>
+      </tr>
+      </thead>
+      <tbody>
+        @if (isLoad) {
+          <tr>
+            <td colspan="2" class="users-table__loading">
+              <div class="loading-content">
+                <span class="loading-spinner"></span>
+                <span>Chargement des rôles...</span>
+              </div>
+            </td>
+          </tr>
+        }
+        @else{
           @for (role of roles; track role.id) {
-            <tr class="datatable-row">
+            <tr>
+              <td>
+                <div class="user-cell">
+                  <!-- Icône -->
+                  <div class="user-avatar role-avatar">
+                    <i class="bi bi-shield-shaded"></i>
+                  </div>
+                  <!-- Informations -->
+                  <div class="user-information">
 
-              <td class="role-cell">
-                <div class="role-badge">
-                  <i class="bi bi-shield-shaded"></i>
-                </div>
-                <div class="role-name">
-                  {{ role.libelle }}
+                    <div class="user-name">{{ role.libelle }}</div>
+
+                    <div class="user-id">ID #{{ role.id }}</div>
+                  </div>
                 </div>
               </td>
 
-              <td class="actions-cell text-end">
-                <button class="btn btn-sm btn-outline-primary" (click)="edit(role)">
+              <td class="users-table__actions">
+                <button type="button" class="btn-user-action" (click)="edit(role)" title="Modifier le rôle">
                   <i class="bi bi-pencil"></i>
                 </button>
-
-                <button class="btn btn-sm btn-outline-danger" (click)="delete(role)">
+                <!-- Supprimer -->
+                <button type="button" class="btn-user-action btn-user-action--danger" (click)="delete(role)" title="Supprimer le rôle">
                   <i class="bi bi-trash"></i>
                 </button>
               </td>
-
             </tr>
           }
+        }
+      </tbody>
+    </table>
+  </div>
 
-        </tbody>
-
-      </table>
-
-    </div>
-
-  }
-
-</div>
-
-<!-- PAGINATION -->
-<div class="datatable-footer">
-  <app-custom-pagination
-    (pageChange)="changePage($event)"
-    [links]="pagination">
-  </app-custom-pagination>
+  <div class="users-card__footer">
+    <app-custom-pagination (pageChange)="changePage($event)" [links]="pagination"></app-custom-pagination>
+  </div>
 </div>

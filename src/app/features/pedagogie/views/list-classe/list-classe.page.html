@@ -1,0 +1,214 @@
+<app-page-header [backBtn]="true" [titre]="'Liste des Classes'"></app-page-header>
+<div class="users-toolbar">
+  <div class="users-toolbar__info">
+    <div class="users-toolbar__title">
+      Classe / Niveau
+    </div>
+    <div class="users-toolbar__subtitle">
+      Gérez les classes et leurs professeurs principaux
+    </div>
+  </div>
+
+  <!-- Actions -->
+  <div class="users-toolbar__actions">
+    <!-- Recherche -->
+    <div class="users-search">
+      <i class="bi bi-search"></i>
+      <input type="text" class="users-search__input" placeholder="Rechercher une classe...">
+    </div>
+
+
+    <!-- Ajouter -->
+    <button type="button" class="btn-add-user" (click)="add()">
+      <i class="bi bi-plus-lg"></i>
+      <span>Ajouter une classe</span>
+    </button>
+  </div>
+</div>
+
+<div class="users-card">
+  <div class="users-card__header">
+    <div>
+      <h4>Liste des classes</h4>
+      <span>Classes enregistrées sur la plateforme</span>
+    </div>
+  </div>
+  <div class="users-table-wrapper">
+
+    <table class="users-table">
+      <thead>
+      <tr>
+        <th>Niveau</th>
+        <th>Capacité</th>
+
+        <th>Nombre élèves</th>
+
+        <th>Places disponibles</th>
+
+        <th>Cycle</th>
+
+        <th>Série</th>
+
+        <th>Statut</th>
+
+        <th class="users-table__actions">Actions</th>
+
+      </tr>
+
+      </thead>
+
+
+      <tbody>
+        @if (isLoad) {
+          <tr>
+
+            <td colspan="8" class="users-table__loading">
+
+              <div class="loading-content">
+
+                <span class="loading-spinner"></span>
+
+                <span>
+                Chargement des classes...
+              </span>
+
+              </div>
+
+            </td>
+
+          </tr>
+
+        }
+        @else {
+          @for (classe of classes; track classe.id) {
+            <tr>
+              <td>
+                <div class="user-cell">
+                  <div class="user-avatar">
+                    <i class="bi bi-mortarboard-fill"></i>
+                  </div>
+                  <div class="user-information">
+                    <div class="user-name">
+                      {{ classe.nom }}
+                    </div>
+                    <div class="user-id">
+                      ID #{{ classe.id }}
+                    </div>
+                  </div>
+                </div>
+              </td>
+              <td>
+                <span class="user-email">
+                  {{ classe.capacite }}
+                </span>
+              </td>
+              <td>
+                <span class="role-badge">
+                  {{ classe.nombre_eleves ?? 0 }}
+                </span>
+              </td>
+              <td>
+                <span class="role-badge">
+                  {{ classe.places_disponibles ?? 0 }}
+                </span>
+              </td>
+              <td>
+                <span class="user-email">
+                  {{ classe.cycle?.libelle ?? '-' }}
+                </span>
+              </td>
+              <td>
+
+                <span class="user-email">
+                  {{ classe.serie?.libelle ?? '-' }}
+                </span>
+
+              </td>
+
+              <td>
+
+                @if (classe.actif) {
+
+                  <span class="status-badge status-badge--active">
+
+                    <span class="status-dot"></span>
+
+                    Actif
+
+                  </span>
+
+                }
+
+                @else {
+
+                  <span class="status-badge status-badge--inactive">
+
+                    <span class="status-dot"></span>
+
+                    Inactif
+
+                  </span>
+
+                }
+
+              </td>
+
+
+              <!-- =============================================
+                   ACTIONS
+              ============================================== -->
+
+              <td class="users-table__actions">
+
+                <!-- Modifier -->
+                <button
+                  type="button"
+                  class="btn-user-action"
+                  (click)="edit(classe)"
+                  title="Modifier la classe">
+
+                  <i class="bi bi-pencil"></i>
+
+                </button>
+
+
+                <!-- Supprimer -->
+                <button
+                  type="button"
+                  class="btn-user-action btn-user-action--danger"
+
+                  title="Supprimer la classe">
+
+                  <i class="bi bi-trash"></i>
+
+                </button>
+
+              </td>
+
+            </tr>
+
+          }
+       }
+
+      </tbody>
+
+    </table>
+
+  </div>
+
+
+  <!-- =======================================================
+       FOOTER / PAGINATION
+  ======================================================== -->
+
+  <div class="users-card__footer">
+
+    <app-custom-pagination
+      (pageChange)="changePage($event)"
+      [links]="pagination">
+    </app-custom-pagination>
+
+  </div>
+
+</div>
+

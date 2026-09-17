@@ -1,30 +1,13 @@
-<!-- ===================================================
-     STRUCTURE PRINCIPALE — eSchool
-==================================================== -->
 <div class="app-shell">
-
-  <!-- =================================================
-       BARRE SUPÉRIEURE
-  ================================================== -->
   <header class="app-topbar">
-
     <div class="app-topbar__left">
-
-      <button
-        class="topbar-toggle"
-        type="button"
-        (click)="toggleSidebar()"
-        aria-label="Afficher ou masquer le menu">
+      <button class="topbar-toggle" type="button" (click)="toggleSidebar()" aria-label="Afficher ou masquer le menu">
         <i class="bi bi-list"></i>
       </button>
-
       <div class="topbar-brand">
         <div class="topbar-brand__logo">
-          <img
-            src="assets/img/eschool_logo.png"
-            alt="Logo eSchool">
+          <img src="assets/img/eschool_logo.png" alt="Logo eSchool">
         </div>
-
         <span class="topbar-brand__name">
           eSchool
         </span>
@@ -243,7 +226,10 @@
         <span class="sidebar-nav__label">
           Administration
         </span>
-
+        <a class="sidebar-nav__link" *ngxPermissionsOnly="['classe.management']" routerLink="/pedagogie/list-classe" routerLinkActive="sidebar-nav__link--active">
+          <i class="bi bi-building-add"></i>
+          <span>Gestion Classe</span>
+        </a>
         <a class="sidebar-nav__link" *ngxPermissionsOnly="['user.management']"  routerLink="/admin/users" routerLinkActive="sidebar-nav__link--active">
           <i class="bi bi-people-fill"></i>
           <span>Gestion Users</span>
