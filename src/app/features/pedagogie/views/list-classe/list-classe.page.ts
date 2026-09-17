@@ -6,11 +6,12 @@ import {Classe} from '../../models/classe';
 import {ModalClasseComponent} from '../../components/modals/modal-classe/modal-classe.component';
 import {CustomPaginationComponent} from '../../../../shared/components/custom-pagination/custom-pagination.component';
 import {PageHeaderComponent} from '../../../../shared/components/page-header/page-header.component';
+import {FormsModule} from '@angular/forms';
 
 @Component({
   selector: 'app-list-classe',
   standalone: true,
-  imports: [CommonModule, CustomPaginationComponent, PageHeaderComponent],
+  imports: [CommonModule, CustomPaginationComponent, PageHeaderComponent, FormsModule],
   templateUrl: './list-classe.page.html',
   styleUrls: ['./list-classe.page.scss']
 })
@@ -72,7 +73,7 @@ export class ListClassePage {
 
 
   searchAction() {
-    if (this.searchText.length > 3) {
+    if (this.searchText.length >= 3) {
       this.isLoad = true;
       this.apiService.get('classe/search/' + this.searchText).then((data: any) => {
         this.classes = data.data;
