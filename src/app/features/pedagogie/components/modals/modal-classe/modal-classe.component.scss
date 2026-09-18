@@ -1,4 +1,1681 @@
+/* =========================================================
+   MODAL CLASSE
+========================================================= */
 
-        /* Styles pour app-modal-classe */
-        
-    
+.classe-modal {
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+
+  background: #ffffff;
+
+  border-radius: 14px;
+
+  overflow: hidden;
+
+  box-shadow:
+    0 20px 60px rgba(24, 51, 42, 0.18);
+}
+
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+.classe-modal__header {
+  position: relative;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  width: 100%;
+
+  padding: 18px 24px;
+
+  box-sizing: border-box;
+
+  background: linear-gradient(
+    135deg,
+    #f5faf7 0%,
+    #ffffff 80%
+  );
+
+  border-bottom: 1px solid #e4ece8;
+}
+
+
+.classe-modal__header::before {
+  content: "";
+
+  position: absolute;
+
+  top: 0;
+  left: 0;
+
+  width: 100%;
+  height: 3px;
+
+  background: linear-gradient(
+    90deg,
+    #006b3f,
+    #00865a,
+    #f2c94c
+  );
+}
+
+
+/* =========================================================
+   IDENTITE
+========================================================= */
+
+.classe-modal__identity {
+  display: flex;
+  align-items: center;
+
+  gap: 13px;
+
+  min-width: 0;
+}
+
+
+.classe-modal__icon {
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  width: 48px;
+  height: 48px;
+
+  flex-shrink: 0;
+
+  background: #eaf6ef;
+
+  border: 1px solid #d4e9dc;
+
+  border-radius: 10px;
+
+  color: #006b3f;
+
+  font-size: 19px;
+}
+
+
+.classe-modal__heading {
+  min-width: 0;
+}
+
+
+.classe-modal__eyebrow {
+
+  margin-bottom: 2px;
+
+  color: #007a4d;
+
+  font-size: 9px;
+
+  font-weight: 700;
+
+  letter-spacing: .08em;
+
+  text-transform: uppercase;
+}
+
+
+.classe-modal__heading h4 {
+
+  margin: 0;
+
+  color: #18332a;
+
+  font-size: 19px;
+
+  font-weight: 750;
+
+  line-height: 1.2;
+}
+
+
+.classe-modal__heading p {
+
+  margin: 4px 0 0;
+
+  color: #7b8b83;
+
+  font-size: 10px;
+
+  line-height: 1.4;
+}
+
+
+/* =========================================================
+   BOUTON FERMER
+========================================================= */
+
+.classe-modal__close {
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  width: 34px;
+  height: 34px;
+
+  flex-shrink: 0;
+
+  background: #ffffff;
+
+  border: 1px solid #dce6e1;
+
+  border-radius: 8px;
+
+  color: #71827a;
+
+  cursor: pointer;
+
+  transition: .2s ease;
+}
+
+
+.classe-modal__close:hover {
+
+  background: #fff4f4;
+
+  border-color: #edcccc;
+
+  color: #bd4b4b;
+
+  transform: rotate(90deg);
+}
+
+
+/* =========================================================
+   FORMULAIRE
+========================================================= */
+
+.classe-modal__form {
+  width: 100%;
+}
+
+
+/* =========================================================
+   BODY
+========================================================= */
+
+.classe-modal__body {
+
+  display: grid;
+
+  grid-template-columns:
+    minmax(330px, .8fr)
+    minmax(600px, 1.6fr);
+
+  gap: 20px;
+
+  width: 100%;
+
+  padding: 20px 24px;
+
+  box-sizing: border-box;
+}
+
+
+/* =========================================================
+   PANNEAUX
+========================================================= */
+
+.classe-panel {
+
+  min-width: 0;
+
+  box-sizing: border-box;
+
+  border-radius: 10px;
+}
+
+
+/* =========================================================
+   PANNEAU GENERAL
+========================================================= */
+
+.classe-panel--general {
+
+  display: flex;
+
+  flex-direction: column;
+
+  padding: 16px;
+
+  background: #ffffff;
+
+  border: 1px solid #e5ede8;
+}
+
+
+/* =========================================================
+   PANNEAU SCOLAIRE
+========================================================= */
+
+.classe-panel--school {
+
+  display: flex;
+
+  flex-direction: column;
+
+  min-width: 0;
+
+  padding: 16px;
+
+  background: #fbfcfb;
+
+  border: 1px solid #e5ede8;
+}
+
+
+/* =========================================================
+   TITRES DES SECTIONS
+========================================================= */
+
+.classe-section__heading {
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 9px;
+
+  margin-bottom: 18px;
+}
+
+
+.classe-section__icon {
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  width: 34px;
+  height: 34px;
+
+  flex-shrink: 0;
+
+  background: #f0f7f3;
+
+  border: 1px solid #dcebe3;
+
+  border-radius: 8px;
+
+  color: #007a4d;
+
+  font-size: 13px;
+}
+
+
+.classe-section__heading h5 {
+
+  margin: 0;
+
+  color: #253c32;
+
+  font-size: 12px;
+
+  font-weight: 700;
+}
+
+
+.classe-section__heading p {
+
+  margin: 2px 0 0;
+
+  color: #899790;
+
+  font-size: 9px;
+}
+
+
+/* =========================================================
+   CONTENU GENERAL
+========================================================= */
+
+.classe-general-content {
+
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 15px;
+
+  height: 100%;
+}
+
+
+/* =========================================================
+   CHAMPS
+========================================================= */
+
+.classe-field {
+
+  width: 100%;
+
+  min-width: 0;
+}
+
+
+.classe-field label {
+
+  display: block;
+
+  margin-bottom: 6px;
+
+  color: #42564d;
+
+  font-size: 10px;
+
+  font-weight: 650;
+}
+
+
+.classe-field label span {
+
+  color: #d25555;
+}
+
+
+/* =========================================================
+   INPUT
+========================================================= */
+
+.classe-input {
+
+  position: relative;
+
+  width: 100%;
+
+  height: 40px;
+}
+
+
+.classe-input > i {
+
+  position: absolute;
+
+  top: 50%;
+  left: 11px;
+
+  z-index: 2;
+
+  transform: translateY(-50%);
+
+  color: #91a098;
+
+  font-size: 12px;
+
+  pointer-events: none;
+}
+
+
+.classe-input input {
+
+  width: 100%;
+  height: 100%;
+
+  box-sizing: border-box;
+
+  padding: 0 11px 0 32px;
+
+  background: #ffffff;
+
+  border: 1px solid #dbe6e0;
+
+  border-radius: 7px;
+
+  color: #243b31;
+
+  font-size: 11px;
+
+  outline: none;
+
+  transition: .2s ease;
+}
+
+
+.classe-input input:hover {
+
+  border-color: #c6d9cf;
+}
+
+
+.classe-input input:focus {
+
+  border-color: #72aa8d;
+
+  box-shadow:
+    0 0 0 3px rgba(0, 107, 63, .06);
+}
+
+
+/* =========================================================
+   TEXTAREA
+========================================================= */
+
+.classe-textarea {
+
+  position: relative;
+
+  width: 100%;
+}
+
+
+.classe-textarea > i {
+
+  position: absolute;
+
+  top: 11px;
+  left: 11px;
+
+  z-index: 2;
+
+  color: #91a098;
+
+  font-size: 12px;
+
+  pointer-events: none;
+}
+
+
+.classe-textarea textarea {
+
+  width: 100%;
+
+  min-height: 105px;
+
+  box-sizing: border-box;
+
+  padding: 10px 11px 10px 32px;
+
+  resize: vertical;
+
+  background: #ffffff;
+
+  border: 1px solid #dbe6e0;
+
+  border-radius: 7px;
+
+  color: #243b31;
+
+  font-size: 11px;
+
+  line-height: 1.5;
+
+  outline: none;
+
+  transition: .2s ease;
+}
+
+
+.classe-textarea textarea:hover {
+
+  border-color: #c6d9cf;
+}
+
+
+.classe-textarea textarea:focus {
+
+  border-color: #72aa8d;
+
+  box-shadow:
+    0 0 0 3px rgba(0, 107, 63, .06);
+}
+
+
+/* =========================================================
+   ZONE ACTIF
+========================================================= */
+
+.classe-active-box {
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  gap: 15px;
+
+  padding: 10px 12px;
+
+  background: #f8faf9;
+
+  border: 1px solid #e1e9e5;
+
+  border-radius: 8px;
+}
+
+
+.classe-active-info {
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 9px;
+
+  min-width: 0;
+}
+
+
+.classe-active-icon {
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  width: 30px;
+  height: 30px;
+
+  flex-shrink: 0;
+
+  background: #eaf6ef;
+
+  border: 1px solid #d4e9dc;
+
+  border-radius: 7px;
+
+  color: #007a4d;
+
+  font-size: 12px;
+}
+
+
+.classe-active-info > div:last-child {
+
+  display: flex;
+
+  flex-direction: column;
+
+  min-width: 0;
+}
+
+
+.classe-active-title {
+
+  color: #344a40;
+
+  font-size: 10px;
+
+  font-weight: 650;
+}
+
+
+.classe-active-description {
+
+  margin-top: 2px;
+
+  color: #899790;
+
+  font-size: 8px;
+}
+
+
+/* =========================================================
+   SWITCH
+========================================================= */
+
+.classe-switch {
+
+  position: relative;
+
+  display: block;
+
+  width: 38px;
+  height: 21px;
+
+  flex-shrink: 0;
+
+  margin: 0;
+
+  cursor: pointer;
+}
+
+
+.classe-switch input {
+
+  position: absolute;
+
+  width: 0;
+  height: 0;
+
+  opacity: 0;
+}
+
+
+.classe-switch__slider {
+
+  position: absolute;
+
+  inset: 0;
+
+  background: #d5dfda;
+
+  border-radius: 20px;
+
+  transition: .2s ease;
+}
+
+
+.classe-switch__slider::before {
+
+  content: "";
+
+  position: absolute;
+
+  left: 3px;
+  bottom: 3px;
+
+  width: 15px;
+  height: 15px;
+
+  background: #ffffff;
+
+  border-radius: 50%;
+
+  box-shadow: 0 1px 3px rgba(0,0,0,.15);
+
+  transition: .2s ease;
+}
+
+
+.classe-switch input:checked + .classe-switch__slider {
+
+  background: #006b3f;
+}
+
+
+.classe-switch input:checked + .classe-switch__slider::before {
+
+  transform: translateX(17px);
+}
+
+
+/* =========================================================
+   INFORMATION GENERAL
+========================================================= */
+
+.classe-general-info {
+
+  display: flex;
+
+  align-items: flex-start;
+
+  gap: 7px;
+
+  margin-top: auto;
+
+  padding-top: 13px;
+
+  border-top: 1px solid #e8efeb;
+
+  color: #899790;
+
+  font-size: 8.5px;
+
+  line-height: 1.45;
+}
+
+
+.classe-general-info i {
+
+  flex-shrink: 0;
+
+  color: #76a68e;
+
+  font-size: 10px;
+}
+
+
+/* =========================================================
+   GRILLE SCOLAIRE
+========================================================= */
+
+.classe-school-grid {
+
+  display: grid;
+
+  grid-template-columns:
+    repeat(2, minmax(0, 1fr));
+
+  gap: 15px;
+}
+
+
+/* =========================================================
+   SELECT NG-SELECT
+========================================================= */
+
+.classe-select {
+
+  position: relative;
+
+  width: 100%;
+
+  min-width: 0;
+}
+
+
+.classe-select > i {
+
+  position: absolute;
+
+  top: 50%;
+  left: 11px;
+
+  z-index: 20;
+
+  transform: translateY(-50%);
+
+  color: #91a098;
+
+  font-size: 12px;
+
+  pointer-events: none;
+}
+
+
+/*
+   On laisse une zone à gauche pour l'icône
+*/
+
+.classe-select ng-select {
+
+  display: block;
+
+  width: 100%;
+
+  min-width: 0;
+}
+
+
+/* Conteneur principal */
+
+.classe-select ::ng-deep .ng-select-container {
+
+  min-height: 40px;
+
+  height: 40px;
+
+  padding-left: 28px;
+
+  background: #ffffff !important;
+
+  border: 1px solid #dbe6e0 !important;
+
+  border-radius: 7px !important;
+
+  box-shadow: none !important;
+
+  color: #243b31;
+
+  font-size: 10.5px;
+
+  transition: .2s ease;
+}
+
+
+.classe-select ::ng-deep .ng-select-container:hover {
+
+  border-color: #c6d9cf !important;
+}
+
+
+.classe-select ::ng-deep.ng-select-focused .ng-select-container {
+
+  border-color: #72aa8d !important;
+
+  box-shadow:
+    0 0 0 3px rgba(0, 107, 63, .06) !important;
+}
+
+
+/* Texte sélectionné */
+
+.classe-select ::ng-deep .ng-value-container {
+
+  padding-left: 4px;
+
+  overflow: hidden;
+}
+
+
+.classe-select ::ng-deep .ng-value {
+
+  color: #344a40;
+
+  font-size: 10.5px;
+
+  white-space: nowrap;
+
+  overflow: hidden;
+
+  text-overflow: ellipsis;
+}
+
+
+/* Placeholder */
+
+.classe-select ::ng-deep .ng-placeholder {
+
+  color: #9aa7a1;
+
+  font-size: 10px;
+}
+
+
+/* Flèche */
+
+.classe-select ::ng-deep .ng-arrow-wrapper {
+
+  padding-right: 8px;
+}
+
+
+.classe-select ::ng-deep .ng-arrow {
+
+  border-color:
+    #8a9b93 transparent transparent;
+
+  border-width:
+    5px 5px 0;
+}
+
+
+/* =========================================================
+   DROPDOWN NG-SELECT
+========================================================= */
+
+.classe-select ::ng-deep .ng-dropdown-panel {
+
+  z-index: 9999;
+
+  margin-top: 3px;
+
+  background: #ffffff;
+
+  border: 1px solid #dbe6e0;
+
+  border-radius: 7px;
+
+  box-shadow:
+    0 8px 25px rgba(24, 51, 42, .12);
+
+  overflow: hidden;
+}
+
+
+.classe-select ::ng-deep .ng-option {
+
+  min-height: 35px;
+
+  padding: 9px 11px;
+
+  color: #42564d;
+
+  font-size: 10px;
+}
+
+
+.classe-select ::ng-deep .ng-option:hover {
+
+  background: #f0f7f3;
+
+  color: #006b3f;
+}
+
+
+.classe-select ::ng-deep .ng-option-selected {
+
+  background: #eaf6ef;
+
+  color: #006b3f;
+
+  font-weight: 600;
+}
+
+
+.classe-select ::ng-deep .ng-option-marked {
+
+  background: #f0f7f3;
+
+  color: #006b3f;
+}
+
+
+/* =========================================================
+   INFO SCOLAIRE
+========================================================= */
+
+.classe-school-info {
+
+  display: flex;
+
+  align-items: flex-start;
+
+  gap: 7px;
+
+  margin-top: auto;
+
+  padding-top: 13px;
+
+  border-top: 1px solid #e8efeb;
+
+  color: #899790;
+
+  font-size: 8.5px;
+
+  line-height: 1.45;
+}
+
+
+.classe-school-info i {
+
+  flex-shrink: 0;
+
+  color: #76a68e;
+
+  font-size: 10px;
+}
+
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+.classe-modal__footer {
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  gap: 15px;
+
+  min-height: 58px;
+
+  padding: 10px 24px;
+
+  box-sizing: border-box;
+
+  background: #f8faf9;
+
+  border-top: 1px solid #e4ece8;
+}
+
+
+/* =========================================================
+   INFO FOOTER
+========================================================= */
+
+.classe-footer-info {
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 6px;
+
+  color: #8a9891;
+
+  font-size: 9px;
+}
+
+
+.classe-footer-info i {
+
+  color: #007a4d;
+
+  font-size: 11px;
+}
+
+
+/* =========================================================
+   ACTIONS
+========================================================= */
+
+.classe-footer-actions {
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 8px;
+}
+
+
+/* =========================================================
+   BOUTON ANNULER
+========================================================= */
+
+.btn-classe-cancel {
+
+  display: inline-flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  gap: 5px;
+
+  height: 36px;
+
+  padding: 0 15px;
+
+  background: #ffffff;
+
+  border: 1px solid #d7e3dd;
+
+  border-radius: 7px;
+
+  color: #63736c;
+
+  font-size: 10px;
+
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition: .2s ease;
+}
+
+
+.btn-classe-cancel:hover {
+
+  background: #f2f6f4;
+
+  border-color: #c5d5cd;
+
+  color: #42564d;
+}
+
+
+/* =========================================================
+   BOUTON SUBMIT
+========================================================= */
+
+.btn-classe-submit {
+
+  display: inline-flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  gap: 6px;
+
+  min-width: 135px;
+
+  height: 36px;
+
+  padding: 0 15px;
+
+  background: #006b3f;
+
+  border: 1px solid #006b3f;
+
+  border-radius: 7px;
+
+  color: #ffffff;
+
+  font-size: 10px;
+
+  font-weight: 650;
+
+  cursor: pointer;
+
+  transition: .2s ease;
+}
+
+
+.btn-classe-submit:hover:not(:disabled) {
+
+  background: #005b36;
+
+  border-color: #005b36;
+
+  box-shadow:
+    0 4px 10px rgba(0, 107, 63, .18);
+
+  transform: translateY(-1px);
+}
+
+
+.btn-classe-submit:disabled {
+
+  opacity: .7;
+
+  cursor: not-allowed;
+
+  transform: none;
+}
+
+
+/* =========================================================
+   SPINNER
+========================================================= */
+
+.classe-submit-spinner {
+
+  width: 12px;
+  height: 12px;
+
+  border: 2px solid rgba(255,255,255,.35);
+
+  border-top-color: #ffffff;
+
+  border-radius: 50%;
+
+  animation: classe-modal-spin .7s linear infinite;
+}
+
+
+@keyframes classe-modal-spin {
+
+  to {
+    transform: rotate(360deg);
+  }
+
+}
+
+
+/* =========================================================
+   LARGEUR DU MODAL BOOTSTRAP
+========================================================= */
+
+.modal-dialog:has(.classe-modal) {
+
+  width: 95%;
+
+  max-width: 1400px;
+
+  margin: 1.75rem auto;
+}
+
+
+/* =========================================================
+   GRAND ECRAN
+========================================================= */
+
+@media (min-width: 1400px) {
+
+  .classe-modal {
+
+    max-width: 1450px;
+  }
+
+
+  .classe-modal__body {
+
+    grid-template-columns:
+      minmax(360px, .8fr)
+      minmax(750px, 1.7fr);
+
+    gap: 24px;
+
+    padding: 22px 28px;
+  }
+
+
+  .classe-school-grid {
+
+    gap: 17px;
+  }
+
+}
+
+
+/* =========================================================
+   TABLETTE
+========================================================= */
+
+@media (max-width: 1100px) {
+
+  .modal-dialog:has(.classe-modal) {
+
+    width: 94%;
+
+    max-width: 1000px;
+  }
+
+
+  .classe-modal__body {
+
+    grid-template-columns:
+      minmax(280px, .8fr)
+      minmax(430px, 1.2fr);
+
+    gap: 15px;
+
+    padding: 17px;
+  }
+
+
+  .classe-school-grid {
+
+    grid-template-columns: 1fr;
+  }
+
+}
+
+
+/* =========================================================
+   PETITE TABLETTE
+========================================================= */
+
+@media (max-width: 850px) {
+
+  .classe-modal__body {
+
+    grid-template-columns: 1fr;
+  }
+
+
+  .classe-panel--general,
+  .classe-panel--school {
+
+    width: 100%;
+  }
+
+
+  .classe-school-grid {
+
+    grid-template-columns:
+      repeat(2, minmax(0, 1fr));
+  }
+
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 650px) {
+
+  .modal-dialog:has(.classe-modal) {
+
+    width: 98%;
+
+    margin: .5rem auto;
+  }
+
+
+  .classe-modal {
+
+    border-radius: 10px;
+  }
+
+
+  .classe-modal__header {
+
+    padding: 15px;
+  }
+
+
+  .classe-modal__body {
+
+    display: flex;
+
+    flex-direction: column;
+
+    padding: 12px;
+  }
+
+
+  .classe-panel {
+
+    width: 100%;
+  }
+
+
+  .classe-school-grid {
+
+    grid-template-columns: 1fr;
+
+    gap: 13px;
+  }
+
+
+  .classe-modal__footer {
+
+    padding: 10px 12px;
+  }
+
+
+  .classe-footer-info {
+
+    display: none;
+  }
+
+
+  .classe-footer-actions {
+
+    width: 100%;
+  }
+
+
+  .btn-classe-cancel,
+  .btn-classe-submit {
+
+    flex: 1;
+  }
+
+}
+
+
+/* =========================================================
+   PETIT MOBILE
+========================================================= */
+
+@media (max-width: 450px) {
+
+  .classe-modal__identity {
+
+    gap: 9px;
+  }
+
+
+  .classe-modal__icon {
+
+    width: 40px;
+    height: 40px;
+
+    font-size: 16px;
+  }
+
+
+  .classe-modal__heading h4 {
+
+    font-size: 16px;
+  }
+
+
+  .classe-modal__heading p {
+
+    font-size: 9px;
+  }
+
+
+  .classe-section__heading {
+
+    margin-bottom: 14px;
+  }
+
+
+  .classe-school-grid {
+
+    grid-template-columns: 1fr;
+  }
+
+
+  .classe-active-box {
+
+    padding: 9px;
+  }
+
+}
+/* =========================================================
+   AJUSTEMENT LARGEUR + MARGE DROITE DU MODAL
+========================================================= */
+
+/* Conteneur Bootstrap */
+.modal-dialog:has(.classe-modal) {
+  width: calc(100% - 50px) !important;
+  max-width: 1400px !important;
+
+  margin: 25px auto !important;
+}
+
+
+/* Modal */
+.classe-modal {
+  width: 100%;
+  max-width: none;
+
+  box-sizing: border-box;
+
+  overflow: hidden;
+}
+
+
+/* =========================================================
+   BODY
+========================================================= */
+
+.classe-modal__body {
+
+  width: 100%;
+
+  box-sizing: border-box;
+
+  /*
+   * On garde une marge intérieure supplémentaire
+   * à droite pour éviter que le dernier select
+   * touche le bord.
+   */
+  padding: 20px 28px 22px 24px;
+
+  display: grid;
+
+  grid-template-columns:
+    minmax(330px, 0.8fr)
+    minmax(0, 1.7fr);
+
+  gap: 22px;
+}
+
+
+/* =========================================================
+   PANNEAU DROIT
+========================================================= */
+
+.classe-panel--school {
+
+  width: 100%;
+
+  min-width: 0;
+
+  box-sizing: border-box;
+
+  overflow: hidden;
+}
+
+
+/* =========================================================
+   GRILLE DES SELECTS
+========================================================= */
+
+.classe-school-grid {
+
+  width: 100%;
+
+  min-width: 0;
+
+  box-sizing: border-box;
+
+  display: grid;
+
+  grid-template-columns:
+    minmax(0, 1fr)
+    minmax(0, 1fr);
+
+  gap: 15px;
+}
+
+
+/* =========================================================
+   CHAMPS
+========================================================= */
+
+.classe-field {
+  width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
+}
+
+
+/* =========================================================
+   NG-SELECT
+========================================================= */
+
+.classe-select {
+  width: 100%;
+  min-width: 0;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+
+.classe-select ng-select {
+  display: block;
+
+  width: 100%;
+  min-width: 0;
+  max-width: 100%;
+
+  box-sizing: border-box;
+}
+
+
+/* =========================================================
+   CONTENEUR NG-SELECT
+========================================================= */
+
+.classe-select ::ng-deep .ng-select-container {
+
+  width: 100% !important;
+
+  max-width: 100% !important;
+
+  box-sizing: border-box;
+
+  overflow: hidden;
+}
+
+
+/* =========================================================
+   TEXTE DU NG-SELECT
+========================================================= */
+
+.classe-select ::ng-deep .ng-value-container {
+
+  min-width: 0;
+
+  overflow: hidden;
+}
+
+
+.classe-select ::ng-deep .ng-value {
+
+  max-width: 100%;
+
+  overflow: hidden;
+
+  text-overflow: ellipsis;
+
+  white-space: nowrap;
+}
+
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+.classe-modal__footer {
+
+  width: 100%;
+
+  box-sizing: border-box;
+
+  padding-left: 24px;
+  padding-right: 24px;
+}
+
+
+/* =========================================================
+   ECRANS MOYENS
+========================================================= */
+
+@media (max-width: 1200px) {
+
+  .modal-dialog:has(.classe-modal) {
+
+    width: calc(100% - 40px) !important;
+  }
+
+
+  .classe-modal__body {
+
+    grid-template-columns:
+      minmax(300px, 0.75fr)
+      minmax(0, 1.25fr);
+
+    gap: 16px;
+
+    padding-right: 22px;
+  }
+
+}
+
+
+/* =========================================================
+   TABLETTE
+========================================================= */
+
+@media (max-width: 900px) {
+
+  .modal-dialog:has(.classe-modal) {
+
+    width: calc(100% - 30px) !important;
+  }
+
+
+  .classe-modal__body {
+
+    grid-template-columns: 1fr;
+
+    padding-right: 20px;
+  }
+
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 650px) {
+
+  .modal-dialog:has(.classe-modal) {
+
+    width: calc(100% - 16px) !important;
+
+    margin: 8px auto !important;
+  }
+
+
+  .classe-modal__body {
+
+    display: flex;
+
+    flex-direction: column;
+
+    width: 100%;
+
+    padding: 14px;
+  }
+
+}
