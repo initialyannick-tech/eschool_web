@@ -226,9 +226,13 @@
         <span class="sidebar-nav__label">
           Administration
         </span>
+        <a class="sidebar-nav__link" *ngxPermissionsOnly="['parent.management']" routerLink="/pedagogie/list-parent" routerLinkActive="sidebar-nav__link--active">
+          <i class="bi bi-person-rolodex"></i>
+          <span>Gestion Parents</span>
+        </a>
         <a class="sidebar-nav__link" *ngxPermissionsOnly="['classe.management']" routerLink="/pedagogie/list-classe" routerLinkActive="sidebar-nav__link--active">
           <i class="bi bi-building-add"></i>
-          <span>Gestion Classe</span>
+          <span>Gestion Classes</span>
         </a>
         <a class="sidebar-nav__link" *ngxPermissionsOnly="['user.management']"  routerLink="/admin/users" routerLinkActive="sidebar-nav__link--active">
           <i class="bi bi-people-fill"></i>

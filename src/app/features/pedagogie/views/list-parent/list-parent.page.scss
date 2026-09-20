@@ -1,2 +1,1549 @@
+/* =========================================================
+   PAGE CLASSES
+========================================================= */
 
-    .list-parent-container {}
+:host {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  overflow-x: hidden;
+  box-sizing: border-box;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+
+/* =========================================================
+   TOOLBAR
+========================================================= */
+
+.users-toolbar {
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 20px;
+
+  margin-bottom: 16px;
+  padding: 4px 0;
+}
+
+.users-toolbar__info {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.users-toolbar__title {
+  color: #18332a;
+
+  font-size: 16px;
+  font-weight: 700;
+
+  line-height: 1.3;
+}
+
+.users-toolbar__subtitle {
+  margin-top: 3px;
+
+  color: #84938c;
+
+  font-size: 12px;
+
+  line-height: 1.4;
+}
+
+
+/* =========================================================
+   ACTIONS TOOLBAR
+========================================================= */
+
+.users-toolbar__actions {
+  display: flex;
+  align-items: center;
+
+  gap: 10px;
+
+  flex-shrink: 0;
+
+  min-width: 0;
+}
+
+
+/* =========================================================
+   RECHERCHE
+========================================================= */
+
+.users-search {
+  position: relative;
+
+  display: flex;
+  align-items: center;
+
+  width: 260px;
+  max-width: 100%;
+
+  height: 38px;
+}
+
+.users-search i {
+  position: absolute;
+
+  left: 13px;
+
+  z-index: 2;
+
+  color: #879790;
+
+  font-size: 13px;
+
+  pointer-events: none;
+}
+
+.users-search__input {
+  width: 100%;
+  height: 100%;
+
+  padding: 0 13px 0 36px;
+
+  background: #ffffff;
+
+  border: 1px solid #dce7e2;
+
+  border-radius: 8px;
+
+  color: #18332a;
+
+  font-size: 12px;
+
+  outline: none;
+
+  box-shadow: none;
+}
+
+.users-search__input::placeholder {
+  color: #a0ada7;
+}
+
+.users-search__input:focus {
+  border-color: #8dbca6;
+
+  box-shadow:
+    0 0 0 3px rgba(0, 107, 63, 0.08);
+}
+
+
+/* =========================================================
+   BOUTON AJOUTER
+========================================================= */
+
+.btn-add-user {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 7px;
+
+  height: 38px;
+
+  padding: 0 15px;
+
+  background: #006b3f;
+
+  border: 1px solid #006b3f;
+
+  border-radius: 8px;
+
+  color: #ffffff;
+
+  font-size: 12px;
+  font-weight: 600;
+
+  white-space: nowrap;
+
+  cursor: pointer;
+
+  transition:
+    background-color 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.btn-add-user i {
+  font-size: 14px;
+}
+
+.btn-add-user:hover {
+  background: #005b36;
+
+  border-color: #005b36;
+}
+
+
+/* =========================================================
+   CARTE
+========================================================= */
+
+.users-card {
+  display: block;
+
+  width: 100% !important;
+  max-width: 100% !important;
+  min-width: 0 !important;
+
+  margin: 0;
+
+  padding: 0;
+
+  background: #ffffff;
+
+  border: 1px solid #e0eae5;
+
+  border-radius: 12px;
+
+  overflow: hidden !important;
+
+  box-shadow:
+    0 2px 8px rgba(24, 51, 42, 0.035);
+}
+
+
+/* =========================================================
+   HEADER CARTE
+========================================================= */
+
+.users-card__header {
+  display: flex;
+
+  align-items: center;
+  justify-content: space-between;
+
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+
+  padding: 17px 20px;
+
+  border-bottom: 1px solid #e8efeb;
+}
+
+.users-card__header > div {
+  min-width: 0;
+}
+
+.users-card__header h4 {
+  margin: 0;
+
+  color: #18332a;
+
+  font-size: 14px;
+  font-weight: 700;
+
+  line-height: 1.3;
+}
+
+.users-card__header span {
+  display: block;
+
+  margin-top: 3px;
+
+  color: #8a9992;
+
+  font-size: 11px;
+
+  line-height: 1.3;
+}
+
+
+/* =========================================================
+   WRAPPER TABLEAU
+========================================================= */
+
+.users-table-wrapper {
+  display: block;
+
+  width: 100% !important;
+  max-width: 100% !important;
+  min-width: 0 !important;
+
+  margin: 0;
+  padding: 0;
+
+  overflow-x: hidden !important;
+  overflow-y: hidden !important;
+}
+
+
+/* =========================================================
+   TABLEAU
+========================================================= */
+
+.users-table {
+  width: 100% !important;
+  max-width: 100% !important;
+  min-width: 0 !important;
+
+  margin: 0 !important;
+  padding: 0 !important;
+
+  border-collapse: collapse;
+  border-spacing: 0;
+
+  table-layout: fixed !important;
+}
+
+
+/* =========================================================
+   LARGEURS DES COLONNES
+========================================================= */
+
+/*
+   Total = 100%
+*/
+
+.users-table th:nth-child(1),
+.users-table td:nth-child(1) {
+  width: 22%;
+}
+
+.users-table th:nth-child(2),
+.users-table td:nth-child(2) {
+  width: 9%;
+}
+
+.users-table th:nth-child(3),
+.users-table td:nth-child(3) {
+  width: 11%;
+}
+
+.users-table th:nth-child(4),
+.users-table td:nth-child(4) {
+  width: 14%;
+}
+
+.users-table th:nth-child(5),
+.users-table td:nth-child(5) {
+  width: 10%;
+}
+
+.users-table th:nth-child(6),
+.users-table td:nth-child(6) {
+  width: 10%;
+}
+
+.users-table th:nth-child(7),
+.users-table td:nth-child(7) {
+  width: 11%;
+}
+
+.users-table th:nth-child(8),
+.users-table td:nth-child(8) {
+  width: 13%;
+}
+
+
+/* =========================================================
+   THEAD
+========================================================= */
+
+.users-table thead {
+  width: 100%;
+
+  background: #f6f9f7;
+}
+
+.users-table thead tr {
+  width: 100%;
+}
+
+.users-table thead th {
+  height: 45px;
+
+  padding: 0 10px;
+
+  border-bottom: 1px solid #dfe9e4;
+
+  color: #66776f;
+
+  font-size: 9px;
+
+  font-weight: 700;
+
+  line-height: 1;
+
+  text-align: left;
+
+  text-transform: uppercase;
+
+  letter-spacing: 0.025em;
+
+  white-space: nowrap;
+
+  overflow: hidden;
+
+  text-overflow: ellipsis;
+
+  vertical-align: middle;
+}
+
+
+/* =========================================================
+   ALIGNEMENT EN-TÊTES
+========================================================= */
+
+/* Statut */
+.users-table thead th:nth-child(7) {
+  text-align: center !important;
+}
+
+/* Actions */
+.users-table thead th:nth-child(8) {
+  text-align: center !important;
+}
+
+
+/* =========================================================
+   TBODY
+========================================================= */
+
+.users-table tbody {
+  width: 100%;
+}
+
+.users-table tbody tr {
+  width: 100%;
+
+  background: #ffffff;
+
+  transition:
+    background-color 0.15s ease;
+}
+
+.users-table tbody tr:hover {
+  background: #fafcfb;
+}
+
+.users-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+
+/* =========================================================
+   CELLULES
+========================================================= */
+
+.users-table tbody td {
+  height: 68px;
+
+  max-width: 0;
+
+  padding: 10px;
+
+  border-bottom: 1px solid #edf2ef;
+
+  color: #30463d;
+
+  font-size: 11px;
+
+  line-height: 1.3;
+
+  vertical-align: middle;
+
+  overflow: hidden;
+}
+
+
+/* =========================================================
+   CELLULE NIVEAU
+========================================================= */
+
+.user-cell {
+  display: flex;
+  align-items: center;
+
+  gap: 10px;
+
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+
+  overflow: hidden;
+}
+
+.user-avatar {
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  width: 34px;
+  height: 34px;
+
+  min-width: 34px;
+
+  flex-shrink: 0;
+
+  background: #eaf5ef;
+
+  border: 1px solid #d5e9dd;
+
+  border-radius: 9px;
+
+  color: #006b3f;
+
+  font-size: 11px;
+}
+
+.user-information {
+  flex: 1 1 auto;
+
+  min-width: 0;
+  max-width: 100%;
+
+  overflow: hidden;
+}
+
+.user-name {
+  display: block;
+
+  width: 100%;
+
+  color: #18332a;
+
+  font-size: 11px;
+
+  font-weight: 700;
+
+  white-space: nowrap;
+
+  overflow: hidden;
+
+  text-overflow: ellipsis;
+}
+
+.user-id {
+  display: block;
+
+  margin-top: 3px;
+
+  color: #9aa7a1;
+
+  font-size: 9px;
+
+  white-space: nowrap;
+
+  overflow: hidden;
+
+  text-overflow: ellipsis;
+}
+
+
+/* =========================================================
+   TEXTE CYCLE / SÉRIE
+========================================================= */
+
+.user-email {
+  display: block;
+
+  width: 100%;
+  max-width: 100%;
+
+  color: #53675e;
+
+  font-size: 10px;
+
+  white-space: nowrap;
+
+  overflow: hidden;
+
+  text-overflow: ellipsis;
+}
+
+
+/* =========================================================
+   BADGES
+========================================================= */
+
+.role-badge {
+  display: inline-flex;
+
+  align-items: center;
+  justify-content: center;
+
+  min-width: 28px;
+
+  height: 25px;
+
+  padding: 0 8px;
+
+  background: #f4f7f5;
+
+  border: 1px solid #e0e8e3;
+
+  border-radius: 6px;
+
+  color: #53675e;
+
+  font-size: 9px;
+
+  font-weight: 600;
+
+  line-height: 1;
+
+  white-space: nowrap;
+}
+
+
+/* =========================================================
+   BADGE PLACES DISPONIBLES
+========================================================= */
+
+.role-badge--available {
+  background: #eaf7ef;
+
+  border-color: #d1ebdb;
+
+  color: #087a46;
+}
+
+.role-badge--full {
+  background: #fff1f1;
+
+  border-color: #efd2d2;
+
+  color: #c0392b;
+}
+
+
+/* =========================================================
+   STATUT
+========================================================= */
+
+.status-cell {
+  width: 100%;
+
+  padding-left: 5px !important;
+  padding-right: 5px !important;
+
+  text-align: center !important;
+
+  white-space: nowrap !important;
+
+  overflow: hidden !important;
+}
+
+.status-badge {
+  display: inline-flex;
+
+  align-items: center;
+  justify-content: center;
+
+  gap: 5px;
+
+  height: 25px;
+
+  padding: 0 9px;
+
+  background: transparent;
+
+  border-radius: 20px;
+
+  font-size: 9px;
+
+  font-weight: 700;
+
+  line-height: 1;
+
+  white-space: nowrap;
+
+  vertical-align: middle;
+}
+
+
+/* =========================================================
+   STATUT ACTIF
+========================================================= */
+
+.status-badge--active {
+  background: #eaf7ef;
+
+  border: 1px solid #d1ebdb;
+
+  color: #087a46;
+}
+
+
+/* =========================================================
+   STATUT INACTIF
+========================================================= */
+
+.status-badge--inactive {
+  background: #fff1f1;
+
+  border: 1px solid #efd2d2;
+
+  color: #c0392b;
+}
+
+
+/* =========================================================
+   POINT STATUT
+========================================================= */
+
+.status-dot {
+  display: inline-block;
+
+  width: 6px;
+  height: 6px;
+
+  min-width: 6px;
+
+  border-radius: 50%;
+
+  background: currentColor;
+}
+
+.status-text {
+  display: inline-block;
+
+  white-space: nowrap;
+}
+
+
+/* =========================================================
+   ACTIONS
+========================================================= */
+
+.users-table__actions {
+  width: 100%;
+
+  padding-left: 5px !important;
+  padding-right: 5px !important;
+
+  text-align: center !important;
+
+  white-space: nowrap !important;
+
+  overflow: hidden !important;
+}
+
+
+/* =========================================================
+   CONTENEUR DES BOUTONS
+========================================================= */
+
+.table-actions {
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  gap: 6px;
+
+  width: 100%;
+
+  min-width: 0;
+}
+
+
+/* =========================================================
+   BOUTONS ACTIONS
+========================================================= */
+
+.btn-user-action {
+  display: inline-flex;
+
+  align-items: center;
+  justify-content: center;
+
+  width: 32px;
+  height: 32px;
+
+  min-width: 32px;
+
+  flex-shrink: 0;
+
+  padding: 0;
+
+  background: #ffffff;
+
+  border: 1px solid #d7e4dd;
+
+  border-radius: 7px;
+
+  color: #006b3f;
+
+  font-size: 12px;
+
+  cursor: pointer;
+
+  transition:
+    background-color 0.2s ease,
+    border-color 0.2s ease,
+    color 0.2s ease;
+}
+
+.btn-user-action:hover {
+  background: #006b3f;
+
+  border-color: #006b3f;
+
+  color: #ffffff;
+}
+
+
+/* =========================================================
+   BOUTON SUPPRIMER
+========================================================= */
+
+.btn-user-action--danger {
+  color: #c0392b;
+}
+
+.btn-user-action--danger:hover {
+  background: #c0392b;
+
+  border-color: #c0392b;
+
+  color: #ffffff;
+}
+
+
+/* =========================================================
+   LOADING
+========================================================= */
+
+.users-table__loading {
+  height: 130px !important;
+
+  padding: 20px !important;
+
+  text-align: center !important;
+
+  vertical-align: middle !important;
+}
+
+.loading-content {
+  display: inline-flex;
+
+  align-items: center;
+  justify-content: center;
+
+  gap: 9px;
+
+  color: #7f9088;
+
+  font-size: 12px;
+}
+
+.loading-spinner {
+  width: 16px;
+  height: 16px;
+
+  border: 2px solid #dce8e2;
+
+  border-top-color: #006b3f;
+
+  border-radius: 50%;
+
+  animation: users-spinner 0.8s linear infinite;
+}
+
+@keyframes users-spinner {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+
+/* =========================================================
+   FOOTER / PAGINATION
+========================================================= */
+
+.users-card__footer {
+  display: flex;
+
+  align-items: center;
+  justify-content: flex-end;
+
+  width: 100%;
+
+  min-height: 58px;
+
+  padding: 8px 18px;
+
+  background: #fafcfb;
+
+  border-top: 1px solid #e8efeb;
+
+  overflow: hidden;
+}
+
+
+/* =========================================================
+   PAGINATION
+========================================================= */
+
+.users-card__footer app-custom-pagination {
+  max-width: 100%;
+
+  min-width: 0;
+}
+
+
+/* =========================================================
+   TABLETTE
+========================================================= */
+
+@media (max-width: 1100px) {
+
+  .users-table thead th {
+    padding: 0 7px;
+
+    font-size: 8px;
+  }
+
+  .users-table tbody td {
+    padding: 8px 7px;
+
+    font-size: 10px;
+  }
+
+  .user-avatar {
+    width: 30px;
+    height: 30px;
+
+    min-width: 30px;
+  }
+
+  .user-name {
+    font-size: 10px;
+  }
+
+  .user-id {
+    font-size: 8px;
+  }
+
+  .user-email {
+    font-size: 9px;
+  }
+
+  .role-badge {
+    min-width: 26px;
+
+    height: 23px;
+
+    padding: 0 6px;
+
+    font-size: 8px;
+  }
+
+  .status-badge {
+    height: 23px;
+
+    padding: 0 7px;
+
+    font-size: 8px;
+  }
+
+  .btn-user-action {
+    width: 29px;
+    height: 29px;
+
+    min-width: 29px;
+  }
+}
+
+
+/* =========================================================
+   PETIT ÉCRAN
+========================================================= */
+
+@media (max-width: 850px) {
+
+  .users-toolbar {
+    align-items: stretch;
+  }
+
+  .users-toolbar__actions {
+    flex-wrap: wrap;
+  }
+
+  .users-search {
+    width: 220px;
+  }
+
+  .users-table thead th {
+    padding: 0 5px;
+
+    font-size: 7px;
+  }
+
+  .users-table tbody td {
+    padding: 7px 5px;
+  }
+
+  .user-cell {
+    gap: 6px;
+  }
+
+  .user-avatar {
+    width: 28px;
+    height: 28px;
+
+    min-width: 28px;
+  }
+
+  .status-badge {
+    padding: 0 6px;
+
+    font-size: 7px;
+  }
+
+  .table-actions {
+    gap: 4px;
+  }
+
+  .btn-user-action {
+    width: 27px;
+    height: 27px;
+
+    min-width: 27px;
+  }
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 650px) {
+
+  .users-toolbar {
+    flex-direction: column;
+
+    align-items: stretch;
+
+    gap: 12px;
+  }
+
+  .users-toolbar__actions {
+    display: flex;
+
+    width: 100%;
+
+    flex-wrap: nowrap;
+  }
+
+  .users-search {
+    flex: 1;
+
+    width: auto;
+
+    min-width: 0;
+  }
+
+  .btn-add-user {
+    flex-shrink: 0;
+
+    padding: 0 11px;
+  }
+
+  .btn-add-user span {
+    display: none;
+  }
+
+
+  /* Carte */
+
+  .users-card__header {
+    padding: 14px 15px;
+  }
+
+
+  /* Tableau */
+
+  .users-table thead th {
+    height: 40px;
+
+    padding: 0 3px;
+
+    font-size: 6px;
+
+    letter-spacing: 0;
+  }
+
+  .users-table tbody td {
+    height: 58px;
+
+    padding: 5px 3px;
+
+    font-size: 8px;
+  }
+
+
+  /* Niveau */
+
+  .user-cell {
+    gap: 0;
+  }
+
+  .user-avatar {
+    display: none;
+  }
+
+  .user-name {
+    font-size: 9px;
+  }
+
+  .user-id {
+    font-size: 7px;
+  }
+
+
+  /* Cycle / série */
+
+  .user-email {
+    font-size: 8px;
+  }
+
+
+  /* Badges */
+
+  .role-badge {
+    min-width: 23px;
+
+    height: 21px;
+
+    padding: 0 4px;
+
+    font-size: 7px;
+  }
+
+
+  /* Statut */
+
+  .status-cell {
+    padding-left: 2px !important;
+    padding-right: 2px !important;
+  }
+
+  .status-badge {
+    height: 21px;
+
+    padding: 0 5px;
+
+    gap: 3px;
+
+    font-size: 6px;
+  }
+
+  .status-dot {
+    width: 5px;
+    height: 5px;
+
+    min-width: 5px;
+  }
+
+
+  /* Actions */
+
+  .users-table__actions {
+    padding-left: 2px !important;
+    padding-right: 2px !important;
+  }
+
+  .table-actions {
+    gap: 3px;
+  }
+
+  .btn-user-action {
+    width: 24px;
+    height: 24px;
+
+    min-width: 24px;
+
+    font-size: 10px;
+  }
+
+
+  /* Footer */
+
+  .users-card__footer {
+    justify-content: center;
+
+    padding: 8px 10px;
+  }
+}
+/* =========================================================
+   PARENT IDENTITY
+========================================================= */
+
+.parent-identity {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+}
+
+.parent-avatar {
+  width: 32px;
+  height: 32px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  flex-shrink: 0;
+
+  border-radius: 8px;
+
+  background: #e8f5ef;
+  color: #006b3f;
+
+  font-size: 13px;
+}
+
+.parent-identity__content {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.parent-identity__content strong {
+  font-size: 11px;
+  font-weight: 800;
+  color: #18332a;
+}
+
+.parent-identity__content span {
+  font-size: 10px;
+  color: #82918b;
+}
+
+
+/* =========================================================
+   RELATION
+========================================================= */
+
+.relation-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+
+  padding: 5px 8px;
+
+  border-radius: 6px;
+
+  background: #f1f7f4;
+  color: #356452;
+
+  font-size: 9px;
+  font-weight: 700;
+}
+
+.relation-badge i {
+  font-size: 10px;
+}
+
+
+/* =========================================================
+   CONTACT
+========================================================= */
+
+.contact-value {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+
+  font-size: 10px;
+  color: #526159;
+}
+
+.contact-value i {
+  color: #006b3f;
+  font-size: 11px;
+}
+
+
+/* =========================================================
+   RESPONSABILITIES
+========================================================= */
+
+.responsibility-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+
+  padding: 4px 6px;
+
+  border-radius: 5px;
+
+  font-size: 8px;
+  font-weight: 800;
+}
+
+.status-badge--principal {
+  background: #e8f5ef;
+  color: #006b3f;
+}
+
+.status-badge--financial {
+  background: #fff7e6;
+  color: #946200;
+}
+
+
+/* =========================================================
+   CHILDREN
+========================================================= */
+
+.children-count {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.children-count__icon {
+  width: 28px;
+  height: 28px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 7px;
+
+  background: #eef3f1;
+  color: #006b3f;
+
+  font-size: 11px;
+}
+
+.children-count__content {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+
+.children-count__content strong {
+  font-size: 11px;
+  font-weight: 800;
+  color: #18332a;
+}
+
+.children-count__content span {
+  font-size: 8px;
+  color: #8a9992;
+}
+
+
+/* =========================================================
+   ACTIONS
+========================================================= */
+
+.table-actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 5px;
+}
+
+.table-action {
+  width: 29px;
+  height: 29px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 6px;
+
+  border: 1px solid #e0e7e3;
+
+  background: #fff;
+
+  font-size: 11px;
+
+  cursor: pointer;
+
+  transition: all .2s ease;
+}
+
+.table-action--view {
+  color: #006b3f;
+}
+
+.table-action--view:hover {
+  background: #e8f5ef;
+  border-color: #cce6d9;
+}
+
+.table-action--edit {
+  color: #526159;
+}
+
+.table-action--edit:hover {
+  background: #f1f4f2;
+}
+
+.table-action--delete {
+  color: #c0392b;
+}
+
+.table-action--delete:hover {
+  background: #fff1f0;
+  border-color: #f2cccc;
+}
+
+
+/* =========================================================
+   EMPTY
+========================================================= */
+
+.users-table__empty {
+  padding: 45px 20px !important;
+}
+
+.empty-content {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: 7px;
+
+  text-align: center;
+}
+
+.empty-content__icon {
+  width: 45px;
+  height: 45px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  margin-bottom: 4px;
+
+  border-radius: 50%;
+
+  background: #edf6f1;
+  color: #006b3f;
+
+  font-size: 18px;
+}
+
+.empty-content strong {
+  font-size: 12px;
+  color: #35473e;
+}
+
+.empty-content span {
+  font-size: 10px;
+  color: #8b9892;
+}
+
+.empty-content__button {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+
+  height: 32px;
+
+  margin-top: 8px;
+  padding: 0 11px;
+
+  border: 0;
+  border-radius: 7px;
+
+  background: #006b3f;
+  color: #fff;
+
+  font-size: 9px;
+  font-weight: 800;
+
+  cursor: pointer;
+}
+
+
+/* =========================================================
+   EMPTY VALUE
+========================================================= */
+
+.empty-value {
+  color: #a5afa9;
+  font-size: 10px;
+}
+
+
+/* =========================================================
+   HEADER COUNTER
+========================================================= */
+
+.parents-count {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+
+  padding: 6px 9px;
+
+  border: 1px solid #dce8e2;
+  border-radius: 7px;
+
+  background: #f7faf8;
+
+  color: #006b3f;
+
+  font-size: 9px;
+  font-weight: 800;
+}
+
+.parents-count i {
+  font-size: 11px;
+}
+
+
+.users-table__actions {
+  text-align: center !important;
+  vertical-align: middle !important;
+}
+
+.table-actions {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  width: 100%;
+}
+
+.table-action {
+  width: 30px;
+  height: 30px;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 0;
+
+  border: 1px solid #e0e7e3;
+  border-radius: 7px;
+
+  background: #fff;
+
+  font-size: 11px;
+
+  cursor: pointer;
+  transition: all .2s ease;
+}

@@ -1,0 +1,323 @@
+<form [formGroup]="parentEleveForm">
+  <div class="student-modal">
+    <div class="parent-eleve-modal__header">
+      <div class="parent-eleve-modal__identity">
+        <div class="parent-eleve-modal__icon">
+          <i class="bi bi-person-vcard-fill"></i>
+        </div>
+        <div class="parent-eleve-modal__heading">
+          <div class="parent-eleve-modal__eyebrow">Administration scolaire</div>
+          <h4>Nouveau dossier élève</h4>
+          <p>Enregistrez le responsable légal et l'élève avant son inscription scolaire.</p>
+        </div>
+      </div>
+
+      <button type="button" class="parent-eleve-modal__close" (click)="close()" [disabled]="isSubmit" aria-label="Fermer">
+        <i class="bi bi-x-lg"></i>
+      </button>
+    </div>
+    <div class="student-tabs">
+      <button type="button" class="student-tab" [class.active]="activeTab === 'parent'" (click)="setTab('parent')">
+        <div class="student-tab__icon">
+          <i class="bi bi-person-vcard-fill"></i>
+        </div>
+        <div class="student-tab__content">
+          <strong>Parent / Responsable</strong>
+          <span>
+            Responsable légal de l'élève
+          </span>
+        </div>
+      </button>
+
+      <button type="button" class="student-tab" [class.active]="activeTab === 'eleve'" (click)="setTab('eleve')">
+        <div class="student-tab__icon">
+          <i class="bi bi-mortarboard-fill"></i>
+        </div>
+        <div class="student-tab__content">
+          <strong>Élève</strong>
+          <span>
+            Informations personnelles
+          </span>
+        </div>
+      </button>
+    </div>
+
+    <div class="student-modal__body">
+      @if (backendErrors.length > 0) {
+        <div class="backend-errors">
+          <div class="backend-errors__header">
+            <i class="bi bi-exclamation-triangle-fill"></i>
+            <span>
+              Impossible d'enregistrer le dossier
+            </span>
+          </div>
+
+          <div class="backend-errors__list">
+            @for (error of backendErrors; track $index) {
+              <div class="backend-error-badge">
+                <i class="bi bi-x-circle-fill"></i>
+                <span>{{ error }}</span>
+              </div>
+            }
+          </div>
+        </div>
+      }
+      @if (activeTab === 'parent') {
+
+        <div class="form-section" formGroupName="parent">
+          <div class="form-section__header">
+            <div>
+              <h5>
+                Informations du responsable
+              </h5>
+              <span>
+                Coordonnées du parent ou tuteur légal
+              </span>
+            </div>
+          </div>
+
+          <div class="form-grid">
+            <div class="form-field">
+              <label>Nom <span>*</span></label>
+              <input type="text" formControlName="nom" placeholder="Nom du parent" [class.is-invalid]="isInvalid('parent', 'nom')">
+              @if (hasError('parent', 'nom', 'required')) {
+                <small class="field-error">Le nom est obligatoire.</small>
+              }
+              @if (hasError('parent', 'nom', 'maxlength')) {
+                <small class="field-error">Le nom ne doit pas dépasser 100 caractères.</small>
+              }
+            </div>
+
+            <div class="form-field">
+              <label>Prénom <span>*</span></label>
+              <input type="text" formControlName="prenom" placeholder="Prénom du parent" [class.is-invalid]="isInvalid('parent', 'prenom')">
+              @if (hasError('parent', 'prenom', 'required')) {
+                <small class="field-error">
+                  Le prénom est obligatoire.
+                </small>
+              }
+              @if (hasError('parent', 'prenom', 'maxlength')) {
+                <small class="field-error">Le prénom ne doit pas dépasser 100 caractères.</small>
+              }
+            </div>
+            <div class="form-field">
+              <label>Relation avec l'élève <span>*</span></label>
+              <select formControlName="relation" [class.is-invalid]="isInvalid('parent', 'relation')">
+                <option value="">Sélectionner une relation</option>
+                <option value="pere">Père</option>
+                <option value="mere">Mère</option>
+                <option value="tuteur">Tuteur</option>
+                <option value="tutrice">Tutrice</option>
+                <option value="autre">Autre</option>
+              </select>
+              @if (hasError('parent', 'relation', 'required')) {
+                <small class="field-error">La relation est obligatoire.</small>
+              }
+            </div>
+            <div class="form-field">
+              <label>Téléphone <span>*</span></label>
+              <input type="tel" formControlName="telephone" placeholder="+241 XX XX XX XX" [class.is-invalid]="isInvalid('parent', 'telephone')">
+              @if (hasError('parent', 'telephone', 'required')) {
+                <small class="field-error">Le téléphone est obligatoire.</small>
+              }
+              @if (hasError('parent', 'telephone', 'maxlength')) {
+                <small class="field-error">Le téléphone ne doit pas dépasser 30 caractères.</small>
+              }
+            </div>
+            <div class="form-field">
+              <label>Email</label>
+              <input type="email" formControlName="email" placeholder="parent@email.com" [class.is-invalid]="isInvalid('parent', 'email')">
+              @if (hasError('parent', 'email', 'email')) {
+                <small class="field-error">L'adresse email est invalide.</small>
+              }
+            </div>
+
+            <div class="form-field form-field--full">
+              <label>Adresse</label>
+              <textarea rows="3" formControlName="adresse" placeholder="Adresse du parent ou du tuteur"></textarea>
+            </div>
+
+            <div class="responsibilities form-field--full">
+              <div class="responsibilities__title">Responsabilités</div>
+              <div class="responsibilities__options">
+                <label class="check-option">
+                  <input type="checkbox" formControlName="responsable_principal">
+                  <span>Responsable principal</span>
+                </label>
+                <label class="check-option">
+                  <input type="checkbox" formControlName="responsable_financier">
+                  <span>Responsable financier</span>
+                </label>
+              </div>
+            </div>
+          </div>
+        </div>
+      }
+      @if (activeTab === 'eleve') {
+        <div class="form-section" formGroupName="eleve">
+          <div class="form-section__header">
+            <div>
+              <h5>Informations de l'élève</h5>
+              <span>Informations personnelles du futur élève</span>
+            </div>
+          </div>
+          <div class="form-grid">
+            <div class="form-field">
+              <label>Nom <span>*</span></label>
+              <input type="text" formControlName="nom" placeholder="Nom de l'élève" [class.is-invalid]="isInvalid('eleve', 'nom')">
+              @if (hasError('eleve', 'nom', 'required')) {
+                <small class="field-error">Le nom est obligatoire.</small>
+              }
+
+              @if (hasError('eleve', 'nom', 'maxlength')) {
+                <small class="field-error">Le nom ne doit pas dépasser 100 caractères.</small>
+              }
+            </div>
+
+            <div class="form-field">
+              <label>Prénom <span>*</span></label>
+              <input type="text" formControlName="prenom" placeholder="Prénom de l'élève" [class.is-invalid]="isInvalid('eleve', 'prenom')">
+              @if (hasError('eleve', 'prenom', 'required')) {
+                <small class="field-error">Le prénom est obligatoire.</small>
+              }
+              @if (hasError('eleve', 'prenom', 'maxlength')) {
+                <small class="field-error">Le prénom ne doit pas dépasser 100 caractères.</small>
+              }
+            </div>
+            <div class="form-field">
+              <label>Sexe <span>*</span></label>
+              <select formControlName="sexe" [class.is-invalid]="isInvalid('eleve', 'sexe')">
+                <option value="">Sélectionner le sexe</option>
+                <option value="masculin">Masculin</option>
+                <option value="feminin">Féminin</option>
+              </select>
+              @if (hasError('eleve', 'sexe', 'required')) {
+                <small class="field-error">Le sexe est obligatoire.</small>
+              }
+            </div>
+
+            <div class="form-field">
+              <label>Date de naissance <span>*</span></label>
+              <input type="date" formControlName="date_naissance" [class.is-invalid]="isInvalid('eleve', 'date_naissance')">
+              @if (hasError('eleve', 'date_naissance', 'required')) {
+                <small class="field-error">La date de naissance est obligatoire.</small>
+              }
+            </div>
+
+            <div class="form-field">
+              <label>Lieu de naissance <span>*</span></label>
+              <input type="text" formControlName="lieu_naissance" placeholder="Ex. Libreville" [class.is-invalid]="isInvalid('eleve', 'lieu_naissance')">
+              @if (hasError('eleve', 'lieu_naissance', 'required')) {
+                <small class="field-error">Le lieu de naissance est obligatoire.</small>
+              }
+              @if (hasError('eleve', 'lieu_naissance', 'maxlength')) {
+                <small class="field-error">Le lieu ne doit pas dépasser 150 caractères.</small>
+              }
+            </div>
+            <div class="form-field">
+              <label>Nationalité</label>
+              <input type="text" formControlName="nationalite" placeholder="Gabonaise">
+            </div>
+
+            <div class="form-field">
+              <label>Téléphone</label>
+              <input type="tel" formControlName="telephone" placeholder="+241 XX XX XX XX">
+            </div>
+            <div class="form-field">
+              <label>Email</label>
+              <input type="email" formControlName="email" placeholder="eleve@email.com" [class.is-invalid]="isInvalid('eleve', 'email')">
+              @if (hasError('eleve', 'email', 'email')) {
+                <small class="field-error">L'adresse email est invalide.</small>
+              }
+            </div>
+
+            <div class="form-field form-field--full">
+              <label>Adresse</label>
+              <textarea rows="3" formControlName="adresse" placeholder="Adresse de résidence de l'élève"></textarea>
+            </div>
+            <div class="form-field form-field--full">
+              <label>Photo</label>
+              <input type="text" formControlName="photo" placeholder="Nom ou chemin de la photo">
+            </div>
+
+
+            <!-- SITUATION PARTICULIERE -->
+
+            <div class="form-field form-field--full">
+              <label>Situation particulière</label>
+              <textarea rows="3" formControlName="situation_particuliere" placeholder="Situation particulière concernant l'élève..."></textarea>
+            </div>
+
+
+            <!-- STATUT -->
+
+            <div class="form-field">
+              <label>Statut <span>*</span></label>
+              <select formControlName="statut" [class.is-invalid]="isInvalid('eleve', 'statut')">
+                <option value="preinscrit">Préinscrit</option>
+                <option value="inscrit">Inscrit</option>
+                <option value="reinscrit">Réinscrit</option>
+                <option value="transfere">Transféré</option>
+                <option value="suspendu">Suspendu</option>
+                <option value="exclu">Exclu</option>
+                <option value="orienté">Orienté</option>
+                <option value="reorienté">Réorienté</option>
+              </select>
+            </div>
+            <div class="matricule-info">
+              <div class="matricule-info__icon">
+                <i class="bi bi-upc-scan"></i>
+              </div>
+              <div>
+                <strong>Matricule automatique</strong>
+                <span>Le matricule sera généré automatiquementlors de la création du dossier.
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      }
+    </div>
+
+    <div class="student-modal__footer">
+      <div class="footer-info">
+        @if (activeTab === 'parent') {
+          <span><i class="bi bi-1-circle-fill"></i>Responsable légal</span>
+          <i class="bi bi-chevron-right"></i>
+          <span class="muted"><i class="bi bi-2-circle"></i>Élève</span>
+        } @else {
+          <span><i class="bi bi-check-circle-fill"></i>Responsable légal</span>
+          <i class="bi bi-chevron-right"></i>
+          <span><i class="bi bi-2-circle-fill"></i>Élève</span>
+        }
+      </div>
+      <div class="footer-actions">
+        @if (activeTab === 'eleve') {
+          <button type="button" class="btn-secondary" (click)="previousTab()" [disabled]="isSubmit">
+            <i class="bi bi-arrow-left"></i>
+            Retour
+          </button>
+        }
+
+        @if (activeTab === 'parent') {
+          <button type="button" class="btn-primary" (click)="nextTab()" [disabled]="isSubmit">
+            Continuer
+            <i class="bi bi-arrow-right"></i>
+          </button>
+        }
+
+        @if (activeTab === 'eleve') {
+          <button type="button" class="btn-primary" (click)="submit()" [disabled]="isSubmit">
+            @if (isSubmit) {
+              <span class="spinner-border spinner-border-sm"></span>
+              Enregistrement...
+            } @else {
+              <i class="bi bi-check-lg"></i>
+              Enregistrer le dossier
+            }
+          </button>
+        }
+      </div>
+    </div>
+  </div>
+</form>

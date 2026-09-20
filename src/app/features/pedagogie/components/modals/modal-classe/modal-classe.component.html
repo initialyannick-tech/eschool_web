@@ -1,562 +1,206 @@
 <div class="classe-modal">
-
-  <!-- =====================================================
-       HEADER
-  ====================================================== -->
   <div class="classe-modal__header">
-
     <div class="classe-modal__identity">
-
       <div class="classe-modal__icon">
         <i class="bi bi-mortarboard-fill"></i>
       </div>
-
       <div class="classe-modal__heading">
-
-        <div class="classe-modal__eyebrow">
-          Administration scolaire
-        </div>
-
-        <h4>
-          {{ isEdit ? 'Modifier une classe' : 'Nouvelle classe' }}
-        </h4>
-
-        <p>
-          {{
-            isEdit
-              ? 'Modifiez les informations et la configuration de cette classe.'
-              : 'Créez une classe et définissez sa configuration scolaire.'
-          }}
-        </p>
-
+        <div class="classe-modal__eyebrow">Administration scolaire</div>
+        <h4>{{ isEdit ? 'Modifier une classe' : 'Nouvelle classe' }}</h4>
+        <p>{{isEdit ? 'Modifiez les informations et la configuration de cette classe.' : 'Créez une classe et définissez sa configuration scolaire.' }}</p>
       </div>
-
     </div>
-
-
     <!-- FERMER -->
-    <button
-      type="button"
-      class="classe-modal__close"
-      (click)="close()"
-      aria-label="Fermer"
-    >
+    <button type="button" class="classe-modal__close" (click)="close()" aria-label="Fermer">
       <i class="bi bi-x-lg"></i>
     </button>
 
   </div>
+  @if (backendErrors.length > 0) {
+    <div class="backend-errors">
+      <div class="backend-errors__header">
+        <i class="bi bi-exclamation-triangle-fill"></i>
+        <span>
+        Impossible d'enregistrer la classe
+      </span>
+      </div>
+      <div class="backend-errors__list">
+        @for (error of backendErrors; track $index) {
+          <div class="backend-error-badge">
+            <i class="bi bi-x-circle-fill"></i>
+            <span>{{ error }}</span>
+          </div>
+        }
+      </div>
+    </div>
+  }
 
-
-  <!-- =====================================================
-       FORMULAIRE
-  ====================================================== -->
-  <form
-    [formGroup]="classeForm"
-    (ngSubmit)="submit()"
-    class="classe-modal__form"
-  >
-
-    <!-- ===================================================
-         BODY
-    ==================================================== -->
+  <form [formGroup]="classeForm" (ngSubmit)="submit()" class="classe-modal__form">
     <div class="classe-modal__body">
-
-
-      <!-- =================================================
-           PANNEAU GAUCHE
-           INFORMATIONS GENERALES
-      ================================================== -->
       <section class="classe-panel classe-panel--general">
-
-
-        <!-- TITRE -->
         <div class="classe-section__heading">
-
           <div class="classe-section__icon">
             <i class="bi bi-info-circle"></i>
           </div>
-
           <div>
-
-            <h5>
-              Informations générales
-            </h5>
-
-            <p>
-              Identité et caractéristiques de la classe
-            </p>
-
+            <h5>Informations générales</h5>
+            <p>Identité et caractéristiques de la classe</p>
           </div>
-
         </div>
-
-
         <!-- CONTENU -->
         <div class="classe-general-content">
-
-
-          <!-- =============================================
-               NOM
-          ============================================== -->
           <div class="classe-field">
-
-            <label for="classe-nom">
-              Nom
-              <span>*</span>
-            </label>
-
+            <label for="classe-nom">Nom<span>*</span></label>
             <div class="classe-input">
-
               <i class="bi bi-building"></i>
-
-              <input
-                id="classe-nom"
-                type="text"
-                formControlName="nom"
-                placeholder="Ex. 6ème A"
-                autocomplete="off"
-              />
-
+              <input id="classe-nom" type="text" formControlName="nom" placeholder="Ex. 6ème A" autocomplete="off"/>
             </div>
-
           </div>
-
-
-          <!-- =============================================
-               CAPACITE
-          ============================================== -->
           <div class="classe-field">
-
-            <label for="classe-capacite">
-              Capacité
-            </label>
-
+            <label for="classe-capacite">Capacité</label>
             <div class="classe-input">
-
               <i class="bi bi-people"></i>
-
-              <input
-                id="classe-capacite"
-                type="text"
-                formControlName="capacite"
-                placeholder="Ex. 40 élèves"
-                autocomplete="off"
-              />
-
+              <input id="classe-capacite" type="text" formControlName="capacite" placeholder="Ex. 40 élèves" autocomplete="off"/>
             </div>
-
           </div>
-
-
-          <!-- =============================================
-               DESCRIPTION
-          ============================================== -->
           <div class="classe-field">
-
-            <label for="classe-description">
-              Description
-            </label>
-
+            <label for="classe-description">Description</label>
             <div class="classe-textarea">
-
               <i class="bi bi-card-text"></i>
-
-              <textarea
-                id="classe-description"
-                formControlName="description"
-                rows="4"
-                placeholder="Décrivez cette classe..."
-              ></textarea>
-
+              <textarea id="classe-description" formControlName="description" rows="4" placeholder="Décrivez cette classe..."></textarea>
             </div>
-
           </div>
-
-
-          <!-- =============================================
-               ACTIF
-          ============================================== -->
           <div class="classe-active-box">
-
             <div class="classe-active-info">
-
               <div class="classe-active-icon">
                 <i class="bi bi-check-circle"></i>
               </div>
-
               <div>
-
-                <span class="classe-active-title">
-                  Classe active
-                </span>
-
+                <span class="classe-active-title">Classe active</span>
                 <span class="classe-active-description">
                   Autoriser cette classe dans l'établissement
                 </span>
-
               </div>
-
             </div>
 
-
             <label class="classe-switch">
-
-              <input
-                type="checkbox"
-                formControlName="actif"
-              />
-
+              <input type="checkbox" formControlName="actif"/>
               <span class="classe-switch__slider"></span>
-
             </label>
-
           </div>
-
 
           <!-- INFORMATION -->
           <div class="classe-general-info">
-
             <i class="bi bi-info-circle"></i>
-
-            <span>
-              Les informations générales permettent d'identifier
-              et de définir les caractéristiques principales de la classe.
-            </span>
-
+            <span>Les informations générales permettent d'identifieret de définir les caractéristiques principales de la classe.</span>
           </div>
-
         </div>
-
       </section>
-
-
-
-      <!-- =================================================
-           PANNEAU DROIT
-           CONFIGURATION SCOLAIRE
-      ================================================== -->
       <section class="classe-panel classe-panel--school">
-
-
-        <!-- TITRE -->
         <div class="classe-section__heading">
-
           <div class="classe-section__icon">
             <i class="bi bi-diagram-3-fill"></i>
           </div>
-
           <div>
-
-            <h5>
-              Configuration scolaire
-            </h5>
-
-            <p>
-              Année, cycle, série et professeur principal
-            </p>
-
+            <h5>Configuration scolaire</h5>
+            <p>Année, cycle, série et professeur principal</p>
           </div>
-
         </div>
-
-
-        <!-- =================================================
-             GRILLE DES SELECTS
-        ================================================== -->
         <div class="classe-school-grid">
-
-
-          <!-- =============================================
-               ANNEE SCOLAIRE
-          ============================================== -->
           <div class="classe-field">
-
-            <label for="classe-annee">
-              Année scolaire
-              <span>*</span>
-            </label>
-
+            <label for="classe-annee">Année scolaire<span>*</span></label>
             <div class="classe-select">
-
               <i class="bi bi-calendar3"></i>
-
-              <ng-select
-                id="classe-annee"
-                formControlName="annee_scolaire_id"
-                placeholder="Sélectionner une année"
-                [clearable]="false"
-              >
-
+              <ng-select id="classe-annee" formControlName="annee_scolaire_id" placeholder="Sélectionner une année" [clearable]="false">
                 @for (item of annees; track item) {
-
-                  <ng-option [value]="item.id">
-                    {{ item.libelle }}
-                  </ng-option>
-
+                  <ng-option [value]="item.id">{{ item.libelle }}</ng-option>
                 }
-
               </ng-select>
-
             </div>
-
           </div>
-
-
-
-          <!-- =============================================
-               CYCLE
-          ============================================== -->
           <div class="classe-field">
-
-            <label for="classe-cycle">
-              Cycle
-              <span>*</span>
-            </label>
-
+            <label for="classe-cycle">Cycle<span>*</span></label>
             <div class="classe-select">
-
               <i class="bi bi-layers"></i>
-
-              <ng-select
-                id="classe-cycle"
-                formControlName="cycle_id"
-                placeholder="Sélectionner un cycle"
-                [clearable]="false"
-              >
-
+              <ng-select id="classe-cycle" formControlName="cycle_id" placeholder="Sélectionner un cycle" [clearable]="false">
                 @for (cycle of cycles; track cycle) {
-
-                  <ng-option [value]="cycle.id">
-                    {{ cycle.libelle }}
-                  </ng-option>
-
+                  <ng-option [value]="cycle.id">{{ cycle.libelle }}</ng-option>
                 }
-
               </ng-select>
-
             </div>
-
           </div>
-
-
-
-          <!-- =============================================
-               SERIE
-          ============================================== -->
           <div class="classe-field">
-
-            <label for="classe-serie">
-              Série
-            </label>
-
+            <label for="classe-serie">Série</label>
             <div class="classe-select">
-
               <i class="bi bi-journal-text"></i>
-
-              <ng-select
-                id="classe-serie"
-                formControlName="serie_id"
-                placeholder="Sélectionner une série"
-                [clearable]="false"
-              >
-
+              <ng-select id="classe-serie" formControlName="serie_id" placeholder="Sélectionner une série" [clearable]="false">
                 @for (serie of series; track serie) {
-
-                  <ng-option [value]="serie.id">
-                    {{ serie.libelle }}
-                  </ng-option>
-
+                  <ng-option [value]="serie.id">{{ serie.libelle }}</ng-option>
                 }
-
               </ng-select>
-
             </div>
-
           </div>
-
-
-
-          <!-- =============================================
-               PROFESSEUR PRINCIPAL
-          ============================================== -->
           <div class="classe-field">
 
-            <label for="classe-professeur">
-              Professeur principal
-            </label>
-
+            <label for="classe-professeur">Professeur principal</label>
             <div class="classe-select">
-
               <i class="bi bi-person-badge"></i>
-
-              <ng-select
-                id="classe-professeur"
-                formControlName="professeur_principal_id"
-                placeholder="Sélectionner un professeur"
-                [clearable]="false"
-              >
-
+              <ng-select id="classe-professeur" formControlName="professeur_principal_id" placeholder="Sélectionner un professeur" [clearable]="false">
                 @for (prof of professeurs; track prof) {
-
                   <ng-option [value]="prof.id">
                     {{ prof.nom }} {{ prof.prenom }}
                   </ng-option>
 
                 }
-
               </ng-select>
-
             </div>
-
           </div>
-
         </div>
-
-
-        <!-- =================================================
-             INFORMATION
-        ================================================== -->
         <div class="classe-school-info">
-
           <i class="bi bi-info-circle"></i>
-
-          <span>
-            La configuration scolaire permet d'associer la classe
-            à son année, son cycle, sa série et son professeur principal.
-          </span>
-
+          <span>La configuration scolaire permet d'associer la classeà son année, son cycle, sa série et son professeur principal.</span>
         </div>
-
       </section>
-
     </div>
-
-
-
-    <!-- =====================================================
-         FOOTER
-    ====================================================== -->
     <div class="classe-modal__footer">
-
-
-      <!-- INFORMATION -->
       <div class="classe-footer-info">
-
         <i class="bi bi-mortarboard"></i>
-
-        <span>
-          Gestion des classes
-        </span>
-
+        <span>Gestion des classes</span>
       </div>
-
-
-      <!-- ACTIONS -->
       <div class="classe-footer-actions">
-
-
-        <!-- ANNULER -->
-        <button
-          type="button"
-          class="btn-classe-cancel"
-          (click)="close()"
-        >
-
+        <button type="button" class="btn-classe-cancel" (click)="close()">
           <i class="bi bi-x-lg"></i>
-
-          <span>
-            Annuler
-          </span>
-
+          <span>Annuler</span>
         </button>
-
-
-
-        <!-- EDITION -->
         @if (isEdit) {
-
           @if (isSubmit) {
-
-            <button
-              type="button"
-              class="btn-classe-submit"
-              disabled
-            >
-
+            <button type="button" class="btn-classe-submit" disabled>
               <span class="classe-submit-spinner"></span>
-
-              <span>
-                Chargement...
-              </span>
-
+              <span>Chargement...</span>
             </button>
-
           }
-
           @else {
-
-            <button
-              type="submit"
-              class="btn-classe-submit"
-            >
-
+            <button type="submit" class="btn-classe-submit">
               <i class="bi bi-check2"></i>
-
-              <span>
-                Mettre à jour
-              </span>
-
+              <span>Mettre à jour</span>
             </button>
-
           }
-
         }
-
-
-        <!-- CREATION -->
         @else {
-
           @if (isSubmit) {
-
-            <button
-              type="button"
-              class="btn-classe-submit"
-              disabled
-            >
-
+            <button type="button" class="btn-classe-submit" disabled>
               <span class="classe-submit-spinner"></span>
-
-              <span>
-                Chargement...
-              </span>
-
+              <span>Chargement...</span>
             </button>
-
           }
-
           @else {
-
-            <button
-              type="submit"
-              class="btn-classe-submit"
-            >
-
+            <button type="submit" class="btn-classe-submit">
               <i class="bi bi-plus-lg"></i>
-
-              <span>
-                Sauvegarder
-              </span>
-
+              <span>Sauvegarder</span>
             </button>
-
           }
-
         }
-
       </div>
-
     </div>
-
   </form>
-
 </div>

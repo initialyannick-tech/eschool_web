@@ -1,16 +1,188 @@
-<div class="list-parent-container">
-  <!-- Loader -->
-
-    <div class="loader">
-      <p>Chargement...</p>
+<app-page-header [backBtn]="true" [titre]="'Liste des Parents'"></app-page-header>
+<div class="users-toolbar">
+  <div class="users-toolbar__info">
+    <div class="users-toolbar__title">
+      Parents / Élèves
     </div>
-
-
-  <!-- Contenu principal -->
-
-    <div class="content">
-      <h1>ListParent</h1>
-      <p>app-list-parent works!</p>
+    <div class="users-toolbar__subtitle">
+      Gérez les parents et leurs enfants
     </div>
+  </div>
 
+  <div class="users-toolbar__actions">
+    <div class="users-search">
+      <i class="bi bi-search"></i>
+      <input (keyup)="searchAction()" [(ngModel)]="searchText" type="text" class="users-search__input" placeholder="Rechercher un parent...">
+    </div>
+    <button type="button" class="btn-add-user" (click)="add()">
+      <i class="bi bi-plus-lg"></i>
+      <span>Ajouter un parent</span>
+    </button>
+  </div>
+</div>
+
+<div class="users-card">
+  <div class="users-card__header">
+    <div>
+      <h4>Liste des parents</h4>
+      <span>Parents enregistrés sur la plateforme</span>
+    </div>
+  </div>
+
+  <div class="users-table-wrapper">
+    <table class="users-table">
+      <thead>
+      <tr>
+        <th>Parent / Responsable</th>
+        <th>Relation</th>
+        <th>Téléphone</th>
+        <th>Email</th>
+        <th>Responsabilités</th>
+        <th>Enfants</th>
+        <th class="">Actions</th>
+      </tr>
+      </thead>
+      <tbody>
+        @if (isLoad) {
+          <tr>
+            <td colspan="7" class="users-table__loading">
+              <div class="loading-content">
+                <span class="loading-spinner"></span>
+                <span>
+                  Chargement des parents...
+                </span>
+              </div>
+            </td>
+          </tr>
+        }
+      @else {
+        @for (items of parents; track items.id) {
+          <tr>
+            <td>
+              <div class="parent-identity">
+                <div class="parent-avatar">
+                  <i class="bi bi-person-fill"></i>
+                </div>
+                <div class="parent-identity__content">
+                  <strong>{{ items.nom }}</strong>
+                  <span>{{ items.prenom }}</span>
+                </div>
+              </div>
+            </td>
+
+            <td>
+              @if (items.relation) {
+                <span class="relation-badge">
+                    <i class="bi bi-person-heart"></i>
+                  {{ items.relation }}
+                  </span>
+              } @else {
+                <span class="empty-value">
+                    —
+                  </span>
+              }
+            </td>
+            <td>
+              @if (items.telephone) {
+                <div class="contact-value">
+                  <i class="bi bi-telephone"></i>
+                  <span>
+                      {{ items.telephone }}
+                    </span>
+                </div>
+              } @else {
+                <span class="empty-value">
+                    —
+                  </span>
+
+              }
+            </td>
+
+            <td>
+              @if (items.email) {
+                <div class="contact-value">
+                  <i class="bi bi-envelope"></i>
+                  <span>
+                      {{ items.email }}
+                    </span>
+                </div>
+              } @else {
+                <span class="empty-value">
+                    —
+                  </span>
+              }
+            </td>
+
+            <td>
+              <div class="responsibility-badges">
+                @if (items.responsable_principal) {
+                  <span class="status-badge status-badge--principal">
+                      <i class="bi bi-person-check-fill"></i>
+                      Principal
+                    </span>
+                }
+                @if (items.responsable_financier) {
+                  <span class="status-badge status-badge--financial">
+                      <i class="bi bi-wallet2"></i>
+                      Financier
+                    </span>
+                }
+                @if (!items.responsable_principal && !items.responsable_financier) {
+                  <span class="empty-value">
+                      —
+                    </span>
+                }
+              </div>
+            </td>
+
+            <td>
+              <div class="children-count">
+                <div class="children-count__icon">
+                  <i class="bi bi-mortarboard-fill"></i>
+                </div>
+                <div class="children-count__content">
+                  <strong>{{ items.nombre_enfants || 0 }}</strong>
+                  <span>enfant(s)</span>
+                </div>
+              </div>
+            </td>
+            <td class="users-table__actions">
+              <div class="table-actions">
+                <button (click)="showParent(items)" type="button" class="table-action table-action--view" title="Voir le parent">
+                  <i class="bi bi-eye"></i>
+                </button>
+                <button type="button" class="table-action table-action--edit" title="Modifier le parent">
+                  <i class="bi bi-pencil"></i>
+                </button>
+                <button type="button" class="table-action table-action--delete" title="Supprimer le parent">
+                  <i class="bi bi-trash3"></i>
+                </button>
+              </div>
+            </td>
+          </tr>
+        }
+        @if (!parents || parents.length === 0) {
+          <tr>
+            <td colspan="7" class="users-table__empty">
+              <div class="empty-content">
+                <div class="empty-content__icon">
+                  <i class="bi bi-people"></i>
+                </div>
+                <strong>Aucun parent enregistré</strong>
+                <span>Aucun parent ne correspond aux critères de recherche.</span>
+                <button type="button" class="empty-content__button" (click)="add()">
+                  <i class="bi bi-plus-lg"></i>
+                  Ajouter un parent
+                </button>
+              </div>
+            </td>
+          </tr>
+        }
+      }
+      </tbody>
+    </table>
+  </div>
+  <div class="users-card__footer">
+    <app-custom-pagination (pageChange)="changePage($event)" [links]="pagination"></app-custom-pagination>
+  </div>
 </div>
