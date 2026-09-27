@@ -1,16 +1,198 @@
-<div class="list-eleve-container">
-  <!-- Loader -->
-
-    <div class="loader">
-      <p>Chargement...</p>
+<app-page-header [backBtn]="true" [titre]="'Liste des Élèves'"></app-page-header>
+<div class="users-toolbar">
+  <div class="users-toolbar__info">
+    <div class="users-toolbar__title">
+      Élèves
     </div>
-
-
-  <!-- Contenu principal -->
-
-    <div class="content">
-      <h1>ListEleve</h1>
-      <p>app-list-eleve works!</p>
+    <div class="users-toolbar__subtitle">
+      Gérez les élèves
     </div>
+  </div>
+  <div class="users-toolbar__actions">
+    <div class="users-search">
+      <i class="bi bi-search"></i>
+      <input (keyup)="searchAction()" [(ngModel)]="searchText" type="text" class="users-search__input" placeholder="Rechercher un élève...">
+    </div>
+    <button type="button" class="btn-add-user" (click)="add()">
+      <i class="bi bi-plus-lg"></i>
+      <span>Ajouter un élève</span>
+    </button>
+  </div>
+</div>
 
+<!-- Carte principale -->
+<div class="users-card">
+  <div class="users-card__header">
+    <div>
+      <h4>Liste des élèves</h4>
+      <span>Élèves enregistrés sur la plateforme</span>
+    </div>
+  </div>
+
+  <!-- Tableau -->
+  <div class="users-table-wrapper">
+    <table class="users-table">
+      <thead>
+      <tr>
+        <th>Matricule</th>
+        <th>Nom & Prénom</th>
+        <th>Sexe</th>
+        <th>Date de naissance</th>
+        <th>Parent / Tuteur</th>
+        <th>Statut</th>
+        <th>Actions</th>
+      </tr>
+      </thead>
+      <tbody>
+        @if (isLoad) {
+          <tr>
+            <td colspan="7" class="users-table__loading">
+
+              <div class="loading-content">
+                <span class="loading-spinner"></span>
+                <span>Chargement des élèves...</span>
+              </div>
+
+            </td>
+          </tr>
+        }
+        @else {
+          <!-- Liste des élèves -->
+          @for (items of eleves; track items.id) {
+            <tr>
+              <td>
+                @if (items.matricule) {
+                  <span class="relation-badge">
+                    <i class="bi bi-card-text"></i>
+                    {{ items.matricule }}
+                  </span>
+                } @else {
+                  <span class="empty-value">—</span>
+                }
+              </td>
+              <td>
+                <div class="parent-identity">
+
+                  <div class="parent-avatar">
+                    <i class="bi bi-person-fill"></i>
+                  </div>
+
+                  <div class="parent-identity__content">
+                    <strong>
+                      {{ items.nom || 'Non renseigné' }}
+                    </strong>
+
+                    <span>
+                      {{ items.prenom || '' }}
+                    </span>
+                  </div>
+
+                </div>
+              </td>
+
+              <td>
+                @if (items.sexe) {
+                  <span class="relation-badge">
+                    {{ items.sexe }}
+                  </span>
+                } @else {
+                  <span class="empty-value">—</span>
+                }
+              </td>
+
+              <td>
+                @if (items.date_naissance) {
+                  <div class="contact-value">
+                    <i class="bi bi-calendar3"></i>
+
+                    <span>
+                      {{ items.date_naissance | date:'dd/MM/yyyy' }}
+                    </span>
+                  </div>
+                } @else {
+                  <span class="empty-value">—</span>
+                }
+              </td>
+
+              <!-- Parent / Tuteur -->
+              <td>
+                @if (items.parent) {
+                  <div class="parent-identity">
+                    <div class="parent-avatar">
+                      <i class="bi bi-person-heart"></i>
+                    </div>
+                    <div class="parent-identity__content">
+                      <strong>
+                        {{ items.parent.nom }}
+                      </strong>
+                      <span>
+                        {{ items.parent.prenom }}
+                      </span>
+                    </div>
+                  </div>
+                } @else {
+                  <span class="empty-value">
+                    Aucun parent associé
+                  </span>
+                }
+              </td>
+
+              <!-- Statut -->
+              <td>
+                @if (items.statut) {
+
+                  <span class="status-badge" [ngClass]="{'status-badge--principal': items.statut === 'actif','status-badge--financial': items.statut !== 'actif' }">
+                    <i class="bi" [ngClass]="{ 'bi-check-circle-fill': items.statut === 'actif', 'bi-info-circle-fill': items.statut !== 'actif'}"></i>
+                    {{ items.statut }}
+                  </span>
+                } @else {
+                  <span class="empty-value">—</span>
+                }
+              </td>
+              <!-- Actions -->
+              <td class="users-table__actions">
+                <div class="table-actions">
+                  <button (click)="showEleve(items)" type="button" class="table-action table-action--view" title="Voir les détails de l'élève">
+                    <i class="bi bi-eye"></i>
+                  </button>
+                  <button routerLink="/pedagogie/detail/{{items.id}}" type="button" class="table-action table-action--assigne" title="Dossier Parent">
+                    <i class="bi bi-folder"></i>
+                  </button>
+
+                  <button (click)="edit(items)" type="button" class="table-action table-action--edit" title="Modifier l'élève">
+                    <i class="bi bi-pencil"></i>
+                  </button>
+                  <!-- Supprimer -->
+                  <button (click)="delete(items)" type="button" class="table-action table-action--delete" title="Supprimer l'élève">
+                    <i class="bi bi-trash3"></i>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          }
+          <!-- Aucun élève -->
+          @if (!eleves || eleves.length === 0) {
+            <tr>
+              <td colspan="7" class="users-table__empty">
+                <div class="empty-content">
+                  <div class="empty-content__icon">
+                    <i class="bi bi-mortarboard"></i>
+                  </div>
+                  <strong>Aucun élève enregistré</strong>
+                  <span>Aucun élève ne correspond aux critères de recherche.</span>
+                  <button type="button" class="empty-content__button" (click)="add()">
+                    <i class="bi bi-plus-lg"></i>
+                    Ajouter un élève
+                  </button>
+                </div>
+              </td>
+            </tr>
+          }
+        }
+      </tbody>
+    </table>
+  </div>
+  <div class="users-card__footer">
+    <app-custom-pagination (pageChange)="changePage($event)" [links]="pagination"></app-custom-pagination>
+  </div>
 </div>

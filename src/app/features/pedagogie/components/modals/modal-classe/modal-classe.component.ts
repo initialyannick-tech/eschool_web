@@ -9,11 +9,7 @@ import {NgOptionComponent, NgSelectComponent} from '@ng-select/ng-select';
   selector: 'app-modal-classe',
   standalone: true,
   templateUrl: './modal-classe.component.html',
-  imports: [
-    ReactiveFormsModule,
-    NgSelectComponent,
-    NgOptionComponent
-  ],
+  imports: [ReactiveFormsModule, NgSelectComponent, NgOptionComponent],
   styleUrls: ['./modal-classe.component.scss']
 })
 export class ModalClasseComponent {

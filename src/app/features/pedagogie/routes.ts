@@ -5,11 +5,10 @@ export const PEDAGOGIE_ROUTES: Routes = [
   {
     path: 'pedagogie',
     component: MainLayout,
-    children: [
-      {
-        path: 'list-classe',
-        loadComponent: () => import('./views/list-classe/list-classe.page').then(m => m.ListClassePage)
-      },
+    children: [{
+      path: 'list-classe',
+      loadComponent: () => import('./views/list-classe/list-classe.page').then(m => m.ListClassePage)
+    },
 
       {
         path: 'list-parent',
@@ -19,9 +18,12 @@ export const PEDAGOGIE_ROUTES: Routes = [
       {
         path: 'list-eleve',
         loadComponent: () => import('./views/list-eleve/list-eleve.page').then(m => m.ListElevePage)
+      },
+
+      {
+        path: 'detail/:code',
+        loadComponent: () => import('./views/detail-eleve/detail-eleve.page').then(m => m.DetailElevePage)
       }
-
-
     ]
   }
 ];

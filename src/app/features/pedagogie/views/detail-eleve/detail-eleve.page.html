@@ -1,0 +1,398 @@
+<app-page-header [backBtn]="true" [titre]="'Dossier Élève'"></app-page-header>
+
+@if (isLoad) {
+  <div class="eleve-dossier-loading">
+    <div class="eleve-dossier-loading__icon">
+      <i class="bi bi-arrow-repeat"></i>
+    </div>
+    <div>
+      <h6>Chargement du dossier</h6>
+      <span>Récupération des informations de l'élève...</span>
+    </div>
+  </div>
+} @else {
+
+  <!-- IDENTITÉ DE L'ÉLÈVE -->
+  <div class="eleve-profile-card">
+    <div class="eleve-profile-card__main">
+      <div class="eleve-avatar">
+        @if (dossier.photo) {
+          <img [src]="dossier.photo" [alt]="dossier.nom + ' ' + dossier.prenom">
+        } @else {
+          <i class="bi bi-person-fill"></i>
+        }
+      </div>
+
+      <div class="eleve-profile-card__identity">
+        <div class="eleve-profile-card__eyebrow">
+          <span><i class="bi bi-person-badge"></i>Dossier scolaire</span>
+          @if (dossier.statut) {
+            <span class="eleve-status">
+              <i class="bi bi-circle-fill"></i>
+              {{ dossier.statut }}
+            </span>
+          }
+
+        </div>
+        <h2>{{ dossier.prenom }} {{ dossier.nom }}</h2>
+        <div class="eleve-profile-card__meta">
+          @if (dossier.matricule) {
+            <span><i class="bi bi-upc-scan"></i>Matricule :<strong>{{ dossier.matricule }}</strong></span>
+          }
+          @if (dossier.sexe) {
+            <span>
+              <i class="bi bi-person"></i>
+              {{ dossier.sexe }}
+            </span>
+          }
+
+          @if (dossier.date_naissance) {
+            <span>
+              <i class="bi bi-calendar3"></i>
+              {{ dossier.date_naissance | date:'dd/MM/yyyy' }}
+            </span>
+          }
+
+        </div>
+      </div>
+
+    </div>
+
+    <div class="eleve-profile-card__actions">
+      <div class="eleve-matricule">
+        <span>MATRICULE</span>
+        <strong>{{ dossier.matricule || 'Non renseigné' }}</strong>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- NAVIGATION DU DOSSIER -->
+  <div class="eleve-dossier-nav">
+
+    <div class="eleve-dossier-nav__header">
+
+      <div>
+
+        <span class="eleve-dossier-nav__eyebrow">
+          Administration scolaire
+        </span>
+
+        <h5>Dossier de l'élève</h5>
+
+      </div>
+
+      <span class="eleve-dossier-nav__count">
+        <i class="bi bi-folder2-open"></i>
+        Dossier scolaire
+      </span>
+
+    </div>
+
+
+    <ul class="nav nav-tabs eleve-tabs">
+
+      <!-- INFORMATIONS -->
+      <li class="nav-item">
+
+        <button
+          type="button"
+          (click)="changeTab(0)"
+          [ngClass]="{'active': tabSelected === 0}"
+          class="nav-link">
+
+          <span class="eleve-tab-icon">
+            <i class="bi bi-person-vcard"></i>
+          </span>
+
+          <span>
+            <strong>Informations générales</strong>
+            <small>Identité et coordonnées</small>
+          </span>
+
+        </button>
+
+      </li>
+
+
+      <!-- PARENT -->
+      <li class="nav-item">
+
+        <button
+          type="button"
+          (click)="changeTab(1)"
+          [ngClass]="{'active': tabSelected === 1}"
+          class="nav-link">
+
+          <span class="eleve-tab-icon">
+            <i class="bi bi-people"></i>
+          </span>
+
+          <span>
+            <strong>Parents</strong>
+            <small>Responsables de l'élève</small>
+          </span>
+
+        </button>
+
+      </li>
+
+
+      <!-- SCOLARITÉ -->
+      <li class="nav-item">
+
+        <button
+          type="button"
+          (click)="changeTab(2)"
+          [ngClass]="{'active': tabSelected === 2}"
+          class="nav-link">
+
+          <span class="eleve-tab-icon">
+            <i class="bi bi-mortarboard"></i>
+          </span>
+
+          <span>
+            <strong>Scolarité</strong>
+            <small>Parcours scolaire</small>
+          </span>
+
+        </button>
+
+      </li>
+
+
+      <!-- ABSENCES -->
+      <li class="nav-item">
+
+        <button
+          type="button"
+          (click)="changeTab(3)"
+          [ngClass]="{'active': tabSelected === 3}"
+          class="nav-link">
+
+          <span class="eleve-tab-icon">
+            <i class="bi bi-calendar-x"></i>
+          </span>
+
+          <span>
+            <strong>Absences</strong>
+            <small>Présences et retards</small>
+          </span>
+
+        </button>
+
+      </li>
+
+
+      <!-- RÉSULTATS -->
+      <li class="nav-item">
+
+        <button
+          type="button"
+          (click)="changeTab(4)"
+          [ngClass]="{'active': tabSelected === 4}"
+          class="nav-link">
+
+          <span class="eleve-tab-icon">
+            <i class="bi bi-journal-check"></i>
+          </span>
+
+          <span>
+            <strong>Résultats</strong>
+            <small>Notes et examens</small>
+          </span>
+
+        </button>
+
+      </li>
+
+
+      <!-- DOCUMENTS -->
+      <li class="nav-item">
+
+        <button
+          type="button"
+          (click)="changeTab(5)"
+          [ngClass]="{'active': tabSelected === 5}"
+          class="nav-link">
+
+          <span class="eleve-tab-icon">
+            <i class="bi bi-folder"></i>
+          </span>
+
+          <span>
+            <strong>Documents</strong>
+            <small>Pièces du dossier</small>
+          </span>
+
+        </button>
+
+      </li>
+
+    </ul>
+
+  </div>
+
+
+  <!-- CONTENU -->
+  <div class="eleve-dossier-content">
+
+    @if (tabSelected === 0) {
+
+      <app-info-eleve
+        [dossier]="dossier">
+      </app-info-eleve>
+
+    }
+
+
+    @if (tabSelected === 1) {
+
+      <div class="eleve-parent-content">
+
+        @if (dossier.parent) {
+
+          <div class="parent-summary">
+
+            <div class="parent-summary__icon">
+              <i class="bi bi-person-heart"></i>
+            </div>
+
+            <div class="parent-summary__content">
+
+              <span class="parent-summary__label">
+                Responsable de l'élève
+              </span>
+
+              <h5>
+                {{ dossier.parent.nom }}
+                {{ dossier.parent.prenom }}
+              </h5>
+
+              @if (dossier.parent.relation) {
+                <span class="parent-summary__relation">
+                  {{ dossier.parent.relation }}
+                </span>
+              }
+
+            </div>
+
+            <div class="parent-summary__contact">
+
+              @if (dossier.parent.telephone) {
+                <span>
+                  <i class="bi bi-telephone"></i>
+                  {{ dossier.parent.telephone }}
+                </span>
+              }
+
+              @if (dossier.parent.email) {
+                <span>
+                  <i class="bi bi-envelope"></i>
+                  {{ dossier.parent.email }}
+                </span>
+              }
+
+            </div>
+
+          </div>
+
+        } @else {
+
+          <div class="eleve-empty-state">
+
+            <i class="bi bi-people"></i>
+
+            <h5>Aucun responsable associé</h5>
+
+            <p>
+              Aucun parent ou responsable n'est actuellement associé
+              à ce dossier élève.
+            </p>
+
+          </div>
+
+        }
+
+      </div>
+
+    }
+
+
+    @if (tabSelected === 2) {
+
+      <div class="eleve-empty-state">
+
+        <i class="bi bi-mortarboard"></i>
+
+        <h5>Scolarité</h5>
+
+        <p>
+          Les informations relatives au parcours scolaire
+          de l'élève seront affichées ici.
+        </p>
+
+      </div>
+
+    }
+
+
+    @if (tabSelected === 3) {
+
+      <div class="eleve-empty-state">
+
+        <i class="bi bi-calendar-x"></i>
+
+        <h5>Absences et retards</h5>
+
+        <p>
+          L'historique des absences et des retards
+          de l'élève sera affiché ici.
+        </p>
+
+      </div>
+
+    }
+
+
+    @if (tabSelected === 4) {
+
+      <div class="eleve-empty-state">
+
+        <i class="bi bi-journal-check"></i>
+
+        <h5>Résultats scolaires</h5>
+
+        <p>
+          Les notes, examens et résultats de l'élève
+          seront affichés ici.
+        </p>
+
+      </div>
+
+    }
+
+
+    @if (tabSelected === 5) {
+
+      <div class="eleve-empty-state">
+
+        <i class="bi bi-folder"></i>
+
+        <h5>Documents</h5>
+
+        <p>
+          Les documents associés au dossier de l'élève
+          seront affichés ici.
+        </p>
+
+      </div>
+
+    }
+
+  </div>
+
+}

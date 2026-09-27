@@ -1,13 +1,21 @@
+import {Parent} from './parent';
+
 export interface Eleve {
   id?: number;
+  matricule?: string;
   nom?: string;
   prenom?: string
   sexe?: string;
+  date_naissance?: Date;
+  lieu_naissance?: string;
+  nationalite?: string;
+  adresse?: string;
   telephone?: string;
   email?: string;
-  date_naissance?: boolean;
-  lieu_naissance?: boolean;
-  nationalite?: string
+  photo?: string;
+  situation_particuliere?: string;
+  statut?: string;
+  parent?: Parent
 }
 
 export class Covert {

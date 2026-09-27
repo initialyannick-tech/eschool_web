@@ -1,0 +1,585 @@
+
+<div class="eleve-info-layout">
+
+  <div class="eleve-info-main">
+
+    <!-- HEADER IDENTITÉ -->
+    <div class="eleve-identity-card">
+
+      <div class="eleve-identity-card__avatar">
+        @if (dossier().photo) {
+          <img
+            [src]="dossier().photo"
+            [alt]="dossier().nom + ' ' + dossier().prenom">
+        } @else {
+          <i class="bi bi-person-fill"></i>
+        }
+      </div>
+
+      <div class="eleve-identity-card__content">
+
+        <span class="eleve-identity-card__eyebrow">
+          Dossier scolaire
+        </span>
+
+        <h4>
+          {{ dossier().nom || 'Nom non renseigné' }}
+          {{ dossier().prenom || '' }}
+        </h4>
+
+        <div class="eleve-identity-card__meta">
+
+          <span>
+            <i class="bi bi-person-badge"></i>
+            {{ dossier().matricule || 'Matricule non renseigné' }}
+          </span>
+
+          @if (dossier().sexe) {
+            <span>
+              <i class="bi bi-gender-ambiguous"></i>
+              {{ dossier().sexe }}
+            </span>
+          }
+
+          @if (dossier().statut) {
+            <span class="eleve-status">
+              <i class="bi bi-circle-fill"></i>
+              {{ dossier().statut }}
+            </span>
+          }
+
+        </div>
+
+      </div>
+
+      <div class="eleve-identity-card__action">
+        <button type="button" class="btn-eleve-action">
+          <i class="bi bi-pencil"></i>
+          Modifier
+        </button>
+      </div>
+
+    </div>
+
+
+    <!-- =====================================================
+         INFORMATIONS PERSONNELLES
+         ===================================================== -->
+
+    <div class="eleve-info-card">
+
+      <div class="eleve-info-card__header">
+
+        <div class="eleve-info-card__title">
+
+          <span class="eleve-info-card__icon">
+            <i class="bi bi-person-vcard"></i>
+          </span>
+
+          <div>
+            <span>Informations personnelles</span>
+            <h5>Identité de l'élève</h5>
+          </div>
+
+        </div>
+
+      </div>
+
+      <div class="eleve-info-card__body">
+
+        <div class="eleve-data-grid">
+
+          <div class="eleve-data-item">
+            <span>Nom</span>
+            <strong>
+              {{ dossier().nom || 'Non renseigné' }}
+            </strong>
+          </div>
+
+          <div class="eleve-data-item">
+            <span>Prénom</span>
+            <strong>
+              {{ dossier().prenom || 'Non renseigné' }}
+            </strong>
+          </div>
+
+          <div class="eleve-data-item">
+            <span>Sexe</span>
+            <strong>
+              {{ dossier().sexe || 'Non renseigné' }}
+            </strong>
+          </div>
+
+          <div class="eleve-data-item">
+            <span>Nationalité</span>
+            <strong>
+              {{ dossier().nationalite || 'Non renseignée' }}
+            </strong>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- =====================================================
+         NAISSANCE + COORDONNÉES
+         ===================================================== -->
+
+    <div class="eleve-info-row">
+
+      <!-- NAISSANCE -->
+      <div class="eleve-info-card">
+
+        <div class="eleve-info-card__header">
+
+          <div class="eleve-info-card__title">
+
+            <span class="eleve-info-card__icon">
+              <i class="bi bi-calendar3"></i>
+            </span>
+
+            <div>
+              <span>État civil</span>
+              <h5>Naissance</h5>
+            </div>
+
+          </div>
+
+        </div>
+
+        <div class="eleve-info-card__body">
+
+          <div class="eleve-data-list">
+
+            <div class="eleve-data-line">
+
+              <div class="eleve-data-line__icon">
+                <i class="bi bi-calendar-event"></i>
+              </div>
+
+              <div>
+                <span>Date de naissance</span>
+
+                <strong>
+                  @if (dossier().date_naissance) {
+                    {{ dossier().date_naissance | date:'dd/MM/yyyy' }}
+                  } @else {
+                    Non renseignée
+                  }
+                </strong>
+              </div>
+
+            </div>
+
+
+            <div class="eleve-data-line">
+
+              <div class="eleve-data-line__icon">
+                <i class="bi bi-geo-alt"></i>
+              </div>
+
+              <div>
+                <span>Lieu de naissance</span>
+
+                <strong>
+                  {{ dossier().lieu_naissance || 'Non renseigné' }}
+                </strong>
+              </div>
+
+            </div>
+
+
+            <div class="eleve-data-line">
+
+              <div class="eleve-data-line__icon">
+                <i class="bi bi-flag"></i>
+              </div>
+
+              <div>
+                <span>Nationalité</span>
+
+                <strong>
+                  {{ dossier().nationalite || 'Non renseignée' }}
+                </strong>
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <!-- COORDONNÉES -->
+      <div class="eleve-info-card">
+
+        <div class="eleve-info-card__header">
+
+          <div class="eleve-info-card__title">
+
+            <span class="eleve-info-card__icon">
+              <i class="bi bi-telephone"></i>
+            </span>
+
+            <div>
+              <span>Contact</span>
+              <h5>Coordonnées</h5>
+            </div>
+
+          </div>
+
+        </div>
+
+        <div class="eleve-info-card__body">
+
+          <div class="eleve-data-list">
+
+            @if (dossier().telephone) {
+
+              <div class="eleve-data-line">
+
+                <div class="eleve-data-line__icon">
+                  <i class="bi bi-phone"></i>
+                </div>
+
+                <div>
+                  <span>Téléphone</span>
+                  <strong>{{ dossier().telephone }}</strong>
+                </div>
+
+              </div>
+
+            }
+
+            @if (dossier().email) {
+
+              <div class="eleve-data-line">
+
+                <div class="eleve-data-line__icon">
+                  <i class="bi bi-envelope"></i>
+                </div>
+
+                <div>
+                  <span>Email</span>
+                  <strong>{{ dossier().email }}</strong>
+                </div>
+
+              </div>
+
+            }
+
+            @if (dossier().adresse) {
+
+              <div class="eleve-data-line">
+
+                <div class="eleve-data-line__icon">
+                  <i class="bi bi-geo-alt"></i>
+                </div>
+
+                <div>
+                  <span>Adresse</span>
+                  <strong>{{ dossier().adresse }}</strong>
+                </div>
+
+              </div>
+
+            }
+
+            @if (!dossier().telephone && !dossier().email && !dossier().adresse) {
+
+              <div class="eleve-mini-empty">
+                <i class="bi bi-telephone-x"></i>
+                <span>Aucune coordonnée renseignée</span>
+              </div>
+
+            }
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- =====================================================
+         SITUATION PARTICULIÈRE
+         ===================================================== -->
+
+    @if (dossier().situation_particuliere) {
+
+      <div class="eleve-info-card">
+
+        <div class="eleve-info-card__header">
+
+          <div class="eleve-info-card__title">
+
+            <span class="eleve-info-card__icon">
+              <i class="bi bi-info-circle"></i>
+            </span>
+
+            <div>
+              <span>Informations complémentaires</span>
+              <h5>Situation particulière</h5>
+            </div>
+
+          </div>
+
+        </div>
+
+        <div class="eleve-info-card__body">
+
+          <div class="eleve-special-note">
+            <i class="bi bi-info-circle-fill"></i>
+
+            <span>
+              {{ dossier().situation_particuliere }}
+            </span>
+          </div>
+
+        </div>
+
+      </div>
+
+    }
+
+  </div>
+
+
+  <!-- =======================================================
+       COLONNE LATÉRALE
+       ======================================================= -->
+
+  <div class="eleve-info-sidebar">
+
+
+    <!-- RESPONSABLE -->
+    <div class="eleve-info-card">
+
+      <div class="eleve-info-card__header">
+
+        <div class="eleve-info-card__title">
+
+          <span class="eleve-info-card__icon">
+            <i class="bi bi-people"></i>
+          </span>
+
+          <div>
+            <span>Famille</span>
+            <h5>Responsable</h5>
+          </div>
+
+        </div>
+
+        <button
+          type="button"
+          class="btn-card-icon">
+          <i class="bi bi-three-dots"></i>
+        </button>
+
+      </div>
+
+
+      <div class="eleve-info-card__body">
+
+        @if (dossier().parent) {
+
+          <div class="parent-profile">
+
+            <div class="parent-profile__avatar">
+              <i class="bi bi-person-fill"></i>
+            </div>
+
+            <div class="parent-profile__identity">
+
+              <span>Responsable de l'élève</span>
+
+              <strong>
+                {{ dossier().parent?.nom }}
+                {{ dossier().parent?.prenom }}
+              </strong>
+
+              @if (dossier().parent?.relation) {
+                <small>
+                  {{ dossier().parent?.relation }}
+                </small>
+              }
+
+            </div>
+
+          </div>
+
+
+          <div class="parent-contact">
+
+            @if (dossier().parent?.telephone) {
+
+              <div class="parent-contact__item">
+
+                <i class="bi bi-telephone"></i>
+
+                <div>
+                  <span>Téléphone</span>
+                  <strong>
+                    {{ dossier().parent?.telephone }}
+                  </strong>
+                </div>
+
+              </div>
+
+            }
+
+
+            @if (dossier().parent?.email) {
+
+              <div class="parent-contact__item">
+
+                <i class="bi bi-envelope"></i>
+
+                <div>
+                  <span>Email</span>
+                  <strong>
+                    {{ dossier().parent?.email }}
+                  </strong>
+                </div>
+
+              </div>
+
+            }
+
+
+            @if (dossier().parent?.adresse) {
+
+              <div class="parent-contact__item">
+
+                <i class="bi bi-geo-alt"></i>
+
+                <div>
+                  <span>Adresse</span>
+                  <strong>
+                    {{ dossier().parent?.adresse }}
+                  </strong>
+                </div>
+
+              </div>
+
+            }
+
+          </div>
+
+        } @else {
+
+          <div class="eleve-sidebar-empty">
+
+            <div class="eleve-sidebar-empty__icon">
+              <i class="bi bi-person-plus"></i>
+            </div>
+
+            <strong>Aucun responsable</strong>
+
+            <span>
+              Aucun parent ou responsable
+              n'est actuellement associé.
+            </span>
+
+            <button type="button" class="btn-eleve-primary">
+              <i class="bi bi-plus-lg"></i>
+              Ajouter un responsable
+            </button>
+
+          </div>
+
+        }
+
+      </div>
+
+    </div>
+
+
+    <!-- ÉTAT DU DOSSIER -->
+    <div class="eleve-info-card">
+
+      <div class="eleve-info-card__header">
+
+        <div class="eleve-info-card__title">
+
+          <span class="eleve-info-card__icon">
+            <i class="bi bi-clipboard2-check"></i>
+          </span>
+
+          <div>
+            <span>Dossier</span>
+            <h5>État du dossier</h5>
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <div class="eleve-info-card__body">
+
+        <div class="dossier-status-list">
+
+          <div class="dossier-status-item">
+
+            <span class="dossier-status-item__icon">
+              <i class="bi bi-person-check"></i>
+            </span>
+
+            <div>
+              <span>Statut</span>
+              <strong>
+                {{ dossier().statut || 'Non renseigné' }}
+              </strong>
+            </div>
+
+          </div>
+
+
+          <div class="dossier-status-item">
+
+            <span class="dossier-status-item__icon">
+              <i class="bi bi-person-badge"></i>
+            </span>
+
+            <div>
+              <span>Matricule</span>
+              <strong>
+                {{ dossier().matricule || 'Non renseigné' }}
+              </strong>
+            </div>
+
+          </div>
+
+
+          <div class="dossier-status-item">
+
+            <span class="dossier-status-item__icon">
+              <i class="bi bi-flag"></i>
+            </span>
+
+            <div>
+              <span>Nationalité</span>
+              <strong>
+                {{ dossier().nationalite || 'Non renseignée' }}
+              </strong>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>

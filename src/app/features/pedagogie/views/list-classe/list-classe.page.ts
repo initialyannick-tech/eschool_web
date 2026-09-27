@@ -25,7 +25,6 @@ export class ListClassePage {
   searchText: string = ''
 
 
-
   ngOnInit() {
     this.getClasses()
   }

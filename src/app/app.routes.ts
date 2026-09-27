@@ -15,8 +15,7 @@ export const routes: Routes = [
     },
     ...DASHBOARD_ROUTES,
     ...ADMIN_ROUTES,
-
-  ...PEDAGOGIE_ROUTES,
+    ...PEDAGOGIE_ROUTES,
   {
       path: '**',
       redirectTo: '',

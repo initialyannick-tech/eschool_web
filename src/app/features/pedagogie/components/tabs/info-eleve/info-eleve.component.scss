@@ -1,0 +1,533 @@
+/* =========================================================
+   INFO ÉLÈVE — ESCHOOL
+   PALETTE VERTE
+   ========================================================= */
+
+.info-eleve-card {
+  width: 100%;
+  background: #ffffff;
+  border: 1px solid #e0eae5;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(24, 51, 42, 0.035);
+}
+
+/* =========================================================
+   HEADER CARTE
+   ========================================================= */
+
+.info-eleve-card__header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 15px 17px;
+  border-bottom: 1px solid #e8efeb;
+  background: #ffffff;
+}
+
+.info-eleve-card__header-icon {
+  width: 38px;
+  height: 38px;
+  min-width: 38px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 9px;
+  background: #eaf5ef;
+  color: #006b3f;
+  font-size: 17px;
+}
+
+.info-eleve-card__header > div:nth-child(2) {
+  min-width: 0;
+  flex: 1;
+}
+
+.info-eleve-card__header span {
+  display: block;
+  margin-bottom: 2px;
+
+  color: #8a9992;
+  font-size: 9px;
+  font-weight: 700;
+
+  text-transform: uppercase;
+  letter-spacing: .07em;
+}
+
+.info-eleve-card__header h5 {
+  margin: 0;
+
+  color: #18332a;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+/* =========================================================
+   STATUT
+   ========================================================= */
+
+.info-eleve-status {
+  display: inline-flex !important;
+  align-items: center;
+  gap: 5px;
+
+  flex: initial !important;
+  margin-left: auto !important;
+  margin-bottom: 0 !important;
+
+  height: 25px;
+  padding: 0 9px;
+
+  background: #eaf7ef;
+  border: 1px solid #d1ebdb;
+  border-radius: 20px;
+
+  color: #087a46 !important;
+
+  font-size: 9px !important;
+  font-weight: 700 !important;
+
+  text-transform: none !important;
+  letter-spacing: 0 !important;
+}
+
+.info-eleve-status i {
+  color: #087a46;
+  font-size: 6px;
+}
+
+/* =========================================================
+   CORPS
+   ========================================================= */
+
+.info-eleve-card__body {
+  padding: 18px;
+}
+
+/* =========================================================
+   SECTIONS
+   ========================================================= */
+
+.info-eleve-section {
+  padding-bottom: 18px;
+  margin-bottom: 18px;
+
+  border-bottom: 1px solid #e8efeb;
+}
+
+.info-eleve-section:last-child {
+  padding-bottom: 0;
+  margin-bottom: 0;
+  border-bottom: 0;
+}
+
+.info-eleve-section__title {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+
+  margin-bottom: 13px;
+
+  color: #30463d;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.info-eleve-section__title i {
+  color: #006b3f;
+  font-size: 14px;
+}
+
+/* =========================================================
+   GRILLE INFORMATIONS
+   ========================================================= */
+
+.info-eleve-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
+
+.info-eleve-field {
+  min-width: 0;
+
+  padding: 11px 12px;
+
+  background: #f8f9fb;
+  border: 1px solid #e8efeb;
+  border-radius: 8px;
+}
+
+.info-eleve-field--full {
+  grid-column: 1 / -1;
+}
+
+.info-eleve-field span {
+  display: block;
+  margin-bottom: 4px;
+
+  color: #8a9992;
+  font-size: 9px;
+  font-weight: 600;
+}
+
+.info-eleve-field strong {
+  display: block;
+
+  overflow: hidden;
+
+  color: #30463d;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1.4;
+
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* =========================================================
+   SITUATION PARTICULIÈRE
+   ========================================================= */
+
+.info-eleve-note {
+  padding: 12px 14px;
+
+  border-left: 3px solid #006b3f;
+  border-radius: 7px;
+
+  background: #f6f9f7;
+
+  color: #53675e;
+  font-size: 11px;
+  line-height: 1.6;
+}
+
+/* =========================================================
+   DEUX COLONNES
+   ========================================================= */
+
+.info-eleve-two-columns {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px;
+
+  margin-top: 18px;
+}
+
+.info-eleve-two-columns .info-eleve-card {
+  min-width: 0;
+}
+
+/* =========================================================
+   RESPONSABLE
+   ========================================================= */
+
+.responsable-eleve {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+
+  padding: 12px;
+
+  border: 1px solid #e0eae5;
+  border-radius: 9px;
+
+  background: #fafcfb;
+}
+
+.responsable-eleve__avatar {
+  width: 43px;
+  height: 43px;
+  min-width: 43px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 10px;
+
+  background: #eaf5ef;
+  color: #006b3f;
+
+  font-size: 18px;
+}
+
+.responsable-eleve__content {
+  min-width: 0;
+}
+
+.responsable-eleve__label {
+  display: block;
+  margin-bottom: 2px;
+
+  color: #8a9992;
+  font-size: 8px;
+  font-weight: 700;
+
+  text-transform: uppercase;
+  letter-spacing: .06em;
+}
+
+.responsable-eleve__content h6 {
+  margin: 0;
+
+  color: #18332a;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.responsable-eleve__relation {
+  display: inline-block;
+  margin-top: 2px;
+
+  color: #84938c;
+  font-size: 10px;
+}
+
+/* =========================================================
+   DÉTAILS RESPONSABLE
+   ========================================================= */
+
+.responsable-eleve__details {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+
+  margin-top: 12px;
+}
+
+.responsable-eleve__details > div {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+
+  padding: 8px 10px;
+
+  border-radius: 7px;
+
+  background: #f6f9f7;
+}
+
+.responsable-eleve__details i {
+  width: 20px;
+
+  color: #006b3f;
+  font-size: 12px;
+
+  text-align: center;
+}
+
+.responsable-eleve__details span {
+  overflow: hidden;
+
+  color: #53675e;
+  font-size: 10px;
+
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* =========================================================
+   SITUATION ÉLÈVE
+   ========================================================= */
+
+.eleve-situation-list {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+}
+
+.eleve-situation-item {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+
+  padding: 10px 11px;
+
+  border: 1px solid #e0eae5;
+  border-radius: 8px;
+
+  background: #fafcfb;
+}
+
+.eleve-situation-item__icon {
+  width: 34px;
+  height: 34px;
+  min-width: 34px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 8px;
+
+  background: #eaf5ef;
+  color: #006b3f;
+
+  font-size: 14px;
+}
+
+.eleve-situation-item div {
+  min-width: 0;
+}
+
+.eleve-situation-item small {
+  display: block;
+  margin-bottom: 2px;
+
+  color: #8a9992;
+  font-size: 8px;
+  font-weight: 600;
+}
+
+.eleve-situation-item strong {
+  display: block;
+
+  overflow: hidden;
+
+  color: #30463d;
+  font-size: 11px;
+  font-weight: 700;
+
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* =========================================================
+   ÉTAT VIDE
+   ========================================================= */
+
+.info-eleve-empty {
+  min-height: 205px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  padding: 20px;
+
+  text-align: center;
+}
+
+.info-eleve-empty > i {
+  width: 48px;
+  height: 48px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  margin-bottom: 10px;
+
+  border-radius: 11px;
+
+  background: #eaf5ef;
+  color: #006b3f;
+
+  font-size: 20px;
+}
+
+.info-eleve-empty h6 {
+  margin: 0 0 4px;
+
+  color: #18332a;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.info-eleve-empty p {
+  max-width: 280px;
+
+  margin: 0 0 12px;
+
+  color: #84938c;
+  font-size: 10px;
+  line-height: 1.5;
+}
+
+.info-eleve-empty .btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+
+  border-radius: 7px;
+
+  background: #006b3f;
+  border-color: #006b3f;
+
+  color: #ffffff;
+
+  font-size: 10px;
+  font-weight: 600;
+}
+
+.info-eleve-empty .btn:hover {
+  background: #005b36;
+  border-color: #005b36;
+}
+
+.info-eleve-empty .btn i {
+  margin-right: 0;
+}
+
+/* =========================================================
+   RESPONSIVE — TABLETTE
+   ========================================================= */
+
+@media (max-width: 1100px) {
+
+  .info-eleve-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* =========================================================
+   RESPONSIVE — TABLETTE / PETIT ÉCRAN
+   ========================================================= */
+
+@media (max-width: 768px) {
+
+  .info-eleve-two-columns {
+    grid-template-columns: 1fr;
+  }
+
+  .info-eleve-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* =========================================================
+   RESPONSIVE — MOBILE
+   ========================================================= */
+
+@media (max-width: 576px) {
+
+  .info-eleve-card__header {
+    padding: 13px;
+  }
+
+  .info-eleve-card__body {
+    padding: 13px;
+  }
+
+  .info-eleve-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .info-eleve-field--full {
+    grid-column: auto;
+  }
+
+  .info-eleve-status {
+    display: none !important;
+  }
+
+  .responsable-eleve {
+    align-items: flex-start;
+  }
+}

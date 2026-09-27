@@ -230,6 +230,10 @@
           <i class="bi bi-person-rolodex"></i>
           <span>Gestion Parents</span>
         </a>
+        <a class="sidebar-nav__link" *ngxPermissionsOnly="['eleve.management']" routerLink="/pedagogie/list-eleve" routerLinkActive="sidebar-nav__link--active">
+          <i class="bi bi-backpack4-fill"></i>
+          <span>Gestion Elèves</span>
+        </a>
         <a class="sidebar-nav__link" *ngxPermissionsOnly="['classe.management']" routerLink="/pedagogie/list-classe" routerLinkActive="sidebar-nav__link--active">
           <i class="bi bi-building-add"></i>
           <span>Gestion Classes</span>

@@ -1,0 +1,749 @@
+/* =========================================================
+   DOSSIER ÉLÈVE
+   ========================================================= */
+
+.eleve-profile-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  margin-top: 18px;
+  padding: 20px 22px;
+  background: #ffffff;
+  border: 1px solid #e7ebf1;
+  border-radius: 14px;
+  box-shadow: 0 3px 14px rgba(25, 35, 55, 0.04);
+}
+
+.eleve-profile-card__main {
+  display: flex;
+  align-items: center;
+  gap: 17px;
+  min-width: 0;
+}
+
+
+/* =========================================================
+   AVATAR
+   ========================================================= */
+
+.eleve-avatar {
+  width: 68px;
+  height: 68px;
+  min-width: 68px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  overflow: hidden;
+
+  border-radius: 14px;
+  background: #eef3ff;
+  border: 1px solid #dfe7ff;
+
+  color: #315efb;
+  font-size: 26px;
+}
+
+.eleve-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+
+/* =========================================================
+   IDENTITÉ
+   ========================================================= */
+
+.eleve-profile-card__identity {
+  min-width: 0;
+}
+
+.eleve-profile-card__eyebrow {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+
+  margin-bottom: 5px;
+
+  color: #858e9e;
+  font-size: 10px;
+  font-weight: 700;
+
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+}
+
+.eleve-profile-card__eyebrow > span:first-child {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.eleve-profile-card__eyebrow i {
+  color: #315efb;
+}
+
+.eleve-profile-card__identity h2 {
+  margin: 0;
+
+  color: #222b3a;
+  font-size: 23px;
+  font-weight: 700;
+  line-height: 1.3;
+}
+
+.eleve-profile-card__meta {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 7px 18px;
+
+  margin-top: 8px;
+
+  color: #727d8e;
+  font-size: 12px;
+}
+
+.eleve-profile-card__meta span {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.eleve-profile-card__meta i {
+  color: #8993a3;
+}
+
+.eleve-profile-card__meta strong {
+  color: #315efb;
+  font-weight: 700;
+}
+
+
+/* =========================================================
+   STATUT
+   ========================================================= */
+
+.eleve-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+
+  padding: 4px 9px;
+
+  border-radius: 20px;
+
+  background: #edf8f2;
+  color: #218653;
+
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+.eleve-status i {
+  color: #2db673 !important;
+  font-size: 6px;
+}
+
+
+/* =========================================================
+   ACTION / MATRICULE
+   ========================================================= */
+
+.eleve-profile-card__actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.eleve-matricule {
+  min-width: 135px;
+
+  padding: 9px 12px;
+
+  border: 1px solid #e9edf2;
+  border-radius: 9px;
+
+  background: #f8f9fb;
+}
+
+.eleve-matricule span {
+  display: block;
+
+  margin-bottom: 2px;
+
+  color: #929baa;
+  font-size: 8px;
+  font-weight: 700;
+
+  letter-spacing: 0.09em;
+}
+
+.eleve-matricule strong {
+  display: block;
+
+  color: #315efb;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+
+/* =========================================================
+   NAVIGATION DOSSIER
+   ========================================================= */
+
+.eleve-dossier-nav {
+  margin-top: 18px;
+
+  padding: 0 17px;
+
+  background: #ffffff;
+
+  border: 1px solid #e7ebf1;
+  border-radius: 14px 14px 0 0;
+
+  box-shadow: 0 2px 10px rgba(25, 35, 55, 0.025);
+}
+
+.eleve-dossier-nav__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 15px;
+
+  padding: 16px 5px 13px;
+}
+
+.eleve-dossier-nav__eyebrow {
+  display: block;
+
+  margin-bottom: 3px;
+
+  color: #9099a8;
+
+  font-size: 9px;
+  font-weight: 700;
+
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.eleve-dossier-nav__header h5 {
+  margin: 0;
+
+  color: #273142;
+
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.eleve-dossier-nav__count {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+
+  padding: 7px 10px;
+
+  border-radius: 7px;
+
+  background: #f6f8fa;
+  color: #697486;
+
+  font-size: 10px;
+  font-weight: 600;
+}
+
+.eleve-dossier-nav__count i {
+  color: #315efb;
+}
+
+
+/* =========================================================
+   ONGLETS
+   ========================================================= */
+
+.eleve-tabs {
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 3px;
+
+  margin: 0;
+
+  overflow-x: auto;
+
+  border-bottom: 0;
+}
+
+.eleve-tabs::-webkit-scrollbar {
+  height: 3px;
+}
+
+.eleve-tabs::-webkit-scrollbar-thumb {
+  border-radius: 5px;
+  background: #dfe4eb;
+}
+
+.eleve-tabs .nav-item {
+  margin-bottom: 0;
+}
+
+.eleve-tabs .nav-link {
+  position: relative;
+
+  display: flex;
+  align-items: center;
+  gap: 9px;
+
+  min-width: 150px;
+
+  padding: 11px 12px;
+
+  border: 0;
+  border-radius: 8px 8px 0 0;
+
+  background: transparent;
+
+  color: #788292;
+
+  text-align: left;
+
+  cursor: pointer;
+
+  transition: background 0.2s ease,
+  color 0.2s ease;
+}
+
+.eleve-tabs .nav-link:hover {
+  background: #f7f9fc;
+  color: #475366;
+}
+
+.eleve-tabs .nav-link.active {
+  background: #f2f5ff;
+  color: #315efb;
+}
+
+.eleve-tabs .nav-link.active::after {
+  content: "";
+
+  position: absolute;
+
+  right: 0;
+  bottom: 0;
+  left: 0;
+
+  height: 2px;
+
+  background: #315efb;
+
+  border-radius: 2px 2px 0 0;
+}
+
+
+/* =========================================================
+   ICÔNES DES ONGLETS
+   ========================================================= */
+
+.eleve-tab-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 31px;
+  height: 31px;
+  min-width: 31px;
+
+  border-radius: 7px;
+
+  background: #f3f5f8;
+  color: #727d8d;
+
+  font-size: 14px;
+
+  transition: background 0.2s ease,
+  color 0.2s ease;
+}
+
+.eleve-tabs .nav-link.active .eleve-tab-icon {
+  background: #e2eaff;
+  color: #315efb;
+}
+
+.eleve-tabs strong {
+  display: block;
+
+  color: inherit;
+
+  font-size: 11px;
+  font-weight: 700;
+
+  line-height: 1.25;
+
+  white-space: nowrap;
+}
+
+.eleve-tabs small {
+  display: block;
+
+  margin-top: 2px;
+
+  color: #9ba3b0;
+
+  font-size: 8px;
+
+  line-height: 1.2;
+
+  white-space: nowrap;
+}
+
+.eleve-tabs .nav-link.active small {
+  color: #7183bd;
+}
+
+
+/* =========================================================
+   CONTENU
+   ========================================================= */
+
+.eleve-dossier-content {
+  min-height: 350px;
+
+  padding: 20px;
+
+  background: #ffffff;
+
+  border: 1px solid #e7ebf1;
+  border-top: 0;
+
+  border-radius: 0 0 14px 14px;
+
+  box-shadow: 0 3px 14px rgba(25, 35, 55, 0.035);
+}
+
+
+/* =========================================================
+   PARENT
+   ========================================================= */
+
+.eleve-parent-content {
+  width: 100%;
+}
+
+.parent-summary {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+
+  padding: 17px;
+
+  border: 1px solid #e8ecf2;
+  border-radius: 11px;
+
+  background: #fafbfd;
+}
+
+.parent-summary__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 48px;
+  height: 48px;
+  min-width: 48px;
+
+  border-radius: 11px;
+
+  background: #eef3ff;
+  color: #315efb;
+
+  font-size: 20px;
+}
+
+.parent-summary__content {
+  flex: 1;
+  min-width: 0;
+}
+
+.parent-summary__label {
+  display: block;
+
+  margin-bottom: 3px;
+
+  color: #929baa;
+
+  font-size: 9px;
+  font-weight: 700;
+
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.parent-summary__content h5 {
+  margin: 0;
+
+  color: #293343;
+
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.parent-summary__relation {
+  display: inline-block;
+
+  margin-top: 3px;
+
+  color: #7d8797;
+
+  font-size: 11px;
+}
+
+.parent-summary__contact {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 5px;
+
+  color: #697486;
+
+  font-size: 11px;
+}
+
+.parent-summary__contact span {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.parent-summary__contact i {
+  color: #315efb;
+}
+
+
+/* =========================================================
+   ÉTAT VIDE
+   ========================================================= */
+
+.eleve-empty-state {
+  min-height: 290px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  text-align: center;
+}
+
+.eleve-empty-state > i {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 60px;
+  height: 60px;
+
+  margin-bottom: 14px;
+
+  border-radius: 14px;
+
+  background: #f1f4ff;
+  color: #315efb;
+
+  font-size: 25px;
+}
+
+.eleve-empty-state h5 {
+  margin: 0 0 5px;
+
+  color: #303949;
+
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.eleve-empty-state p {
+  max-width: 430px;
+
+  margin: 0;
+
+  color: #8b94a2;
+
+  font-size: 11px;
+  line-height: 1.6;
+}
+
+
+/* =========================================================
+   CHARGEMENT
+   ========================================================= */
+
+.eleve-dossier-loading {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+
+  margin-top: 18px;
+  padding: 18px;
+
+  background: #ffffff;
+
+  border: 1px solid #e7ebf1;
+  border-radius: 12px;
+
+  box-shadow: 0 3px 12px rgba(25, 35, 55, 0.03);
+}
+
+.eleve-dossier-loading__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 43px;
+  height: 43px;
+  min-width: 43px;
+
+  border-radius: 10px;
+
+  background: #eef3ff;
+  color: #315efb;
+
+  font-size: 18px;
+}
+
+.eleve-dossier-loading__icon i {
+  animation: eleve-loading 1s linear infinite;
+}
+
+.eleve-dossier-loading h6 {
+  margin: 0 0 3px;
+
+  color: #303949;
+
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.eleve-dossier-loading span {
+  color: #8c95a3;
+
+  font-size: 11px;
+}
+
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+
+@media (max-width: 1100px) {
+
+  .eleve-profile-card {
+    align-items: flex-start;
+  }
+
+  .eleve-profile-card__actions {
+    flex-shrink: 0;
+  }
+
+  .eleve-tabs .nav-link {
+    min-width: 145px;
+  }
+
+}
+
+
+@media (max-width: 768px) {
+
+  .eleve-profile-card {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .eleve-profile-card__actions {
+    justify-content: flex-end;
+  }
+
+  .eleve-dossier-nav {
+    padding: 0 10px;
+  }
+
+  .eleve-dossier-nav__header {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .eleve-dossier-content {
+    padding: 12px;
+  }
+
+  .parent-summary {
+    align-items: flex-start;
+    flex-wrap: wrap;
+  }
+
+  .parent-summary__contact {
+    width: 100%;
+    align-items: flex-start;
+    padding-left: 63px;
+  }
+
+}
+
+
+@media (max-width: 576px) {
+
+  .eleve-profile-card {
+    padding: 16px;
+  }
+
+  .eleve-profile-card__main {
+    align-items: flex-start;
+  }
+
+  .eleve-avatar {
+    width: 55px;
+    height: 55px;
+    min-width: 55px;
+  }
+
+  .eleve-profile-card__identity h2 {
+    font-size: 19px;
+  }
+
+  .eleve-profile-card__meta {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 5px;
+  }
+
+  .eleve-matricule {
+    width: 100%;
+  }
+
+  .eleve-profile-card__actions {
+    width: 100%;
+  }
+
+}
+
+
+/* =========================================================
+   ANIMATION
+   ========================================================= */
+
+@keyframes eleve-loading {
+
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+
+}

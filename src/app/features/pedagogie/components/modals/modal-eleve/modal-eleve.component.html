@@ -1,1 +1,246 @@
-<p>app-modal-eleve works!</p>
+<div class="classe-modal eleve-modal">
+  <div class="classe-modal__header">
+    <div class="classe-modal__identity">
+      <div class="classe-modal__icon">
+        <i class="bi bi-mortarboard-fill"></i>
+      </div>
+      <div class="classe-modal__heading">
+        <div class="classe-modal__eyebrow">
+          Administration scolaire
+        </div>
+        <h4>{{ isEdit ? 'Modifier un élève' : 'Nouvel élève' }}</h4>
+
+        <p>{{ isEdit ? 'Modifiez les informations de cet élève.' : 'Renseignez les informations pour créer un élève.' }}</p>
+      </div>
+    </div>
+
+    <button type="button" class="classe-modal__close" (click)="close()" aria-label="Fermer">
+      <i class="bi bi-x-lg"></i>
+    </button>
+  </div>
+
+  <!-- ERREURS BACKEND -->
+  @if (backendErrors.length > 0) {
+    <div class="backend-errors">
+      <div class="backend-errors__header">
+        <i class="bi bi-exclamation-triangle-fill"></i>
+        <span>Impossible d'enregistrer cet élève</span>
+      </div>
+
+      <div class="backend-errors__list">
+        @for (error of backendErrors; track $index) {
+          <div class="backend-error-badge">
+            <i class="bi bi-x-circle-fill"></i>
+            <span>{{ error }}</span>
+          </div>
+        }
+      </div>
+    </div>
+  }
+
+  <!-- FORMULAIRE -->
+  <form [formGroup]="eleveForm" (ngSubmit)="submit()" class="classe-modal__form">
+    <div class="classe-modal__body eleve-modal__body">
+      <section class="classe-panel classe-panel--general">
+        <div class="classe-section__heading">
+          <div class="classe-section__icon">
+            <i class="bi bi-person-vcard-fill"></i>
+          </div>
+          <div>
+            <h5>Identité de l'élève</h5>
+            <p>Informations personnelles et état civil</p>
+          </div>
+        </div>
+        <div class="classe-general-content">
+          <div class="classe-field">
+            <label for="eleve-nom">Nom <span>*</span></label>
+            <div class="classe-input">
+              <i class="bi bi-person"></i>
+              <input id="eleve-nom" type="text" formControlName="nom" placeholder="Ex. ESSONO" autocomplete="family-name"/>
+            </div>
+          </div>
+
+          <div class="classe-field">
+            <label for="eleve-prenom">Prénom <span>*</span></label>
+            <div class="classe-input">
+              <i class="bi bi-person-fill"></i>
+              <input id="eleve-prenom" type="text" formControlName="prenom" placeholder="Ex. Hans" autocomplete="given-name"/>
+            </div>
+          </div>
+
+          <!-- SEXE -->
+          <div class="classe-field">
+            <label for="eleve-sexe">Sexe <span>*</span></label>
+            <div class="classe-native-select">
+              <i class="bi bi-gender-ambiguous"></i>
+              <select id="eleve-sexe" formControlName="sexe">
+                <option value="" disabled>Sélectionner le sexe</option>
+                <option value="masculin">Masculin</option>
+                <option value="feminin">Féminin</option>
+              </select>
+              <i class="bi bi-chevron-down select-arrow"></i>
+            </div>
+          </div>
+
+          <!-- DATE DE NAISSANCE -->
+          <div class="classe-field">
+            <label for="eleve-date-naissance">Date de naissance <span>*</span></label>
+            <div class="classe-input">
+              <i class="bi bi-calendar-event"></i>
+              <input id="eleve-date-naissance" type="date" formControlName="date_naissance"/>
+            </div>
+          </div>
+
+          <!-- LIEU DE NAISSANCE -->
+          <div class="classe-field">
+            <label for="eleve-lieu-naissance">Lieu de naissance <span>*</span></label>
+            <div class="classe-input">
+              <i class="bi bi-geo-alt"></i>
+              <input id="eleve-lieu-naissance" type="text" formControlName="lieu_naissance" placeholder="Ex. Libreville" autocomplete="off"/>
+            </div>
+          </div>
+
+          <!-- NATIONALITÉ -->
+          <div class="classe-field">
+            <label for="eleve-nationalite">Nationalité <span>*</span></label>
+            <div class="classe-input">
+              <i class="bi bi-globe2"></i>
+              <input id="eleve-nationalite" type="text" formControlName="nationalite" placeholder="Ex. Gabonaise" autocomplete="country-name"/>
+            </div>
+          </div>
+
+          <!-- PHOTO -->
+          <div class="classe-field">
+            <label for="eleve-photo">Photo de l'élève</label>
+            <div class="classe-input">
+              <i class="bi bi-image"></i>
+              <input id="eleve-photo" type="text" formControlName="photo" placeholder="URL ou chemin de la photo" autocomplete="off"/>
+            </div>
+            <small class="eleve-field-hint">Renseignez l'URL ou le chemin de la photo.</small>
+          </div>
+
+          <!-- STATUT -->
+          <div class="classe-active-box eleve-status-box">
+            <div class="classe-active-info">
+              <div class="classe-active-icon">
+                <i class="bi bi-person-check-fill"></i>
+              </div>
+              <div>
+                <span class="classe-active-title">Statut de l'élève</span>
+                <span class="classe-active-description">Situation administrative actuelle</span>
+              </div>
+            </div>
+
+            <div class="eleve-status-control">
+              <select id="eleve-statut" class="classe-status-select" formControlName="statut">
+                <option value="">Choisir un statut</option>
+                <option value="preinscrit">Préinscrit</option>
+                <option value="inscrit">Inscrit</option>
+                <option value="reinscrit">Réinscrit</option>
+                <option value="transfere">Transféré</option>
+                <option value="suspendu">Suspendu</option>
+                <option value="exclu">Exclu</option>
+                <option value="orienté">Orienté</option>
+                <option value="reorienté">Réorienté</option>
+              </select>
+            </div>
+          </div>
+          <!-- INFORMATION -->
+          <div class="classe-general-info">
+            <i class="bi bi-info-circle-fill"></i>
+            <span>Les champs marqués d'un astérisque sont obligatoires.Le statut indique la situation administrative de l'élève.
+            </span>
+          </div>
+        </div>
+      </section>
+      <section class="classe-panel classe-panel--school">
+        <div class="classe-section__heading">
+          <div class="classe-section__icon">
+            <i class="bi bi-telephone-fill"></i>
+          </div>
+          <div>
+            <h5>Coordonnées et informations complémentaires</h5>
+            <p>Contact, adresse et situation particulière</p>
+          </div>
+        </div>
+        <div class="eleve-complement-content">
+          <div class="eleve-subsection">
+            <div class="classe-school-grid">
+              <div class="classe-field">
+                <label for="eleve-telephone">Téléphone</label>
+                <div class="classe-input">
+                  <i class="bi bi-telephone"></i>
+                  <input id="eleve-telephone" type="tel" formControlName="telephone" placeholder="Ex. 077 00 00 00" autocomplete="tel"/>
+                </div>
+              </div>
+
+              <!-- EMAIL -->
+              <div class="classe-field">
+                <label for="eleve-email">Adresse email</label>
+                <div class="classe-input">
+                  <i class="bi bi-envelope"></i>
+                  <input id="eleve-email" type="email" formControlName="email" placeholder="Ex. eleve@email.com" autocomplete="email"/>
+                </div>
+              </div>
+            </div>
+            <!-- ADRESSE -->
+            <div class="classe-field eleve-address-field">
+              <label for="eleve-adresse">Adresse de résidence</label>
+              <div class="classe-textarea">
+                <i class="bi bi-geo-alt"></i>
+                <textarea id="eleve-adresse" formControlName="adresse" rows="3" placeholder="Quartier, ville, arrondissement...">
+                </textarea>
+              </div>
+            </div>
+          </div>
+
+          <!-- SITUATION PARTICULIÈRE -->
+          <div class="eleve-subsection eleve-subsection--situation">
+            <div class="eleve-subsection__heading">
+              <i class="bi bi-clipboard2-check-fill"></i>
+              <span>Situation particulière</span>
+            </div>
+            <div class="classe-field">
+              <label for="eleve-situation">Informations complémentaires<span>*</span></label>
+              <div class="classe-textarea">
+                <i class="bi bi-card-text"></i>
+                <textarea id="eleve-situation" formControlName="situation_particuliere" rows="5" placeholder="Précisez la situation particulière de l'élève..."></textarea>
+              </div>
+              <small class="eleve-field-hint">Mentionnez les informations particulières utiles au suivi administratif de l'élève.</small>
+            </div>
+          </div>
+
+          <!-- INFORMATION -->
+          <div class="classe-school-info">
+            <i class="bi bi-info-circle-fill"></i>
+            <span>Ces informations permettent de faciliter le suiviadministratif et la communication avec l'élève.</span>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <div class="classe-modal__footer">
+      <div class="classe-footer-info">
+        <i class="bi bi-mortarboard-fill"></i>
+        <span>Gestion des élèves</span>
+      </div>
+      <div class="classe-footer-actions">
+        <button type="button" class="btn-classe-cancel" (click)="close()">
+          <i class="bi bi-x-lg"></i>
+          <span>Annuler</span>
+        </button>
+        @if (isSubmit) {
+          <button type="button" class="btn-classe-submit" disabled>
+            <span class="classe-submit-spinner"></span>
+            <span>Chargement...</span>
+          </button>
+        } @else {
+          <button type="submit" class="btn-classe-submit">
+            <i class="bi" [ngClass]="isEdit ? 'bi-check2' : 'bi-plus-lg'"></i>
+            <span>{{ isEdit ? 'Mettre à jour' : 'Sauvegarder' }}</span>
+          </button>
+        }
+      </div>
+    </div>
+  </form>
+</div>

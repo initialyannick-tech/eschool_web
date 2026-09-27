@@ -1,0 +1,586 @@
+
+<div class="classe-modal eleve-show-modal">
+
+  <!-- =====================================================
+       HEADER
+  ====================================================== -->
+  <div class="classe-modal__header">
+
+    <div class="classe-modal__identity">
+
+      <div class="classe-modal__icon">
+        <i class="bi bi-mortarboard-fill"></i>
+      </div>
+
+      <div class="classe-modal__heading">
+
+        <div class="classe-modal__eyebrow">
+          Administration scolaire
+        </div>
+
+        <h4>
+          Profil de l'élève
+        </h4>
+
+        <p>
+          Consultez les informations personnelles et administratives
+          de l'élève.
+        </p>
+
+      </div>
+
+    </div>
+
+    <button
+      type="button"
+      class="classe-modal__close"
+      (click)="close()"
+      aria-label="Fermer">
+
+      <i class="bi bi-x-lg"></i>
+
+    </button>
+
+  </div>
+
+
+  <!-- =====================================================
+       BODY
+  ====================================================== -->
+  <div class="classe-modal__body">
+
+
+    <!-- =================================================
+         PROFIL PRINCIPAL
+    ================================================== -->
+    <div class="eleve-profile-card">
+
+      <div class="eleve-profile-card__left">
+
+        <!-- Photo -->
+        <div class="eleve-profile-card__avatar">
+
+          @if (items?.photo) {
+
+            <img
+              [src]="items.photo"
+              [alt]="(items?.nom || '') + ' ' + (items?.prenom || '')">
+
+          } @else {
+
+            <i class="bi bi-person-fill"></i>
+
+          }
+
+        </div>
+
+
+        <!-- Identité -->
+        <div class="eleve-profile-card__identity">
+
+          <span class="eleve-profile-card__label">
+            Élève
+          </span>
+
+          <h5>
+            {{ items?.nom || '' }}
+            {{ items?.prenom || '' }}
+          </h5>
+
+          <div class="eleve-profile-card__meta">
+
+            <span>
+              <i class="bi bi-card-text"></i>
+              {{ items?.matricule || 'Matricule non renseigné' }}
+            </span>
+
+            <span>
+              <i class="bi bi-gender-ambiguous"></i>
+              {{ items?.sexe || 'Sexe non renseigné' }}
+            </span>
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <!-- Statut -->
+      <div class="eleve-profile-card__status">
+
+        @if (items?.statut) {
+
+          <span
+            class="profile-status"
+            [class.profile-status--active]="items.statut === 'actif'"
+            [class.profile-status--inactive]="items.statut !== 'actif'">
+
+            <i
+              class="bi"
+              [class.bi-check-circle-fill]="items.statut === 'actif'"
+              [class.bi-info-circle-fill]="items.statut !== 'actif'">
+            </i>
+
+            {{ items.statut }}
+
+          </span>
+
+        } @else {
+
+          <span class="profile-status profile-status--inactive">
+            <i class="bi bi-question-circle"></i>
+            Statut non renseigné
+          </span>
+
+        }
+
+      </div>
+
+    </div>
+
+
+    <!-- =================================================
+         INFORMATIONS PERSONNELLES
+    ================================================== -->
+    <div class="form-section">
+
+      <div class="form-section__header">
+
+        <div class="form-section__icon">
+          <i class="bi bi-person-vcard-fill"></i>
+        </div>
+
+        <div>
+          <strong>Informations personnelles</strong>
+          <span>
+            Identité et état civil de l'élève
+          </span>
+        </div>
+
+      </div>
+
+
+      <div class="eleve-details-grid">
+
+
+        <!-- Nom -->
+        <div class="eleve-detail-card">
+
+          <div class="eleve-detail-card__icon">
+            <i class="bi bi-person"></i>
+          </div>
+
+          <div>
+            <span>Nom</span>
+            <strong>
+              {{ items?.nom || 'Non renseigné' }}
+            </strong>
+          </div>
+
+        </div>
+
+
+        <!-- Prénom -->
+        <div class="eleve-detail-card">
+
+          <div class="eleve-detail-card__icon">
+            <i class="bi bi-person"></i>
+          </div>
+
+          <div>
+            <span>Prénom</span>
+            <strong>
+              {{ items?.prenom || 'Non renseigné' }}
+            </strong>
+          </div>
+
+        </div>
+
+
+        <!-- Matricule -->
+        <div class="eleve-detail-card">
+
+          <div class="eleve-detail-card__icon">
+            <i class="bi bi-card-text"></i>
+          </div>
+
+          <div>
+            <span>Matricule</span>
+            <strong class="highlight">
+              {{ items?.matricule || 'Non renseigné' }}
+            </strong>
+          </div>
+
+        </div>
+
+
+        <!-- Sexe -->
+        <div class="eleve-detail-card">
+
+          <div class="eleve-detail-card__icon">
+            <i class="bi bi-gender-ambiguous"></i>
+          </div>
+
+          <div>
+            <span>Sexe</span>
+            <strong>
+              {{ items?.sexe || 'Non renseigné' }}
+            </strong>
+          </div>
+
+        </div>
+
+
+        <!-- Date naissance -->
+        <div class="eleve-detail-card">
+
+          <div class="eleve-detail-card__icon">
+            <i class="bi bi-calendar3"></i>
+          </div>
+
+          <div>
+            <span>Date de naissance</span>
+
+            <strong>
+              @if (items?.date_naissance) {
+                {{ items.date_naissance | date:'dd/MM/yyyy' }}
+              } @else {
+                Non renseignée
+              }
+            </strong>
+
+          </div>
+
+        </div>
+
+
+        <!-- Lieu naissance -->
+        <div class="eleve-detail-card">
+
+          <div class="eleve-detail-card__icon">
+            <i class="bi bi-geo-alt"></i>
+          </div>
+
+          <div>
+            <span>Lieu de naissance</span>
+            <strong>
+              {{ items?.lieu_naissance || 'Non renseigné' }}
+            </strong>
+          </div>
+
+        </div>
+
+
+        <!-- Nationalité -->
+        <div class="eleve-detail-card">
+
+          <div class="eleve-detail-card__icon">
+            <i class="bi bi-globe2"></i>
+          </div>
+
+          <div>
+            <span>Nationalité</span>
+            <strong>
+              {{ items?.nationalite || 'Non renseignée' }}
+            </strong>
+          </div>
+
+        </div>
+
+
+        <!-- Statut -->
+        <div class="eleve-detail-card">
+
+          <div class="eleve-detail-card__icon">
+            <i class="bi bi-check-circle"></i>
+          </div>
+
+          <div>
+            <span>Statut</span>
+            <strong>
+              {{ items?.statut || 'Non renseigné' }}
+            </strong>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- =================================================
+         COORDONNÉES
+    ================================================== -->
+    <div class="form-section">
+
+      <div class="form-section__header">
+
+        <div class="form-section__icon">
+          <i class="bi bi-telephone-fill"></i>
+        </div>
+
+        <div>
+          <strong>Coordonnées</strong>
+          <span>
+            Informations de contact et adresse
+          </span>
+        </div>
+
+      </div>
+
+
+      <div class="contact-grid">
+
+
+        <!-- Téléphone -->
+        <div class="contact-card">
+
+          <div class="contact-card__icon">
+            <i class="bi bi-telephone-fill"></i>
+          </div>
+
+          <div class="contact-card__content">
+
+            <span>
+              Téléphone
+            </span>
+
+            <strong>
+              {{ items?.telephone || 'Non renseigné' }}
+            </strong>
+
+          </div>
+
+        </div>
+
+
+        <!-- Email -->
+        <div class="contact-card">
+
+          <div class="contact-card__icon">
+            <i class="bi bi-envelope-fill"></i>
+          </div>
+
+          <div class="contact-card__content">
+
+            <span>
+              Email
+            </span>
+
+            <strong>
+              {{ items?.email || 'Non renseigné' }}
+            </strong>
+
+          </div>
+
+        </div>
+
+
+        <!-- Adresse -->
+        <div class="contact-card contact-card--full">
+
+          <div class="contact-card__icon">
+            <i class="bi bi-house-door-fill"></i>
+          </div>
+
+          <div class="contact-card__content">
+
+            <span>
+              Adresse
+            </span>
+
+            <strong>
+              {{ items?.adresse || 'Non renseignée' }}
+            </strong>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- =================================================
+         PARENT / TUTEUR
+    ================================================== -->
+    <div class="form-section">
+
+      <div class="form-section__header">
+
+        <div class="form-section__icon">
+          <i class="bi bi-person-heart"></i>
+        </div>
+
+        <div>
+          <strong>Parent / Tuteur</strong>
+          <span>
+            Responsable légal associé à l'élève
+          </span>
+        </div>
+
+      </div>
+
+
+      @if (items?.parent) {
+
+        <div class="parent-profile">
+
+          <div class="parent-profile__avatar">
+            <i class="bi bi-person-fill"></i>
+          </div>
+
+
+          <div class="parent-profile__identity">
+
+            <span>
+              Responsable légal
+            </span>
+
+            <strong>
+              {{ items.parent.nom }}
+              {{ items.parent.prenom }}
+            </strong>
+
+          </div>
+
+
+          <div class="parent-profile__contact">
+
+            @if (items.parent.telephone) {
+
+              <span>
+                <i class="bi bi-telephone"></i>
+                {{ items.parent.telephone }}
+              </span>
+
+            }
+
+            @if (items.parent.email) {
+
+              <span>
+                <i class="bi bi-envelope"></i>
+                {{ items.parent.email }}
+              </span>
+
+            }
+
+          </div>
+
+
+          <div class="parent-profile__badge">
+
+            <i class="bi bi-person-check-fill"></i>
+            Responsable
+
+          </div>
+
+        </div>
+
+      } @else {
+
+        <div class="empty-parent">
+
+          <div class="empty-parent__icon">
+            <i class="bi bi-person-x"></i>
+          </div>
+
+          <div>
+            <strong>Aucun parent associé</strong>
+
+            <span>
+              Aucun parent ou tuteur n'est actuellement associé
+              à cet élève.
+            </span>
+          </div>
+
+        </div>
+
+      }
+
+    </div>
+
+
+    <!-- =================================================
+         SITUATION PARTICULIÈRE
+    ================================================== -->
+    <div class="form-section">
+
+      <div class="form-section__header">
+
+        <div class="form-section__icon">
+          <i class="bi bi-info-circle-fill"></i>
+        </div>
+
+        <div>
+          <strong>Situation particulière</strong>
+          <span>
+            Informations complémentaires concernant l'élève
+          </span>
+        </div>
+
+      </div>
+
+
+      @if (items?.situation_particuliere) {
+
+        <div class="situation-card">
+
+          <div class="situation-card__icon">
+            <i class="bi bi-info-circle"></i>
+          </div>
+
+          <div>
+            <strong>
+              Situation particulière
+            </strong>
+
+            <p>
+              {{ items.situation_particuliere }}
+            </p>
+          </div>
+
+        </div>
+
+      } @else {
+
+        <div class="empty-situation">
+
+          <i class="bi bi-check-circle-fill"></i>
+
+          <span>
+            Aucune situation particulière renseignée.
+          </span>
+
+        </div>
+
+      }
+
+    </div>
+
+
+  </div>
+
+
+  <!-- =====================================================
+       FOOTER
+  ====================================================== -->
+  <div class="classe-modal__footer">
+
+    <button
+      type="button"
+      class="btn-modal-cancel"
+      (click)="close()">
+
+      <i class="bi bi-x-lg"></i>
+      Fermer
+
+    </button>
+
+  </div>
+
+</div>
+
