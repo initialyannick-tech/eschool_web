@@ -250,7 +250,7 @@
 
 
       <div class="eleve-info-card__body">
-        @if (dossier().parent) {
+        @if (dossier().parents) {
           <div class="parent-profile">
             <div class="parent-profile__avatar">
               <i class="bi bi-person-fill"></i>
@@ -258,12 +258,12 @@
             <div class="parent-profile__identity">
               <span>Responsable de l'élève</span>
               <strong>
-                {{ dossier().parent?.nom }}
-                {{ dossier().parent?.prenom }}
+                {{ dossier().parents?.nom }}
+                {{ dossier().parents?.prenom }}
               </strong>
-              @if (dossier().parent?.relation) {
+              @if (dossier().parents?.relation) {
                 <small>
-                  {{ dossier().parent?.relation }}
+                  {{ dossier().parents?.relation }}
                 </small>
               }
             </div>
@@ -271,38 +271,38 @@
 
 
           <div class="parent-contact">
-            @if (dossier().parent?.telephone) {
+            @if (dossier().parents?.telephone) {
               <div class="parent-contact__item">
                 <i class="bi bi-telephone"></i>
                 <div>
                   <span>Téléphone</span>
                   <strong>
-                    {{ dossier().parent?.telephone }}
+                    {{ dossier().parents?.telephone }}
                   </strong>
                 </div>
               </div>
             }
 
-            @if (dossier().parent?.email) {
+            @if (dossier().parents?.email) {
               <div class="parent-contact__item">
                 <i class="bi bi-envelope"></i>
                 <div>
                   <span>Email</span>
                   <strong>
-                    {{ dossier().parent?.email }}
+                    {{ dossier().parents?.email }}
                   </strong>
                 </div>
               </div>
             }
 
 
-            @if (dossier().parent?.adresse) {
+            @if (dossier().parents?.adresse) {
               <div class="parent-contact__item">
                 <i class="bi bi-geo-alt"></i>
                 <div>
                   <span>Adresse</span>
                   <strong>
-                    {{ dossier().parent?.adresse }}
+                    {{ dossier().parents?.adresse }}
                   </strong>
                 </div>
               </div>

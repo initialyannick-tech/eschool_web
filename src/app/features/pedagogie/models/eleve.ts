@@ -15,7 +15,7 @@ export interface Eleve {
   photo?: string;
   situation_particuliere?: string;
   statut?: string;
-  parent?: Parent
+  parents?: Parent
 }
 
 export class Covert {
