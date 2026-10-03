@@ -238,9 +238,18 @@
           <i class="bi bi-building-add"></i>
           <span>Gestion Classes</span>
         </a>
-        <a class="sidebar-nav__link" *ngxPermissionsOnly="['user.management']"  routerLink="/admin/users" routerLinkActive="sidebar-nav__link--active">
+        <a class="sidebar-nav__link" *ngxPermissionsOnly="['matiere.management']" routerLink="/pedagogie/list-matiere" routerLinkActive="sidebar-nav__link--active">
+          <i class="bi bi-journal-bookmark-fill"></i>
+          <span>Gestion Matières</span>
+        </a>
+        <a class="sidebar-nav__link" *ngxPermissionsOnly="['user.management']" routerLink="/admin/users" routerLinkActive="sidebar-nav__link--active">
           <i class="bi bi-people-fill"></i>
           <span>Gestion Users</span>
+        </a>
+
+        <a class="sidebar-nav__link" *ngxPermissionsOnly="['user.management']" routerLink="/admin/enseignants" routerLinkActive="sidebar-nav__link--active">
+          <i class="bi bi-person-workspace"></i>
+          <span>Gestion Enseignants</span>
         </a>
 
         <a class="sidebar-nav__link" *ngxPermissionsOnly="['role.management']" routerLink="/admin/roles" routerLinkActive="sidebar-nav__link--active">

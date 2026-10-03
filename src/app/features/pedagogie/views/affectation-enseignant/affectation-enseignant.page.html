@@ -1,0 +1,49 @@
+<app-page-header [backBtn]="true" [titre]="'Affectations enseignants - matières'"></app-page-header>
+
+<div class="affectation-card">
+  <div class="affectation-header">
+    <div>
+      <h4>Assignation des matières</h4>
+      <span>Choisissez un enseignant puis sélectionnez les matières qu’il dispense</span>
+    </div>
+  </div>
+
+  <div class="affectation-body">
+    <div class="form-group mb-4">
+      <label class="form-label">Enseignant</label>
+      <select class="form-select" [(ngModel)]="selectedTeacherId" (change)="onTeacherChange()">
+        <option [ngValue]="null" disabled>Choisir un enseignant</option>
+        @for (teacher of teachers; track teacher.id) {
+          <option [ngValue]="teacher.id">
+            {{ teacher.nom }} {{ teacher.prenom }}
+          </option>
+        }
+      </select>
+    </div>
+
+    @if (selectedTeacherId) {
+      <div class="subjects-grid">
+        @for (matiere of matieres; track matiere.id) {
+          <label class="subject-item">
+            <input
+              type="checkbox"
+              [checked]="selectedMatiereIds.includes(matiere.id)"
+              (change)="toggleMatiere(matiere.id, $any($event.target).checked)"
+            />
+            <span>{{ matiere.libelle }}</span>
+          </label>
+        }
+      </div>
+
+      <div class="actions mt-4">
+        <button type="button" class="btn btn-primary" (click)="saveAffectation()">
+          Enregistrer l’affectation
+        </button>
+      </div>
+
+      @if (savedMessage) {
+        <div class="alert alert-success mt-3">{{ savedMessage }}</div>
+      }
+    }
+  </div>
+</div>

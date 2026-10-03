@@ -35,7 +35,11 @@ export class AuthentificationPage {
         if (data.success) {
           this.cookieService.setCookie('token', data.data.token, 1);
           this.cookieService.setCookie('userConnected', data.data.user, 1);
-          this.cookieService.setCookie('permissions', data.data.permissions, 1);
+
+          if (typeof window !== 'undefined') {
+            sessionStorage.setItem('permissions', JSON.stringify(data.data.permissions ?? []));
+          }
+
           window.location.href = '/dashboard';
         } else {
           this.isSubmit = false;

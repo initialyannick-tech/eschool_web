@@ -1,0 +1,138 @@
+.users-toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  margin: 1.5rem 0;
+}
+
+.users-toolbar__info {
+  display: flex;
+  flex-direction: column;
+}
+
+.users-toolbar__title {
+  font-size: 1.3rem;
+  font-weight: 700;
+}
+
+.users-toolbar__subtitle {
+  color: #6c757d;
+}
+
+.users-toolbar__actions {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.users-search {
+  display: flex;
+  align-items: center;
+  background: #f5f7fb;
+  border: 1px solid #dfe5ee;
+  border-radius: 10px;
+  padding: 0.7rem 0.9rem;
+}
+
+.users-search__input {
+  border: 0;
+  background: transparent;
+  outline: none;
+  min-width: 220px;
+}
+
+.btn-add-user {
+  background: #0d6efd;
+  border: none;
+  border-radius: 10px;
+  color: white;
+  padding: 0.7rem 1rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.users-card {
+  background: #fff;
+  border: 1px solid #eceff4;
+  border-radius: 18px;
+  overflow: hidden;
+}
+
+.users-card__header {
+  padding: 1.25rem 1.5rem;
+  border-bottom: 1px solid #eef1f5;
+}
+
+.users-table-wrapper {
+  overflow-x: auto;
+  padding: 1rem;
+}
+
+.users-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.users-table th,
+.users-table td {
+  padding: 0.9rem 0.75rem;
+  border-bottom: 1px solid #edf1f5;
+  text-align: left;
+  vertical-align: middle;
+}
+
+.role-badge {
+  display: inline-flex;
+  align-items: center;
+  border-radius: 999px;
+  background: #ebf3ff;
+  color: #1a5ec8;
+  padding: 0.3rem 0.7rem;
+  font-weight: 600;
+}
+
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  border-radius: 999px;
+  padding: 0.35rem 0.7rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.status-badge--active {
+  background: #e8f8ee;
+  color: #1b8e5a;
+}
+
+.status-badge--inactive {
+  background: #f5f5f5;
+  color: #6c757d;
+}
+
+.loading-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.8rem;
+  color: #6c757d;
+  padding: 1rem;
+}
+
+.loading-spinner {
+  width: 16px;
+  height: 16px;
+  border: 2px solid #dfe5ee;
+  border-top-color: #0d6efd;
+  border-radius: 50%;
+  display: inline-block;
+  animation: spin 0.7s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}

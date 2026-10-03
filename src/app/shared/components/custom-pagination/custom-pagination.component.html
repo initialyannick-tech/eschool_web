@@ -1,6 +1,6 @@
 <nav class="eschool-pagination" aria-label="Navigation des pages">
   <ul class="pagination">
-    @for (link of links; track link.url) {
+    @for (link of links; track link.url + '-' + link.label + $index) {
       @if (link.label == '&laquo; Previous') {
         <li class="page-item pagination-navigation">
           <a

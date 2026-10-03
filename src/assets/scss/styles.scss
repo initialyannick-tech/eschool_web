@@ -9,11 +9,13 @@
    IMPORTS
 ========================================================== */
 
-@import "bootstrap/dist/css/bootstrap.min.css";
-@import "bootstrap-icons/font/bootstrap-icons.css";
-@import "ngx-toastr/toastr";
-@import "@ng-select/ng-select/themes/default.theme.css";
-@import "bootstrap/scss/bootstrap";
+@import url("bootstrap/dist/css/bootstrap.min.css");
+@import url("bootstrap-icons/font/bootstrap-icons.css");
+@import url("ngx-toastr/toastr");
+@import url("@ng-select/ng-select/themes/default.theme.css");
+
+/* Bootstrap Sass is intentionally not imported here to avoid deprecation warnings from Dart Sass.
+   The compiled Bootstrap CSS above is already loaded and provides the styling used by the app. */
 
 
 /* ==========================================================

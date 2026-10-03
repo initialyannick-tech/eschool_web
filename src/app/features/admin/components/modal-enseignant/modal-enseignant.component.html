@@ -1,0 +1,98 @@
+<div class="teacher-modal">
+  <div class="teacher-modal__header">
+    <div class="teacher-modal__identity">
+      <div class="teacher-modal__icon">
+        <i class="bi bi-person-workspace"></i>
+      </div>
+
+      <div class="teacher-modal__heading">
+        <div class="teacher-modal__eyebrow">Administration</div>
+        <h4>{{ isEdit ? 'Modifier un enseignant' : 'Nouvel enseignant' }}</h4>
+        <p>
+          {{ isEdit
+            ? 'Mettez à jour les informations de cet enseignant.'
+            : 'Créez un enseignant et attribuez-lui ses informations de base.'
+          }}
+        </p>
+      </div>
+    </div>
+
+    <button type="button" class="teacher-modal__close" (click)="close()" aria-label="Fermer">
+      <i class="bi bi-x-lg"></i>
+    </button>
+  </div>
+
+  <form [formGroup]="enseignantForm" (ngSubmit)="submit()" class="teacher-modal__form">
+    <div class="teacher-modal__body">
+      <div class="form-grid">
+        <div class="form-field">
+          <label for="nom">Nom <span>*</span></label>
+          <div class="form-input">
+            <i class="bi bi-person"></i>
+            <input id="nom" type="text" formControlName="nom" placeholder="Ex. DIALLO" autocomplete="family-name" />
+          </div>
+        </div>
+
+        <div class="form-field">
+          <label for="prenom">Prénom <span>*</span></label>
+          <div class="form-input">
+            <i class="bi bi-person"></i>
+            <input id="prenom" type="text" formControlName="prenom" placeholder="Ex. Mamadou" autocomplete="given-name" />
+          </div>
+        </div>
+
+        <div class="form-field form-field--full">
+          <label for="email">Email <span>*</span></label>
+          <div class="form-input">
+            <i class="bi bi-envelope"></i>
+            <input id="email" type="email" formControlName="email" placeholder="enseignant@ecole.com" autocomplete="email" />
+          </div>
+        </div>
+
+        @if (isEdit) {
+          <div class="form-field">
+            <label for="status">Statut</label>
+            <div class="form-select-wrapper">
+              <i class="bi bi-toggle-on"></i>
+              <select id="status" class="form-select-custom" formControlName="status">
+                <option value="active">Actif</option>
+                <option value="inactive">Inactif</option>
+              </select>
+            </div>
+          </div>
+        }
+      </div>
+
+      <div class="teacher-modal__assignment" style="margin-top: 1.5rem; border-top: 1px solid rgba(0,0,0,0.08); padding-top: 1.25rem;">
+        <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.75rem;">
+          <h5 style="margin: 0; font-size: 1rem;">Matières enseignées</h5>
+          <span style="font-size: 0.8rem; color: #6c757d;">{{ selectedMatiereIds.length }} sélectionnée(s)</span>
+        </div>
+
+        @if (matieres.length === 0) {
+          <div style="padding: 0.75rem 0; color: #6c757d;">Aucune matière disponible pour le moment.</div>
+        } @else {
+          <div style="display: flex; flex-wrap: wrap; gap: 0.75rem;">
+            @for (matiere of matieres; track matiere.id) {
+              <label style="display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.5rem 0.75rem; border: 1px solid #dfe3e8; border-radius: 999px; background: #f8f9fa; cursor: pointer;">
+                <input
+                  type="checkbox"
+                  [checked]="selectedMatiereIds.includes(matiere.id)"
+                  (change)="toggleMatiere(matiere.id, $any($event.target).checked)"
+                />
+                <span>{{ matiere.libelle }}</span>
+              </label>
+            }
+          </div>
+        }
+      </div>
+    </div>
+
+    <div class="teacher-modal__footer">
+      <button type="button" class="btn btn-outline-secondary" (click)="close()">Annuler</button>
+      <button type="submit" class="btn btn-primary" [disabled]="isSubmit">
+        {{ isSubmit ? 'Enregistrement...' : (isEdit ? 'Enregistrer' : 'Créer') }}
+      </button>
+    </div>
+  </form>
+</div>

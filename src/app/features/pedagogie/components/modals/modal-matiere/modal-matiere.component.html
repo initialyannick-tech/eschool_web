@@ -1,0 +1,41 @@
+<div class="modal-header">
+  <h4 class="modal-title">{{ isEdit ? 'Modifier la matière' : 'Ajouter une matière' }}</h4>
+  <button type="button" class="btn-close" aria-label="Close" (click)="close()"></button>
+</div>
+
+<div class="modal-body">
+  <form [formGroup]="matiereForm" (ngSubmit)="submit()">
+    <div class="row g-3">
+      <div class="col-md-6">
+        <label class="form-label">Code</label>
+        <input type="text" class="form-control" formControlName="code" placeholder="Ex : MATH" />
+      </div>
+
+      <div class="col-md-6">
+        <label class="form-label">Libellé</label>
+        <input type="text" class="form-control" formControlName="libelle" placeholder="Ex : Mathématiques" />
+      </div>
+
+      <div class="col-12">
+        <label class="form-label">Description</label>
+        <textarea class="form-control" rows="3" formControlName="description" placeholder="Description de la matière"></textarea>
+      </div>
+
+      <div class="col-12">
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" formControlName="actif" id="matiereActif" />
+          <label class="form-check-label" for="matiereActif">
+            Matière active
+          </label>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
+
+<div class="modal-footer">
+  <button type="button" class="btn btn-outline-secondary" (click)="close()">Annuler</button>
+  <button type="button" class="btn btn-primary" (click)="submit()">
+    {{ isEdit ? 'Enregistrer' : 'Créer' }}
+  </button>
+</div>

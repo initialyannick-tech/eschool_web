@@ -1,0 +1,75 @@
+<app-page-header [backBtn]="true" [titre]="'Liste des matières'"></app-page-header>
+
+<div class="users-toolbar">
+  <div class="users-toolbar__info">
+    <div class="users-toolbar__title">Matières</div>
+    <div class="users-toolbar__subtitle">Gérez les matières enseignées dans l'établissement</div>
+  </div>
+
+  <div class="users-toolbar__actions">
+    <div class="users-search">
+      <i class="bi bi-search"></i>
+      <input type="text" [(ngModel)]="searchText" (keyup)="searchAction()" class="users-search__input" placeholder="Rechercher une matière..." />
+    </div>
+
+    <button type="button" class="btn-add-user" (click)="add()">
+      <i class="bi bi-plus-lg"></i>
+      <span>Ajouter une matière</span>
+    </button>
+  </div>
+</div>
+
+<div class="users-card">
+  <div class="users-card__header">
+    <div>
+      <h4>Liste des matières</h4>
+      <span>Les matières disponibles pour les enseignants</span>
+    </div>
+  </div>
+
+  <div class="users-table-wrapper">
+    <table class="users-table">
+      <thead>
+      <tr>
+        <th>Code</th>
+        <th>Libellé</th>
+        <th>Description</th>
+        <th>Statut</th>
+        <th>Enseignants</th>
+        <th class="users-table__actions">Actions</th>
+      </tr>
+      </thead>
+
+      <tbody>
+      @if (isLoad) {
+        <tr>
+          <td colspan="6" class="users-table__loading">
+            <div class="loading-content">
+              <span class="loading-spinner"></span>
+              <span>Chargement des matières...</span>
+            </div>
+          </td>
+        </tr>
+      } @else {
+        @for (matiere of matieres; track matiere.id) {
+          <tr>
+            <td><span class="role-badge">{{ matiere.code }}</span></td>
+            <td>{{ matiere.libelle }}</td>
+            <td>{{ matiere.description || '—' }}</td>
+            <td>
+              <span class="status-badge" [class.status-badge--active]="matiere.actif" [class.status-badge--inactive]="!matiere.actif">
+                {{ matiere.actif ? 'Active' : 'Inactive' }}
+              </span>
+            </td>
+            <td>{{ matiere.enseignants?.length ?? 0 }}</td>
+            <td class="users-table__actions-cell">
+              <button class="btn btn-sm btn-outline-primary me-2" (click)="edit(matiere)">Modifier</button>
+              <button class="btn btn-sm btn-outline-danger" (click)="delete(matiere)">Supprimer</button>
+            </td>
+          </tr>
+        }
+      }
+      </tbody>
+    </table>
+  </div>
+</div>

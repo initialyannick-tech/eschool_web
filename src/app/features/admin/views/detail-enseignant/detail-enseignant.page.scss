@@ -1,0 +1,460 @@
+/* =========================================================
+   PROFIL ENSEIGNANT
+   ========================================================= */
+
+.enseignant-profile-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  margin-top: 18px;
+  padding: 20px 22px;
+  background: #ffffff;
+  border: 1px solid #e7ebf1;
+  border-radius: 14px;
+  box-shadow: 0 3px 14px rgba(25, 35, 55, 0.04);
+}
+
+.enseignant-profile-card__main {
+  display: flex;
+  align-items: center;
+  gap: 17px;
+  min-width: 0;
+}
+
+/* =========================================================
+   AVATAR
+   ========================================================= */
+
+.enseignant-avatar {
+  width: 68px;
+  height: 68px;
+  min-width: 68px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 14px;
+  background: #eef3ff;
+  border: 1px solid #dfe7ff;
+
+  color: #315efb;
+  font-size: 28px;
+}
+
+/* =========================================================
+   IDENTITÉ
+   ========================================================= */
+
+.enseignant-profile-card__identity {
+  min-width: 0;
+}
+
+.enseignant-profile-card__eyebrow {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+
+  margin-bottom: 5px;
+
+  color: #858e9e;
+  font-size: 10px;
+  font-weight: 700;
+
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+}
+
+.enseignant-profile-card__eyebrow > span:first-child {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.enseignant-profile-card__eyebrow i {
+  color: #315efb;
+}
+
+.enseignant-profile-card__identity h2 {
+  margin: 0;
+
+  color: #222b3a;
+  font-size: 23px;
+  font-weight: 700;
+  line-height: 1.3;
+}
+
+.enseignant-profile-card__meta {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 7px 18px;
+
+  margin-top: 8px;
+
+  color: #727d8e;
+  font-size: 12px;
+}
+
+.enseignant-profile-card__meta span {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.enseignant-profile-card__meta i {
+  color: #8993a3;
+}
+
+/* =========================================================
+   STATUT
+   ========================================================= */
+
+.enseignant-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+
+  padding: 4px 9px;
+
+  border-radius: 20px;
+
+  background: #edf8f2;
+  color: #218653;
+
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+.enseignant-status i {
+  color: #2db673 !important;
+  font-size: 6px;
+}
+
+/* =========================================================
+   BADGE / ACTIONS
+   ========================================================= */
+
+.enseignant-profile-card__actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.enseignant-badge {
+  min-width: 135px;
+
+  padding: 9px 12px;
+
+  border: 1px solid #e9edf2;
+  border-radius: 9px;
+
+  background: #f8f9fb;
+}
+
+.enseignant-badge span {
+  display: block;
+
+  margin-bottom: 2px;
+
+  color: #929baa;
+  font-size: 8px;
+  font-weight: 700;
+
+  letter-spacing: 0.09em;
+}
+
+.enseignant-badge strong {
+  display: block;
+
+  color: #315efb;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+/* =========================================================
+   RÉSUMÉ
+   ========================================================= */
+
+.enseignant-summary-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+  margin-top: 18px;
+}
+
+.enseignant-summary-card {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px 18px;
+  background: #ffffff;
+  border: 1px solid #e7ebf1;
+  border-radius: 14px;
+  box-shadow: 0 3px 14px rgba(25, 35, 55, 0.04);
+}
+
+.enseignant-summary-card__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  font-size: 20px;
+}
+
+.teacher-blue {
+  background: #eef3ff;
+  color: #315efb;
+}
+
+.teacher-green {
+  background: #edf8f2;
+  color: #218653;
+}
+
+.teacher-orange {
+  background: #fff7ed;
+  color: #f59e0b;
+}
+
+.enseignant-summary-card__content {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.enseignant-summary-card__content span {
+  color: #8a93a3;
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.enseignant-summary-card__content strong {
+  color: #1f2a3c;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+/* =========================================================
+   FICHE INFOS
+   ========================================================= */
+
+.enseignant-info-block,
+.enseignant-matieres {
+  margin-top: 18px;
+  padding: 0 17px;
+
+  background: #ffffff;
+
+  border: 1px solid #e7ebf1;
+  border-radius: 14px;
+
+  box-shadow: 0 2px 10px rgba(25, 35, 55, 0.025);
+}
+
+.enseignant-info-block__header,
+.enseignant-matieres__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 15px;
+
+  padding: 16px 5px 13px;
+}
+
+.enseignant-info-block__eyebrow,
+.enseignant-matieres__eyebrow {
+  display: block;
+
+  margin-bottom: 3px;
+
+  color: #9099a8;
+
+  font-size: 9px;
+  font-weight: 700;
+
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.enseignant-info-block__header h5,
+.enseignant-matieres__header h5 {
+  margin: 0;
+
+  color: #273142;
+
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.enseignant-info-block__count {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+
+  padding: 7px 10px;
+
+  border-radius: 7px;
+
+  background: #f6f8fa;
+  color: #697486;
+
+  font-size: 10px;
+  font-weight: 600;
+}
+
+.enseignant-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+  padding: 0 5px 18px;
+}
+
+.enseignant-card {
+  padding: 16px 14px;
+  background: #f8f9fb;
+  border: 1px solid #edf0f5;
+  border-radius: 12px;
+}
+
+.enseignant-card__label {
+  margin-bottom: 6px;
+  color: #8a93a3;
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.09em;
+}
+
+.enseignant-card__value {
+  color: #202b3b;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+/* =========================================================
+   MATIÈRES
+   ========================================================= */
+
+.matiere-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 12px;
+  padding: 0 5px 18px;
+}
+
+.matiere-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 16px;
+  background: #f8f9fb;
+  border: 1px solid #edf0f5;
+  border-radius: 12px;
+}
+
+.matiere-item__icon {
+  width: 42px;
+  height: 42px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  background: #eef3ff;
+  color: #315efb;
+  font-size: 18px;
+}
+
+.matiere-item__content {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.matiere-item__content strong {
+  color: #1f2a3c;
+  font-size: 14px;
+}
+
+.matiere-item__content span {
+  color: #738197;
+  font-size: 11px;
+}
+
+.enseignant-empty-state {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 18px 5px 20px;
+  color: #64748b;
+  font-size: 14px;
+}
+
+.enseignant-empty-state i {
+  color: #315efb;
+}
+
+.enseignant-detail-loading {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-top: 18px;
+  padding: 22px 18px;
+  background: #ffffff;
+  border: 1px solid #e7ebf1;
+  border-radius: 14px;
+  box-shadow: 0 3px 14px rgba(25, 35, 55, 0.04);
+}
+
+.enseignant-detail-loading__icon {
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 12px;
+  background: #eef3ff;
+  color: #315efb;
+  font-size: 20px;
+  animation: spin 1s linear infinite;
+}
+
+.enseignant-detail-loading h6 {
+  margin: 0 0 3px;
+  color: #222b3a;
+  font-size: 16px;
+}
+
+.enseignant-detail-loading span {
+  color: #6b7280;
+  font-size: 13px;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (max-width: 768px) {
+  .enseignant-profile-card {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .enseignant-summary-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .enseignant-grid {
+    grid-template-columns: 1fr;
+  }
+}

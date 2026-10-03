@@ -1,0 +1,253 @@
+.teachers-toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  margin: 1.5rem 0;
+  padding: 1rem 1.25rem;
+  background: #fff;
+  border: 1px solid rgba(15, 23, 42, 0.08);
+  border-radius: 16px;
+  box-shadow: 0 12px 30px rgba(15, 23, 42, 0.04);
+}
+
+.teachers-toolbar__info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.teachers-toolbar__title {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #111827;
+}
+
+.teachers-toolbar__subtitle {
+  color: #6b7280;
+  font-size: 0.92rem;
+}
+
+.teachers-toolbar__actions {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.teachers-search {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  min-width: 260px;
+  padding: 0.7rem 0.9rem;
+  background: #f3f4f6;
+  border-radius: 12px;
+  border: 1px solid #e5e7eb;
+}
+
+.teachers-search i {
+  color: #9ca3af;
+}
+
+.teachers-search__input {
+  border: none;
+  background: transparent;
+  width: 100%;
+  outline: none;
+  color: #111827;
+}
+
+.btn-add-teacher {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  border: none;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #2563eb, #1d4ed8);
+  color: #fff;
+  padding: 0.8rem 1.15rem;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 8px 20px rgba(37, 99, 235, 0.25);
+}
+
+.teachers-card {
+  background: #fff;
+  border: 1px solid rgba(15, 23, 42, 0.08);
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 12px 30px rgba(15, 23, 42, 0.04);
+}
+
+.teachers-card__header {
+  padding: 1rem 1.25rem;
+  border-bottom: 1px solid #eef2f7;
+}
+
+.teachers-card__header h4 {
+  margin: 0;
+  font-size: 1.1rem;
+  color: #111827;
+}
+
+.teachers-card__header span {
+  color: #6b7280;
+  font-size: 0.9rem;
+}
+
+.teachers-table-wrapper {
+  overflow-x: auto;
+}
+
+.teachers-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.teachers-table th,
+.teachers-table td {
+  padding: 0.9rem 1rem;
+  border-bottom: 1px solid #eef2f7;
+  text-align: left;
+  vertical-align: middle;
+}
+
+.teachers-table th {
+  background: #f8fafc;
+  color: #475569;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.teacher-cell {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.teacher-avatar {
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #dbeafe, #bfdbfe);
+  color: #1d4ed8;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+}
+
+.teacher-name {
+  font-weight: 600;
+  color: #111827;
+}
+
+.teacher-id {
+  color: #6b7280;
+  font-size: 0.78rem;
+}
+
+.teacher-email,
+.speciality-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.35rem 0.75rem;
+  border-radius: 999px;
+  font-size: 0.82rem;
+  background: #eff6ff;
+  color: #1d4ed8;
+}
+
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.35rem 0.7rem;
+  border-radius: 999px;
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.status-badge--active {
+  background: rgba(16, 185, 129, 0.12);
+  color: #127a5d;
+}
+
+.status-badge--inactive {
+  background: rgba(239, 68, 68, 0.1);
+  color: #b91c1c;
+}
+
+.status-dot {
+  width: 0.55rem;
+  height: 0.55rem;
+  border-radius: 50%;
+  background: currentColor;
+  display: inline-block;
+}
+
+.teachers-table__actions {
+  width: 130px;
+}
+
+.btn-teacher-action {
+  border: 1px solid #dbeafe;
+  background: #eff6ff;
+  color: #1d4ed8;
+  width: 2.2rem;
+  height: 2.2rem;
+  border-radius: 10px;
+  margin-right: 0.4rem;
+  cursor: pointer;
+}
+
+.btn-teacher-action--danger {
+  border-color: #fecaca;
+  background: #fef2f2;
+  color: #dc2626;
+}
+
+.teachers-table__loading {
+  text-align: center;
+  padding: 1.6rem;
+}
+
+.loading-content {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  color: #64748b;
+}
+
+.loading-spinner {
+  width: 1rem;
+  height: 1rem;
+  border-radius: 50%;
+  border: 2px solid rgba(59, 130, 246, 0.2);
+  border-top-color: #3b82f6;
+  display: inline-block;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (max-width: 768px) {
+  .teachers-toolbar {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .teachers-toolbar__actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .teachers-search {
+    min-width: 100%;
+  }
+}
