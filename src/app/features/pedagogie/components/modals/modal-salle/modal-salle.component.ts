@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output, inject } from '@angular/core';
+import { Component, EventEmitter, Input, Output, ViewEncapsulation, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
@@ -11,7 +11,8 @@ import { Salle } from '../../../models/salle';
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule],
   templateUrl: './modal-salle.component.html',
-  styleUrls: ['./modal-salle.component.scss']
+  styleUrls: ['./modal-salle.component.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 export class ModalSalleComponent {
   private apiService = inject(ApiService);
@@ -81,8 +82,8 @@ export class ModalSalleComponent {
     const current = this.salle || this.salleToEdit;
 
     const request = (current && current.id)
-      ? this.apiService.put(`/pedagogie/salles/${current.id}`, data)
-      : this.apiService.post('/pedagogie/salles', data);
+      ? this.apiService.put(`salles/${current.id}`, data)
+      : this.apiService.post('salles', data);
 
     request
       .then((res: any) => {

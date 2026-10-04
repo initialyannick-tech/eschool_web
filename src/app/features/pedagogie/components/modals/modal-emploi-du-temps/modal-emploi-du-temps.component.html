@@ -5,28 +5,27 @@
         <i class="bi bi-calendar-plus-fill"></i>
       </div>
       <div class="classe-modal__heading">
-        <div class="classe-modal__eyebrow">
-          Administration scolaire
-        </div>
+        <div class="classe-modal__eyebrow">Administration scolaire</div>
         <h4>{{ courseToEdit ? 'Modifier un cours' : 'Programmer un cours' }}</h4>
-
-        <p>{{ courseToEdit ? 'Modifiez les informations de ce créneau.' : 'Renseignez les informations pour programmer un nouveau cours.' }}</p>
+        <p>
+          {{ courseToEdit
+              ? 'Modifiez les informations de ce créneau.'
+              : 'Renseignez les informations pour programmer un nouveau cours.' }}
+        </p>
       </div>
     </div>
-
+    <!-- FERMER -->
     <button type="button" class="classe-modal__close" (click)="close()" aria-label="Fermer">
       <i class="bi bi-x-lg"></i>
     </button>
   </div>
 
-  <!-- ERREURS BACKEND -->
   @if (backendErrors.length > 0) {
     <div class="backend-errors">
       <div class="backend-errors__header">
         <i class="bi bi-exclamation-triangle-fill"></i>
         <span>Impossible d'enregistrer ce cours</span>
       </div>
-
       <div class="backend-errors__list">
         @for (error of backendErrors; track $index) {
           <div class="backend-error-badge">
@@ -38,9 +37,25 @@
     </div>
   }
 
-  <!-- FORMULAIRE -->
+  @if (dependencyErrors.length > 0) {
+    <div class="backend-errors">
+      <div class="backend-errors__header">
+        <i class="bi bi-exclamation-triangle-fill"></i>
+        <span>Certains choix ne sont pas disponibles</span>
+      </div>
+      <div class="backend-errors__list">
+        @for (error of dependencyErrors; track $index) {
+          <div class="backend-error-badge">
+            <i class="bi bi-x-circle-fill"></i>
+            <span>{{ error }}</span>
+          </div>
+        }
+      </div>
+    </div>
+  }
+
   <form [formGroup]="emploiForm" (ngSubmit)="save()" class="classe-modal__form">
-    <div class="classe-modal__body emploi-modal__body">
+    <div class="classe-modal__body">
 
       <!-- PANNEAU 1 : PLANIFICATION -->
       <section class="classe-panel classe-panel--general">
@@ -57,7 +72,7 @@
         <div class="classe-general-content">
           <!-- JOUR -->
           <div class="classe-field">
-            <label for="cours-jour">Jour de la semaine <span>*</span></label>
+            <label for="cours-jour">Jour de la semaine<span>*</span></label>
             <div class="classe-native-select">
               <i class="bi bi-calendar-week"></i>
               <select id="cours-jour" formControlName="jour_semaine">
@@ -71,22 +86,21 @@
 
           <!-- TYPE DE COURS -->
           <div class="classe-field">
-            <label for="cours-type">Type de cours <span>*</span></label>
+            <label for="cours-type">Type de cours<span>*</span></label>
             <div class="classe-native-select">
               <i class="bi bi-bookmark-fill"></i>
               <select id="cours-type" formControlName="type_cours">
                 <option value="CM">Cours Magistral (CM)</option>
                 <option value="TD">Travaux Dirigés (TD)</option>
                 <option value="TP">Travaux Pratiques (TP)</option>
-                <option value="Evaluation">Évaluation / Examen</option>
               </select>
               <i class="bi bi-chevron-down select-arrow"></i>
             </div>
           </div>
 
-          <!-- HEURE DEBUT -->
+          <!-- HEURE DÉBUT -->
           <div class="classe-field">
-            <label for="cours-heure-debut">Heure de début <span>*</span></label>
+            <label for="cours-heure-debut">Heure de début<span>*</span></label>
             <div class="classe-input">
               <i class="bi bi-clock"></i>
               <input id="cours-heure-debut" type="time" formControlName="heure_debut"/>
@@ -95,7 +109,7 @@
 
           <!-- HEURE FIN -->
           <div class="classe-field">
-            <label for="cours-heure-fin">Heure de fin <span>*</span></label>
+            <label for="cours-heure-fin">Heure de fin<span>*</span></label>
             <div class="classe-input">
               <i class="bi bi-clock-fill"></i>
               <input id="cours-heure-fin" type="time" formControlName="heure_fin"/>
@@ -104,7 +118,7 @@
 
           <!-- INFORMATION -->
           <div class="classe-general-info">
-            <i class="bi bi-info-circle-fill"></i>
+            <i class="bi bi-info-circle"></i>
             <span>Le créneau doit respecter la plage horaire de l'établissement et ne pas entrer en conflit avec un autre cours.</span>
           </div>
         </div>
@@ -114,7 +128,7 @@
       <section class="classe-panel classe-panel--school">
         <div class="classe-section__heading">
           <div class="classe-section__icon">
-            <i class="bi bi-people-fill"></i>
+            <i class="bi bi-diagram-3-fill"></i>
           </div>
           <div>
             <h5>Affectation pédagogique</h5>
@@ -122,58 +136,56 @@
           </div>
         </div>
 
-        <div class="emploi-complement-content">
-          <div class="emploi-subsection">
-            <div class="classe-field">
-              <label for="cours-matiere">Matière <span>*</span></label>
-              <div class="classe-native-select">
-                <i class="bi bi-journal-bookmark-fill"></i>
-                <select id="cours-matiere" formControlName="matiere_id">
-                  <option [ngValue]="null">Sélectionner une matière...</option>
-                  @for (m of matieres; track m.id) {
-                    <option [value]="m.id">{{ m.libelle || m.nom || m.code }}</option>
-                  }
-                </select>
-                <i class="bi bi-chevron-down select-arrow"></i>
-              </div>
-            </div>
-
-            <div class="classe-school-grid">
-              <div class="classe-field">
-                <label for="cours-enseignant">Enseignant / Intervenant <span>*</span></label>
-                <div class="classe-native-select">
-                  <i class="bi bi-person-badge-fill"></i>
-                  <select id="cours-enseignant" formControlName="enseignant_id">
-                    <option [ngValue]="null">Sélectionner un enseignant...</option>
-                    @for (ens of enseignants; track ens.id) {
-                      <option [value]="ens.id">{{ ens.nom }} {{ ens.prenom }}</option>
-                    }
-                  </select>
-                  <i class="bi bi-chevron-down select-arrow"></i>
-                </div>
-              </div>
-
-              <div class="classe-field">
-                <label for="cours-salle">Salle <span>*</span></label>
-                <div class="classe-native-select">
-                  <i class="bi bi-door-open-fill"></i>
-                  <select id="cours-salle" formControlName="salle_id">
-                    <option [ngValue]="null">Sélectionner une salle...</option>
-                    @for (s of salles; track s.id) {
-                      <option [value]="s.id">{{ s.code }} - {{ s.nom }} ({{ s.capacite }} pl.)</option>
-                    }
-                  </select>
-                  <i class="bi bi-chevron-down select-arrow"></i>
-                </div>
-              </div>
+        <div class="classe-school-grid">
+          <!-- MATIÈRE -->
+          <div class="classe-field" style="grid-column: 1 / -1;">
+            <label for="cours-matiere">Matière<span>*</span></label>
+            <div class="classe-native-select">
+              <i class="bi bi-journal-bookmark-fill"></i>
+              <select id="cours-matiere" formControlName="matiere_id">
+                <option [ngValue]="null">Sélectionner une matière...</option>
+                @for (m of matieres; track m.id) {
+                  <option [value]="m.id">{{ m.libelle || m.nom || m.code }}</option>
+                }
+              </select>
+              <i class="bi bi-chevron-down select-arrow"></i>
             </div>
           </div>
 
-          <!-- INFORMATION -->
-          <div class="classe-school-info">
-            <i class="bi bi-info-circle-fill"></i>
-            <span>Vérifiez la disponibilité de l'enseignant et de la salle avant de valider la programmation.</span>
+          <!-- ENSEIGNANT -->
+          <div class="classe-field">
+            <label for="cours-enseignant">Enseignant / Intervenant<span>*</span></label>
+            <div class="classe-native-select">
+              <i class="bi bi-person-badge"></i>
+              <select id="cours-enseignant" formControlName="enseignant_id">
+                <option [ngValue]="null">Sélectionner un enseignant...</option>
+                @for (ens of enseignants; track ens.id) {
+                  <option [value]="ens.id">{{ ens.nom }} {{ ens.prenom }}</option>
+                }
+              </select>
+              <i class="bi bi-chevron-down select-arrow"></i>
+            </div>
           </div>
+
+          <!-- SALLE -->
+          <div class="classe-field">
+            <label for="cours-salle">Salle<span>*</span></label>
+            <div class="classe-native-select">
+              <i class="bi bi-door-open-fill"></i>
+              <select id="cours-salle" formControlName="salle_id">
+                <option [ngValue]="null">Sélectionner une salle...</option>
+                @for (s of salles; track s.id) {
+                  <option [value]="s.id">{{ s.code }} - {{ s.nom }} ({{ s.capacite }} pl.)</option>
+                }
+              </select>
+              <i class="bi bi-chevron-down select-arrow"></i>
+            </div>
+          </div>
+        </div>
+
+        <div class="classe-school-info">
+          <i class="bi bi-info-circle"></i>
+          <span>Vérifiez la disponibilité de l'enseignant et de la salle avant de valider la programmation.</span>
         </div>
       </section>
     </div>
@@ -188,16 +200,30 @@
           <i class="bi bi-x-lg"></i>
           <span>Annuler</span>
         </button>
-        @if (isSubmit) {
-          <button type="button" class="btn-classe-submit" disabled>
-            <span class="classe-submit-spinner"></span>
-            <span>Enregistrement...</span>
-          </button>
+        @if (courseToEdit) {
+          @if (isSubmit) {
+            <button type="button" class="btn-classe-submit" disabled>
+              <span class="classe-submit-spinner"></span>
+              <span>Chargement...</span>
+            </button>
+          } @else {
+            <button type="submit" class="btn-classe-submit">
+              <i class="bi bi-check2"></i>
+              <span>Mettre à jour</span>
+            </button>
+          }
         } @else {
-          <button type="submit" class="btn-classe-submit">
-            <i class="bi" [ngClass]="courseToEdit ? 'bi-check2' : 'bi-plus-lg'"></i>
-            <span>{{ courseToEdit ? 'Mettre à jour' : 'Programmer' }}</span>
-          </button>
+          @if (isSubmit) {
+            <button type="button" class="btn-classe-submit" disabled>
+              <span class="classe-submit-spinner"></span>
+              <span>Chargement...</span>
+            </button>
+          } @else {
+            <button type="submit" class="btn-classe-submit">
+              <i class="bi bi-plus-lg"></i>
+              <span>Programmer</span>
+            </button>
+          }
         }
       </div>
     </div>

@@ -9,6 +9,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CustomPaginationComponent } from '../../../../shared/components/custom-pagination/custom-pagination.component';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { RouterLink } from '@angular/router';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-list-salle',
@@ -39,7 +40,7 @@ export class ListSallePage implements OnInit {
   }
 
   getSalles(): void {
-    this.apiService.get('pedagogie/salles').then((data: any) => {
+    this.apiService.get('salles').then((data: any) => {
       this.salles = data.data;
       this.pagination = data.meta?.links || [];
       this.isLoad = false;
@@ -90,7 +91,7 @@ export class ListSallePage implements OnInit {
   searchAction(): void {
     if (this.searchText.length >= 3) {
       this.isLoad = true;
-      this.apiService.get('pedagogie/salles/search/' + this.searchText).then((data: any) => {
+      this.apiService.get('salles/search/' + this.searchText).then((data: any) => {
         this.salles = data.data;
         this.pagination = data.meta?.links || [];
         this.isLoad = false;
@@ -103,8 +104,19 @@ export class ListSallePage implements OnInit {
   }
 
   delete(items: Salle): void {
-    if (confirm('Voulez-vous vraiment supprimer cette salle ?')) {
-      this.apiService.delete(`pedagogie/salles/${items.id}`)
+    Swal.fire({
+      title: 'Suppression de salle',
+      text: `Voulez-vous vraiment supprimer la salle "${items.nom}" ?`,
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Oui, supprimer',
+      cancelButtonText: 'Non'
+    }).then((result) => {
+      if (!result.isConfirmed) {
+        return;
+      }
+
+      this.apiService.delete(`salles/${items.id}`)
         .then((res: any) => {
           this.shareService.toastSuccess(res.message || 'Salle supprimée avec succès.');
           this.getSalles();
@@ -112,6 +124,6 @@ export class ListSallePage implements OnInit {
         .catch((err: any) => {
           this.shareService.toastWarning(err.error?.message || 'Erreur lors de la suppression.');
         });
-    }
+    });
   }
 }

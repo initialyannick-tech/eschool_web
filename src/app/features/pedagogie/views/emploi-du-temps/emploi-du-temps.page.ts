@@ -6,8 +6,7 @@ import { ShareService } from '../../../../core/services/share.service';
 import { EmploiDuTemps } from '../../models/emploi-du-temps';
 import { ModalEmploiDuTempsComponent } from '../../components/modals/modal-emploi-du-temps/modal-emploi-du-temps.component';
 import { PageHeaderComponent } from '../../../../shared/components/page-header/page-header.component';
-
-declare var bootstrap: any;
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-emploi-du-temps',
@@ -15,7 +14,6 @@ declare var bootstrap: any;
   imports: [
     CommonModule,
     FormsModule,
-    ModalEmploiDuTempsComponent,
     PageHeaderComponent
   ],
   templateUrl: './emploi-du-temps.page.html',
@@ -24,13 +22,13 @@ declare var bootstrap: any;
 export class EmploiDuTempsPage implements OnInit {
   private apiService = inject(ApiService);
   private shareService = inject(ShareService);
+  private modal = inject(NgbModal);
 
   classes: any[] = [];
   selectedClasseId: number | null = null;
   selectedAnneeId: number = 1; // ID de l'année scolaire en cours
 
   coursList: EmploiDuTemps[] = [];
-  selectedCourse: EmploiDuTemps | null = null;
   isLoad = false;
 
   jours = ['lundi', 'mardi', 'mercredi', 'jeudi', 'vendredi', 'samedi'];
@@ -40,7 +38,7 @@ export class EmploiDuTempsPage implements OnInit {
   }
 
   getClasses(): void {
-    this.apiService.get('/pedagogie/classe/liste').then((res: any) => {
+    this.apiService.get('classe/liste').then((res: any) => {
       this.classes = res.data || res || [];
       if (this.classes.length > 0) {
         this.selectedClasseId = this.classes[0].id;
@@ -54,7 +52,7 @@ export class EmploiDuTempsPage implements OnInit {
 
     this.isLoad = true;
     this.apiService.get(
-      `/pedagogie/emplois-du-temps/classe/${this.selectedClasseId}?annee_scolaire_id=${this.selectedAnneeId}`
+      `emplois-du-temps/classe/${this.selectedClasseId}?annee_scolaire_id=${this.selectedAnneeId}`
     )
       .then((res: any) => {
         this.coursList = res.data || [];
@@ -73,26 +71,25 @@ export class EmploiDuTempsPage implements OnInit {
   }
 
   openModal(cours: EmploiDuTemps | null = null): void {
-    this.selectedCourse = cours;
-    const modalElement = document.getElementById('modalEmploiDuTemps');
-    if (modalElement) {
-      const modal = new bootstrap.Modal(modalElement);
-      modal.show();
-    }
-  }
-
-  onCourseSaved(): void {
-    const modalElement = document.getElementById('modalEmploiDuTemps');
-    if (modalElement) {
-      const modal = bootstrap.Modal.getInstance(modalElement);
-      modal?.hide();
-    }
-    this.loadEmploiDuTemps();
+    const modalRef = this.modal.open(ModalEmploiDuTempsComponent, {
+      size: 'xl',
+      backdrop: 'static'
+    });
+    modalRef.componentInstance.initialize(
+      this.selectedClasseId,
+      this.selectedAnneeId,
+      cours
+    );
+    modalRef.result.catch((reason: unknown) => {
+      if (reason === 'save') {
+        this.loadEmploiDuTemps();
+      }
+    });
   }
 
   deleteCours(id: number): void {
     if (confirm('Voulez-vous vraiment supprimer ce créneau de cours ?')) {
-      this.apiService.delete(`/pedagogie/emplois-du-temps/${id}`)
+      this.apiService.delete(`emplois-du-temps/${id}`)
         .then((res: any) => {
           this.shareService.toastSuccess(res.message || 'Cours supprimé.');
           this.loadEmploiDuTemps();

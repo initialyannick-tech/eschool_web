@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output, inject, OnInit, OnChanges } from '@angular/core';
+import { Component, inject, OnInit, ViewEncapsulation } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
@@ -12,19 +12,21 @@ import { Salle } from '../../../models/salle';
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule],
   templateUrl: './modal-emploi-du-temps.component.html',
-  styleUrls: ['./modal-emploi-du-temps.component.scss']
+  styleUrls: ['./modal-emploi-du-temps.component.scss'],
+  encapsulation: ViewEncapsulation.None   // ⬅️ IMPORTANT (hérite des styles .classe-modal globaux)
 })
-export class ModalEmploiDuTempsComponent implements OnInit, OnChanges {
+export class ModalEmploiDuTempsComponent implements OnInit {
   private apiService = inject(ApiService);
   private shareService = inject(ShareService);
   modal = inject(NgbActiveModal);
 
-  @Input() courseToEdit: EmploiDuTemps | null = null;
-  @Input() selectedClasseId: number | null = null;
-  @Input() selectedAnneeId: number = 1; // Valeur par défaut / dynamique selon l'année active
+  courseToEdit: EmploiDuTemps | null = null;
+  selectedClasseId: number | null = null;
+  selectedAnneeId = 1;
 
   isSubmit = false;
   backendErrors: string[] = [];
+  dependencyErrors: string[] = [];
   salles: Salle[] = [];
   enseignants: any[] = [];
   matieres: any[] = [];
@@ -54,34 +56,29 @@ export class ModalEmploiDuTempsComponent implements OnInit, OnChanges {
     this.loadDependencies();
   }
 
-  ngOnChanges(): void {
-    if (this.selectedClasseId) {
-      this.emploiForm.patchValue({ classe_id: this.selectedClasseId });
-    }
-    if (this.selectedAnneeId) {
-      this.emploiForm.patchValue({ annee_scolaire_id: this.selectedAnneeId });
-    }
+  /**
+   * Appelée par le composant parent après modal.open()
+   */
+  initialize(
+    classeId: number | null,
+    anneeId: number,
+    course: EmploiDuTemps | null
+  ): void {
+    this.selectedClasseId = classeId;
+    this.selectedAnneeId = anneeId;
+    this.courseToEdit = course;
 
-    if (this.courseToEdit) {
-      this.emploiForm.patchValue({
-        annee_scolaire_id: this.courseToEdit.annee_scolaire_id,
-        classe_id: this.courseToEdit.classe_id,
-        matiere_id: this.courseToEdit.matiere_id,
-        enseignant_id: this.courseToEdit.enseignant_id,
-        salle_id: this.courseToEdit.salle_id,
-        jour_semaine: this.courseToEdit.jour_semaine,
-        heure_debut: this.courseToEdit.heure_debut,
-        heure_fin: this.courseToEdit.heure_fin,
-        type_cours: this.courseToEdit.type_cours || 'CM'
-      });
-    } else {
-      this.emploiForm.patchValue({
-        heure_debut: '08:00',
-        heure_fin: '10:00',
-        jour_semaine: 'lundi',
-        type_cours: 'CM'
-      });
-    }
+    this.emploiForm.reset({
+      annee_scolaire_id: course?.annee_scolaire_id ?? anneeId,
+      classe_id: classeId,
+      matiere_id: course?.matiere_id ?? null,
+      enseignant_id: course?.enseignant_id ?? null,
+      salle_id: course?.salle_id ?? null,
+      jour_semaine: course?.jour_semaine ?? 'lundi',
+      heure_debut: course?.heure_debut?.slice(0, 5) ?? '08:00',
+      heure_fin: course?.heure_fin?.slice(0, 5) ?? '10:00',
+      type_cours: course?.type_cours ?? 'CM'
+    });
   }
 
   close(): void {
@@ -89,23 +86,22 @@ export class ModalEmploiDuTempsComponent implements OnInit, OnChanges {
   }
 
   loadDependencies(): void {
-    // Salles
-    this.apiService.get('/pedagogie/salles').then((res: any) => {
+    this.apiService.get('salles').then((res: any) => {
       this.salles = res.data || [];
+    }).catch((err: any) => {
+      this.dependencyErrors.push(err?.error?.message || 'Impossible de charger la liste des salles.');
     });
 
-    // Agents / Enseignants
-    this.apiService.get('/agent/liste').then((res: any) => {
+    this.apiService.get('enseignants').then((res: any) => {
       this.enseignants = res.data || res || [];
-    }).catch(() => {
-      this.enseignants = [];
+    }).catch((err: any) => {
+      this.dependencyErrors.push(err?.error?.message || 'Impossible de charger la liste des enseignants.');
     });
 
-    // Matières (Ajuster l'URL selon votre API Matières)
-    this.apiService.get('/pedagogie/matiere/liste').then((res: any) => {
+    this.apiService.get('matiere/liste').then((res: any) => {
       this.matieres = res.data || res || [];
-    }).catch(() => {
-      this.matieres = [];
+    }).catch((err: any) => {
+      this.dependencyErrors.push(err?.error?.message || 'Impossible de charger la liste des matières.');
     });
   }
 
@@ -121,8 +117,8 @@ export class ModalEmploiDuTempsComponent implements OnInit, OnChanges {
     const data = this.emploiForm.value;
 
     const request = (this.courseToEdit && this.courseToEdit.id)
-      ? this.apiService.put(`/pedagogie/emplois-du-temps/${this.courseToEdit.id}`, data)
-      : this.apiService.post('/pedagogie/emplois-du-temps', data);
+      ? this.apiService.put(`emplois-du-temps/${this.courseToEdit.id}`, data)
+      : this.apiService.post('emplois-du-temps', data);
 
     request
       .then((res: any) => {
