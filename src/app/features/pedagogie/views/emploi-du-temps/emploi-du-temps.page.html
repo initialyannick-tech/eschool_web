@@ -1,0 +1,152 @@
+<app-page-header [backBtn]="true" [titre]="'Emploi du Temps'"></app-page-header>
+
+<div class="users-toolbar">
+  <div class="users-toolbar__info">
+    <div class="users-toolbar__title">
+      Emploi du Temps Hebdomadaire
+    </div>
+    <div class="users-toolbar__subtitle">
+      Gérez les créneaux de cours par classe
+    </div>
+  </div>
+
+  <div class="users-toolbar__actions">
+    <div class="classe-select">
+      <label class="classe-select__label">Classe :</label>
+      <select
+        class="classe-select__input"
+        [(ngModel)]="selectedClasseId"
+        (change)="loadEmploiDuTemps()">
+        @for (c of classes; track c.id) {
+          <option [value]="c.id">{{ c.libelle || c.nom }}</option>
+        }
+      </select>
+    </div>
+
+    <button
+      type="button"
+      class="btn-add-user"
+      [disabled]="!selectedClasseId"
+      (click)="openModal()">
+      <i class="bi bi-plus-lg"></i>
+      <span>Ajouter un cours</span>
+    </button>
+  </div>
+</div>
+
+<!-- Carte principale -->
+<div class="users-card">
+  <div class="users-card__header">
+    <div>
+      <h4>Emploi du temps</h4>
+      <span>Créneaux de cours de la semaine</span>
+    </div>
+    <div class="parents-count">
+      <i class="bi bi-calendar-week"></i>
+      {{ coursList.length }} cours
+    </div>
+  </div>
+
+  <div class="users-table-wrapper emploi-wrapper">
+    @if (isLoad) {
+      <div class="users-table__loading">
+        <div class="loading-content">
+          <span class="loading-spinner"></span>
+          <span>Chargement de l'emploi du temps...</span>
+        </div>
+      </div>
+    } @else {
+      <div class="emploi-grid">
+        @for (jour of jours; track jour) {
+          <div class="emploi-jour">
+            <div class="emploi-jour__header">
+              {{ jour }}
+            </div>
+            <div class="emploi-jour__body">
+              @let coursJour = getCoursForJour(jour);
+              @if (coursJour.length === 0) {
+                <div class="emploi-empty">Aucun cours</div>
+              } @else {
+                @for (c of coursJour; track c.id) {
+                  <div class="cours-card">
+                    <div class="cours-card__top">
+                      <span class="cours-badge cours-badge--heure">
+                        <i class="bi bi-clock"></i>
+                        {{ c.heure_debut }} - {{ c.heure_fin }}
+                      </span>
+                      @if (c.type_cours) {
+                        <span class="cours-badge cours-badge--type">
+                          {{ c.type_cours }}
+                        </span>
+                      }
+                    </div>
+
+                    <div class="cours-card__matiere">
+                      {{ c.matiere?.libelle || c.matiere?.nom || 'Matière N/A' }}
+                    </div>
+
+                    <div class="cours-card__info">
+                      <i class="bi bi-person"></i>
+                      <span>
+                        {{ c.enseignant?.nom }} {{ c.enseignant?.prenom }}
+                      </span>
+                    </div>
+
+                    <div class="cours-card__info">
+                      <i class="bi bi-door-open"></i>
+                      <span>Salle : {{ c.salle?.code || 'N/A' }}</span>
+                    </div>
+
+                    <div class="cours-card__actions">
+                      <button
+                        type="button"
+                        class="table-action table-action--edit"
+                        title="Modifier ce cours"
+                        (click)="openModal(c)">
+                        <i class="bi bi-pencil"></i>
+                      </button>
+                      <button
+                        type="button"
+                        class="table-action table-action--delete"
+                        title="Supprimer ce cours"
+                        (click)="c.id && deleteCours(c.id)">
+                        <i class="bi bi-trash3"></i>
+                      </button>
+                    </div>
+                  </div>
+                }
+              }
+            </div>
+          </div>
+        }
+      </div>
+
+      @if (!coursList || coursList.length === 0) {
+        <div class="users-table__empty">
+          <div class="empty-content">
+            <div class="empty-content__icon">
+              <i class="bi bi-calendar-x"></i>
+            </div>
+            <strong>Aucun cours planifié</strong>
+            <span>Aucun créneau n'est défini pour cette classe.</span>
+            <button
+              type="button"
+              class="empty-content__button"
+              [disabled]="!selectedClasseId"
+              (click)="openModal()">
+              <i class="bi bi-plus-lg"></i>
+              Ajouter un cours
+            </button>
+          </div>
+        </div>
+      }
+    }
+  </div>
+</div>
+
+<app-modal-emploi-du-temps
+  [courseToEdit]="selectedCourse"
+  [selectedClasseId]="selectedClasseId"
+  [selectedAnneeId]="selectedAnneeId"
+  (saved)="onCourseSaved()">
+</app-modal-emploi-du-temps>

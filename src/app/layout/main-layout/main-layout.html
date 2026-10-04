@@ -256,6 +256,16 @@
           <i class="bi bi-shield-check"></i>
           <span>Gestion Rôles</span>
         </a>
+        
+        <a class="sidebar-nav__link" *ngxPermissionsOnly="['salle.management']" routerLink="/pedagogie/list-salle" routerLinkActive="sidebar-nav__link--active">
+          <i class="bi bi-door-open"></i>
+          <span>Gestion Salles</span>
+        </a>
+
+        <a class="sidebar-nav__link" *ngxPermissionsOnly="['emploi_temps.management']" routerLink="/pedagogie/emploi-du-temps" routerLinkActive="sidebar-nav__link--active">
+          <i class="bi bi-calendar-week"></i>
+          <span>Emploi du Temps</span>
+        </a>
       </div>
 
 
