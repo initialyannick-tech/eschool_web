@@ -1,41 +1,138 @@
-<div class="modal-header">
-  <h4 class="modal-title">{{ isEdit ? 'Modifier la matière' : 'Ajouter une matière' }}</h4>
-  <button type="button" class="btn-close" aria-label="Close" (click)="close()"></button>
-</div>
-
-<div class="modal-body">
-  <form [formGroup]="matiereForm" (ngSubmit)="submit()">
-    <div class="row g-3">
-      <div class="col-md-6">
-        <label class="form-label">Code</label>
-        <input type="text" class="form-control" formControlName="code" placeholder="Ex : MATH" />
+<div class="classe-modal">
+  <div class="classe-modal__header">
+    <div class="classe-modal__identity">
+      <div class="classe-modal__icon">
+        <i class="bi bi-book-fill"></i>
       </div>
-
-      <div class="col-md-6">
-        <label class="form-label">Libellé</label>
-        <input type="text" class="form-control" formControlName="libelle" placeholder="Ex : Mathématiques" />
+      <div class="classe-modal__heading">
+        <div class="classe-modal__eyebrow">Administration scolaire</div>
+        <h4>{{ isEdit ? 'Modifier une matière' : 'Nouvelle matière' }}</h4>
+        <p>{{ isEdit ? 'Modifiez les informations de la matière' : 'Ajoutez une nouvelle matière à l’établissement' }}</p>
       </div>
+    </div>
+    <button type="button" class="classe-modal__close" aria-label="Fermer" (click)="close()">
+      <i class="bi bi-x-lg"></i>
+    </button>
+  </div>
 
-      <div class="col-12">
-        <label class="form-label">Description</label>
-        <textarea class="form-control" rows="3" formControlName="description" placeholder="Description de la matière"></textarea>
-      </div>
-
-      <div class="col-12">
-        <div class="form-check">
-          <input class="form-check-input" type="checkbox" formControlName="actif" id="matiereActif" />
-          <label class="form-check-label" for="matiereActif">
-            Matière active
-          </label>
+  <form [formGroup]="matiereForm" (ngSubmit)="submit()" class="classe-modal__form">
+    <div class="classe-modal__body">
+      <div class="classe-panel classe-panel--general">
+        <div class="classe-section__heading">
+          <div class="classe-section__icon">
+            <i class="bi bi-book"></i>
+          </div>
+          <div>
+            <h5>Informations générales</h5>
+            <p>
+              Identité et présentation de la matière
+            </p>
+          </div>
         </div>
+
+
+        <div class="classe-general-content">
+          <div class="classe-field">
+            <label for="matiereLibelle">Libellé <span>*</span></label>
+            <div class="classe-input">
+              <i class="bi bi-type"></i>
+              <input id="matiereLibelle" type="text" formControlName="libelle" placeholder="Ex : Mathématiques" autocomplete="off"/>
+            </div>
+          </div>
+          <!-- DESCRIPTION -->
+          <div class="classe-field">
+            <label for="matiereDescription">Description</label>
+            <div class="classe-textarea">
+              <i class="bi bi-card-text"></i>
+              <textarea id="matiereDescription" formControlName="description" placeholder="Décrivez brièvement cette matière..." rows="5"></textarea>
+            </div>
+          </div>
+
+          <!-- STATUT -->
+          <div class="classe-active-box">
+            <div class="classe-active-info">
+              <div class="classe-active-icon">
+                <i class="bi bi-check-circle-fill"></i>
+              </div>
+              <div>
+                <div class="classe-active-title">Matière active</div>
+                <div class="classe-active-description">
+                  Cette matière sera disponible dans les
+                  différentes fonctionnalités pédagogiques.
+                </div>
+              </div>
+            </div>
+            <label class="classe-switch" for="matiereActif">
+              <input id="matiereActif" type="checkbox" formControlName="actif"/>
+              <span class="classe-switch__slider"></span>
+            </label>
+          </div>
+          <!-- INFORMATION -->
+          <div class="classe-general-info">
+            <i class="bi bi-info-circle-fill"></i>
+            <span>Le libellé permet d’identifier la matière dansles classes, emplois du temps, évaluations etbulletins scolaires.</span>
+          </div>
+        </div>
+      </div>
+      <div class="classe-panel classe-panel--school">
+        <div class="classe-section__heading">
+          <div class="classe-section__icon">
+            <i class="bi bi-mortarboard-fill"></i>
+          </div>
+          <div>
+            <h5>Configuration pédagogique</h5>
+            <p>Paramètres utilisés pour la gestion scolaire</p>
+          </div>
+        </div>
+        <div class="classe-school-grid">
+          <div class="classe-field">
+            <label>Code matière</label>
+            <div class="classe-input">
+              <i class="bi bi-upc-scan"></i>
+              <input type="text" [value]="isEdit ? matiere?.code : 'Généré automatiquement'" readonly/>
+            </div>
+          </div>
+          <!-- STATUT -->
+          <div class="classe-field">
+            <label>État</label>
+            <div class="classe-input">
+              <i class="bi bi-toggle-on"></i>
+              <input type="text" [value]="matiereForm.get('actif')?.value ? 'Active' : 'Inactive'" readonly/>
+            </div>
+          </div>
+        </div>
+        <!-- INFORMATION PÉDAGOGIQUE -->
+        <div class="classe-school-info">
+          <i class="bi bi-lightbulb-fill"></i>
+          <span>Une matière active peut être utilisée lors del’affectation aux classes, de la création desenseignements et du suivi des résultats scolaires.</span>
+        </div>
+      </div>
+    </div>
+    <div class="classe-modal__footer">
+      <div class="classe-footer-info">
+        <i class="bi bi-shield-check"></i>
+        <span>
+          Les informations seront enregistrées dans le
+          référentiel des matières.
+        </span>
+      </div>
+      <div class="classe-footer-actions">
+        <button type="button" class="btn-classe-cancel" (click)="close()">
+          <i class="bi bi-x-lg"></i>
+          <span>Annuler</span>
+        </button>
+        <button type="submit" class="btn-classe-submit" [disabled]="matiereForm.invalid || isSubmit">
+          @if (isSubmit) {
+            <span class="classe-submit-spinner"></span>
+            <span>Enregistrement...</span>
+          } @else {
+            <i class="bi" [ngClass]="isEdit ? 'bi-check-lg': 'bi-plus-lg'">
+            </i>
+            <span>{{ isEdit ? 'Enregistrer' : 'Créer la matière' }}</span>
+          }
+        </button>
       </div>
     </div>
   </form>
 </div>
 
-<div class="modal-footer">
-  <button type="button" class="btn btn-outline-secondary" (click)="close()">Annuler</button>
-  <button type="button" class="btn btn-primary" (click)="submit()">
-    {{ isEdit ? 'Enregistrer' : 'Créer' }}
-  </button>
-</div>

@@ -1,16 +1,17 @@
 import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { RouterLink } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ApiService } from '../../../../core/services/api.service';
 import { PageHeaderComponent } from '../../../../shared/components/page-header/page-header.component';
 import { ModalEnseignantComponent } from '../../components/modal-enseignant/modal-enseignant.component';
+import {CustomPaginationComponent} from '../../../../shared/components/custom-pagination/custom-pagination.component';
+import {RouterLink} from '@angular/router';
 
 @Component({
   selector: 'app-list-enseignant',
   standalone: true,
-  imports: [CommonModule, FormsModule, PageHeaderComponent, RouterLink],
+  imports: [CommonModule, FormsModule, PageHeaderComponent, CustomPaginationComponent, RouterLink],
   templateUrl: './list-enseignant.page.html',
   styleUrls: ['./list-enseignant.page.scss']
 })
@@ -21,6 +22,7 @@ export class ListEnseignantPage {
   enseignants: any[] = [];
   isLoad = true;
   searchText = '';
+  pagination: any[] = []
 
   ngOnInit() {
     this.getEnseignants();
@@ -61,12 +63,10 @@ export class ListEnseignantPage {
     if (!enseignant?.id) {
       return;
     }
-
     const confirmed = window.confirm(`Voulez-vous supprimer l'enseignant ${enseignant.nom ?? ''} ${enseignant.prenom ?? ''} ?`);
     if (!confirmed) {
       return;
     }
-
     this.apiService.delete('enseignants/' + enseignant.id).then((response: any) => {
       if (response?.success) {
         this.getEnseignants();
@@ -80,10 +80,20 @@ export class ListEnseignantPage {
       this.getEnseignants();
       return;
     }
-
     this.enseignants = this.enseignants.filter((enseignant) => {
       const value = `${enseignant.nom ?? ''} ${enseignant.prenom ?? ''} ${enseignant.email ?? ''} ${enseignant.specialite?.nom ?? ''}`.toLowerCase();
       return value.includes(criteria);
     });
+  }
+
+  changePage(url: any) {
+    if (url != null) {
+      this.isLoad = true;
+      this.apiService.getPaginate(url).then((data: any) => {
+        this.enseignants = data.data;
+        this.pagination = data.meta.links;
+        this.isLoad = false;
+      })
+    }
   }
 }

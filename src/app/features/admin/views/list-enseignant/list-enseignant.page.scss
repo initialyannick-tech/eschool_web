@@ -1,253 +1,1264 @@
-.teachers-toolbar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 1rem;
-  margin: 1.5rem 0;
-  padding: 1rem 1.25rem;
-  background: #fff;
-  border: 1px solid rgba(15, 23, 42, 0.08);
-  border-radius: 16px;
-  box-shadow: 0 12px 30px rgba(15, 23, 42, 0.04);
-}
+/* =========================================================
+   PAGE CLASSES
+========================================================= */
 
-.teachers-toolbar__info {
-  display: flex;
-  flex-direction: column;
-  gap: 0.25rem;
-}
-
-.teachers-toolbar__title {
-  font-size: 1.2rem;
-  font-weight: 700;
-  color: #111827;
-}
-
-.teachers-toolbar__subtitle {
-  color: #6b7280;
-  font-size: 0.92rem;
-}
-
-.teachers-toolbar__actions {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-}
-
-.teachers-search {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  min-width: 260px;
-  padding: 0.7rem 0.9rem;
-  background: #f3f4f6;
-  border-radius: 12px;
-  border: 1px solid #e5e7eb;
-}
-
-.teachers-search i {
-  color: #9ca3af;
-}
-
-.teachers-search__input {
-  border: none;
-  background: transparent;
+:host {
+  display: block;
   width: 100%;
-  outline: none;
-  color: #111827;
+  max-width: 100%;
+  min-width: 0;
+  overflow-x: hidden;
+  box-sizing: border-box;
 }
 
-.btn-add-teacher {
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+
+/* =========================================================
+   TOOLBAR
+========================================================= */
+
+.users-toolbar {
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 20px;
+
+  margin-bottom: 16px;
+  padding: 4px 0;
+}
+
+.users-toolbar__info {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.users-toolbar__title {
+  color: #18332a;
+
+  font-size: 16px;
+  font-weight: 700;
+
+  line-height: 1.3;
+}
+
+.users-toolbar__subtitle {
+  margin-top: 3px;
+
+  color: #84938c;
+
+  font-size: 12px;
+
+  line-height: 1.4;
+}
+
+
+/* =========================================================
+   ACTIONS TOOLBAR
+========================================================= */
+
+.users-toolbar__actions {
+  display: flex;
+  align-items: center;
+
+  gap: 10px;
+
+  flex-shrink: 0;
+
+  min-width: 0;
+}
+
+
+/* =========================================================
+   RECHERCHE
+========================================================= */
+
+.users-search {
+  position: relative;
+
+  display: flex;
+  align-items: center;
+
+  width: 260px;
+  max-width: 100%;
+
+  height: 38px;
+}
+
+.users-search i {
+  position: absolute;
+
+  left: 13px;
+
+  z-index: 2;
+
+  color: #879790;
+
+  font-size: 13px;
+
+  pointer-events: none;
+}
+
+.users-search__input {
+  width: 100%;
+  height: 100%;
+
+  padding: 0 13px 0 36px;
+
+  background: #ffffff;
+
+  border: 1px solid #dce7e2;
+
+  border-radius: 8px;
+
+  color: #18332a;
+
+  font-size: 12px;
+
+  outline: none;
+
+  box-shadow: none;
+}
+
+.users-search__input::placeholder {
+  color: #a0ada7;
+}
+
+.users-search__input:focus {
+  border-color: #8dbca6;
+
+  box-shadow:
+    0 0 0 3px rgba(0, 107, 63, 0.08);
+}
+
+
+/* =========================================================
+   BOUTON AJOUTER
+========================================================= */
+
+.btn-add-user {
   display: inline-flex;
   align-items: center;
-  gap: 0.5rem;
-  border: none;
-  border-radius: 12px;
-  background: linear-gradient(135deg, #2563eb, #1d4ed8);
-  color: #fff;
-  padding: 0.8rem 1.15rem;
+  justify-content: center;
+
+  gap: 7px;
+
+  height: 38px;
+
+  padding: 0 15px;
+
+  background: #006b3f;
+
+  border: 1px solid #006b3f;
+
+  border-radius: 8px;
+
+  color: #ffffff;
+
+  font-size: 12px;
   font-weight: 600;
+
+  white-space: nowrap;
+
   cursor: pointer;
-  box-shadow: 0 8px 20px rgba(37, 99, 235, 0.25);
+
+  transition:
+    background-color 0.2s ease,
+    border-color 0.2s ease;
 }
 
-.teachers-card {
-  background: #fff;
-  border: 1px solid rgba(15, 23, 42, 0.08);
-  border-radius: 16px;
-  overflow: hidden;
-  box-shadow: 0 12px 30px rgba(15, 23, 42, 0.04);
+.btn-add-user i {
+  font-size: 14px;
 }
 
-.teachers-card__header {
-  padding: 1rem 1.25rem;
-  border-bottom: 1px solid #eef2f7;
+.btn-add-user:hover {
+  background: #005b36;
+
+  border-color: #005b36;
 }
 
-.teachers-card__header h4 {
+
+/* =========================================================
+   CARTE
+========================================================= */
+
+.users-card {
+  display: block;
+
+  width: 100% !important;
+  max-width: 100% !important;
+  min-width: 0 !important;
+
   margin: 0;
-  font-size: 1.1rem;
-  color: #111827;
+
+  padding: 0;
+
+  background: #ffffff;
+
+  border: 1px solid #e0eae5;
+
+  border-radius: 12px;
+
+  overflow: hidden !important;
+
+  box-shadow:
+    0 2px 8px rgba(24, 51, 42, 0.035);
 }
 
-.teachers-card__header span {
-  color: #6b7280;
-  font-size: 0.9rem;
-}
 
-.teachers-table-wrapper {
-  overflow-x: auto;
-}
+/* =========================================================
+   HEADER CARTE
+========================================================= */
 
-.teachers-table {
+.users-card__header {
+  display: flex;
+
+  align-items: center;
+  justify-content: space-between;
+
   width: 100%;
-  border-collapse: collapse;
+  max-width: 100%;
+  min-width: 0;
+
+  padding: 17px 20px;
+
+  border-bottom: 1px solid #e8efeb;
 }
 
-.teachers-table th,
-.teachers-table td {
-  padding: 0.9rem 1rem;
-  border-bottom: 1px solid #eef2f7;
+.users-card__header > div {
+  min-width: 0;
+}
+
+.users-card__header h4 {
+  margin: 0;
+
+  color: #18332a;
+
+  font-size: 14px;
+  font-weight: 700;
+
+  line-height: 1.3;
+}
+
+.users-card__header span {
+  display: block;
+
+  margin-top: 3px;
+
+  color: #8a9992;
+
+  font-size: 11px;
+
+  line-height: 1.3;
+}
+
+
+/* =========================================================
+   WRAPPER TABLEAU
+========================================================= */
+
+.users-table-wrapper {
+  display: block;
+
+  width: 100% !important;
+  max-width: 100% !important;
+  min-width: 0 !important;
+
+  margin: 0;
+  padding: 0;
+
+  overflow-x: hidden !important;
+  overflow-y: hidden !important;
+}
+
+
+/* =========================================================
+   TABLEAU
+========================================================= */
+
+.users-table {
+  width: 100% !important;
+  max-width: 100% !important;
+  min-width: 0 !important;
+
+  margin: 0 !important;
+  padding: 0 !important;
+
+  border-collapse: collapse;
+  border-spacing: 0;
+
+  table-layout: fixed !important;
+}
+
+
+/* =========================================================
+   LARGEURS DES COLONNES
+========================================================= */
+
+/*
+   Total = 100%
+*/
+
+.users-table th:nth-child(1),
+.users-table td:nth-child(1) {
+  width: 22%;
+}
+
+.users-table th:nth-child(2),
+.users-table td:nth-child(2) {
+  width: 9%;
+}
+
+.users-table th:nth-child(3),
+.users-table td:nth-child(3) {
+  width: 11%;
+}
+
+.users-table th:nth-child(4),
+.users-table td:nth-child(4) {
+  width: 14%;
+}
+
+.users-table th:nth-child(5),
+.users-table td:nth-child(5) {
+  width: 10%;
+}
+
+.users-table th:nth-child(6),
+.users-table td:nth-child(6) {
+  width: 10%;
+}
+
+.users-table th:nth-child(7),
+.users-table td:nth-child(7) {
+  width: 11%;
+}
+
+.users-table th:nth-child(8),
+.users-table td:nth-child(8) {
+  width: 13%;
+}
+
+
+/* =========================================================
+   THEAD
+========================================================= */
+
+.users-table thead {
+  width: 100%;
+
+  background: #f6f9f7;
+}
+
+.users-table thead tr {
+  width: 100%;
+}
+
+.users-table thead th {
+  height: 45px;
+
+  padding: 0 10px;
+
+  border-bottom: 1px solid #dfe9e4;
+
+  color: #66776f;
+
+  font-size: 9px;
+
+  font-weight: 700;
+
+  line-height: 1;
+
   text-align: left;
+
+  text-transform: uppercase;
+
+  letter-spacing: 0.025em;
+
+  white-space: nowrap;
+
+  overflow: hidden;
+
+  text-overflow: ellipsis;
+
   vertical-align: middle;
 }
 
-.teachers-table th {
-  background: #f8fafc;
-  color: #475569;
-  font-size: 0.8rem;
-  text-transform: uppercase;
-  letter-spacing: 0.04em;
+
+/* =========================================================
+   ALIGNEMENT EN-TÊTES
+========================================================= */
+
+/* Statut */
+.users-table thead th:nth-child(7) {
+  text-align: center !important;
 }
 
-.teacher-cell {
+/* Actions */
+.users-table thead th:nth-child(8) {
+  text-align: center !important;
+}
+
+
+/* =========================================================
+   TBODY
+========================================================= */
+
+.users-table tbody {
+  width: 100%;
+}
+
+.users-table tbody tr {
+  width: 100%;
+
+  background: #ffffff;
+
+  transition:
+    background-color 0.15s ease;
+}
+
+.users-table tbody tr:hover {
+  background: #fafcfb;
+}
+
+.users-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+
+/* =========================================================
+   CELLULES
+========================================================= */
+
+.users-table tbody td {
+  height: 68px;
+
+  max-width: 0;
+
+  padding: 10px;
+
+  border-bottom: 1px solid #edf2ef;
+
+  color: #30463d;
+
+  font-size: 11px;
+
+  line-height: 1.3;
+
+  vertical-align: middle;
+
+  overflow: hidden;
+}
+
+
+/* =========================================================
+   CELLULE NIVEAU
+========================================================= */
+
+.user-cell {
   display: flex;
   align-items: center;
-  gap: 0.75rem;
+
+  gap: 10px;
+
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+
+  overflow: hidden;
 }
 
-.teacher-avatar {
-  width: 2.5rem;
-  height: 2.5rem;
-  border-radius: 50%;
-  background: linear-gradient(135deg, #dbeafe, #bfdbfe);
-  color: #1d4ed8;
+.user-avatar {
   display: flex;
+
   align-items: center;
   justify-content: center;
+
+  width: 34px;
+  height: 34px;
+
+  min-width: 34px;
+
+  flex-shrink: 0;
+
+  background: #eaf5ef;
+
+  border: 1px solid #d5e9dd;
+
+  border-radius: 9px;
+
+  color: #006b3f;
+
+  font-size: 11px;
+}
+
+.user-information {
+  flex: 1 1 auto;
+
+  min-width: 0;
+  max-width: 100%;
+
+  overflow: hidden;
+}
+
+.user-name {
+  display: block;
+
+  width: 100%;
+
+  color: #18332a;
+
+  font-size: 11px;
+
   font-weight: 700;
+
+  white-space: nowrap;
+
+  overflow: hidden;
+
+  text-overflow: ellipsis;
 }
 
-.teacher-name {
-  font-weight: 600;
-  color: #111827;
+.user-id {
+  display: block;
+
+  margin-top: 3px;
+
+  color: #9aa7a1;
+
+  font-size: 9px;
+
+  white-space: nowrap;
+
+  overflow: hidden;
+
+  text-overflow: ellipsis;
 }
 
-.teacher-id {
-  color: #6b7280;
-  font-size: 0.78rem;
+
+/* =========================================================
+   TEXTE CYCLE / SÉRIE
+========================================================= */
+
+.user-email {
+  display: block;
+
+  width: 100%;
+  max-width: 100%;
+
+  color: #53675e;
+
+  font-size: 10px;
+
+  white-space: nowrap;
+
+  overflow: hidden;
+
+  text-overflow: ellipsis;
 }
 
-.teacher-email,
-.speciality-badge {
+
+/* =========================================================
+   BADGES
+========================================================= */
+
+.role-badge {
   display: inline-flex;
+
   align-items: center;
-  padding: 0.35rem 0.75rem;
-  border-radius: 999px;
-  font-size: 0.82rem;
-  background: #eff6ff;
-  color: #1d4ed8;
+  justify-content: center;
+
+  min-width: 28px;
+
+  height: 25px;
+
+  padding: 0 8px;
+
+  background: #f4f7f5;
+
+  border: 1px solid #e0e8e3;
+
+  border-radius: 6px;
+
+  color: #53675e;
+
+  font-size: 9px;
+
+  font-weight: 600;
+
+  line-height: 1;
+
+  white-space: nowrap;
+}
+
+
+/* =========================================================
+   BADGE PLACES DISPONIBLES
+========================================================= */
+
+.role-badge--available {
+  background: #eaf7ef;
+
+  border-color: #d1ebdb;
+
+  color: #087a46;
+}
+
+.role-badge--full {
+  background: #fff1f1;
+
+  border-color: #efd2d2;
+
+  color: #c0392b;
+}
+
+
+/* =========================================================
+   STATUT
+========================================================= */
+
+.status-cell {
+  width: 100%;
+
+  padding-left: 5px !important;
+  padding-right: 5px !important;
+
+  text-align: center !important;
+
+  white-space: nowrap !important;
+
+  overflow: hidden !important;
 }
 
 .status-badge {
   display: inline-flex;
+
   align-items: center;
-  gap: 0.45rem;
-  padding: 0.35rem 0.7rem;
-  border-radius: 999px;
-  font-size: 0.8rem;
-  font-weight: 600;
+  justify-content: center;
+
+  gap: 5px;
+
+  height: 25px;
+
+  padding: 0 9px;
+
+  background: transparent;
+
+  border-radius: 20px;
+
+  font-size: 9px;
+
+  font-weight: 700;
+
+  line-height: 1;
+
+  white-space: nowrap;
+
+  vertical-align: middle;
 }
+
+
+/* =========================================================
+   STATUT ACTIF
+========================================================= */
 
 .status-badge--active {
-  background: rgba(16, 185, 129, 0.12);
-  color: #127a5d;
+  background: #eaf7ef;
+
+  border: 1px solid #d1ebdb;
+
+  color: #087a46;
 }
+
+
+/* =========================================================
+   STATUT INACTIF
+========================================================= */
 
 .status-badge--inactive {
-  background: rgba(239, 68, 68, 0.1);
-  color: #b91c1c;
+  background: #fff1f1;
+
+  border: 1px solid #efd2d2;
+
+  color: #c0392b;
 }
+
+
+/* =========================================================
+   POINT STATUT
+========================================================= */
 
 .status-dot {
-  width: 0.55rem;
-  height: 0.55rem;
-  border-radius: 50%;
-  background: currentColor;
   display: inline-block;
+
+  width: 6px;
+  height: 6px;
+
+  min-width: 6px;
+
+  border-radius: 50%;
+
+  background: currentColor;
 }
 
-.teachers-table__actions {
-  width: 130px;
+.status-text {
+  display: inline-block;
+
+  white-space: nowrap;
 }
 
-.btn-teacher-action {
-  border: 1px solid #dbeafe;
-  background: #eff6ff;
-  color: #1d4ed8;
-  width: 2.2rem;
-  height: 2.2rem;
-  border-radius: 10px;
-  margin-right: 0.4rem;
+
+/* =========================================================
+   ACTIONS
+========================================================= */
+
+.users-table__actions {
+  width: 100%;
+
+  padding-left: 5px !important;
+  padding-right: 5px !important;
+
+  text-align: center !important;
+
+  white-space: nowrap !important;
+
+  overflow: hidden !important;
+}
+
+
+/* =========================================================
+   CONTENEUR DES BOUTONS
+========================================================= */
+
+.table-actions {
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  gap: 6px;
+
+  width: 100%;
+
+  min-width: 0;
+}
+
+
+/* =========================================================
+   BOUTONS ACTIONS
+========================================================= */
+
+.btn-user-action {
+  display: inline-flex;
+
+  align-items: center;
+  justify-content: center;
+
+  width: 32px;
+  height: 32px;
+
+  min-width: 32px;
+
+  flex-shrink: 0;
+
+  padding: 0;
+
+  background: #ffffff;
+
+  border: 1px solid #d7e4dd;
+
+  border-radius: 7px;
+
+  color: #006b3f;
+
+  font-size: 12px;
+
   cursor: pointer;
+
+  transition:
+    background-color 0.2s ease,
+    border-color 0.2s ease,
+    color 0.2s ease;
 }
 
-.btn-teacher-action--danger {
-  border-color: #fecaca;
-  background: #fef2f2;
-  color: #dc2626;
+.btn-user-action:hover {
+  background: #006b3f;
+
+  border-color: #006b3f;
+
+  color: #ffffff;
 }
 
-.teachers-table__loading {
-  text-align: center;
-  padding: 1.6rem;
+
+/* =========================================================
+   BOUTON SUPPRIMER
+========================================================= */
+
+.btn-user-action--danger {
+  color: #c0392b;
+}
+
+.btn-user-action--danger:hover {
+  background: #c0392b;
+
+  border-color: #c0392b;
+
+  color: #ffffff;
+}
+
+
+/* =========================================================
+   LOADING
+========================================================= */
+
+.users-table__loading {
+  height: 130px !important;
+
+  padding: 20px !important;
+
+  text-align: center !important;
+
+  vertical-align: middle !important;
 }
 
 .loading-content {
   display: inline-flex;
+
   align-items: center;
-  gap: 0.6rem;
-  color: #64748b;
+  justify-content: center;
+
+  gap: 9px;
+
+  color: #7f9088;
+
+  font-size: 12px;
 }
 
 .loading-spinner {
-  width: 1rem;
-  height: 1rem;
+  width: 16px;
+  height: 16px;
+
+  border: 2px solid #dce8e2;
+
+  border-top-color: #006b3f;
+
   border-radius: 50%;
-  border: 2px solid rgba(59, 130, 246, 0.2);
-  border-top-color: #3b82f6;
-  display: inline-block;
-  animation: spin 0.8s linear infinite;
+
+  animation: users-spinner 0.8s linear infinite;
 }
 
-@keyframes spin {
+@keyframes users-spinner {
   to {
     transform: rotate(360deg);
   }
 }
 
-@media (max-width: 768px) {
-  .teachers-toolbar {
-    flex-direction: column;
+
+/* =========================================================
+   FOOTER / PAGINATION
+========================================================= */
+
+.users-card__footer {
+  display: flex;
+
+  align-items: center;
+  justify-content: flex-end;
+
+  width: 100%;
+
+  min-height: 58px;
+
+  padding: 8px 18px;
+
+  background: #fafcfb;
+
+  border-top: 1px solid #e8efeb;
+
+  overflow: hidden;
+}
+
+
+/* =========================================================
+   PAGINATION
+========================================================= */
+
+.users-card__footer app-custom-pagination {
+  max-width: 100%;
+
+  min-width: 0;
+}
+
+
+/* =========================================================
+   TABLETTE
+========================================================= */
+
+@media (max-width: 1100px) {
+
+  .users-table thead th {
+    padding: 0 7px;
+
+    font-size: 8px;
+  }
+
+  .users-table tbody td {
+    padding: 8px 7px;
+
+    font-size: 10px;
+  }
+
+  .user-avatar {
+    width: 30px;
+    height: 30px;
+
+    min-width: 30px;
+  }
+
+  .user-name {
+    font-size: 10px;
+  }
+
+  .user-id {
+    font-size: 8px;
+  }
+
+  .user-email {
+    font-size: 9px;
+  }
+
+  .role-badge {
+    min-width: 26px;
+
+    height: 23px;
+
+    padding: 0 6px;
+
+    font-size: 8px;
+  }
+
+  .status-badge {
+    height: 23px;
+
+    padding: 0 7px;
+
+    font-size: 8px;
+  }
+
+  .btn-user-action {
+    width: 29px;
+    height: 29px;
+
+    min-width: 29px;
+  }
+}
+
+
+/* =========================================================
+   PETIT ÉCRAN
+========================================================= */
+
+@media (max-width: 850px) {
+
+  .users-toolbar {
     align-items: stretch;
   }
 
-  .teachers-toolbar__actions {
-    flex-direction: column;
-    align-items: stretch;
+  .users-toolbar__actions {
+    flex-wrap: wrap;
   }
 
-  .teachers-search {
-    min-width: 100%;
+  .users-search {
+    width: 220px;
   }
+
+  .users-table thead th {
+    padding: 0 5px;
+
+    font-size: 7px;
+  }
+
+  .users-table tbody td {
+    padding: 7px 5px;
+  }
+
+  .user-cell {
+    gap: 6px;
+  }
+
+  .user-avatar {
+    width: 28px;
+    height: 28px;
+
+    min-width: 28px;
+  }
+
+  .status-badge {
+    padding: 0 6px;
+
+    font-size: 7px;
+  }
+
+  .table-actions {
+    gap: 4px;
+  }
+
+  .btn-user-action {
+    width: 27px;
+    height: 27px;
+
+    min-width: 27px;
+  }
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 650px) {
+
+  .users-toolbar {
+    flex-direction: column;
+
+    align-items: stretch;
+
+    gap: 12px;
+  }
+
+  .users-toolbar__actions {
+    display: flex;
+
+    width: 100%;
+
+    flex-wrap: nowrap;
+  }
+
+  .users-search {
+    flex: 1;
+
+    width: auto;
+
+    min-width: 0;
+  }
+
+  .btn-add-user {
+    flex-shrink: 0;
+
+    padding: 0 11px;
+  }
+
+  .btn-add-user span {
+    display: none;
+  }
+
+
+  /* Carte */
+
+  .users-card__header {
+    padding: 14px 15px;
+  }
+
+
+  /* Tableau */
+
+  .users-table thead th {
+    height: 40px;
+
+    padding: 0 3px;
+
+    font-size: 6px;
+
+    letter-spacing: 0;
+  }
+
+  .users-table tbody td {
+    height: 58px;
+
+    padding: 5px 3px;
+
+    font-size: 8px;
+  }
+
+
+  /* Niveau */
+
+  .user-cell {
+    gap: 0;
+  }
+
+  .user-avatar {
+    display: none;
+  }
+
+  .user-name {
+    font-size: 9px;
+  }
+
+  .user-id {
+    font-size: 7px;
+  }
+
+
+  /* Cycle / série */
+
+  .user-email {
+    font-size: 8px;
+  }
+
+
+  /* Badges */
+
+  .role-badge {
+    min-width: 23px;
+
+    height: 21px;
+
+    padding: 0 4px;
+
+    font-size: 7px;
+  }
+
+
+  /* Statut */
+
+  .status-cell {
+    padding-left: 2px !important;
+    padding-right: 2px !important;
+  }
+
+  .status-badge {
+    height: 21px;
+
+    padding: 0 5px;
+
+    gap: 3px;
+
+    font-size: 6px;
+  }
+
+  .status-dot {
+    width: 5px;
+    height: 5px;
+
+    min-width: 5px;
+  }
+
+
+  /* Actions */
+
+  .users-table__actions {
+    padding-left: 2px !important;
+    padding-right: 2px !important;
+  }
+
+  .table-actions {
+    gap: 3px;
+  }
+
+  .btn-user-action {
+    width: 24px;
+    height: 24px;
+
+    min-width: 24px;
+
+    font-size: 10px;
+  }
+
+
+  /* Footer */
+
+  .users-card__footer {
+    justify-content: center;
+
+    padding: 8px 10px;
+  }
+}
+/* =========================================================
+   LARGEURS DES COLONNES ENSEIGNANTS
+========================================================= */
+
+.users-table th:nth-child(1),
+.users-table td:nth-child(1) {
+  width: 25%;
+}
+
+.users-table th:nth-child(2),
+.users-table td:nth-child(2) {
+  width: 21%;
+}
+
+.users-table th:nth-child(3),
+.users-table td:nth-child(3) {
+  width: 28%;
+}
+
+.users-table th:nth-child(4),
+.users-table td:nth-child(4) {
+  width: 13%;
+}
+
+.users-table th:nth-child(5),
+.users-table td:nth-child(5) {
+  width: 13%;
+}
+
+
+/* =========================================================
+   MATIÈRES
+========================================================= */
+
+.teacher-subjects {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+
+  width: 100%;
+  min-width: 0;
+
+  overflow: hidden;
+}
+
+
+.subject-badge {
+  display: inline-flex;
+
+  align-items: center;
+  justify-content: center;
+
+  max-width: 120px;
+  height: 25px;
+
+  padding: 0 8px;
+
+  background: #eaf7ef;
+  border: 1px solid #d1ebdb;
+  border-radius: 6px;
+
+  color: #087a46;
+
+  font-size: 9px;
+  font-weight: 600;
+
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+
+.subject-badge--more {
+  flex-shrink: 0;
+
+  background: #f4f7f5;
+  border-color: #e0e8e3;
+
+  color: #53675e;
 }

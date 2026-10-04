@@ -1,8 +1,4 @@
-<app-page-header [backBtn]="true"
-  [titre]="'Liste des Matières'">
-</app-page-header>
-
-<!-- Toolbar -->
+<app-page-header [backBtn]="true" [titre]="'Liste des Matières'"></app-page-header>
 <div class="users-toolbar">
   <div class="users-toolbar__info">
     <div class="users-toolbar__title">Matières</div>
@@ -10,38 +6,17 @@
       Gérez les matières de l'établissement
     </div>
   </div>
-
   <div class="users-toolbar__actions">
-
-    <!-- Recherche -->
     <div class="users-search">
       <i class="bi bi-search"></i>
-
-      <input
-        type="text"
-        class="users-search__input"
-        placeholder="Rechercher une matière..."
-        [(ngModel)]="searchText"
-        (keyup)="searchAction()">
+      <input type="text" class="users-search__input" placeholder="Rechercher une matière..." [(ngModel)]="searchText" (keyup)="searchAction()">
     </div>
-
-    <!-- Ajouter -->
-    <button
-      type="button"
-      class="btn-add-user"
-      (click)="add()">
-      <i class="bi bi-plus-lg"></i>
-      <span>Ajouter une matière</span>
-    </button>
-
+    <button type="button" class="btn-add-user" (click)="add()"><i class="bi bi-plus-lg"></i><span>Ajouter une matière</span></button>
   </div>
 </div>
 
-
 <!-- Card -->
 <div class="users-card">
-
-  <!-- Card header -->
   <div class="users-card__header">
     <div>
       <h4>Liste des Matières</h4>
@@ -50,14 +25,9 @@
       </span>
     </div>
   </div>
-
-
   <!-- Table -->
   <div class="users-table-wrapper">
-
     <table class="users-table">
-
-      <!-- 6 colonnes -->
       <colgroup>
         <col class="col-code">
         <col class="col-libelle">
@@ -77,121 +47,58 @@
         <th class="users-table__actions">Actions</th>
       </tr>
       </thead>
-
-
       <tbody>
-
-      <!-- Loading -->
         @if (isLoad) {
-
           <tr>
             <td colspan="6" class="users-table__loading">
-
               <div class="loading-content">
                 <span class="loading-spinner"></span>
                 <span>Chargement des matières...</span>
               </div>
-
             </td>
           </tr>
-
         }
         @else {
-
           @for (matiere of matieres; track matiere.id) {
-
             <tr>
-
-              <!-- Code -->
               <td>
                 <div class="user-cell">
-
                   <div class="user-avatar">
                     <i class="bi bi-book-half"></i>
                   </div>
-
                   <div class="user-information">
                     <div class="user-name">
                       {{ matiere.code }}
                     </div>
                   </div>
-
                 </div>
               </td>
-
-
-              <!-- Libellé -->
+              <td><span class="table-text">{{ matiere.libelle ?? '-' }}</span></td>
+              <td><span class="table-text">{{ matiere.description ?? '-' }}</span></td>
               <td>
-                  <span class="table-text">
-                    {{ matiere.libelle ?? '-' }}
-                  </span>
-              </td>
-
-
-              <!-- Description -->
-              <td>
-                  <span class="table-text">
-                    {{ matiere.description ?? '-' }}
-                  </span>
-              </td>
-
-
-              <!-- Statut -->
-              <td>
-
                 @if (matiere.actif === true) {
-
                   <span class="status-badge status-badge--active">
                       <span class="status-dot"></span>
                       <span class="status-text">Active</span>
                     </span>
-
                 }
                 @else {
-
                   <span class="status-badge status-badge--inactive">
                       <span class="status-dot"></span>
                       <span class="status-text">Inactive</span>
                     </span>
-
                 }
-
               </td>
-
               <td><span class="role-badge">{{ matiere.enseignants?.length ?? 0 }}</span></td>
-
-
               <!-- Actions -->
               <td class="users-table__actions">
-
                 <div class="table-actions">
-
-                  <!-- Modifier -->
-                  <button
-                    type="button"
-                    class="btn-user-action"
-                    title="Modifier la matière"
-                    (click)="edit(matiere)">
-                    <i class="bi bi-pencil"></i>
-                  </button>
-
-                  <!-- Supprimer -->
-                  <button
-                    type="button"
-                    class="btn-user-action btn-user-action--danger"
-                    title="Supprimer la matière"
-                    (click)="delete(matiere)">
-                    <i class="bi bi-trash"></i>
-                  </button>
-
+                  <button type="button" class="btn-user-action" title="Modifier la matière" (click)="edit(matiere)"><i class="bi bi-pencil"></i></button>
+                  <button type="button" class="btn-user-action btn-user-action--danger" title="Supprimer la matière" (click)="delete(matiere)"><i class="bi bi-trash"></i></button>
                 </div>
-
               </td>
-
             </tr>
-
           }
-
         }
       </tbody>
     </table>
