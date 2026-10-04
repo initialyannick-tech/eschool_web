@@ -6,11 +6,12 @@ import {ApiService} from '../../../../core/services/api.service';
 import {PageHeaderComponent} from '../../../../shared/components/page-header/page-header.component';
 import {Matiere} from '../../models/matiere';
 import {ModalMatiereComponent} from '../../components/modals/modal-matiere/modal-matiere.component';
+import {CustomPaginationComponent} from '../../../../shared/components/custom-pagination/custom-pagination.component';
 
 @Component({
   selector: 'app-list-matiere',
   standalone: true,
-  imports: [CommonModule, FormsModule, PageHeaderComponent],
+  imports: [CommonModule, FormsModule, PageHeaderComponent, CustomPaginationComponent],
   templateUrl: './list-matiere.page.html',
   styleUrls: ['./list-matiere.page.scss']
 })
@@ -19,6 +20,7 @@ export class ListMatierePage {
   modal = inject(NgbModal);
 
   matieres: Matiere[] = [];
+  pagination: any[] = []
   isLoad = true;
   searchText = '';
 
@@ -28,11 +30,10 @@ export class ListMatierePage {
 
   getMatieres() {
     this.apiService.get('matiere').then((data: any) => {
-      this.matieres = data.data ?? [];
-      this.isLoad = false;
-    }).catch(() => {
-      this.isLoad = false;
-    });
+      this.matieres = data.data
+      this.pagination = data.meta.links
+      this.isLoad = false
+    })
   }
 
   add() {
@@ -85,5 +86,16 @@ export class ListMatierePage {
       const value = `${matiere.libelle ?? ''} ${matiere.code ?? ''} ${matiere.description ?? ''}`.toLowerCase();
       return value.includes(criteria);
     });
+  }
+
+  changePage(url: any) {
+    if (url != null) {
+      this.isLoad = true;
+      this.apiService.getPaginate(url).then((data: any) => {
+        this.matieres = data.data;
+        this.pagination = data.meta.links;
+        this.isLoad = false;
+      })
+    }
   }
 }
