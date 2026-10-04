@@ -23,6 +23,16 @@ export const PEDAGOGIE_ROUTES: Routes = [
       {
         path: 'detail/:code',
         loadComponent: () => import('./views/detail-eleve/detail-eleve.page').then(m => m.DetailElevePage)
+      },
+
+      {
+        path: 'list-salle',
+        loadComponent: () => import('./views/list-salle/list-salle.page').then(m => m.ListSallePage)
+      },
+
+      {
+        path: 'emploi-du-temps',
+        loadComponent: () => import('./views/emploi-du-temps/emploi-du-temps.page').then(m => m.EmploiDuTempsPage)
       }
     ]
   }

@@ -1,0 +1,399 @@
+/* =========================================================
+   MODAL SALLE
+========================================================= */
+
+.salle-modal {
+  --salle-primary: #006b3f;
+  --salle-primary-dark: #004d2d;
+  --salle-accent: #f2c94c;
+  --salle-border: #dbe6e0;
+  --salle-text: #243b31;
+  --salle-muted: #899790;
+}
+
+
+/* =========================================================
+   STRUCTURE GENERALE
+========================================================= */
+
+.salle-modal .salle-modal__body {
+  grid-template-columns:
+    minmax(320px, 0.85fr)
+    minmax(0, 1.5fr);
+
+  align-items: stretch;
+  gap: 22px;
+}
+
+.salle-modal .classe-panel {
+  min-width: 0;
+  height: 100%;
+}
+
+.salle-modal .classe-panel--general {
+  background: #ffffff;
+}
+
+.salle-modal .classe-panel--school {
+  background: #fbfcfb;
+}
+
+
+/* =========================================================
+   CONTENU GENERAL
+========================================================= */
+
+.salle-modal .classe-general-content {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  height: 100%;
+}
+
+.salle-modal .classe-field {
+  min-width: 0;
+  width: 100%;
+}
+
+.salle-modal .classe-field label {
+  display: block;
+  margin-bottom: 7px;
+  color: #344a40;
+  font-size: 11px;
+  font-weight: 650;
+}
+
+.salle-modal .classe-field label span {
+  color: #d25555;
+  margin-left: 2px;
+}
+
+
+/* =========================================================
+   INPUTS
+========================================================= */
+
+.salle-modal .classe-input {
+  position: relative;
+  width: 100%;
+  height: 42px;
+}
+
+.salle-modal .classe-input > i {
+  position: absolute;
+  top: 50%;
+  left: 12px;
+  z-index: 2;
+
+  transform: translateY(-50%);
+
+  color: #82958a;
+  font-size: 14px;
+
+  pointer-events: none;
+}
+
+.salle-modal .classe-input input {
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+
+  padding: 0 12px 0 38px;
+
+  background: #ffffff;
+  border: 1px solid var(--salle-border);
+  border-radius: 8px;
+
+  color: var(--salle-text);
+  font-size: 12px;
+
+  outline: none;
+  transition: border-color .2s ease,
+  box-shadow .2s ease,
+  background .2s ease;
+}
+
+.salle-modal .classe-input input::placeholder {
+  color: #a2afa8;
+  font-size: 11px;
+}
+
+.salle-modal .classe-input input:hover {
+  border-color: #b8d1c3;
+}
+
+.salle-modal .classe-input input:focus {
+  border-color: var(--salle-primary);
+  box-shadow: 0 0 0 3px rgba(0, 107, 63, .09);
+}
+
+.salle-modal .classe-input input[type="number"] {
+  cursor: text;
+}
+
+
+/* =========================================================
+   SELECT NATIF
+========================================================= */
+
+.salle-modal .classe-native-select {
+  position: relative;
+  width: 100%;
+  height: 42px;
+}
+
+.salle-modal .classe-native-select > i:first-child {
+  position: absolute;
+  top: 50%;
+  left: 12px;
+  z-index: 2;
+
+  transform: translateY(-50%);
+
+  color: #82958a;
+  font-size: 14px;
+
+  pointer-events: none;
+}
+
+.salle-modal .classe-native-select select {
+  width: 100%;
+  height: 100%;
+  min-width: 0;
+
+  padding: 0 34px 0 38px;
+
+  appearance: none;
+  -webkit-appearance: none;
+
+  background-color: #ffffff;
+  border: 1px solid var(--salle-border);
+  border-radius: 8px;
+
+  color: var(--salle-text);
+  font-family: inherit;
+  font-size: 12px;
+
+  outline: none;
+  cursor: pointer;
+
+  transition: border-color .2s ease,
+  box-shadow .2s ease;
+}
+
+.salle-modal .classe-native-select select:hover {
+  border-color: #b8d1c3;
+}
+
+.salle-modal .classe-native-select select:focus {
+  border-color: var(--salle-primary);
+  box-shadow: 0 0 0 3px rgba(0, 107, 63, .09);
+}
+
+.salle-modal .classe-native-select .select-arrow {
+  position: absolute;
+  top: 50%;
+  right: 13px;
+
+  transform: translateY(-50%);
+
+  color: #82958a;
+  font-size: 11px;
+
+  pointer-events: none;
+}
+
+.salle-modal .classe-native-select select option {
+  color: var(--salle-text);
+  background: #ffffff;
+}
+
+
+/* =========================================================
+   PANNEAU COMPLEMENTAIRE
+========================================================= */
+
+.salle-modal .salle-complement-content {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+
+  width: 100%;
+  min-width: 0;
+  height: 100%;
+}
+
+.salle-modal .salle-subsection {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+
+  width: 100%;
+  min-width: 0;
+}
+
+
+/* =========================================================
+   INDICATIONS
+========================================================= */
+
+.salle-modal .salle-field-hint {
+  display: block;
+  margin-top: 6px;
+
+  color: #84958c;
+  font-size: 10px;
+  line-height: 1.5;
+}
+
+
+/* =========================================================
+   INFORMATIONS
+========================================================= */
+
+.salle-modal .classe-general-info,
+.salle-modal .classe-school-info {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+
+  margin-top: auto;
+  padding-top: 14px;
+
+  border-top: 1px solid #e5ede8;
+
+  color: #778a7f;
+  font-size: 10px;
+  line-height: 1.6;
+}
+
+.salle-modal .classe-general-info i,
+.salle-modal .classe-school-info i {
+  flex-shrink: 0;
+  margin-top: 2px;
+
+  color: var(--salle-primary);
+  font-size: 12px;
+}
+
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+.salle-modal .classe-modal__footer {
+  background: #f5f9f6;
+  border-top: 1px solid #dce8e1;
+}
+
+.salle-modal .btn-classe-submit {
+  background: var(--salle-primary);
+  border-color: var(--salle-primary);
+}
+
+.salle-modal .btn-classe-submit:hover:not(:disabled) {
+  background: var(--salle-primary-dark);
+  border-color: var(--salle-primary-dark);
+}
+
+
+/* =========================================================
+   TABLETTE
+========================================================= */
+
+@media (max-width: 1100px) {
+  .salle-modal .salle-modal__body {
+    grid-template-columns:
+      minmax(280px, 0.85fr)
+      minmax(0, 1.15fr);
+
+    gap: 16px;
+    padding: 18px;
+  }
+}
+
+
+/* =========================================================
+   PETITE TABLETTE
+========================================================= */
+
+@media (max-width: 850px) {
+  .salle-modal .salle-modal__body {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+
+  .salle-modal .classe-panel {
+    width: 100%;
+    height: auto;
+  }
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 650px) {
+  .salle-modal .salle-modal__body {
+    display: flex;
+    flex-direction: column;
+
+    padding: 12px;
+    gap: 14px;
+  }
+
+  .salle-modal .classe-panel--general,
+  .salle-modal .classe-panel--school {
+    padding: 13px;
+  }
+
+  .salle-modal .salle-complement-content {
+    gap: 18px;
+  }
+
+  .salle-modal .classe-modal__footer {
+    padding: 12px;
+  }
+
+  .salle-modal .classe-footer-actions {
+    width: 100%;
+  }
+
+  .salle-modal .btn-classe-cancel,
+  .salle-modal .btn-classe-submit {
+    flex: 1;
+    min-width: 0;
+    padding: 0 10px;
+  }
+}
+
+
+/* =========================================================
+   PETIT MOBILE
+========================================================= */
+
+@media (max-width: 450px) {
+  .salle-modal .classe-section__heading {
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .salle-modal .classe-section__heading h5 {
+    font-size: 12px;
+    line-height: 1.5;
+  }
+
+  .salle-modal .classe-section__heading p {
+    font-size: 10px;
+    line-height: 1.5;
+  }
+
+  .salle-modal .classe-modal__heading h4 {
+    font-size: 16px;
+  }
+
+  .salle-modal .classe-modal__heading p {
+    font-size: 10px;
+  }
+}

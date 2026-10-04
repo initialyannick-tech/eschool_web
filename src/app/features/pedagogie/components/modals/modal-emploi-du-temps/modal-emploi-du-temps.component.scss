@@ -1,0 +1,422 @@
+/* =========================================================
+   MODAL EMPLOI DU TEMPS
+========================================================= */
+
+.emploi-modal {
+  --emploi-primary: #006b3f;
+  --emploi-primary-dark: #004d2d;
+  --emploi-accent: #f2c94c;
+  --emploi-border: #dbe6e0;
+  --emploi-text: #243b31;
+  --emploi-muted: #899790;
+}
+
+
+/* =========================================================
+   STRUCTURE GENERALE
+========================================================= */
+
+.emploi-modal .emploi-modal__body {
+  grid-template-columns:
+    minmax(320px, 0.85fr)
+    minmax(0, 1.5fr);
+
+  align-items: stretch;
+  gap: 22px;
+}
+
+.emploi-modal .classe-panel {
+  min-width: 0;
+  height: 100%;
+}
+
+.emploi-modal .classe-panel--general {
+  background: #ffffff;
+}
+
+.emploi-modal .classe-panel--school {
+  background: #fbfcfb;
+}
+
+
+/* =========================================================
+   CONTENU GENERAL
+========================================================= */
+
+.emploi-modal .classe-general-content {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  height: 100%;
+}
+
+.emploi-modal .classe-field {
+  min-width: 0;
+  width: 100%;
+}
+
+.emploi-modal .classe-field label {
+  display: block;
+  margin-bottom: 7px;
+  color: #344a40;
+  font-size: 11px;
+  font-weight: 650;
+}
+
+.emploi-modal .classe-field label span {
+  color: #d25555;
+  margin-left: 2px;
+}
+
+
+/* =========================================================
+   INPUTS
+========================================================= */
+
+.emploi-modal .classe-input {
+  position: relative;
+  width: 100%;
+  height: 42px;
+}
+
+.emploi-modal .classe-input > i {
+  position: absolute;
+  top: 50%;
+  left: 12px;
+  z-index: 2;
+
+  transform: translateY(-50%);
+
+  color: #82958a;
+  font-size: 14px;
+
+  pointer-events: none;
+}
+
+.emploi-modal .classe-input input {
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+
+  padding: 0 12px 0 38px;
+
+  background: #ffffff;
+  border: 1px solid var(--emploi-border);
+  border-radius: 8px;
+
+  color: var(--emploi-text);
+  font-size: 12px;
+
+  outline: none;
+  transition: border-color .2s ease,
+  box-shadow .2s ease,
+  background .2s ease;
+}
+
+.emploi-modal .classe-input input::placeholder {
+  color: #a2afa8;
+  font-size: 11px;
+}
+
+.emploi-modal .classe-input input:hover {
+  border-color: #b8d1c3;
+}
+
+.emploi-modal .classe-input input:focus {
+  border-color: var(--emploi-primary);
+  box-shadow: 0 0 0 3px rgba(0, 107, 63, .09);
+}
+
+.emploi-modal .classe-input input[type="time"] {
+  color-scheme: light;
+  cursor: pointer;
+}
+
+
+/* =========================================================
+   SELECT NATIF
+========================================================= */
+
+.emploi-modal .classe-native-select {
+  position: relative;
+  width: 100%;
+  height: 42px;
+}
+
+.emploi-modal .classe-native-select > i:first-child {
+  position: absolute;
+  top: 50%;
+  left: 12px;
+  z-index: 2;
+
+  transform: translateY(-50%);
+
+  color: #82958a;
+  font-size: 14px;
+
+  pointer-events: none;
+}
+
+.emploi-modal .classe-native-select select {
+  width: 100%;
+  height: 100%;
+  min-width: 0;
+
+  padding: 0 34px 0 38px;
+
+  appearance: none;
+  -webkit-appearance: none;
+
+  background-color: #ffffff;
+  border: 1px solid var(--emploi-border);
+  border-radius: 8px;
+
+  color: var(--emploi-text);
+  font-family: inherit;
+  font-size: 12px;
+
+  outline: none;
+  cursor: pointer;
+
+  transition: border-color .2s ease,
+  box-shadow .2s ease;
+}
+
+.emploi-modal .classe-native-select select:hover {
+  border-color: #b8d1c3;
+}
+
+.emploi-modal .classe-native-select select:focus {
+  border-color: var(--emploi-primary);
+  box-shadow: 0 0 0 3px rgba(0, 107, 63, .09);
+}
+
+.emploi-modal .classe-native-select .select-arrow {
+  position: absolute;
+  top: 50%;
+  right: 13px;
+
+  transform: translateY(-50%);
+
+  color: #82958a;
+  font-size: 11px;
+
+  pointer-events: none;
+}
+
+.emploi-modal .classe-native-select select option {
+  color: var(--emploi-text);
+  background: #ffffff;
+}
+
+
+/* =========================================================
+   PANNEAU COMPLEMENTAIRE
+========================================================= */
+
+.emploi-modal .emploi-complement-content {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+
+  width: 100%;
+  min-width: 0;
+  height: 100%;
+}
+
+.emploi-modal .emploi-subsection {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+
+  width: 100%;
+  min-width: 0;
+}
+
+
+/* =========================================================
+   GRILLE AFFECTATION
+========================================================= */
+
+.emploi-modal .classe-school-grid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(2, minmax(0, 1fr));
+
+  gap: 16px;
+
+  width: 100%;
+  min-width: 0;
+}
+
+.emploi-modal .classe-school-grid > .classe-field {
+  min-width: 0;
+}
+
+
+/* =========================================================
+   INFORMATIONS
+========================================================= */
+
+.emploi-modal .classe-general-info,
+.emploi-modal .classe-school-info {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+
+  margin-top: auto;
+  padding-top: 14px;
+
+  border-top: 1px solid #e5ede8;
+
+  color: #778a7f;
+  font-size: 10px;
+  line-height: 1.6;
+}
+
+.emploi-modal .classe-general-info i,
+.emploi-modal .classe-school-info i {
+  flex-shrink: 0;
+  margin-top: 2px;
+
+  color: var(--emploi-primary);
+  font-size: 12px;
+}
+
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+.emploi-modal .classe-modal__footer {
+  background: #f5f9f6;
+  border-top: 1px solid #dce8e1;
+}
+
+.emploi-modal .btn-classe-submit {
+  background: var(--emploi-primary);
+  border-color: var(--emploi-primary);
+}
+
+.emploi-modal .btn-classe-submit:hover:not(:disabled) {
+  background: var(--emploi-primary-dark);
+  border-color: var(--emploi-primary-dark);
+}
+
+
+/* =========================================================
+   TABLETTE
+========================================================= */
+
+@media (max-width: 1100px) {
+  .emploi-modal .emploi-modal__body {
+    grid-template-columns:
+      minmax(280px, 0.85fr)
+      minmax(0, 1.15fr);
+
+    gap: 16px;
+    padding: 18px;
+  }
+
+  .emploi-modal .classe-school-grid {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+}
+
+
+/* =========================================================
+   PETITE TABLETTE
+========================================================= */
+
+@media (max-width: 850px) {
+  .emploi-modal .emploi-modal__body {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+
+  .emploi-modal .classe-panel {
+    width: 100%;
+    height: auto;
+  }
+
+  .emploi-modal .classe-school-grid {
+    grid-template-columns:
+      repeat(2, minmax(0, 1fr));
+  }
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 650px) {
+  .emploi-modal .emploi-modal__body {
+    display: flex;
+    flex-direction: column;
+
+    padding: 12px;
+    gap: 14px;
+  }
+
+  .emploi-modal .classe-panel--general,
+  .emploi-modal .classe-panel--school {
+    padding: 13px;
+  }
+
+  .emploi-modal .classe-school-grid {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+
+  .emploi-modal .emploi-complement-content {
+    gap: 18px;
+  }
+
+  .emploi-modal .classe-modal__footer {
+    padding: 12px;
+  }
+
+  .emploi-modal .classe-footer-actions {
+    width: 100%;
+  }
+
+  .emploi-modal .btn-classe-cancel,
+  .emploi-modal .btn-classe-submit {
+    flex: 1;
+    min-width: 0;
+    padding: 0 10px;
+  }
+}
+
+
+/* =========================================================
+   PETIT MOBILE
+========================================================= */
+
+@media (max-width: 450px) {
+  .emploi-modal .classe-section__heading {
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .emploi-modal .classe-section__heading h5 {
+    font-size: 12px;
+    line-height: 1.5;
+  }
+
+  .emploi-modal .classe-section__heading p {
+    font-size: 10px;
+    line-height: 1.5;
+  }
+
+  .emploi-modal .classe-modal__heading h4 {
+    font-size: 16px;
+  }
+
+  .emploi-modal .classe-modal__heading p {
+    font-size: 10px;
+  }
+}
