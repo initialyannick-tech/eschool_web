@@ -1,0 +1,160 @@
+<app-page-header [backBtn]="true" [titre]="'Profil enseignant'"></app-page-header>
+
+@if (isLoad) {
+  <div class="enseignant-detail-loading">
+    <div class="enseignant-detail-loading__icon">
+      <i class="bi bi-arrow-repeat"></i>
+    </div>
+    <div>
+      <h6>Chargement du profil</h6>
+      <span>Récupération des informations enseignantes...</span>
+    </div>
+  </div>
+} @else {
+
+  <!-- IDENTITÉ DE L'ENSEIGNANT -->
+  <div class="enseignant-profile-card">
+    <div class="enseignant-profile-card__main">
+      <div class="enseignant-avatar">
+        <i class="bi bi-person-workspace"></i>
+      </div>
+
+      <div class="enseignant-profile-card__identity">
+        <div class="enseignant-profile-card__eyebrow">
+          <span><i class="bi bi-person-badge"></i>Profil enseignant</span>
+          @if (enseignant.status) {
+            <span class="enseignant-status">
+              <i class="bi bi-circle-fill"></i>
+              {{ enseignant.status === 'active' ? 'Actif' : 'Inactif' }}
+            </span>
+          }
+        </div>
+
+        <h2>{{ enseignant.prenom }} {{ enseignant.nom }}</h2>
+
+        <div class="enseignant-profile-card__meta">
+          @if (enseignant.email) {
+            <span>
+              <i class="bi bi-envelope"></i>
+              {{ enseignant.email }}
+            </span>
+          }
+
+          @if (enseignant.specialite?.nom) {
+            <span>
+              <i class="bi bi-mortarboard"></i>
+              {{ enseignant.specialite.nom }}
+            </span>
+          }
+        </div>
+      </div>
+    </div>
+
+    <div class="enseignant-profile-card__actions">
+      <div class="enseignant-badge">
+        <span>STATUT</span>
+        <strong>{{ enseignant.status === 'active' ? 'Actif' : 'Inactif' }}</strong>
+      </div>
+    </div>
+  </div>
+
+  <!-- RÉSUMÉ -->
+  <div class="enseignant-summary-grid">
+    <div class="enseignant-summary-card">
+      <div class="enseignant-summary-card__icon teacher-blue">
+        <i class="bi bi-journal-bookmark-fill"></i>
+      </div>
+      <div class="enseignant-summary-card__content">
+        <span>Matières</span>
+        <strong>{{ matieres.length }}</strong>
+      </div>
+    </div>
+
+    <div class="enseignant-summary-card">
+      <div class="enseignant-summary-card__icon teacher-green">
+        <i class="bi bi-mortarboard"></i>
+      </div>
+      <div class="enseignant-summary-card__content">
+        <span>Spécialité</span>
+        <strong>{{ enseignant.specialite?.nom || 'Non définie' }}</strong>
+      </div>
+    </div>
+
+    <div class="enseignant-summary-card">
+      <div class="enseignant-summary-card__icon teacher-orange">
+        <i class="bi bi-shield-check"></i>
+      </div>
+      <div class="enseignant-summary-card__content">
+        <span>Statut</span>
+        <strong>{{ enseignant.status === 'active' ? 'Actif' : 'Inactif' }}</strong>
+      </div>
+    </div>
+  </div>
+
+  <!-- INFORMATIONS -->
+  <div class="enseignant-info-block">
+    <div class="enseignant-info-block__header">
+      <div>
+        <span class="enseignant-info-block__eyebrow">Informations</span>
+        <h5>Fiche enseignant</h5>
+      </div>
+      <span class="enseignant-info-block__count">
+        <i class="bi bi-person-lines-fill"></i>
+        {{ matieres.length }} matière(s)
+      </span>
+    </div>
+
+    <div class="enseignant-grid">
+      <div class="enseignant-card">
+        <div class="enseignant-card__label">Nom</div>
+        <div class="enseignant-card__value">{{ enseignant.nom || '—' }}</div>
+      </div>
+
+      <div class="enseignant-card">
+        <div class="enseignant-card__label">Prénom</div>
+        <div class="enseignant-card__value">{{ enseignant.prenom || '—' }}</div>
+      </div>
+
+      <div class="enseignant-card">
+        <div class="enseignant-card__label">Email</div>
+        <div class="enseignant-card__value">{{ enseignant.email || '—' }}</div>
+      </div>
+
+      <div class="enseignant-card">
+        <div class="enseignant-card__label">Spécialité</div>
+        <div class="enseignant-card__value">{{ enseignant.specialite?.nom || '—' }}</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MATIÈRES AFFECTÉES -->
+  <div class="enseignant-matieres">
+    <div class="enseignant-matieres__header">
+      <div>
+        <span class="enseignant-matieres__eyebrow">Affectation</span>
+        <h5>Matières enseignées</h5>
+      </div>
+    </div>
+
+    @if (matieres.length > 0) {
+      <div class="matiere-list">
+        @for (matiere of matieres; track matiere.id) {
+          <div class="matiere-item">
+            <div class="matiere-item__icon">
+              <i class="bi bi-journal-bookmark-fill"></i>
+            </div>
+            <div class="matiere-item__content">
+              <strong>{{ matiere.libelle }}</strong>
+              <span>{{ matiere.code || 'Code non renseigné' }}</span>
+            </div>
+          </div>
+        }
+      </div>
+    } @else {
+      <div class="enseignant-empty-state">
+        <i class="bi bi-info-circle"></i>
+        <span>Aucune matière affectée pour le moment.</span>
+      </div>
+    }
+  </div>
+}

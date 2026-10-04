@@ -1,9 +1,10 @@
-import {inject, Injectable} from '@angular/core';
+import {inject, Injectable, PLATFORM_ID} from '@angular/core';
 import {NgxPermissionsService} from 'ngx-permissions';
 import {HttpClient} from '@angular/common/http';
 import {Router} from "@angular/router";
 import {ShareService} from './share.service';
 import {environment} from '../../../environments/environment';
+import {isPlatformServer} from '@angular/common';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +15,12 @@ export class ApiService {
   router = inject(Router)
   shareService = inject(ShareService)
   permissionsService = inject(NgxPermissionsService)
+  platformId = inject(PLATFORM_ID)
   apiUrl = environment.apiUrl
+
+  private shouldSkipServerRequest(): boolean {
+    return isPlatformServer(this.platformId);
+  }
 
 
   /**
@@ -22,6 +28,10 @@ export class ApiService {
    * @url
    */
   get(url: string) {
+    if (this.shouldSkipServerRequest()) {
+      return Promise.resolve([]);
+    }
+
     return new Promise((resolve, reject) => {
       this.http.get(this.apiUrl + url).subscribe(
         (data) => {
@@ -46,6 +56,10 @@ export class ApiService {
    * @data
    */
   post(url: string, data: any) {
+    if (this.shouldSkipServerRequest()) {
+      return Promise.resolve({ success: true });
+    }
+
     return new Promise((resolve, reject) => {
       this.http.post(this.apiUrl + url, data).subscribe(
         (data: any) => {
@@ -70,6 +84,10 @@ export class ApiService {
    * @data
    */
   put(url: string, data: any) {
+    if (this.shouldSkipServerRequest()) {
+      return Promise.resolve({ success: true });
+    }
+
     return new Promise((resolve, reject) => {
       this.http.put(this.apiUrl + url, data).subscribe(
         (data: any) => {
@@ -93,6 +111,10 @@ export class ApiService {
    * @url
    */
   delete(url: string) {
+    if (this.shouldSkipServerRequest()) {
+      return Promise.resolve({ success: true });
+    }
+
     return new Promise((resolve, reject) => {
       this.http.delete(this.apiUrl + url).subscribe(
         (data: any) => {
@@ -116,6 +138,10 @@ export class ApiService {
    * @url
    */
   getPaginate(url: string) {
+    if (this.shouldSkipServerRequest()) {
+      return Promise.resolve({ data: [], total: 0 });
+    }
+
     return new Promise((resolve, reject) => {
       this.http.get(url).subscribe(
         (data: any) => {
@@ -139,7 +165,15 @@ export class ApiService {
    * @permissions
    */
   loadPermissions(permissions: any) {
-    this.permissionsService.loadPermissions(permissions);
+    const normalizedPermissions = Array.isArray(permissions)
+      ? permissions
+      : Array.isArray(permissions?.permissions)
+        ? permissions.permissions
+        : typeof permissions === 'string'
+          ? permissions.split(',').map((permission) => permission.trim()).filter(Boolean)
+          : [];
+
+    this.permissionsService.loadPermissions(normalizedPermissions);
   }
 
 }

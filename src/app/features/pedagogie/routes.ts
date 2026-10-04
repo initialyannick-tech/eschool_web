@@ -23,6 +23,11 @@ export const PEDAGOGIE_ROUTES: Routes = [
       {
         path: 'detail/:code',
         loadComponent: () => import('./views/detail-eleve/detail-eleve.page').then(m => m.DetailElevePage)
+      },
+
+      {
+        path: 'list-matiere',
+        loadComponent: () => import('./views/list-matiere/list-matiere.page').then(m => m.ListMatierePage)
       }
     ]
   }

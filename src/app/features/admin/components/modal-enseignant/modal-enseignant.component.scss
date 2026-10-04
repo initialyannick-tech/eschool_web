@@ -1,0 +1,1347 @@
+/* =========================================================
+   MODAL ENSEIGNANT
+========================================================= */
+
+.teacher-modal {
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+
+  background: #ffffff;
+
+  border-radius: 14px;
+
+  overflow: hidden;
+
+  box-shadow:
+    0 20px 60px rgba(24, 51, 42, 0.18);
+}
+
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+.teacher-modal__header {
+
+  position: relative;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  width: 100%;
+
+  padding: 18px 24px;
+
+  box-sizing: border-box;
+
+  background: linear-gradient(
+    135deg,
+    #f5faf7 0%,
+    #ffffff 80%
+  );
+
+  border-bottom: 1px solid #e4ece8;
+}
+
+
+.teacher-modal__header::before {
+
+  content: "";
+
+  position: absolute;
+
+  top: 0;
+  left: 0;
+
+  width: 100%;
+  height: 3px;
+
+  background: linear-gradient(
+    90deg,
+    #006b3f,
+    #00865a,
+    #f2c94c
+  );
+}
+
+
+/* =========================================================
+   IDENTITÉ
+========================================================= */
+
+.teacher-modal__identity {
+
+  display: flex;
+  align-items: center;
+
+  gap: 13px;
+
+  min-width: 0;
+}
+
+
+.teacher-modal__icon {
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  width: 48px;
+  height: 48px;
+
+  flex-shrink: 0;
+
+  background: #eaf6ef;
+
+  border: 1px solid #d4e9dc;
+
+  border-radius: 10px;
+
+  color: #006b3f;
+
+  font-size: 19px;
+}
+
+
+.teacher-modal__heading {
+
+  min-width: 0;
+}
+
+
+.teacher-modal__eyebrow {
+
+  margin-bottom: 2px;
+
+  color: #007a4d;
+
+  font-size: 9px;
+
+  font-weight: 700;
+
+  letter-spacing: .08em;
+
+  text-transform: uppercase;
+}
+
+
+.teacher-modal__heading h4 {
+
+  margin: 0;
+
+  color: #18332a;
+
+  font-size: 19px;
+
+  font-weight: 750;
+
+  line-height: 1.2;
+}
+
+
+.teacher-modal__heading p {
+
+  margin: 4px 0 0;
+
+  color: #7b8b83;
+
+  font-size: 10px;
+
+  line-height: 1.4;
+}
+
+
+/* =========================================================
+   FERMER
+========================================================= */
+
+.teacher-modal__close {
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  width: 34px;
+  height: 34px;
+
+  flex-shrink: 0;
+
+  background: #ffffff;
+
+  border: 1px solid #dce6e1;
+
+  border-radius: 8px;
+
+  color: #71827a;
+
+  cursor: pointer;
+
+  transition: .2s ease;
+}
+
+
+.teacher-modal__close:hover {
+
+  background: #fff4f4;
+
+  border-color: #edcccc;
+
+  color: #bd4b4b;
+
+  transform: rotate(90deg);
+}
+
+
+/* =========================================================
+   FORMULAIRE
+========================================================= */
+
+.teacher-modal__form {
+
+  width: 100%;
+}
+
+
+/* =========================================================
+   BODY
+========================================================= */
+
+.teacher-modal__body {
+
+  display: grid;
+
+  grid-template-columns:
+    minmax(330px, .8fr)
+    minmax(0, 1.7fr);
+
+  gap: 22px;
+
+  width: 100%;
+
+  padding: 20px 28px 22px 24px;
+
+  box-sizing: border-box;
+}
+
+
+/* =========================================================
+   PANNEAUX
+========================================================= */
+
+.teacher-panel {
+
+  min-width: 0;
+
+  box-sizing: border-box;
+
+  border-radius: 10px;
+}
+
+
+/* =========================================================
+   PANNEAU GÉNÉRAL
+========================================================= */
+
+.teacher-panel--general {
+
+  display: flex;
+
+  flex-direction: column;
+
+  padding: 16px;
+
+  background: #ffffff;
+
+  border: 1px solid #e5ede8;
+}
+
+
+/* =========================================================
+   PANNEAU MATIÈRES
+========================================================= */
+
+.teacher-panel--subjects {
+
+  display: flex;
+
+  flex-direction: column;
+
+  min-width: 0;
+
+  padding: 16px;
+
+  background: #fbfcfb;
+
+  border: 1px solid #e5ede8;
+
+  overflow: hidden;
+}
+
+
+/* =========================================================
+   TITRES DES SECTIONS
+========================================================= */
+
+.teacher-section__heading {
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 9px;
+
+  margin-bottom: 18px;
+}
+
+
+.teacher-section__icon {
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  width: 34px;
+  height: 34px;
+
+  flex-shrink: 0;
+
+  background: #f0f7f3;
+
+  border: 1px solid #dcebe3;
+
+  border-radius: 8px;
+
+  color: #007a4d;
+
+  font-size: 13px;
+}
+
+
+.teacher-section__heading h5 {
+
+  margin: 0;
+
+  color: #253c32;
+
+  font-size: 12px;
+
+  font-weight: 700;
+}
+
+
+.teacher-section__heading p {
+
+  margin: 2px 0 0;
+
+  color: #899790;
+
+  font-size: 9px;
+}
+
+
+/* =========================================================
+   CHAMPS
+========================================================= */
+
+.teacher-fields {
+
+  display: grid;
+
+  grid-template-columns:
+    repeat(2, minmax(0, 1fr));
+
+  gap: 15px;
+}
+
+
+.teacher-field {
+
+  width: 100%;
+
+  min-width: 0;
+}
+
+
+.teacher-field--full {
+
+  grid-column: 1 / -1;
+}
+
+
+.teacher-field label {
+
+  display: block;
+
+  margin-bottom: 6px;
+
+  color: #42564d;
+
+  font-size: 10px;
+
+  font-weight: 650;
+}
+
+
+.teacher-field label span {
+
+  color: #d25555;
+}
+
+
+/* =========================================================
+   INPUT
+========================================================= */
+
+.teacher-input {
+
+  position: relative;
+
+  width: 100%;
+  height: 40px;
+}
+
+
+.teacher-input > i {
+
+  position: absolute;
+
+  top: 50%;
+  left: 11px;
+
+  z-index: 2;
+
+  transform: translateY(-50%);
+
+  color: #91a098;
+
+  font-size: 12px;
+
+  pointer-events: none;
+}
+
+
+.teacher-input input {
+
+  width: 100%;
+  height: 100%;
+
+  box-sizing: border-box;
+
+  padding: 0 11px 0 32px;
+
+  background: #ffffff;
+
+  border: 1px solid #dbe6e0;
+
+  border-radius: 7px;
+
+  color: #243b31;
+
+  font-size: 11px;
+
+  outline: none;
+
+  transition: .2s ease;
+}
+
+
+.teacher-input input:hover {
+
+  border-color: #c6d9cf;
+}
+
+
+.teacher-input input:focus {
+
+  border-color: #72aa8d;
+
+  box-shadow:
+    0 0 0 3px rgba(0, 107, 63, .06);
+}
+
+
+.teacher-input input::placeholder {
+
+  color: #9aa7a1;
+}
+
+
+/* =========================================================
+   SELECT
+========================================================= */
+
+.teacher-select {
+
+  position: relative;
+
+  display: flex;
+  align-items: center;
+
+  width: 100%;
+  height: 40px;
+
+  background: #ffffff;
+
+  border: 1px solid #dbe6e0;
+
+  border-radius: 7px;
+
+  transition: .2s ease;
+}
+
+
+.teacher-select:focus-within {
+
+  border-color: #72aa8d;
+
+  box-shadow:
+    0 0 0 3px rgba(0, 107, 63, .06);
+}
+
+
+.teacher-select > i:first-child {
+
+  width: 32px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  flex-shrink: 0;
+
+  color: #91a098;
+
+  font-size: 12px;
+}
+
+
+.teacher-select select {
+
+  width: 100%;
+  height: 100%;
+
+  padding: 0 30px 0 0;
+
+  appearance: none;
+
+  background: transparent;
+
+  border: 0;
+
+  outline: none;
+
+  color: #243b31;
+
+  font-size: 10.5px;
+
+  cursor: pointer;
+}
+
+
+.teacher-select__arrow {
+
+  position: absolute;
+
+  top: 50%;
+  right: 10px;
+
+  transform: translateY(-50%);
+
+  color: #8a9b93;
+
+  font-size: 9px;
+
+  pointer-events: none;
+}
+
+
+/* =========================================================
+   EN-TÊTE MATIÈRES
+========================================================= */
+
+.teacher-subject-header {
+
+  display: flex;
+
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 10px;
+
+  min-height: 40px;
+
+  margin-bottom: 13px;
+
+  padding: 7px 10px;
+
+  background: #f8faf9;
+
+  border: 1px solid #e1e9e5;
+
+  border-radius: 8px;
+}
+
+
+.teacher-subject-info {
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 7px;
+
+  color: #899790;
+
+  font-size: 9px;
+}
+
+
+.teacher-subject-count {
+
+  display: inline-flex;
+
+  align-items: center;
+  justify-content: center;
+
+  min-width: 24px;
+  height: 24px;
+
+  padding: 0 6px;
+
+  background: #eaf6ef;
+
+  border: 1px solid #d4e9dc;
+
+  border-radius: 7px;
+
+  color: #006b3f;
+
+  font-size: 10px;
+
+  font-weight: 700;
+}
+
+
+.teacher-subject-selected {
+
+  display: inline-flex;
+
+  align-items: center;
+
+  gap: 5px;
+
+  color: #007a4d;
+
+  font-size: 8.5px;
+
+  font-weight: 650;
+}
+
+
+.teacher-subject-selected i {
+
+  color: #007a4d;
+
+  font-size: 10px;
+}
+
+
+/* =========================================================
+   GRILLE DES MATIÈRES
+========================================================= */
+
+.teacher-subject-grid {
+
+  display: grid;
+
+  grid-template-columns:
+    repeat(2, minmax(0, 1fr));
+
+  gap: 10px;
+
+  width: 100%;
+
+  min-width: 0;
+}
+
+
+/* =========================================================
+   MATIÈRE
+========================================================= */
+
+.teacher-subject {
+
+  position: relative;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 9px;
+
+  width: 100%;
+
+  min-width: 0;
+  min-height: 52px;
+
+  padding: 8px 10px;
+
+  box-sizing: border-box;
+
+  background: #ffffff;
+
+  border: 1px solid #dbe6e0;
+
+  border-radius: 8px;
+
+  cursor: pointer;
+
+  transition: .2s ease;
+}
+
+
+.teacher-subject:hover {
+
+  background: #f8faf9;
+
+  border-color: #c6d9cf;
+}
+
+
+.teacher-subject--selected {
+
+  background: #eaf6ef;
+
+  border-color: #b9dcc7;
+
+  box-shadow:
+    0 2px 8px rgba(0, 107, 63, .06);
+}
+
+
+/* =========================================================
+   CHECKBOX
+========================================================= */
+
+.teacher-subject input {
+
+  position: absolute;
+
+  width: 0;
+  height: 0;
+
+  opacity: 0;
+}
+
+
+.teacher-subject__check {
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  width: 19px;
+  height: 19px;
+
+  flex-shrink: 0;
+
+  background: #ffffff;
+
+  border: 1px solid #ccd9d2;
+
+  border-radius: 5px;
+
+  color: transparent;
+
+  font-size: 10px;
+
+  transition: .2s ease;
+}
+
+
+.teacher-subject--selected
+.teacher-subject__check {
+
+  background: #006b3f;
+
+  border-color: #006b3f;
+
+  color: #ffffff;
+}
+
+
+/* =========================================================
+   CONTENU MATIÈRE
+========================================================= */
+
+.teacher-subject__content {
+
+  display: flex;
+
+  flex-direction: column;
+
+  min-width: 0;
+}
+
+
+.teacher-subject__name {
+
+  overflow: hidden;
+
+  color: #344a40;
+
+  font-size: 10px;
+
+  font-weight: 650;
+
+  line-height: 14px;
+
+  white-space: nowrap;
+
+  text-overflow: ellipsis;
+}
+
+
+.teacher-subject--selected
+.teacher-subject__name {
+
+  color: #006b3f;
+}
+
+
+.teacher-subject__code {
+
+  margin-top: 2px;
+
+  color: #899790;
+
+  font-size: 8px;
+
+  line-height: 11px;
+}
+
+
+/* =========================================================
+   AUCUNE MATIÈRE
+========================================================= */
+
+.teacher-empty {
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 10px;
+
+  min-height: 110px;
+
+  padding: 14px;
+
+  background: #f8faf9;
+
+  border: 1px dashed #d5e2db;
+
+  border-radius: 8px;
+}
+
+
+.teacher-empty__icon {
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  width: 38px;
+  height: 38px;
+
+  flex-shrink: 0;
+
+  background: #eaf6ef;
+
+  border: 1px solid #d4e9dc;
+
+  border-radius: 8px;
+
+  color: #007a4d;
+
+  font-size: 15px;
+}
+
+
+.teacher-empty__content {
+
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 3px;
+
+  min-width: 0;
+}
+
+
+.teacher-empty__content strong {
+
+  color: #344a40;
+
+  font-size: 10px;
+
+  font-weight: 700;
+}
+
+
+.teacher-empty__content span {
+
+  color: #899790;
+
+  font-size: 8.5px;
+
+  line-height: 1.45;
+}
+
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+.teacher-modal__footer {
+
+  display: flex;
+
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 15px;
+
+  min-height: 58px;
+
+  width: 100%;
+
+  padding: 10px 24px;
+
+  box-sizing: border-box;
+
+  background: #f8faf9;
+
+  border-top: 1px solid #e4ece8;
+}
+
+
+.teacher-footer-info {
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 6px;
+
+  color: #8a9891;
+
+  font-size: 9px;
+}
+
+
+.teacher-footer-info i {
+
+  color: #007a4d;
+
+  font-size: 11px;
+}
+
+
+.teacher-footer-actions {
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 8px;
+}
+
+
+/* =========================================================
+   ANNULER
+========================================================= */
+
+.btn-teacher-cancel {
+
+  display: inline-flex;
+
+  align-items: center;
+  justify-content: center;
+
+  gap: 5px;
+
+  height: 36px;
+
+  padding: 0 15px;
+
+  background: #ffffff;
+
+  border: 1px solid #d7e3dd;
+
+  border-radius: 7px;
+
+  color: #63736c;
+
+  font-size: 10px;
+
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition: .2s ease;
+}
+
+
+.btn-teacher-cancel:hover {
+
+  background: #f2f6f4;
+
+  border-color: #c5d5cd;
+
+  color: #42564d;
+}
+
+
+/* =========================================================
+   ENREGISTRER
+========================================================= */
+
+.btn-teacher-submit {
+
+  display: inline-flex;
+
+  align-items: center;
+  justify-content: center;
+
+  gap: 6px;
+
+  min-width: 145px;
+  height: 36px;
+
+  padding: 0 15px;
+
+  background: #006b3f;
+
+  border: 1px solid #006b3f;
+
+  border-radius: 7px;
+
+  color: #ffffff;
+
+  font-size: 10px;
+
+  font-weight: 650;
+
+  cursor: pointer;
+
+  transition: .2s ease;
+}
+
+
+.btn-teacher-submit:hover:not(:disabled) {
+
+  background: #005b36;
+
+  border-color: #005b36;
+
+  box-shadow:
+    0 4px 10px rgba(0, 107, 63, .18);
+
+  transform: translateY(-1px);
+}
+
+
+.btn-teacher-submit:disabled {
+
+  opacity: .7;
+
+  cursor: not-allowed;
+
+  transform: none;
+}
+
+
+/* =========================================================
+   SPINNER
+========================================================= */
+
+.teacher-submit-spinner {
+
+  width: 12px;
+  height: 12px;
+
+  border: 2px solid rgba(255,255,255,.35);
+
+  border-top-color: #ffffff;
+
+  border-radius: 50%;
+
+  animation: teacher-modal-spin .7s linear infinite;
+}
+
+
+@keyframes teacher-modal-spin {
+
+  to {
+    transform: rotate(360deg);
+  }
+
+}
+
+
+/* =========================================================
+   MODAL BOOTSTRAP
+========================================================= */
+
+.modal-dialog:has(.teacher-modal) {
+
+  width: calc(100% - 50px) !important;
+
+  max-width: 1400px !important;
+
+  margin: 25px auto !important;
+}
+
+
+/* =========================================================
+   GRAND ÉCRAN
+========================================================= */
+
+@media (min-width: 1400px) {
+
+  .teacher-modal {
+
+    max-width: 1450px;
+  }
+
+
+  .teacher-modal__body {
+
+    grid-template-columns:
+      minmax(360px, .8fr)
+      minmax(0, 1.7fr);
+
+    gap: 24px;
+
+    padding: 22px 28px;
+  }
+
+
+  .teacher-subject-grid {
+
+    gap: 12px;
+  }
+
+}
+
+
+/* =========================================================
+   ÉCRAN MOYEN
+========================================================= */
+
+@media (max-width: 1200px) {
+
+  .modal-dialog:has(.teacher-modal) {
+
+    width: calc(100% - 40px) !important;
+
+    max-width: 1200px !important;
+  }
+
+
+  .teacher-modal__body {
+
+    grid-template-columns:
+      minmax(300px, .75fr)
+      minmax(0, 1.25fr);
+
+    gap: 16px;
+
+    padding-right: 22px;
+  }
+
+}
+
+
+/* =========================================================
+   TABLETTE
+========================================================= */
+
+@media (max-width: 900px) {
+
+  .modal-dialog:has(.teacher-modal) {
+
+    width: calc(100% - 30px) !important;
+  }
+
+
+  .teacher-modal__body {
+
+    grid-template-columns: 1fr;
+
+    padding-right: 20px;
+  }
+
+}
+
+
+/* =========================================================
+   PETITE TABLETTE
+========================================================= */
+
+@media (max-width: 700px) {
+
+  .teacher-fields {
+
+    grid-template-columns: 1fr;
+  }
+
+
+  .teacher-field--full {
+
+    grid-column: auto;
+  }
+
+
+  .teacher-subject-grid {
+
+    grid-template-columns:
+      repeat(2, minmax(0, 1fr));
+  }
+
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 650px) {
+
+  .modal-dialog:has(.teacher-modal) {
+
+    width: calc(100% - 16px) !important;
+
+    margin: 8px auto !important;
+  }
+
+
+  .teacher-modal {
+
+    border-radius: 10px;
+  }
+
+
+  .teacher-modal__header {
+
+    padding: 15px;
+  }
+
+
+  .teacher-modal__body {
+
+    display: flex;
+
+    flex-direction: column;
+
+    width: 100%;
+
+    padding: 14px;
+  }
+
+
+  .teacher-panel {
+
+    width: 100%;
+  }
+
+
+  .teacher-subject-grid {
+
+    grid-template-columns: 1fr;
+  }
+
+
+  .teacher-modal__footer {
+
+    padding: 10px 14px;
+  }
+
+
+  .teacher-footer-info {
+
+    display: none;
+  }
+
+
+  .teacher-footer-actions {
+
+    width: 100%;
+  }
+
+
+  .btn-teacher-cancel,
+  .btn-teacher-submit {
+
+    flex: 1;
+  }
+
+}
+
+
+/* =========================================================
+   PETIT MOBILE
+========================================================= */
+
+@media (max-width: 450px) {
+
+  .teacher-modal__identity {
+
+    gap: 9px;
+  }
+
+
+  .teacher-modal__icon {
+
+    width: 40px;
+    height: 40px;
+
+    font-size: 16px;
+  }
+
+
+  .teacher-modal__heading h4 {
+
+    font-size: 16px;
+  }
+
+
+  .teacher-modal__heading p {
+
+    font-size: 9px;
+  }
+
+
+  .teacher-section__heading {
+
+    margin-bottom: 14px;
+  }
+
+
+  .teacher-subject-header {
+
+    align-items: flex-start;
+
+    flex-direction: column;
+  }
+
+}

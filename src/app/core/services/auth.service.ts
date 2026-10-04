@@ -68,12 +68,33 @@ AuthService {
     * Fonction qui permet de récupérer les permissions
     * **/
   getPermissions() {
-    let sto = this.cookieService.getCookie('permissions');
-    if (sto != null) {
-      return sto;
-    } else {
-      return false;
+    if (typeof window !== 'undefined') {
+      const storedPermissions = sessionStorage.getItem('permissions');
+      if (storedPermissions) {
+        try {
+          const parsed = JSON.parse(storedPermissions);
+          if (Array.isArray(parsed)) {
+            return parsed;
+          }
+          if (typeof parsed === 'string') {
+            return parsed.split(',').map((permission) => permission.trim()).filter(Boolean);
+          }
+        } catch {
+          // Ignore malformed storage value and fall back to cookie
+        }
+      }
     }
+
+    let sto = this.cookieService.getCookie('permissions');
+    if (Array.isArray(sto)) {
+      return sto;
+    }
+
+    if (typeof sto === 'string') {
+      return sto.split(',').map((permission) => permission.trim()).filter(Boolean);
+    }
+
+    return [];
   }
 
 

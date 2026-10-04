@@ -61,7 +61,7 @@ export class MainLayout {
     this.userConnected = this.authService.getUser();
     if (this.userConnected) {
       this.permissionItems = this.authService.getPermissions();
-      this.apiService.loadPermissions(this.permissionItems)
+      this.apiService.loadPermissions(this.permissionItems);
     }
 
     this.passwordChanged = this.authService.passwordChanged()
@@ -112,6 +112,11 @@ export class MainLayout {
       this.cookieService.deleteCookie('token')
       this.cookieService.deleteCookie('userConnected')
       this.cookieService.deleteCookie('permissions')
+
+      if (typeof window !== 'undefined') {
+        sessionStorage.removeItem('permissions');
+      }
+
       this.route.navigate(['/login'])
     })
   }
