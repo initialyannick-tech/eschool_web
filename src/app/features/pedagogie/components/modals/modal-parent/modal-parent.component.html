@@ -1,1 +1,63 @@
-<p>app-modal-parent works!</p>
+<form [formGroup]="form" (ngSubmit)="save()" class="parent-edit-modal">
+  <div class="parent-edit-modal__header">
+    <div>
+      <span>Administration scolaire</span>
+      <h4>Modifier le parent</h4>
+      <p>Mettez à jour les coordonnées du responsable légal.</p>
+    </div>
+    <button type="button" (click)="close()" [disabled]="isSubmitting" aria-label="Fermer">×</button>
+  </div>
+
+  <div class="parent-edit-modal__body">
+    @if (errors.length) {
+      <div class="parent-edit-modal__errors">
+        @for (error of errors; track $index) {
+          <div>{{ error }}</div>
+        }
+      </div>
+    }
+
+    <div class="parent-edit-modal__grid">
+      <label>Nom *
+        <input formControlName="nom" type="text">
+      </label>
+      <label>Prénom *
+        <input formControlName="prenom" type="text">
+      </label>
+      <label>Téléphone *
+        <input formControlName="telephone" type="tel">
+      </label>
+      <label>Téléphone secondaire
+        <input formControlName="telephone_secondaire" type="tel">
+      </label>
+      <label>Email
+        <input formControlName="email" type="email">
+      </label>
+      <label>Statut
+        <select formControlName="statut">
+          <option value="actif">Actif</option>
+          <option value="inactif">Inactif</option>
+        </select>
+      </label>
+      <label class="parent-edit-modal__full">Adresse
+        <input formControlName="adresse" type="text">
+      </label>
+      <label>Profession
+        <input formControlName="profession" type="text">
+      </label>
+      <label>Lieu de travail
+        <input formControlName="lieu_travail" type="text">
+      </label>
+      <label class="parent-edit-modal__full">Observation
+        <textarea formControlName="observation" rows="3"></textarea>
+      </label>
+    </div>
+  </div>
+
+  <div class="parent-edit-modal__footer">
+    <button type="button" (click)="close()" [disabled]="isSubmitting">Annuler</button>
+    <button type="submit" [disabled]="isSubmitting">
+      {{ isSubmitting ? 'Enregistrement...' : 'Enregistrer' }}
+    </button>
+  </div>
+</form>

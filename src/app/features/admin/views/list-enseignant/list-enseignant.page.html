@@ -1,134 +1,113 @@
-<app-page-header [backBtn]="true" [titre]="'Liste des Enseignants'"></app-page-header>
-<div class="users-toolbar">
-  <div class="users-toolbar__info">
-    <div class="users-toolbar__title">
-      Enseignants
-    </div>
-    <div class="users-toolbar__subtitle">
-      Gérez les enseignants et leurs matières
+<app-page-header [backBtn]="true" [titre]="'Liste des enseignants'"></app-page-header>
+
+<div class="teachers-toolbar">
+  <div class="teachers-toolbar__info">
+    <div class="teachers-toolbar__title">Enseignants</div>
+    <div class="teachers-toolbar__subtitle">
+      Gérez les enseignants de l’établissement et leurs informations.
     </div>
   </div>
 
-
-  <div class="users-toolbar__actions">
-    <div class="users-search">
+  <div class="teachers-toolbar__actions">
+    <div class="teachers-search">
       <i class="bi bi-search"></i>
-      <input type="text" class="users-search__input" placeholder="Rechercher un enseignant..." [(ngModel)]="searchText" (keyup)="searchAction()"/>
+      <input
+        type="text"
+        class="teachers-search__input"
+        placeholder="Rechercher un enseignant..."
+        [(ngModel)]="searchText"
+        (input)="searchAction()"
+      />
     </div>
-    <!-- Ajouter -->
-    <button type="button" class="btn-add-user" (click)="add()">
+
+    <button type="button" class="btn-add-teacher" (click)="add()">
       <i class="bi bi-plus-lg"></i>
-      <span>Ajouter un enseignant
-      </span>
+      <span>Ajouter un enseignant</span>
     </button>
   </div>
 </div>
 
-
-<div class="users-card">
-  <div class="users-card__header">
+<div class="teachers-card">
+  <div class="teachers-card__header">
     <div>
-      <h4>Liste des Enseignants</h4>
-      <span>Enseignants enregistrés sur la plateforme</span>
+      <h4>Liste des enseignants</h4>
+      <span>Enseignants enregistrés dans le système</span>
     </div>
   </div>
 
-  <div class="users-table-wrapper">
-    <table class="users-table">
-      <colgroup>
-        <col class="col-enseignant">
-        <col class="col-email">
-        <col class="col-matieres">
-        <col class="col-statut">
-        <col class="col-actions">
-      </colgroup>
+  <div class="teachers-table-wrapper">
+    <table class="teachers-table">
       <thead>
-      <tr>
-        <th>Enseignant</th>
-        <th>Email</th>
-        <th>Matières</th>
-        <th>Statut</th>
-        <th>Actions</th>
-      </tr>
+        <tr>
+          <th>Enseignant</th>
+          <th>Email</th>
+          <th>Matières</th>
+          <th>Statut</th>
+          <th class="teachers-table__actions">Actions</th>
+        </tr>
       </thead>
 
       <tbody>
         @if (isLoad) {
           <tr>
-            <td colspan="5" class="users-table__loading">
+            <td colspan="5" class="teachers-table__loading">
               <div class="loading-content">
                 <span class="loading-spinner"></span>
                 <span>Chargement des enseignants...</span>
               </div>
             </td>
           </tr>
-        }
-        @else {
+        } @else {
           @for (enseignant of enseignants; track enseignant.id) {
             <tr>
               <td>
-                <div class="user-cell">
-                  <div class="user-avatar">
-                    {{enseignant.prenom?.charAt(0)?.toUpperCase()
-                    }}{{
-                      enseignant.nom?.charAt(0)?.toUpperCase()
-                    }}
+                <div class="teacher-cell">
+                  <div class="teacher-avatar">
+                    {{ enseignant.prenom?.charAt(0) }}{{ enseignant.nom?.charAt(0) }}
                   </div>
-                  <div class="user-information">
-                    <span class="user-name">{{ enseignant.nom }}{{ enseignant.prenom }}</span>
-                    <span class="user-id">
-                      ID #{{ enseignant.id }}
-                    </span>
+                  <div class="teacher-information">
+                    <div class="teacher-name">{{ enseignant.nom }} {{ enseignant.prenom }}</div>
+                    <div class="teacher-id">ID #{{ enseignant.id }}</div>
                   </div>
                 </div>
               </td>
-              <td><span class="user-email">{{ enseignant.email || '—' }}</span></td>
+
+              <td><span class="teacher-email">{{ enseignant.email }}</span></td>
               <td>
-                @if ((enseignant.matieres ?? []).length > 0) {
+                @if ((enseignant.matieres ?? []).length) {
                   <div class="teacher-subjects">
-                    @for (matiere of (enseignant.matieres ?? []).slice(0, 2);track matiere.id) {
+                    @for (matiere of (enseignant.matieres ?? []).slice(0, 2); track matiere.id) {
                       <span class="subject-badge">{{ matiere.libelle }}</span>
                     }
                     @if ((enseignant.matieres ?? []).length > 2) {
-                      <span class="subject-badge subject-badge--more">
-                        +{{(enseignant.matieres ?? []).length - 2 }}
-                      </span>
+                      <span class="subject-badge subject-badge--more">+{{ (enseignant.matieres ?? []).length - 2 }}</span>
                     }
                   </div>
-                }
-                @else {
-                  <span class="text-muted">Aucune matière</span>
+                } @else {
+                  <span class="text-muted">—</span>
                 }
               </td>
-
               <td>
                 @if (enseignant.status === 'active') {
                   <span class="status-badge status-badge--active">
-                      <span class="status-dot"></span>
-                      <span class="status-text">Active</span>
-                    </span>
-                }
-                @else {
+                    <span class="status-dot"></span>Actif
+                  </span>
+                } @else {
                   <span class="status-badge status-badge--inactive">
-                      <span class="status-dot"></span>
-                      <span class="status-text">Inactive</span>
-                    </span>
+                    <span class="status-dot"></span>Inactif
+                  </span>
                 }
               </td>
-
-              <td class="users-table__actions">
-                <div class="table-actions">
-                  <button type="button" class="btn-user-action" title="Voir le détail de l'enseignant" [routerLink]="['/admin/enseignants/detail',enseignant.id]">
-                    <i class="bi bi-eye"></i>
-                  </button>
-                  <button type="button" class="btn-user-action" title="Modifier l'enseignant" (click)="edit(enseignant)">
-                    <i class="bi bi-pencil"></i>
-                  </button>
-
-                  <button type="button" class="btn-user-action btn-user-action--danger" title="Supprimer l'enseignant" (click)="delete(enseignant)">
-                    <i class="bi bi-trash"></i>
-                  </button>
-                </div>
+              <td class="teachers-table__actions">
+                <button type="button" class="btn-teacher-action" [routerLink]="['/admin/enseignants/detail', enseignant.id]" title="Voir le détail de l'enseignant">
+                  <i class="bi bi-eye"></i>
+                </button>
+                <button type="button" class="btn-teacher-action" (click)="edit(enseignant)" title="Modifier l'enseignant">
+                  <i class="bi bi-pencil"></i>
+                </button>
+                <button type="button" class="btn-teacher-action btn-teacher-action--danger" (click)="delete(enseignant)" title="Supprimer l'enseignant">
+                  <i class="bi bi-trash"></i>
+                </button>
               </td>
             </tr>
           }
@@ -136,8 +115,4 @@
       </tbody>
     </table>
   </div>
-  <div class="users-card__footer">
-    <app-custom-pagination (pageChange)="changePage($event)" [links]="pagination"></app-custom-pagination>
-  </div>
 </div>
-

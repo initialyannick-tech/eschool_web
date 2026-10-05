@@ -50,16 +50,44 @@ export class ListParentPage  {
     })
   }
 
-  edit(classe: any) {
-    const modal = this.modal.open(ModalParentComponent, {size: 'lg', backdrop: 'static'})
-    modal.componentInstance.classe = classe
-    modal.componentInstance.isEdit = true
+  addChild(parent: Parent) {
+    const modal = this.modal.open(ModalParentEleveComponent, {size: 'xl', backdrop: 'static'})
+    modal.componentInstance.existingParent = parent
     modal.result.catch((reason: any) => {
       if (reason === 'save') {
         this.isLoad = true
         this.getParents()
       }
     })
+  }
+
+  edit(parent: Parent) {
+    const modal = this.modal.open(ModalParentComponent, {size: 'lg', backdrop: 'static'})
+    modal.componentInstance.parent = parent
+    modal.result.catch((reason: any) => {
+      if (reason === 'save') {
+        this.isLoad = true
+        this.getParents()
+      }
+    })
+  }
+
+  delete(parent: Parent) {
+    if (!parent.id || !window.confirm(`Supprimer la fiche de ${parent.prenom} ${parent.nom} ? Les élèves resteront enregistrés.`)) {
+      return;
+    }
+
+    this.apiService.delete(`parents/${parent.id}`)
+      .then((response: any) => {
+        if (response?.success) {
+          this.getParents();
+        } else {
+          window.alert(response?.message || 'Impossible de supprimer le parent.');
+        }
+      })
+      .catch((error: any) => {
+        window.alert(error?.error?.message || 'Une erreur est survenue lors de la suppression.');
+      });
   }
 
   showParent(items: Parent) {

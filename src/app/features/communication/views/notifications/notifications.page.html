@@ -1,0 +1,56 @@
+<section class="notifications-page">
+  <header class="notifications-heading">
+    <div>
+      <p class="notifications-eyebrow">ESPACE PERSONNEL</p>
+      <h1>Notifications</h1>
+      <p>Les dernières informations qui vous sont destinées.</p>
+    </div>
+    <button type="button" class="mark-all-button" [disabled]="isMarkingAll || communicationState.unreadCount() === 0" (click)="markAllRead()">
+      <i class="bi bi-check2-all" aria-hidden="true"></i>
+      Tout marquer comme lu
+    </button>
+  </header>
+
+  <section class="notifications-panel" aria-label="Liste des notifications">
+    <div class="notifications-toolbar">
+      <div class="notification-tabs" role="tablist" aria-label="Filtrer les notifications">
+        <button type="button" role="tab" [attr.aria-selected]="filter === 'all'" [class.is-active]="filter === 'all'" (click)="setFilter('all')">Toutes</button>
+        <button type="button" role="tab" [attr.aria-selected]="filter === 'unread'" [class.is-active]="filter === 'unread'" (click)="setFilter('unread')">Non lues <span>{{ communicationState.unreadCount() }}</span></button>
+      </div>
+      <span class="notification-total">{{ notifications.length }} affichée(s)</span>
+    </div>
+
+    @if (isLoading) {
+      <div class="notifications-state"><span class="loading-spinner"></span><span>Chargement des notifications...</span></div>
+    } @else if (notifications.length === 0) {
+      <div class="notifications-state notifications-state--empty">
+        <i class="bi bi-bell-slash" aria-hidden="true"></i>
+        <h2>{{ filter === 'unread' ? 'Tout est à jour' : 'Aucune notification' }}</h2>
+        <p>{{ filter === 'unread' ? 'Vous avez lu toutes vos notifications.' : 'Les nouvelles informations apparaîtront ici.' }}</p>
+      </div>
+    } @else {
+      <div class="notification-list">
+        @for (notification of notifications; track notification.id) {
+          <article class="notification-item" [class.notification-item--unread]="!notification.read_at">
+            <div class="notification-mark"><i class="bi" [class.bi-chat-left-text]="notification.type === 'internal_message'" [class.bi-megaphone]="notification.type !== 'internal_message'" aria-hidden="true"></i></div>
+            <div class="notification-content">
+              <div class="notification-meta">
+                <span class="notification-kind">{{ notification.type === 'internal_message' ? 'Message' : 'Annonce' }}</span>
+                <time>{{ notification.created_at | date:'d MMM y, HH:mm' }}</time>
+              </div>
+              <h2>{{ notification.title }}</h2>
+              <p>{{ notification.message }}</p>
+              <span class="notification-sender">{{ notification.sender_name ? 'Envoyé par ' + notification.sender_name : 'Communication eSchool' }}</span>
+              @if (notification.type === 'internal_message' && notification.conversation_id) {
+                <a class="notification-open-link" [routerLink]="['/messagerie']" [queryParams]="{ conversation: notification.conversation_id }" (click)="markRead(notification)">Ouvrir la conversation</a>
+              }
+            </div>
+            <button type="button" class="mark-read-button" [disabled]="!!notification.read_at" [attr.aria-label]="notification.read_at ? 'Notification déjà lue' : 'Marquer comme lue'" [title]="notification.read_at ? 'Déjà lue' : 'Marquer comme lue'" (click)="markRead(notification)">
+              <i class="bi" [class.bi-check2]="!!notification.read_at" [class.bi-circle]="!notification.read_at" aria-hidden="true"></i>
+            </button>
+          </article>
+        }
+      </div>
+    }
+  </section>
+</section>

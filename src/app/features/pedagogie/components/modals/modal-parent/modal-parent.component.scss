@@ -1,4 +1,104 @@
 
-        /* Styles pour app-modal-parent */
-        
+.parent-edit-modal {
+  overflow: hidden;
+  border-radius: 16px;
+  background: #fff;
+  color: #243247;
+}
+
+.parent-edit-modal__header,
+.parent-edit-modal__footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 20px 24px;
+}
+
+.parent-edit-modal__header {
+  border-bottom: 1px solid #e8edf3;
+}
+
+.parent-edit-modal__header span {
+  color: #64748b;
+  font-size: 12px;
+  text-transform: uppercase;
+}
+
+.parent-edit-modal__header h4 {
+  margin: 4px 0;
+}
+
+.parent-edit-modal__header p {
+  margin: 0;
+  color: #64748b;
+}
+
+.parent-edit-modal__header button,
+.parent-edit-modal__footer button {
+  border: 0;
+  border-radius: 8px;
+  padding: 9px 14px;
+  background: #eef2f7;
+  color: #243247;
+}
+
+.parent-edit-modal__body {
+  padding: 24px;
+}
+
+.parent-edit-modal__grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.parent-edit-modal__grid label {
+  display: grid;
+  gap: 7px;
+  color: #475569;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.parent-edit-modal__grid input,
+.parent-edit-modal__grid select,
+.parent-edit-modal__grid textarea {
+  width: 100%;
+  border: 1px solid #dbe3ec;
+  border-radius: 8px;
+  padding: 10px 12px;
+  color: #243247;
+}
+
+.parent-edit-modal__full {
+  grid-column: 1 / -1;
+}
+
+.parent-edit-modal__errors {
+  display: grid;
+  gap: 6px;
+  margin-bottom: 18px;
+  color: #b42318;
+}
+
+.parent-edit-modal__footer {
+  justify-content: flex-end;
+  border-top: 1px solid #e8edf3;
+}
+
+.parent-edit-modal__footer button[type='submit'] {
+  background: #2563eb;
+  color: #fff;
+}
+
+@media (max-width: 640px) {
+  .parent-edit-modal__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .parent-edit-modal__full {
+    grid-column: auto;
+  }
+}
     

@@ -78,6 +78,48 @@ export class ApiService {
     })
   }
 
+  postFormData(url: string, data: FormData) {
+    if (this.shouldSkipServerRequest()) {
+      return Promise.resolve({ success: true });
+    }
+
+    return new Promise((resolve, reject) => {
+      this.http.post(this.apiUrl + url, data).subscribe(
+        (response: any) => resolve(response),
+        (error: any) => {
+          if (error.status === 401) {
+            this.router.navigate(['/login']);
+          }
+          if (error.status === 0) {
+            this.shareService.toastWarning('La connexion au serveur a été rompue. Veuillez réessayer plus tard.');
+          }
+          reject(error);
+        }
+      );
+    });
+  }
+
+  getBlob(url: string) {
+    if (this.shouldSkipServerRequest()) {
+      return Promise.resolve(new Blob());
+    }
+
+    return new Promise<Blob>((resolve, reject) => {
+      this.http.get(this.apiUrl + url, { responseType: 'blob' }).subscribe(
+        (data) => resolve(data),
+        (error: any) => {
+          if (error.status === 401) {
+            this.router.navigate(['/login']);
+          }
+          if (error.status === 0) {
+            this.shareService.toastWarning('La connexion au serveur a été rompue. Veuillez réessayer plus tard.');
+          }
+          reject(error);
+        }
+      );
+    });
+  }
+
   /**
    * Put request
    * @url
@@ -104,6 +146,27 @@ export class ApiService {
         }
       )
     })
+  }
+
+  patch(url: string, data: any = {}) {
+    if (this.shouldSkipServerRequest()) {
+      return Promise.resolve({ success: true });
+    }
+
+    return new Promise((resolve, reject) => {
+      this.http.patch(this.apiUrl + url, data).subscribe(
+        (data: any) => resolve(data),
+        (error: any) => {
+          if (error.status === 401) {
+            this.router.navigate(['/login']);
+          }
+          if (error.status === 0) {
+            this.shareService.toastWarning('La connexion au serveur a été rompue. Veuillez réessayer plus tard.');
+          }
+          reject(error);
+        }
+      );
+    });
   }
 
   /**

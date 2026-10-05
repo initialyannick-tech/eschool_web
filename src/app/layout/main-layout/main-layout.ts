@@ -1,13 +1,16 @@
-import {Component, HostListener, Inject, inject, PLATFORM_ID} from '@angular/core';
+import {Component, DestroyRef, HostListener, Inject, inject, PLATFORM_ID} from '@angular/core';
 import {AuthService} from '../../core/services/auth.service';
 import {ApiService} from '../../core/services/api.service';
 import {CookieService} from '../../core/services/cookie.service';
-import {Router, RouterLink, RouterLinkActive, RouterOutlet} from '@angular/router';
+import {NavigationEnd, Router, RouterLink, RouterLinkActive, RouterOutlet} from '@angular/router';
 import Swal from 'sweetalert2';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {UpdatePasswordComponent} from '../../features/admin/components/update-password/update-password.component';
 import {isPlatformBrowser, NgIf} from '@angular/common';
 import {NgxPermissionsModule} from 'ngx-permissions';
+import {filter} from 'rxjs';
+import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
+import {CommunicationStateService} from '../../features/communication/services/communication-state.service';
 
 @Component({
   selector: 'app-main-layout',
@@ -26,6 +29,8 @@ export class MainLayout {
   cookieService = inject(CookieService)
   route = inject(Router)
   modal = inject(NgbModal)
+  destroyRef = inject(DestroyRef)
+  communicationState: CommunicationStateService = inject(CommunicationStateService)
 
   userConnected: any
   passwordChanged: any
@@ -62,6 +67,11 @@ export class MainLayout {
     if (this.userConnected) {
       this.permissionItems = this.authService.getPermissions();
       this.apiService.loadPermissions(this.permissionItems);
+      this.communicationState.refreshUnreadCount();
+      this.route.events.pipe(
+        filter((event) => event instanceof NavigationEnd),
+        takeUntilDestroyed(this.destroyRef),
+      ).subscribe(() => this.communicationState.refreshUnreadCount());
     }
 
     this.passwordChanged = this.authService.passwordChanged()
@@ -80,6 +90,10 @@ export class MainLayout {
         }
       });
     }
+  }
+
+  notificationCount(): number {
+    return Number(this.communicationState.unreadCount());
   }
 
 

@@ -66,6 +66,9 @@
 
               <i class="bi bi-bell me-2"></i>
               Notifications
+              @if (notificationCount() > 0) {
+                <span class="topbar-notification-count">{{ notificationCount() > 99 ? '99+' : notificationCount() }}</span>
+              }
 
             </a>
           </li>
@@ -255,6 +258,14 @@
         <a class="sidebar-nav__link" *ngxPermissionsOnly="['role.management']" routerLink="/admin/roles" routerLinkActive="sidebar-nav__link--active">
           <i class="bi bi-shield-check"></i>
           <span>Gestion Rôles</span>
+        </a>
+        <a class="sidebar-nav__link" *ngxPermissionsOnly="['annonce.management']" routerLink="/communication" routerLinkActive="sidebar-nav__link--active">
+          <i class="bi bi-megaphone"></i>
+          <span>Communication</span>
+        </a>
+        <a class="sidebar-nav__link" *ngxPermissionsOnly="['message.consulter']" routerLink="/messagerie" routerLinkActive="sidebar-nav__link--active">
+          <i class="bi bi-chat-left-text"></i>
+          <span>Messagerie</span>
         </a>
       </div>
 
