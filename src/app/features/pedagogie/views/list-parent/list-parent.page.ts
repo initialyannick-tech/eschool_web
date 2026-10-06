@@ -4,7 +4,6 @@ import {ApiService} from '../../../../core/services/api.service';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {Parent} from '../../models/parent';
 import {ModalParentComponent} from '../../components/modals/modal-parent/modal-parent.component';
-import {ModalParentEleveComponent} from '../../components/modals/modal-parent-eleve/modal-parent-eleve.component';
 import {PageHeaderComponent} from '../../../../shared/components/page-header/page-header.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {CustomPaginationComponent} from '../../../../shared/components/custom-pagination/custom-pagination.component';
@@ -41,7 +40,7 @@ export class ListParentPage  {
   }
 
   add() {
-    const modal = this.modal.open(ModalParentEleveComponent, {size: 'xl', backdrop: 'static'})
+    const modal = this.modal.open(ModalParentComponent, {size: 'xl', backdrop: 'static'})
     modal.result.catch((reason: any) => {
       if (reason === 'save') {
         this.isLoad = true
@@ -50,9 +49,9 @@ export class ListParentPage  {
     })
   }
 
-  edit(classe: any) {
+  edit(parent: any) {
     const modal = this.modal.open(ModalParentComponent, {size: 'lg', backdrop: 'static'})
-    modal.componentInstance.classe = classe
+    modal.componentInstance.parent = parent
     modal.componentInstance.isEdit = true
     modal.result.catch((reason: any) => {
       if (reason === 'save') {

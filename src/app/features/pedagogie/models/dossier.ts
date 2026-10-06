@@ -16,7 +16,7 @@ export interface DossierEleve {
   photo?: string;
   situation_particuliere?: string;
   statut?: string;
-  parent?: Parent
+  parents?: Parent
 
 }
 
