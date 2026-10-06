@@ -1,0 +1,781 @@
+/* =========================================================
+   PAGE CLASSES
+========================================================= */
+
+:host {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  overflow-x: hidden;
+  box-sizing: border-box;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+
+/* =========================================================
+   TOOLBAR
+========================================================= */
+
+.users-toolbar {
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 20px;
+
+  margin-bottom: 16px;
+  padding: 4px 0;
+}
+
+.users-toolbar__info {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.users-toolbar__title {
+  color: #18332a;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 1.3;
+}
+
+.users-toolbar__subtitle {
+  margin-top: 3px;
+  color: #84938c;
+  font-size: 12px;
+  line-height: 1.4;
+}
+
+
+/* =========================================================
+   ACTIONS TOOLBAR
+========================================================= */
+
+.users-toolbar__actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+  min-width: 0;
+  flex-wrap: wrap;
+}
+
+
+/* =========================================================
+   SELECT CLASSE
+========================================================= */
+
+.classe-select {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+
+  height: 38px;
+
+  padding: 0 12px;
+
+  background: #ffffff;
+
+  border: 1px solid #dce7e2;
+  border-radius: 8px;
+}
+
+.classe-select__label {
+  margin: 0;
+
+  color: #66776f;
+
+  font-size: 11px;
+  font-weight: 700;
+
+  white-space: nowrap;
+}
+
+.classe-select__input {
+  height: 100%;
+
+  padding: 0 4px;
+
+  background: transparent;
+  border: none;
+  outline: none;
+
+  color: #18332a;
+
+  font-size: 12px;
+  font-weight: 600;
+
+  cursor: pointer;
+}
+
+
+/* =========================================================
+   BOUTON AJOUTER
+========================================================= */
+
+.btn-add-user {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 7px;
+
+  height: 38px;
+
+  padding: 0 15px;
+
+  background: #006b3f;
+  border: 1px solid #006b3f;
+  border-radius: 8px;
+
+  color: #ffffff;
+
+  font-size: 12px;
+  font-weight: 600;
+
+  white-space: nowrap;
+  cursor: pointer;
+
+  transition:
+    background-color 0.2s ease,
+    border-color 0.2s ease,
+    opacity 0.2s ease;
+}
+
+.btn-add-user i {
+  font-size: 14px;
+}
+
+.btn-add-user:hover:not(:disabled) {
+  background: #005b36;
+  border-color: #005b36;
+}
+
+.btn-add-user:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+
+/* =========================================================
+   CARTE
+========================================================= */
+
+.users-card {
+  display: block;
+
+  width: 100% !important;
+  max-width: 100% !important;
+  min-width: 0 !important;
+
+  margin: 0;
+  padding: 0;
+
+  background: #ffffff;
+
+  border: 1px solid #e0eae5;
+  border-radius: 12px;
+
+  overflow: hidden !important;
+
+  box-shadow: 0 2px 8px rgba(24, 51, 42, 0.035);
+}
+
+
+/* =========================================================
+   HEADER CARTE
+========================================================= */
+
+.users-card__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+
+  padding: 17px 20px;
+
+  border-bottom: 1px solid #e8efeb;
+}
+
+.users-card__header > div {
+  min-width: 0;
+}
+
+.users-card__header h4 {
+  margin: 0;
+  color: #18332a;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1.3;
+}
+
+.users-card__header span {
+  display: block;
+  margin-top: 3px;
+  color: #8a9992;
+  font-size: 11px;
+  line-height: 1.3;
+}
+
+
+/* =========================================================
+   WRAPPER TABLEAU / EMPLOI
+========================================================= */
+
+.users-table-wrapper {
+  display: block;
+
+  width: 100% !important;
+  max-width: 100% !important;
+  min-width: 0 !important;
+
+  margin: 0;
+  padding: 0;
+
+  overflow-x: hidden !important;
+  overflow-y: hidden !important;
+}
+
+.emploi-wrapper {
+  padding: 16px;
+}
+
+
+/* =========================================================
+   GRILLE EMPLOI DU TEMPS
+========================================================= */
+
+.emploi-grid {
+  display: grid;
+
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+
+  gap: 12px;
+}
+
+
+/* =========================================================
+   COLONNE JOUR
+========================================================= */
+
+.emploi-jour {
+  display: flex;
+  flex-direction: column;
+
+  min-width: 0;
+
+  background: #f8fbf9;
+
+  border: 1px solid #e5eee9;
+  border-radius: 10px;
+
+  overflow: hidden;
+}
+
+.emploi-jour__header {
+  padding: 10px 8px;
+
+  background: #ffffff;
+
+  border-bottom: 1px solid #e8efeb;
+
+  color: #006b3f;
+
+  font-size: 10px;
+  font-weight: 800;
+
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.emploi-jour__body {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+
+  padding: 8px;
+
+  min-height: 90px;
+}
+
+
+/* =========================================================
+   MESSAGE VIDE PAR JOUR
+========================================================= */
+
+.emploi-empty {
+  padding: 14px 6px;
+
+  color: #a5afa9;
+
+  font-size: 10px;
+  font-style: italic;
+
+  text-align: center;
+}
+
+
+/* =========================================================
+   CARTE COURS
+========================================================= */
+
+.cours-card {
+  display: flex;
+  flex-direction: column;
+
+  gap: 5px;
+
+  padding: 9px;
+
+  background: #ffffff;
+
+  border: 1px solid #e0eae5;
+  border-left: 3px solid #006b3f;
+  border-radius: 8px;
+
+  box-shadow: 0 1px 3px rgba(24, 51, 42, 0.04);
+
+  transition: box-shadow 0.2s ease;
+}
+
+.cours-card:hover {
+  box-shadow: 0 3px 8px rgba(24, 51, 42, 0.08);
+}
+
+.cours-card__top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 4px;
+
+  flex-wrap: wrap;
+}
+
+.cours-card__matiere {
+  color: #18332a;
+
+  font-size: 11px;
+  font-weight: 800;
+
+  line-height: 1.3;
+
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.cours-card__info {
+  display: flex;
+  align-items: center;
+
+  gap: 5px;
+
+  color: #66776f;
+
+  font-size: 9px;
+
+  min-width: 0;
+}
+
+.cours-card__info i {
+  color: #006b3f;
+  font-size: 10px;
+  flex-shrink: 0;
+}
+
+.cours-card__info span {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.cours-card__actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+
+  gap: 5px;
+
+  margin-top: 4px;
+  padding-top: 5px;
+
+  border-top: 1px solid #f0f5f2;
+}
+
+
+/* =========================================================
+   BADGES COURS
+========================================================= */
+
+.cours-badge {
+  display: inline-flex;
+  align-items: center;
+
+  gap: 3px;
+
+  padding: 3px 6px;
+
+  border-radius: 5px;
+
+  font-size: 8px;
+  font-weight: 700;
+
+  line-height: 1;
+
+  white-space: nowrap;
+}
+
+.cours-badge--heure {
+  background: #eaf5ef;
+  color: #006b3f;
+}
+
+.cours-badge--type {
+  background: #eef3f1;
+  color: #526159;
+}
+
+
+/* =========================================================
+   ACTIONS (boutons)
+========================================================= */
+
+.table-action {
+  width: 28px;
+  height: 28px;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 0;
+
+  border: 1px solid #e0e7e3;
+  border-radius: 6px;
+
+  background: #fff;
+
+  font-size: 11px;
+
+  cursor: pointer;
+  transition: all .2s ease;
+}
+
+.table-action--edit {
+  color: #526159;
+}
+
+.table-action--edit:hover {
+  background: #f1f4f2;
+}
+
+.table-action--delete {
+  color: #c0392b;
+}
+
+.table-action--delete:hover {
+  background: #fff1f0;
+  border-color: #f2cccc;
+}
+
+
+/* =========================================================
+   LOADING
+========================================================= */
+
+.users-table__loading {
+  height: 130px !important;
+  padding: 20px !important;
+  text-align: center !important;
+  vertical-align: middle !important;
+}
+
+.loading-content {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 9px;
+
+  color: #7f9088;
+  font-size: 12px;
+}
+
+.loading-spinner {
+  width: 16px;
+  height: 16px;
+
+  border: 2px solid #dce8e2;
+  border-top-color: #006b3f;
+  border-radius: 50%;
+
+  animation: users-spinner 0.8s linear infinite;
+}
+
+@keyframes users-spinner {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+
+/* =========================================================
+   EMPTY
+========================================================= */
+
+.users-table__empty {
+  padding: 45px 20px !important;
+}
+
+.empty-content {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: 7px;
+
+  text-align: center;
+}
+
+.empty-content__icon {
+  width: 45px;
+  height: 45px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  margin-bottom: 4px;
+
+  border-radius: 50%;
+
+  background: #edf6f1;
+  color: #006b3f;
+
+  font-size: 18px;
+}
+
+.empty-content strong {
+  font-size: 12px;
+  color: #35473e;
+}
+
+.empty-content span {
+  font-size: 10px;
+  color: #8b9892;
+}
+
+.empty-content__button {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+
+  height: 32px;
+
+  margin-top: 8px;
+  padding: 0 11px;
+
+  border: 0;
+  border-radius: 7px;
+
+  background: #006b3f;
+  color: #fff;
+
+  font-size: 9px;
+  font-weight: 800;
+
+  cursor: pointer;
+
+  transition: background-color 0.2s ease, opacity 0.2s ease;
+}
+
+.empty-content__button:hover:not(:disabled) {
+  background: #005b36;
+}
+
+.empty-content__button:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+
+/* =========================================================
+   HEADER COUNTER
+========================================================= */
+
+.parents-count {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+
+  padding: 6px 9px;
+
+  border: 1px solid #dce8e2;
+  border-radius: 7px;
+
+  background: #f7faf8;
+
+  color: #006b3f;
+
+  font-size: 9px;
+  font-weight: 800;
+
+  white-space: nowrap;
+}
+
+.parents-count i {
+  font-size: 11px;
+}
+
+
+/* =========================================================
+   RESPONSIVE — TABLETTE
+========================================================= */
+
+@media (max-width: 1100px) {
+
+  .emploi-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .cours-card__matiere {
+    font-size: 10px;
+  }
+
+  .cours-card__info {
+    font-size: 8px;
+  }
+
+  .cours-badge {
+    font-size: 7px;
+    padding: 3px 5px;
+  }
+}
+
+
+/* =========================================================
+   RESPONSIVE — PETIT ÉCRAN
+========================================================= */
+
+@media (max-width: 850px) {
+
+  .users-toolbar {
+    align-items: stretch;
+  }
+
+  .users-toolbar__actions {
+    flex-wrap: wrap;
+  }
+
+  .emploi-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+  }
+
+  .classe-select {
+    height: 36px;
+    padding: 0 9px;
+  }
+
+  .classe-select__label,
+  .classe-select__input {
+    font-size: 10px;
+  }
+}
+
+
+/* =========================================================
+   RESPONSIVE — MOBILE
+========================================================= */
+
+@media (max-width: 650px) {
+
+  .users-toolbar {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+  }
+
+  .users-toolbar__actions {
+    display: flex;
+    width: 100%;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .classe-select {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .btn-add-user {
+    flex-shrink: 0;
+    padding: 0 11px;
+  }
+
+  .btn-add-user span {
+    display: none;
+  }
+
+  .users-card__header {
+    padding: 14px 15px;
+  }
+
+  .parents-count {
+    font-size: 8px;
+    padding: 4px 7px;
+  }
+
+  .emploi-wrapper {
+    padding: 10px;
+  }
+
+  .emploi-grid {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+
+  .emploi-jour__header {
+    font-size: 9px;
+  }
+
+  .cours-card {
+    padding: 7px;
+  }
+
+  .cours-card__matiere {
+    font-size: 10px;
+  }
+
+  .cours-card__info {
+    font-size: 8px;
+  }
+
+  .cours-badge {
+    font-size: 7px;
+    padding: 2px 5px;
+  }
+
+  .table-action {
+    width: 24px;
+    height: 24px;
+    font-size: 10px;
+  }
+}

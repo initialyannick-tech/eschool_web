@@ -1,0 +1,171 @@
+<div class="classe-modal salle-modal">
+  <div class="classe-modal__header">
+    <div class="classe-modal__identity">
+      <div class="classe-modal__icon">
+        <i class="bi bi-door-open-fill"></i>
+      </div>
+      <div class="classe-modal__heading">
+        <div class="classe-modal__eyebrow">
+          Administration scolaire
+        </div>
+        <h4>{{ isEdit ? 'Modifier une salle' : 'Nouvelle salle' }}</h4>
+
+        <p>{{ isEdit ? 'Modifiez les informations de cette salle.' : 'Renseignez les informations pour créer une salle.' }}</p>
+      </div>
+    </div>
+
+    <button type="button" class="classe-modal__close" (click)="close()" aria-label="Fermer">
+      <i class="bi bi-x-lg"></i>
+    </button>
+  </div>
+
+  <!-- ERREURS BACKEND -->
+  @if (backendErrors.length > 0) {
+    <div class="backend-errors">
+      <div class="backend-errors__header">
+        <i class="bi bi-exclamation-triangle-fill"></i>
+        <span>Impossible d'enregistrer cette salle</span>
+      </div>
+
+      <div class="backend-errors__list">
+        @for (error of backendErrors; track $index) {
+          <div class="backend-error-badge">
+            <i class="bi bi-x-circle-fill"></i>
+            <span>{{ error }}</span>
+          </div>
+        }
+      </div>
+    </div>
+  }
+
+  <!-- FORMULAIRE -->
+  <form [formGroup]="salleForm" (ngSubmit)="save()" class="classe-modal__form">
+    <div class="classe-modal__body salle-modal__body">
+
+      <!-- PANNEAU 1 : IDENTIFICATION -->
+      <section class="classe-panel classe-panel--general">
+        <div class="classe-section__heading">
+          <div class="classe-section__icon">
+            <i class="bi bi-tag-fill"></i>
+          </div>
+          <div>
+            <h5>Identification de la salle</h5>
+            <p>Code, nom et type d'usage</p>
+          </div>
+        </div>
+
+        <div class="classe-general-content">
+          <!-- CODE -->
+          <div class="classe-field">
+            <label for="salle-code">Code / Sigle <span>*</span></label>
+            <div class="classe-input">
+              <i class="bi bi-card-text"></i>
+              <input
+                id="salle-code"
+                type="text"
+                formControlName="code"
+                placeholder="Ex. S01, LAB-INFO"
+                autocomplete="off"/>
+            </div>
+          </div>
+
+          <!-- NOM -->
+          <div class="classe-field">
+            <label for="salle-nom">Nom de la salle <span>*</span></label>
+            <div class="classe-input">
+              <i class="bi bi-building"></i>
+              <input
+                id="salle-nom"
+                type="text"
+                formControlName="nom"
+                placeholder="Ex. Salle Amadou Hampâté Bâ"
+                autocomplete="off"/>
+            </div>
+          </div>
+
+          <!-- TYPE -->
+          <div class="classe-field">
+            <label for="salle-type">Type de salle <span>*</span></label>
+            <div class="classe-native-select">
+              <i class="bi bi-grid-1x2-fill"></i>
+              <select id="salle-type" formControlName="type">
+                <option value="standard">Standard / Cours</option>
+                <option value="laboratoire">Laboratoire</option>
+                <option value="amphi">Amphithéâtre</option>
+                <option value="informatique">Informatique</option>
+              </select>
+              <i class="bi bi-chevron-down select-arrow"></i>
+            </div>
+          </div>
+
+          <!-- INFORMATION -->
+          <div class="classe-general-info">
+            <i class="bi bi-info-circle-fill"></i>
+            <span>Le code de la salle doit être unique. Il sera utilisé pour identifier la salle dans l'emploi du temps.</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- PANNEAU 2 : CAPACITÉ -->
+      <section class="classe-panel classe-panel--school">
+        <div class="classe-section__heading">
+          <div class="classe-section__icon">
+            <i class="bi bi-people-fill"></i>
+          </div>
+          <div>
+            <h5>Capacité et informations complémentaires</h5>
+            <p>Nombre de places et détails d'usage</p>
+          </div>
+        </div>
+
+        <div class="salle-complement-content">
+          <div class="salle-subsection">
+            <div class="classe-field">
+              <label for="salle-capacite">Capacité (places) <span>*</span></label>
+              <div class="classe-input">
+                <i class="bi bi-people"></i>
+                <input
+                  id="salle-capacite"
+                  type="number"
+                  min="1"
+                  formControlName="capacite"
+                  placeholder="Ex. 45"/>
+              </div>
+              <small class="salle-field-hint">Indiquez le nombre maximum d'élèves pouvant être accueillis dans cette salle.</small>
+            </div>
+          </div>
+
+          <!-- INFORMATION -->
+          <div class="classe-school-info">
+            <i class="bi bi-info-circle-fill"></i>
+            <span>La capacité est utilisée pour la répartition des classes et la planification des cours.</span>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <div class="classe-modal__footer">
+      <div class="classe-footer-info">
+        <i class="bi bi-door-open-fill"></i>
+        <span>Gestion des salles</span>
+      </div>
+      <div class="classe-footer-actions">
+        <button type="button" class="btn-classe-cancel" (click)="close()">
+          <i class="bi bi-x-lg"></i>
+          <span>Annuler</span>
+        </button>
+        @if (isSubmit) {
+          <button type="button" class="btn-classe-submit" disabled>
+            <span class="classe-submit-spinner"></span>
+            <span>Enregistrement...</span>
+          </button>
+        } @else {
+          <button type="submit" class="btn-classe-submit">
+            <i class="bi" [ngClass]="isEdit ? 'bi-check2' : 'bi-plus-lg'"></i>
+            <span>{{ isEdit ? 'Mettre à jour' : 'Sauvegarder' }}</span>
+          </button>
+        }
+      </div>
+    </div>
+  </form>
+</div>
