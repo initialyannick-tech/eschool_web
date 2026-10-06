@@ -114,13 +114,16 @@
 
               <!-- Statut -->
               <td>
-                @if (items.statut) {
-                  <span class="status-badge" [ngClass]="{'status-badge--principal': items.statut === 'actif', 'status-badge--financial': items.statut !== 'actif'}">
-                    <i class="bi" [ngClass]="{ 'bi-check-circle-fill': items.statut === 'actif', 'bi-info-circle-fill': items.statut !== 'actif'}"></i>
-                    {{ items.statut }}
+                @if (items.actif === true) {
+                  <span class="status-badge status-badge--principal">
+                    <i class="bi bi-check-circle-fill"></i>
+                    Actif
                   </span>
                 } @else {
-                  <span class="empty-value">—</span>
+                  <span class="status-badge status-badge--financial">
+                  <i class="bi bi-x-circle-fill"></i>
+                  Inactif
+                  </span>
                 }
               </td>
 

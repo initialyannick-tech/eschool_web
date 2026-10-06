@@ -4,7 +4,7 @@ export interface Salle {
   nom: string;
   capacite: number;
   type?: string;
-  statut?: string;
+  actif?: boolean;
   created_at?: string;
   updated_at?: string;
 }
