@@ -34,10 +34,9 @@
       <thead>
       <tr>
         <th>Parent / Responsable</th>
-        <th>Relation</th>
         <th>Téléphone</th>
         <th>Email</th>
-        <th>Responsabilités</th>
+        <th>Compte</th>
         <th>Enfants</th>
         <th class="">Actions</th>
       </tr>
@@ -45,7 +44,7 @@
       <tbody>
         @if (isLoad) {
           <tr>
-            <td colspan="7" class="users-table__loading">
+            <td colspan="6" class="users-table__loading">
               <div class="loading-content">
                 <span class="loading-spinner"></span>
                 <span>
@@ -70,18 +69,6 @@
               </div>
             </td>
 
-            <td>
-              @if (items.relation) {
-                <span class="relation-badge">
-                    <i class="bi bi-person-heart"></i>
-                  {{ items.relation }}
-                  </span>
-              } @else {
-                <span class="empty-value">
-                    —
-                  </span>
-              }
-            </td>
             <td>
               @if (items.telephone) {
                 <div class="contact-value">
@@ -114,25 +101,14 @@
             </td>
 
             <td>
-              <div class="responsibility-badges">
-                @if (items.responsable_principal) {
-                  <span class="status-badge status-badge--principal">
-                      <i class="bi bi-person-check-fill"></i>
-                      Principal
-                    </span>
-                }
-                @if (items.responsable_financier) {
-                  <span class="status-badge status-badge--financial">
-                      <i class="bi bi-wallet2"></i>
-                      Financier
-                    </span>
-                }
-                @if (!items.responsable_principal && !items.responsable_financier) {
-                  <span class="empty-value">
-                      —
-                    </span>
-                }
-              </div>
+              @if (items.compte) {
+                <span class="status-badge status-badge--principal">
+                  <i class="bi bi-person-check-fill"></i>
+                  Compte actif
+                </span>
+              } @else {
+                <span class="empty-value">Pas de compte</span>
+              }
             </td>
 
             <td>
@@ -151,10 +127,13 @@
                 <button (click)="showParent(items)" type="button" class="table-action table-action--view" title="Voir le parent">
                   <i class="bi bi-eye"></i>
                 </button>
-                <button type="button" class="table-action table-action--edit" title="Modifier le parent">
+                <button (click)="addChild(items)" type="button" class="table-action" title="Ajouter un enfant">
+                  <i class="bi bi-person-plus"></i>
+                </button>
+                <button (click)="edit(items)" type="button" class="table-action table-action--edit" title="Modifier le parent">
                   <i class="bi bi-pencil"></i>
                 </button>
-                <button type="button" class="table-action table-action--delete" title="Supprimer le parent">
+                <button (click)="delete(items)" type="button" class="table-action table-action--delete" title="Supprimer le parent">
                   <i class="bi bi-trash3"></i>
                 </button>
               </div>
@@ -163,7 +142,7 @@
         }
         @if (!parents || parents.length === 0) {
           <tr>
-            <td colspan="7" class="users-table__empty">
+            <td colspan="6" class="users-table__empty">
               <div class="empty-content">
                 <div class="empty-content__icon">
                   <i class="bi bi-people"></i>

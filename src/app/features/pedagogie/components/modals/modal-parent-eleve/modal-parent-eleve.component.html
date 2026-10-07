@@ -7,8 +7,14 @@
         </div>
         <div class="parent-eleve-modal__heading">
           <div class="parent-eleve-modal__eyebrow">Administration scolaire</div>
-          <h4>Nouveau dossier élève</h4>
-          <p>Enregistrez le responsable légal et l'élève avant son inscription scolaire.</p>
+          <h4>{{ existingParent ? 'Ajouter un enfant' : 'Nouveau dossier élève' }}</h4>
+          <p>
+            @if (existingParent) {
+              Enregistrez un nouvel élève dans le dossier de {{ existingParent.prenom }} {{ existingParent.nom }}.
+            } @else {
+              Enregistrez le responsable légal et l'élève avant son inscription scolaire.
+            }
+          </p>
         </div>
       </div>
 
@@ -16,31 +22,29 @@
         <i class="bi bi-x-lg"></i>
       </button>
     </div>
-    <div class="student-tabs">
-      <button type="button" class="student-tab" [class.active]="activeTab === 'parent'" (click)="setTab('parent')">
-        <div class="student-tab__icon">
-          <i class="bi bi-person-vcard-fill"></i>
-        </div>
-        <div class="student-tab__content">
-          <strong>Parent / Responsable</strong>
-          <span>
-            Responsable légal de l'élève
-          </span>
-        </div>
-      </button>
+    @if (!existingParent) {
+      <div class="student-tabs">
+        <button type="button" class="student-tab" [class.active]="activeTab === 'parent'" (click)="setTab('parent')">
+          <div class="student-tab__icon">
+            <i class="bi bi-person-vcard-fill"></i>
+          </div>
+          <div class="student-tab__content">
+            <strong>Parent / Responsable</strong>
+            <span>Responsable légal de l'élève</span>
+          </div>
+        </button>
 
-      <button type="button" class="student-tab" [class.active]="activeTab === 'eleve'" (click)="setTab('eleve')">
-        <div class="student-tab__icon">
-          <i class="bi bi-mortarboard-fill"></i>
-        </div>
-        <div class="student-tab__content">
-          <strong>Élève</strong>
-          <span>
-            Informations personnelles
-          </span>
-        </div>
-      </button>
-    </div>
+        <button type="button" class="student-tab" [class.active]="activeTab === 'eleve'" (click)="setTab('eleve')">
+          <div class="student-tab__icon">
+            <i class="bi bi-mortarboard-fill"></i>
+          </div>
+          <div class="student-tab__content">
+            <strong>Élève</strong>
+            <span>Informations personnelles</span>
+          </div>
+        </button>
+      </div>
+    }
 
     <div class="student-modal__body">
       @if (backendErrors.length > 0) {
@@ -62,7 +66,7 @@
           </div>
         </div>
       }
-      @if (activeTab === 'parent') {
+      @if (activeTab === 'parent' && !existingParent) {
 
         <div class="form-section" formGroupName="parent">
           <div class="form-section__header">
@@ -154,6 +158,45 @@
         </div>
       }
       @if (activeTab === 'eleve') {
+        @if (existingParent) {
+          <div class="form-section" formGroupName="parent">
+            <div class="form-section__header">
+              <div>
+                <h5>Lien avec le parent</h5>
+                <span>Précisez la relation et les responsabilités pour cet élève.</span>
+              </div>
+            </div>
+            <div class="form-grid">
+              <div class="form-field">
+                <label>Relation avec l'élève <span>*</span></label>
+                <select formControlName="relation" [class.is-invalid]="isInvalid('parent', 'relation')">
+                  <option value="">Sélectionner une relation</option>
+                  <option value="pere">Père</option>
+                  <option value="mere">Mère</option>
+                  <option value="tuteur">Tuteur</option>
+                  <option value="tutrice">Tutrice</option>
+                  <option value="autre">Autre</option>
+                </select>
+                @if (hasError('parent', 'relation', 'required')) {
+                  <small class="field-error">La relation est obligatoire.</small>
+                }
+              </div>
+              <div class="responsibilities form-field--full">
+                <div class="responsibilities__title">Responsabilités pour cet élève</div>
+                <div class="responsibilities__options">
+                  <label class="check-option">
+                    <input type="checkbox" formControlName="responsable_principal">
+                    <span>Responsable principal</span>
+                  </label>
+                  <label class="check-option">
+                    <input type="checkbox" formControlName="responsable_financier">
+                    <span>Responsable financier</span>
+                  </label>
+                </div>
+              </div>
+            </div>
+          </div>
+        }
         <div class="form-section" formGroupName="eleve">
           <div class="form-section__header">
             <div>
@@ -281,7 +324,11 @@
 
     <div class="student-modal__footer">
       <div class="footer-info">
-        @if (activeTab === 'parent') {
+        @if (existingParent) {
+          <span><i class="bi bi-person-check-fill"></i>Parent : {{ existingParent.prenom }} {{ existingParent.nom }}</span>
+          <i class="bi bi-chevron-right"></i>
+          <span><i class="bi bi-2-circle-fill"></i>Nouvel élève</span>
+        } @else if (activeTab === 'parent') {
           <span><i class="bi bi-1-circle-fill"></i>Responsable légal</span>
           <i class="bi bi-chevron-right"></i>
           <span class="muted"><i class="bi bi-2-circle"></i>Élève</span>
@@ -299,7 +346,7 @@
           </button>
         }
 
-        @if (activeTab === 'parent') {
+        @if (activeTab === 'parent' && !existingParent) {
           <button type="button" class="btn-primary" (click)="nextTab()" [disabled]="isSubmit">
             Continuer
             <i class="bi bi-arrow-right"></i>

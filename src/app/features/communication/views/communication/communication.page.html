@@ -1,0 +1,124 @@
+<section class="communication-page">
+  <header class="communication-heading">
+    <div>
+      <p class="communication-eyebrow">ECOLE - DIFFUSION</p>
+      <h1>Communication</h1>
+      <p class="communication-intro">Diffusez une information aux équipes et retrouvez vos envois.</p>
+    </div>
+    <a class="inbox-link" routerLink="/notifications">
+      <i class="bi bi-bell" aria-hidden="true"></i>
+      <span>Centre de notifications</span>
+    </a>
+  </header>
+
+  @if (!canManage) {
+    <div class="communication-state" role="status">
+      <i class="bi bi-shield-lock" aria-hidden="true"></i>
+      <h2>Accès réservé</h2>
+      <p>Votre rôle ne permet pas de gérer les communications.</p>
+    </div>
+  } @else {
+    <div class="communication-layout">
+      <section class="compose-panel" aria-labelledby="compose-title">
+        <div class="panel-heading">
+          <div class="panel-icon"><i class="bi bi-send" aria-hidden="true"></i></div>
+          <div>
+            <h2 id="compose-title">Nouvelle annonce</h2>
+            <p>Choisissez les destinataires et les canaux.</p>
+          </div>
+        </div>
+
+        <form [formGroup]="form" (ngSubmit)="submit()" class="compose-form">
+          <label class="field-label" for="announcement-title">Objet</label>
+          <input id="announcement-title" type="text" formControlName="title" maxlength="160" placeholder="Ex. Réunion pédagogique" />
+          @if (form.controls.title.touched && form.controls.title.invalid) {
+            <span class="field-error">Saisissez un objet de 160 caractères maximum.</span>
+          }
+
+          <label class="field-label" for="announcement-message">Message</label>
+          <textarea id="announcement-message" formControlName="message" rows="6" maxlength="5000" placeholder="Rédigez votre message..."></textarea>
+          <div class="field-hint">{{ form.controls.message.value.length }} / 5000</div>
+          @if (form.controls.message.touched && form.controls.message.invalid) {
+            <span class="field-error">Le message est obligatoire.</span>
+          }
+
+          <label class="field-label" for="announcement-audience">Destinataires</label>
+          <select id="announcement-audience" formControlName="audience">
+            <option value="all">Tous les utilisateurs actifs</option>
+            <option value="role">Un rôle précis</option>
+          </select>
+
+          @if (form.controls.audience.value === 'role') {
+            <label class="field-label" for="announcement-role">Rôle</label>
+            <select id="announcement-role" formControlName="role_id">
+              <option [ngValue]="null">Sélectionner un rôle</option>
+              @for (role of roles; track role.id) {
+                <option [ngValue]="role.id">{{ role.libelle }}</option>
+              }
+            </select>
+            @if (form.controls.role_id.touched && !form.controls.role_id.value) {
+              <span class="field-error">Sélectionnez un rôle pour cibler les destinataires.</span>
+            }
+          }
+
+          <fieldset class="channel-options">
+            <legend>Canaux de diffusion</legend>
+            <label class="channel-option">
+              <input type="checkbox" formControlName="inApp" />
+              <span class="channel-option__icon"><i class="bi bi-bell" aria-hidden="true"></i></span>
+              <span><strong>Notification</strong><small>Dans l’application</small></span>
+            </label>
+            <label class="channel-option">
+              <input type="checkbox" formControlName="email" />
+              <span class="channel-option__icon"><i class="bi bi-envelope" aria-hidden="true"></i></span>
+              <span><strong>E-mail</strong><small>À l’adresse du compte</small></span>
+            </label>
+          </fieldset>
+
+          <button class="send-button" type="submit" [disabled]="isSending">
+            <i class="bi" [class.bi-send-fill]="!isSending" [class.bi-arrow-repeat]="isSending" aria-hidden="true"></i>
+            {{ isSending ? 'Envoi en cours...' : 'Envoyer la communication' }}
+          </button>
+        </form>
+      </section>
+
+      <section class="history-panel" aria-labelledby="history-title">
+        <div class="history-heading">
+          <div>
+            <h2 id="history-title">Historique des envois</h2>
+            <p>Les communications récemment diffusées.</p>
+          </div>
+          <span class="history-count">{{ messages.length }}</span>
+        </div>
+
+        @if (isLoading) {
+          <div class="communication-state communication-state--compact"><span class="loading-spinner"></span><span>Chargement...</span></div>
+        } @else if (messages.length === 0) {
+          <div class="communication-state communication-state--compact">
+            <i class="bi bi-inbox" aria-hidden="true"></i>
+            <p>Aucun envoi pour le moment.</p>
+          </div>
+        } @else {
+          <div class="history-list">
+            @for (item of messages; track item.id) {
+              <article class="history-item">
+                <div class="history-item__topline">
+                  <span class="history-item__date">{{ item.sent_at | date:'d MMM y, HH:mm' }}</span>
+                  <span class="history-item__recipients"><i class="bi bi-people" aria-hidden="true"></i>{{ item.recipient_count }}</span>
+                </div>
+                <h3>{{ item.title }}</h3>
+                <p>{{ item.message }}</p>
+                <div class="history-item__meta">
+                  <span><i class="bi bi-broadcast" aria-hidden="true"></i>{{ item.audience === 'all' ? 'Tous les utilisateurs' : item.role?.libelle }}</span>
+                  @for (channel of item.channels; track channel) {
+                    <span class="channel-tag">{{ channel === 'mail' ? 'E-mail' : 'Notification' }}</span>
+                  }
+                </div>
+              </article>
+            }
+          </div>
+        }
+      </section>
+    </div>
+  }
+</section>

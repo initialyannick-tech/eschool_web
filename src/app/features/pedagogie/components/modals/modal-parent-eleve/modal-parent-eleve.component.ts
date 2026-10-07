@@ -1,8 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
 import { NgbActiveModal } from "@ng-bootstrap/ng-bootstrap";
 import {ApiService} from '../../../../../core/services/api.service';
 import {ShareService} from '../../../../../core/services/share.service';
+import {Parent} from '../../../models/parent';
 
 @Component({
   selector: 'app-modal-parent-eleve',
@@ -12,6 +13,8 @@ import {ShareService} from '../../../../../core/services/share.service';
   styleUrls: ['./modal-parent-eleve.component.scss']
 })
 export class ModalParentEleveComponent  {
+
+  @Input() existingParent: Parent | null = null;
 
   parentEleveForm!: FormGroup;
   activeTab: 'parent' | 'eleve' = 'parent';
@@ -27,6 +30,9 @@ export class ModalParentEleveComponent  {
 
   ngOnInit(): void {
     this.initForm();
+    if (this.existingParent) {
+      this.activeTab = 'eleve';
+    }
   }
 
   initForm(): void {
@@ -79,10 +85,15 @@ export class ModalParentEleveComponent  {
   submit(): void {
     this.backendErrors = [];
 
-    if (this.parentEleveForm.invalid) {
+    const invalidGroup = this.existingParent
+      ? this.parentEleveForm.get('eleve')?.invalid
+        || this.parentEleveForm.get('parent.relation')?.invalid
+      : this.parentEleveForm.invalid;
+
+    if (invalidGroup) {
       this.parentEleveForm.markAllAsTouched();
 
-      if (this.parentEleveForm.get('parent')?.invalid) {
+      if (!this.existingParent && this.parentEleveForm.get('parent')?.invalid) {
         this.activeTab = 'parent';
       } else {
         this.activeTab = 'eleve';
@@ -96,37 +107,22 @@ export class ModalParentEleveComponent  {
     const parentData = this.parentEleveForm.get('parent')?.value;
     const eleveData = this.parentEleveForm.get('eleve')?.value;
 
-    this.apiService.post('parents', parentData)
-      .then((parentResponse: any) => {
-
-        if (!parentResponse?.success) {
-          throw new Error(
-            parentResponse?.message ||
-            'Impossible d’enregistrer le parent.'
-          );
-        }
-
-        const parentId = parentResponse?.data?.id;
-
-        if (!parentId) {
-          throw new Error(
-            'Le parent a été créé mais son identifiant est introuvable.'
-          );
-        }
-
-        return this.apiService.post('eleves', {
+    const saveRequest = this.existingParent
+      ? this.apiService.post('eleves', {
           ...eleveData,
-          parent_id: parentId
+          parent_id: this.existingParent.id,
+          relation: parentData.relation,
+          responsable_principal: parentData.responsable_principal,
+          responsable_financier: parentData.responsable_financier
+        })
+      : this.apiService.post('parents/dossier', {
+          parent: parentData,
+          eleve: eleveData
         });
-      })
 
-      .then((eleveResponse: any) => {
-
-        if (!eleveResponse?.success) {
-          throw new Error(
-            eleveResponse?.message ||
-            'Impossible d’enregistrer l’élève.'
-          );
+    saveRequest.then((response: any) => {
+        if (!response?.success) {
+          throw new Error(response?.message || 'Impossible d’enregistrer le dossier.');
         }
 
         this.isSubmit = false;
@@ -159,7 +155,7 @@ export class ModalParentEleveComponent  {
           ];
 
           const hasParentError = Object.keys(response.errors)
-            .some(field => parentFields.includes(field));
+            .some(field => field.startsWith('parent.') || parentFields.includes(field));
 
           this.activeTab = hasParentError
             ? 'parent'

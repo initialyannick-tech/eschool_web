@@ -2,15 +2,27 @@ import {Eleve} from './eleve';
 
 export interface Parent {
   id?: number;
+  user_id?: number | null;
   nom?: string;
-  prenom?: string
+  prenom?: string;
   relation?: string;
-  telephone?: string;
-  email?: string;
   responsable_principal?: boolean;
   responsable_financier?: boolean;
-  eleves?: Eleve;
-  nombre_enfants?: string;
+  telephone?: string;
+  telephone_secondaire?: string;
+  email?: string;
+  adresse?: string;
+  profession?: string;
+  lieu_travail?: string;
+  statut?: 'actif' | 'inactif';
+  observation?: string;
+  compte?: {
+    id: number;
+    email: string;
+    role_id: number;
+  } | null;
+  eleves?: Eleve[];
+  nombre_enfants?: number;
 }
 
 export class Covert {

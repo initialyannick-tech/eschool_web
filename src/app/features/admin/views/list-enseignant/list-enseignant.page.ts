@@ -5,13 +5,12 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ApiService } from '../../../../core/services/api.service';
 import { PageHeaderComponent } from '../../../../shared/components/page-header/page-header.component';
 import { ModalEnseignantComponent } from '../../components/modal-enseignant/modal-enseignant.component';
-import {CustomPaginationComponent} from '../../../../shared/components/custom-pagination/custom-pagination.component';
 import {RouterLink} from '@angular/router';
 
 @Component({
   selector: 'app-list-enseignant',
   standalone: true,
-  imports: [CommonModule, FormsModule, PageHeaderComponent, CustomPaginationComponent, RouterLink],
+  imports: [CommonModule, FormsModule, PageHeaderComponent, RouterLink],
   templateUrl: './list-enseignant.page.html',
   styleUrls: ['./list-enseignant.page.scss']
 })

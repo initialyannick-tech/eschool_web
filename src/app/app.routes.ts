@@ -4,6 +4,7 @@ import { ADMIN_ROUTES } from './features/admin/routes';
 import {GuestGuard} from './core/guards/guest.guard';
 import {AuthentificationPage} from './features/auth/views/authentification/authentification.page';
 import { PEDAGOGIE_ROUTES } from './features/pedagogie/routes';
+import { COMMUNICATION_ROUTES } from './features/communication/routes';
 
 
 export const routes: Routes = [
@@ -16,6 +17,7 @@ export const routes: Routes = [
     ...DASHBOARD_ROUTES,
     ...ADMIN_ROUTES,
     ...PEDAGOGIE_ROUTES,
+    ...COMMUNICATION_ROUTES,
   {
       path: '**',
       redirectTo: '',

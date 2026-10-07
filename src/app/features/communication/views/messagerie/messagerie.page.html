@@ -1,0 +1,172 @@
+<section class="messaging-page">
+  <header class="messaging-heading">
+    <div>
+      <p class="messaging-eyebrow">ÉCHANGES PRIVÉS</p>
+      <h1>Messagerie</h1>
+      <p>Échangez avec les membres de l’établissement.</p>
+    </div>
+    @if (canSend) {
+      <button type="button" class="new-message-button" (click)="startNewMessage()">
+        <i class="bi bi-pencil-square" aria-hidden="true"></i>
+        Nouveau message
+      </button>
+    }
+  </header>
+
+  @if (!canRead) {
+    <div class="messaging-empty">
+      <i class="bi bi-shield-lock" aria-hidden="true"></i>
+      <h2>Accès réservé</h2>
+      <p>Votre rôle ne permet pas de consulter la messagerie.</p>
+    </div>
+  } @else {
+    <div class="messaging-shell">
+      <aside class="conversation-sidebar" aria-label="Conversations">
+        <div class="conversation-tools">
+          <label class="conversation-search">
+            <i class="bi bi-search" aria-hidden="true"></i>
+            <input type="search" [(ngModel)]="searchText" (keyup.enter)="loadConversations()" placeholder="Rechercher" aria-label="Rechercher des conversations" />
+          </label>
+          <button type="button" class="search-submit" (click)="loadConversations()" aria-label="Lancer la recherche" title="Rechercher">
+            <i class="bi bi-arrow-return-left" aria-hidden="true"></i>
+          </button>
+        </div>
+        <div class="conversation-filters" role="tablist" aria-label="Filtrer les conversations">
+          <button type="button" [class.is-active]="!showArchived" [attr.aria-selected]="!showArchived" (click)="showArchived = false; loadConversations()">Boîte de réception</button>
+          <button type="button" [class.is-active]="showArchived" [attr.aria-selected]="showArchived" (click)="showArchived = true; loadConversations()">Archives</button>
+        </div>
+
+        @if (isLoading) {
+          <div class="sidebar-state"><span class="loading-spinner"></span><span>Chargement...</span></div>
+        } @else if (conversations.length === 0) {
+          <div class="sidebar-state sidebar-state--empty">
+            <i class="bi bi-chat-square-text" aria-hidden="true"></i>
+            <p>{{ searchText ? 'Aucun résultat.' : 'Aucune conversation.' }}</p>
+          </div>
+        } @else {
+          <div class="conversation-list">
+            @for (conversation of conversations; track conversation.id) {
+              <button type="button" class="conversation-row" [class.is-selected]="selectedConversation?.id === conversation.id" (click)="selectConversation(conversation)">
+                <span class="conversation-avatar">{{ otherParticipant(conversation)?.prenom?.charAt(0) }}{{ otherParticipant(conversation)?.nom?.charAt(0) }}</span>
+                <span class="conversation-row__copy">
+                  <span class="conversation-row__name">{{ otherParticipant(conversation)?.prenom }} {{ otherParticipant(conversation)?.nom }}</span>
+                  <span class="conversation-row__preview">{{ conversation.last_message?.body || conversation.last_message?.attachment?.name || 'Nouvelle conversation' }}</span>
+                </span>
+                <span class="conversation-row__side">
+                  <time>{{ conversation.updated_at | date:'d MMM' }}</time>
+                  @if (conversation.unread_count > 0) {
+                    <span class="unread-pill">{{ conversation.unread_count }}</span>
+                  }
+                </span>
+              </button>
+            }
+          </div>
+        }
+      </aside>
+
+      <main class="message-panel">
+        @if (showComposer) {
+          <section class="new-message-panel" aria-labelledby="new-message-title">
+            <div class="message-panel-heading">
+              <div>
+                <h2 id="new-message-title">Nouveau message</h2>
+                <p>Le message et ses pièces jointes sont visibles uniquement par les participants.</p>
+              </div>
+              <button type="button" class="icon-action" (click)="showComposer = false" aria-label="Fermer le formulaire" title="Fermer">
+                <i class="bi bi-x-lg" aria-hidden="true"></i>
+              </button>
+            </div>
+            <div class="new-message-fields">
+              <label for="recipient-search">Destinataire</label>
+              <input id="recipient-search" type="search" [(ngModel)]="recipientSearch" (keyup.enter)="loadRecipients()" placeholder="Rechercher par nom ou e-mail" />
+              <button type="button" class="text-action" (click)="loadRecipients()">Rechercher</button>
+              <select [(ngModel)]="recipientId" name="recipient" aria-label="Choisir un destinataire" [disabled]="isLoadingRecipients">
+                <option [ngValue]="null">{{ isLoadingRecipients ? 'Chargement...' : 'Sélectionner un destinataire' }}</option>
+                @for (recipient of recipients; track recipient.id) {
+                  <option [ngValue]="recipient.id">{{ recipient.prenom }} {{ recipient.nom }} · {{ recipient.role ?? recipient.email }}</option>
+                }
+              </select>
+              <label for="message-subject">Objet <span>(facultatif)</span></label>
+              <input id="message-subject" type="text" [(ngModel)]="subject" name="subject" maxlength="160" placeholder="Objet de la conversation" />
+            </div>
+            <div class="composer-area">
+              <textarea [(ngModel)]="body" name="newMessageBody" rows="5" maxlength="10000" placeholder="Écrire un message..."></textarea>
+              <div class="composer-actions">
+                <label class="attachment-picker">
+                  <i class="bi bi-paperclip" aria-hidden="true"></i>
+                  <span>{{ selectedFile?.name ?? 'Joindre un fichier' }}</span>
+                  <input type="file" accept=".pdf,.doc,.docx,.xls,.xlsx,.jpg,.jpeg,.png" (change)="onNewFileSelected($event)" />
+                </label>
+                <button type="button" class="send-message-button" [disabled]="isSending" (click)="sendNewMessage()">
+                  <i class="bi bi-send-fill" aria-hidden="true"></i>
+                  {{ isSending ? 'Envoi...' : 'Envoyer' }}
+                </button>
+              </div>
+            </div>
+          </section>
+        } @else if (!selectedConversation) {
+          <div class="messaging-empty">
+            <i class="bi bi-chat-left-text" aria-hidden="true"></i>
+            <h2>Vos conversations</h2>
+            <p>Sélectionnez un fil ou commencez un nouveau message.</p>
+          </div>
+        } @else {
+          <section class="thread-view" aria-label="Fil de discussion">
+            <header class="thread-header">
+              <span class="conversation-avatar">{{ otherParticipant(selectedConversation)?.prenom?.charAt(0) }}{{ otherParticipant(selectedConversation)?.nom?.charAt(0) }}</span>
+              <div class="thread-header__person">
+                <h2>{{ otherParticipant(selectedConversation)?.prenom }} {{ otherParticipant(selectedConversation)?.nom }}</h2>
+                <span>{{ selectedConversation.subject || otherParticipant(selectedConversation)?.email }}</span>
+              </div>
+              <button type="button" class="icon-action" [title]="showArchived ? 'Restaurer la conversation' : 'Archiver la conversation'" [attr.aria-label]="showArchived ? 'Restaurer la conversation' : 'Archiver la conversation'" (click)="toggleArchive(selectedConversation, !showArchived)">
+                <i class="bi" [class.bi-archive]="!showArchived" [class.bi-archive-fill]="showArchived" aria-hidden="true"></i>
+              </button>
+            </header>
+
+            @if (isLoadingMessages) {
+              <div class="thread-state"><span class="loading-spinner"></span><span>Chargement des messages...</span></div>
+            } @else {
+              <div class="thread-messages" aria-live="polite">
+                @for (message of messages; track message.id) {
+                  <article class="message-bubble" [class.message-bubble--mine]="message.sender?.id === authService.getUser()?.id">
+                    <div class="message-bubble__meta">
+                      <strong>{{ message.sender?.prenom }} {{ message.sender?.nom }}</strong>
+                      <time>{{ message.created_at | date:'d MMM y, HH:mm' }}</time>
+                    </div>
+                    @if (message.body) {
+                      <p>{{ message.body }}</p>
+                    }
+                    @if (message.attachment) {
+                      <button type="button" class="message-attachment" (click)="downloadAttachment(message)">
+                        <i class="bi bi-file-earmark-arrow-down" aria-hidden="true"></i>
+                        <span>{{ message.attachment.name }}</span>
+                        <small>{{ (message.attachment.size / 1024) | number:'1.0-0' }} Ko</small>
+                      </button>
+                    }
+                  </article>
+                }
+              </div>
+
+              @if (canSend && !showArchived) {
+                <div class="reply-composer">
+                  <textarea [(ngModel)]="replyBody" name="replyBody" rows="3" maxlength="10000" placeholder="Répondre à cette conversation..."></textarea>
+                  <div class="composer-actions">
+                    <label class="attachment-picker">
+                      <i class="bi bi-paperclip" aria-hidden="true"></i>
+                      <span>{{ replyFile?.name ?? 'Joindre un fichier' }}</span>
+                      <input type="file" accept=".pdf,.doc,.docx,.xls,.xlsx,.jpg,.jpeg,.png" (change)="onReplyFileSelected($event)" />
+                    </label>
+                    <button type="button" class="send-message-button" [disabled]="isSending" (click)="reply()">
+                      <i class="bi bi-reply-fill" aria-hidden="true"></i>
+                      {{ isSending ? 'Envoi...' : 'Répondre' }}
+                    </button>
+                  </div>
+                </div>
+              }
+            }
+          </section>
+        }
+      </main>
+    </div>
+  }
+</section>
