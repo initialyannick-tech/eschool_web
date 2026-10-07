@@ -123,7 +123,7 @@
 
     @if (tabSelected === 1) {
       <div class="eleve-parent-content">
-        @if (dossier.parent) {
+        @if (dossier.parents) {
           <div class="parent-summary">
             <div class="parent-summary__icon">
               <i class="bi bi-person-heart"></i>
@@ -132,24 +132,24 @@
               <span class="parent-summary__label">
                 Responsable de l'élève
               </span>
-              <h5>{{ dossier.parent.nom }}{{ dossier.parent.prenom }}</h5>
-              @if (dossier.parent.relation) {
+              <h5>{{ dossier.parents.nom }}{{ dossier.parents.prenom }}</h5>
+              @if (dossier.parents.relation) {
                 <span class="parent-summary__relation">
-                  {{ dossier.parent.relation }}
+                  {{ dossier.parents.relation }}
                 </span>
               }
             </div>
             <div class="parent-summary__contact">
-              @if (dossier.parent.telephone) {
+              @if (dossier.parents.telephone) {
                 <span>
                   <i class="bi bi-telephone"></i>
-                  {{ dossier.parent.telephone }}
+                  {{ dossier.parents.telephone }}
                 </span>
               }
-              @if (dossier.parent.email) {
+              @if (dossier.parents.email) {
                 <span>
                   <i class="bi bi-envelope"></i>
-                  {{ dossier.parent.email }}
+                  {{ dossier.parents.email }}
                 </span>
               }
             </div>

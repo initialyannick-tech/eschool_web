@@ -1,0 +1,175 @@
+<app-page-header [backBtn]="true" [titre]="'Liste des Salles'"></app-page-header>
+
+<div class="users-toolbar">
+  <div class="users-toolbar__info">
+    <div class="users-toolbar__title">
+      Salles
+    </div>
+    <div class="users-toolbar__subtitle">
+      Gérez les salles de l'établissement
+    </div>
+  </div>
+  <div class="users-toolbar__actions">
+    <div class="users-search">
+      <i class="bi bi-search"></i>
+      <input (keyup)="searchAction()" [(ngModel)]="searchText" type="text" class="users-search__input" placeholder="Rechercher une salle...">
+    </div>
+    <button type="button" class="btn-add-user" (click)="add()">
+      <i class="bi bi-plus-lg"></i>
+      <span>Ajouter une salle</span>
+    </button>
+  </div>
+</div>
+
+<!-- Carte principale -->
+<div class="users-card">
+  <div class="users-card__header">
+    <div>
+      <h4>Liste des salles</h4>
+      <span>Salles enregistrées sur la plateforme</span>
+    </div>
+    <div class="parents-count">
+      <i class="bi bi-door-open"></i>
+      {{ salles.length }} salle(s)
+    </div>
+  </div>
+
+  <!-- Tableau -->
+  <div class="users-table-wrapper">
+    <table class="users-table">
+      <thead>
+      <tr>
+        <th>Code</th>
+        <th>Nom</th>
+        <th>Capacité</th>
+        <th>Type</th>
+        <th>Statut</th>
+        <th>Actions</th>
+      </tr>
+      </thead>
+      <tbody>
+        @if (isLoad) {
+          <tr>
+            <td colspan="6" class="users-table__loading">
+              <div class="loading-content">
+                <span class="loading-spinner"></span>
+                <span>Chargement des salles...</span>
+              </div>
+            </td>
+          </tr>
+        }
+        @else {
+          <!-- Liste des salles -->
+          @for (items of salles; track items.id) {
+            <tr>
+              <td>
+                @if (items.code) {
+                  <span class="relation-badge">
+                    <i class="bi bi-card-text"></i>
+                    {{ items.code }}
+                  </span>
+                } @else {
+                  <span class="empty-value">—</span>
+                }
+              </td>
+
+              <td>
+                <div class="parent-identity">
+                  <div class="parent-avatar">
+                    <i class="bi bi-door-open-fill"></i>
+                  </div>
+                  <div class="parent-identity__content">
+                    <strong>{{ items.nom || 'Non renseigné' }}</strong>
+                    <span>Salle de classe</span>
+                  </div>
+                </div>
+              </td>
+
+              <td>
+                @if (items.capacite) {
+                  <div class="children-count">
+                    <div class="children-count__icon">
+                      <i class="bi bi-people-fill"></i>
+                    </div>
+                    <div class="children-count__content">
+                      <strong>{{ items.capacite }}</strong>
+                      <span>places</span>
+                    </div>
+                  </div>
+                } @else {
+                  <span class="empty-value">—</span>
+                }
+              </td>
+
+              <td>
+                @if (items.type) {
+                  <span class="relation-badge">
+                    <i class="bi bi-tag"></i>
+                    {{ items.type }}
+                  </span>
+                } @else {
+                  <span class="empty-value">Standard</span>
+                }
+              </td>
+
+              <!-- Statut -->
+              <td>
+                @if (items.actif === true) {
+                  <span class="status-badge status-badge--principal">
+                    <i class="bi bi-check-circle-fill"></i>
+                    Actif
+                  </span>
+                } @else {
+                  <span class="status-badge status-badge--financial">
+                  <i class="bi bi-x-circle-fill"></i>
+                  Inactif
+                  </span>
+                }
+              </td>
+
+              <!-- Actions -->
+              <td class="users-table__actions">
+                <div class="table-actions">
+                  <button (click)="showSalle(items)" type="button" class="table-action table-action--view" title="Voir les détails de la salle">
+                    <i class="bi bi-eye"></i>
+                  </button>
+
+                  <button (click)="edit(items)" type="button" class="table-action table-action--edit" title="Modifier la salle">
+                    <i class="bi bi-pencil"></i>
+                  </button>
+
+                  <button (click)="delete(items)" type="button" class="table-action table-action--delete" title="Supprimer la salle">
+                    <i class="bi bi-trash3"></i>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          }
+
+          <!-- Aucune salle -->
+          @if (!salles || salles.length === 0) {
+            <tr>
+              <td colspan="6" class="users-table__empty">
+                <div class="empty-content">
+                  <div class="empty-content__icon">
+                    <i class="bi bi-door-open"></i>
+                  </div>
+                  <strong>Aucune salle enregistrée</strong>
+                  <span>Aucune salle ne correspond aux critères de recherche.</span>
+                  <button type="button" class="empty-content__button" (click)="add()">
+                    <i class="bi bi-plus-lg"></i>
+                    Ajouter une salle
+                  </button>
+                </div>
+              </td>
+            </tr>
+          }
+        }
+      </tbody>
+    </table>
+  </div>
+
+  <div class="users-card__footer">
+    <app-custom-pagination (pageChange)="changePage($event)" [links]="pagination"></app-custom-pagination>
+  </div>
+</div>
