@@ -6,11 +6,10 @@ import {NavigationEnd, Router, RouterLink, RouterLinkActive, RouterOutlet} from 
 import Swal from 'sweetalert2';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {UpdatePasswordComponent} from '../../features/admin/components/update-password/update-password.component';
-import {isPlatformBrowser, NgIf} from '@angular/common';
+import {isPlatformBrowser} from '@angular/common';
 import {NgxPermissionsModule} from 'ngx-permissions';
 import {filter} from 'rxjs';
 import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
-import {CommunicationStateService} from '../../features/communication/services/communication-state.service';
 
 @Component({
   selector: 'app-main-layout',
@@ -30,7 +29,6 @@ export class MainLayout {
   route = inject(Router)
   modal = inject(NgbModal)
   destroyRef = inject(DestroyRef)
-  communicationState: CommunicationStateService = inject(CommunicationStateService)
 
   userConnected: any
   passwordChanged: any
@@ -67,11 +65,10 @@ export class MainLayout {
     if (this.userConnected) {
       this.permissionItems = this.authService.getPermissions();
       this.apiService.loadPermissions(this.permissionItems);
-      this.communicationState.refreshUnreadCount();
       this.route.events.pipe(
         filter((event) => event instanceof NavigationEnd),
         takeUntilDestroyed(this.destroyRef),
-      ).subscribe(() => this.communicationState.refreshUnreadCount());
+      )
     }
 
     this.passwordChanged = this.authService.passwordChanged()
@@ -91,11 +88,6 @@ export class MainLayout {
       });
     }
   }
-
-  notificationCount(): number {
-    return Number(this.communicationState.unreadCount());
-  }
-
 
   logout() {
     Swal.fire(

@@ -12,9 +12,7 @@
           eSchool
         </span>
       </div>
-
     </div>
-
     <div class="app-topbar__right">
       <div class="dropdown topbar-user">
         <button class="topbar-user__button dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -25,7 +23,6 @@
           <span class="topbar-user__name">
             {{ userConnected.nom }} {{ userConnected.prenom }}
           </span>
-
         </button>
 
         <ul class="dropdown-menu dropdown-menu-end topbar-user__menu">
@@ -47,13 +44,10 @@
           <li>
             <a class="dropdown-item" routerLink="/notifications">
               <i class="bi bi-bell me-2"></i>
-              Notifications
-              @if (notificationCount() > 0) {
-                <span class="topbar-notification-count">{{ notificationCount() > 99 ? '99+' : notificationCount() }}</span>
-              }
-
+                 Notifications
             </a>
           </li>
+
           <li>
             <hr class="dropdown-divider">
           </li>
@@ -68,22 +62,25 @@
       </div>
     </div>
   </header>
+
+
   <!-- =================================================
        OVERLAY MOBILE
   ================================================== -->
   @if (isMobile && isSidebarOpen) {
     <div class="app-overlay" (click)="toggleSidebar()"></div>
   }
+
+
   <!-- =================================================
        BARRE LATÉRALE
   ================================================== -->
   <aside class="app-sidebar" [class.app-sidebar--collapsed]="!isSidebarOpen">
     <nav class="sidebar-nav">
-      <!-- =================================================
-           GROUPE : GÉNÉRAL
-      ================================================== -->
       <div class="sidebar-nav__group">
-        <span class="sidebar-nav__label">Général</span>
+        <span class="sidebar-nav__label">
+          Général
+        </span>
         <a class="sidebar-nav__link" routerLink="/dashboard" routerLinkActive="sidebar-nav__link--active">
           <i class="bi bi-speedometer2"></i>
           <span>
@@ -92,10 +89,9 @@
         </a>
         <a class="sidebar-nav__link" routerLink="/calendar" routerLinkActive="sidebar-nav__link--active">
           <i class="bi bi-calendar-event"></i>
-          <span>
-            Calendrier
-          </span>
+          <span>Calendrier</span>
         </a>
+
         <a class="sidebar-nav__link" routerLink="/stats" routerLinkActive="sidebar-nav__link--active">
           <i class="bi bi-bar-chart"></i>
           <span>
@@ -103,18 +99,12 @@
           </span>
         </a>
       </div>
-      <!-- =================================================
-           GROUPE : GESTION
-      ================================================== -->
+
       <div class="sidebar-nav__group">
-        <span class="sidebar-nav__label">
-          Gestion
-        </span>
+        <span class="sidebar-nav__label">Gestion</span>
         <a class="sidebar-nav__link" *ngxPermissionsOnly="['service.management']" routerLink="/departement/list" routerLinkActive="sidebar-nav__link--active">
           <i class="bi bi-building"></i>
-          <span>
-            Départements
-          </span>
+          <span>Départements</span>
         </a>
 
         <a class="sidebar-nav__link" *ngxPermissionsOnly="['metier.management']" routerLink="/departement/list-metier" routerLinkActive="sidebar-nav__link--active">
@@ -124,49 +114,65 @@
 
         <a class="sidebar-nav__link" *ngxPermissionsOnly="['poste.management']" routerLink="/departement/list-poste" routerLinkActive="sidebar-nav__link--active">
           <i class="bi bi-sliders"></i>
-          <span>Postes</span>
+          <span>
+            Postes
+          </span>
         </a>
-
 
         <a class="sidebar-nav__link" *ngxPermissionsOnly="['agent.management']" routerLink="/agent/list" routerLinkActive="sidebar-nav__link--active">
           <i class="bi bi-person-arms-up"></i>
-          <span>Agents</span>
+          <span>
+            Agents
+          </span>
         </a>
-
 
         <a class="sidebar-nav__link" *ngxPermissionsOnly="['ligue.management']" routerLink="/ligue/list" routerLinkActive="sidebar-nav__link--active">
           <i class="bi bi-trophy"></i>
-          <span>Gestion Ligues</span>
+          <span>
+            Gestion Ligues
+          </span>
         </a>
       </div>
-      <!-- =================================================
-           GROUPE : ADMINISTRATION
-      ================================================== -->
+
       <div class="sidebar-nav__group">
         <span class="sidebar-nav__label">
           Administration
         </span>
         <a class="sidebar-nav__link" *ngxPermissionsOnly="['parent.management']" routerLink="/pedagogie/list-parent" routerLinkActive="sidebar-nav__link--active">
           <i class="bi bi-person-rolodex"></i>
-          <span>Gestion Parents</span>
+          <span>
+            Gestion Parents
+          </span>
         </a>
+
         <a class="sidebar-nav__link" *ngxPermissionsOnly="['eleve.management']" routerLink="/pedagogie/list-eleve" routerLinkActive="sidebar-nav__link--active">
           <i class="bi bi-backpack4-fill"></i>
-          <span>Gestion Elèves</span>
+          <span>
+            Gestion Élèves
+          </span>
         </a>
+
         <a class="sidebar-nav__link" *ngxPermissionsOnly="['classe.management']" routerLink="/pedagogie/list-classe" routerLinkActive="sidebar-nav__link--active">
           <i class="bi bi-building-add"></i>
-          <span>Gestion Classes</span>
+          <span>
+            Gestion Classes
+          </span>
         </a>
+
         <a class="sidebar-nav__link" *ngxPermissionsOnly="['matiere.management']" routerLink="/pedagogie/list-matiere" routerLinkActive="sidebar-nav__link--active">
           <i class="bi bi-journal-bookmark-fill"></i>
-          <span>Gestion Matières</span>
+          <span>
+            Gestion Matières
+          </span>
         </a>
 
         <a class="sidebar-nav__link" *ngxPermissionsOnly="['user.management']" routerLink="/admin/enseignants" routerLinkActive="sidebar-nav__link--active">
           <i class="bi bi-person-workspace"></i>
-          <span>Gestion Enseignants</span>
+          <span>
+            Gestion Enseignants
+          </span>
         </a>
+
         <a class="sidebar-nav__link" *ngxPermissionsOnly="['salle.management']" routerLink="/pedagogie/list-salle" routerLinkActive="sidebar-nav__link--active">
           <i class="bi bi-door-open"></i>
           <span>Gestion Salles</span>
@@ -181,13 +187,7 @@
           <i class="bi bi-shield-check"></i>
           <span>Gestion Rôles</span>
         </a>
-        <a class="sidebar-nav__link" *ngxPermissionsOnly="['annonce.management']" routerLink="/communication" routerLinkActive="sidebar-nav__link--active">
-          <i class="bi bi-megaphone"></i>
-          <span>Communication</span>
-        </a>
-        <a class="sidebar-nav__link" *ngxPermissionsOnly="['message.consulter']" routerLink="/messagerie" routerLinkActive="sidebar-nav__link--active">
-          <i class="bi bi-chat-left-text"></i>
-          <span>Messagerie</span>
+
         <a class="sidebar-nav__link" *ngxPermissionsOnly="['user.management']" routerLink="/admin/users" routerLinkActive="sidebar-nav__link--active">
           <i class="bi bi-people-fill"></i>
           <span>Gestion Users</span>
@@ -208,11 +208,9 @@
     </nav>
   </aside>
 
-
-  <!-- =================================================
-       CONTENU PRINCIPAL
-  ================================================== -->
   <main class="app-content" [class.app-content--expanded]="!isSidebarOpen">
     <router-outlet></router-outlet>
   </main>
 </div>
+
+

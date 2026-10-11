@@ -6,17 +6,16 @@ import {Parent} from '../../models/parent';
 import {ModalParentComponent} from '../../components/modals/modal-parent/modal-parent.component';
 import {PageHeaderComponent} from '../../../../shared/components/page-header/page-header.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {CustomPaginationComponent} from '../../../../shared/components/custom-pagination/custom-pagination.component';
-import {ModalShowComponent} from '../../components/modals/modal-show/modal-show.component';
+
 
 @Component({
   selector: 'app-list-parent',
   standalone: true,
-  imports: [CommonModule, PageHeaderComponent, ReactiveFormsModule, FormsModule, CustomPaginationComponent],
+  imports: [CommonModule, PageHeaderComponent, ReactiveFormsModule, FormsModule],
   templateUrl: './list-parent.page.html',
   styleUrls: ['./list-parent.page.scss']
 })
-export class ListParentPage  {
+export class ListParentPage {
 
   apiService = inject(ApiService)
   modal = inject(NgbModal)
@@ -24,7 +23,6 @@ export class ListParentPage  {
   pagination: any[] = []
   isLoad: boolean = true
   searchText: string = ''
-
 
 
   ngOnInit() {
@@ -47,82 +45,6 @@ export class ListParentPage  {
         this.getParents()
       }
     })
-  }
-
-  addChild(parent: Parent) {
-    const modal = this.modal.open(ModalParentEleveComponent, {size: 'xl', backdrop: 'static'})
-    modal.componentInstance.existingParent = parent
-    modal.result.catch((reason: any) => {
-      if (reason === 'save') {
-        this.isLoad = true
-        this.getParents()
-      }
-    })
-  }
-
-  edit(parent: Parent) {
-    const modal = this.modal.open(ModalParentComponent, {size: 'lg', backdrop: 'static'})
-    modal.componentInstance.parent = parent
-  edit(parent: any) {
-    const modal = this.modal.open(ModalParentComponent, {size: 'lg', backdrop: 'static'})
-    modal.componentInstance.parent = parent
-    modal.componentInstance.isEdit = true
-    modal.result.catch((reason: any) => {
-      if (reason === 'save') {
-        this.isLoad = true
-        this.getParents()
-      }
-    })
-  }
-
-  delete(parent: Parent) {
-    if (!parent.id || !window.confirm(`Supprimer la fiche de ${parent.prenom} ${parent.nom} ? Les élèves resteront enregistrés.`)) {
-      return;
-    }
-
-    this.apiService.delete(`parents/${parent.id}`)
-      .then((response: any) => {
-        if (response?.success) {
-          this.getParents();
-        } else {
-          window.alert(response?.message || 'Impossible de supprimer le parent.');
-        }
-      })
-      .catch((error: any) => {
-        window.alert(error?.error?.message || 'Une erreur est survenue lors de la suppression.');
-      });
-  }
-
-  showParent(items: Parent) {
-     const modal = this.modal.open(ModalShowComponent, {size: 'xl', backdrop: 'static'});
-     modal.componentInstance.items = items
-  }
-
-  changePage(url: any) {
-    if (url != null) {
-      this.isLoad = true;
-      this.apiService.getPaginate(url).then((data: any) => {
-        this.parents = data.data;
-        this.pagination = data.meta.links;
-        this.isLoad = false;
-      })
-    }
-  }
-
-
-  searchAction() {
-    if (this.searchText.length >= 3) {
-      this.isLoad = true;
-      this.apiService.get('parents/search/' + this.searchText).then((data: any) => {
-        this.parents = data.data;
-        this.pagination = data.meta.links;
-        this.isLoad = false;
-      })
-    }
-    if (this.searchText.length == 0) {
-      this.isLoad = true;
-      this.getParents()
-    }
   }
 
 }
