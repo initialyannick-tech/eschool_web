@@ -38,7 +38,7 @@
         <th>Email</th>
         <th>Compte</th>
         <th>Enfants</th>
-        <th class="">Actions</th>
+        <th class="users-table__actions">Actions</th>
       </tr>
       </thead>
       <tbody>
@@ -73,15 +73,12 @@
               @if (items.telephone) {
                 <div class="contact-value">
                   <i class="bi bi-telephone"></i>
-                  <span>
-                      {{ items.telephone }}
-                    </span>
+                  <span>{{ items.telephone }}</span>
                 </div>
               } @else {
                 <span class="empty-value">
                     —
                   </span>
-
               }
             </td>
 
@@ -89,9 +86,7 @@
               @if (items.email) {
                 <div class="contact-value">
                   <i class="bi bi-envelope"></i>
-                  <span>
-                      {{ items.email }}
-                    </span>
+                  <span>{{ items.email }}</span>
                 </div>
               } @else {
                 <span class="empty-value">
@@ -120,6 +115,23 @@
                   <strong>{{ items.nombre_enfants || 0 }}</strong>
                   <span>enfant(s)</span>
                 </div>
+              </div>
+            </td>
+
+            <td class="users-table__actions">
+              <div class="table-actions">
+                <button type="button" class="btn-user-action" title="Voir le détail parent">
+                  <i class="bi bi-eye"></i>
+                </button>
+                <button (click)="AssignerEleve(items)" type="button" class="btn-user-action btn-parent-action-assigne" title="Assigner élève">
+                  <i class="bi bi-plugin"></i>
+                </button>
+                <button (click)="edit(items)" type="button" class="btn-user-action btn-parent-action-edit" title="Modifier parent">
+                  <i class="bi bi-pencil"></i>
+                </button>
+                <button type="button" class="btn-user-action btn-user-action--danger" title="Supprimer parent">
+                  <i class="bi bi-trash"></i>
+                </button>
               </div>
             </td>
 

@@ -1,0 +1,278 @@
+
+<div class="parent-form-container">
+
+  <!-- En-tête -->
+  <div class="parent-form-header">
+    <div class="parent-form-header__left">
+      <div class="parent-form-header__icon">
+        <i class="bi bi-person-lines-fill"></i>
+      </div>
+
+      <div>
+        <span class="parent-form-header__eyebrow">
+          GESTION SCOLAIRE
+        </span>
+        <h4>{{ isEdit ? 'Modifier le parent' : 'Enregistrer un parent' }}</h4>
+        <p>Gestion des informations et coordonnées du responsable</p>
+      </div>
+    </div>
+
+    <button
+      type="button"
+      class="parent-close-btn"
+      (click)="close()"
+      aria-label="Fermer">
+      <i class="bi bi-x-lg"></i>
+    </button>
+  </div>
+
+  <form
+    [formGroup]="parentForm"
+    (ngSubmit)="submit()"
+    class="parent-form">
+
+    <div class="parent-form-content">
+
+      <!-- Colonne gauche : identité -->
+      <aside class="parent-profile-panel">
+        <div class="parent-profile-panel__avatar">
+          <i class="bi bi-person-fill"></i>
+        </div>
+
+        <h5>Informations du parent</h5>
+
+        <p class="parent-profile-panel__description">
+          Renseignez l'identité du parent ou du responsable légal
+          de l'élève.
+        </p>
+
+        <div class="parent-profile-panel__divider"></div>
+
+        <div class="parent-info-item">
+          <span class="parent-info-item__icon">
+            <i class="bi bi-person"></i>
+          </span>
+          <div>
+            <strong>Identité</strong>
+            <span>Nom et prénom</span>
+          </div>
+        </div>
+
+        <div class="parent-info-item">
+          <span class="parent-info-item__icon">
+            <i class="bi bi-telephone"></i>
+          </span>
+          <div>
+            <strong>Contact</strong>
+            <span>Téléphones et email</span>
+          </div>
+        </div>
+
+        <div class="parent-info-item">
+          <span class="parent-info-item__icon">
+            <i class="bi bi-briefcase"></i>
+          </span>
+          <div>
+            <strong>Situation professionnelle</strong>
+            <span>Profession et statut</span>
+          </div>
+        </div>
+
+        <div class="parent-profile-panel__notice">
+          <i class="bi bi-info-circle"></i>
+          <span>
+            Les champs marqués d'un astérisque sont obligatoires.
+          </span>
+        </div>
+      </aside>
+
+      <!-- Colonne droite : formulaire -->
+      <div class="parent-fields-panel">
+
+        <!-- Section 1 -->
+        <section class="parent-form-section">
+
+          <div class="parent-form-section__header">
+            <div class="parent-form-section__number">01</div>
+            <div>
+              <h5>Identité</h5>
+              <p>Informations personnelles du responsable</p>
+            </div>
+          </div>
+
+          <div class="parent-fields-grid">
+
+            <div class="parent-field">
+              <label for="nom">Nom <span>*</span></label>
+              <input
+                id="nom"
+                type="text"
+                formControlName="nom"
+                placeholder="Nom de famille">
+            </div>
+
+            <div class="parent-field">
+              <label for="prenom">Prénom <span>*</span></label>
+              <input
+                id="prenom"
+                type="text"
+                formControlName="prenom"
+                placeholder="Prénom du parent">
+            </div>
+
+          </div>
+        </section>
+
+        <!-- Section 2 -->
+        <section class="parent-form-section">
+
+          <div class="parent-form-section__header">
+            <div class="parent-form-section__number">02</div>
+            <div>
+              <h5>Coordonnées</h5>
+              <p>Informations permettant de joindre le parent</p>
+            </div>
+          </div>
+
+          <div class="parent-fields-grid">
+
+            <div class="parent-field">
+              <label for="telephone">Téléphone principal</label>
+              <div class="parent-input-wrapper">
+                <i class="bi bi-telephone"></i>
+                <input
+                  id="telephone"
+                  type="tel"
+                  formControlName="telephone"
+                  placeholder="Numéro principal">
+              </div>
+            </div>
+
+            <div class="parent-field">
+              <label for="telephone_secondaire">
+                Téléphone secondaire
+              </label>
+              <div class="parent-input-wrapper">
+                <i class="bi bi-phone"></i>
+                <input
+                  id="telephone_secondaire"
+                  type="tel"
+                  formControlName="telephone_secondaire"
+                  placeholder="Numéro alternatif">
+              </div>
+            </div>
+
+            <div class="parent-field parent-field--full">
+              <label for="email">Adresse email</label>
+              <div class="parent-input-wrapper">
+                <i class="bi bi-envelope"></i>
+                <input
+                  id="email"
+                  type="email"
+                  formControlName="email"
+                  placeholder="exemple@domaine.com">
+              </div>
+            </div>
+
+            <div class="parent-field parent-field--full">
+              <label for="adresse">Adresse de résidence <span>*</span></label>
+              <div class="parent-input-wrapper">
+                <i class="bi bi-geo-alt"></i>
+                <input
+                  id="adresse"
+                  type="text"
+                  formControlName="adresse"
+                  placeholder="Quartier, ville, adresse complète">
+              </div>
+            </div>
+
+          </div>
+        </section>
+
+        <!-- Section 3 -->
+        <section class="parent-form-section">
+
+          <div class="parent-form-section__header">
+            <div class="parent-form-section__number">03</div>
+            <div>
+              <h5>Situation et suivi</h5>
+              <p>Profession et informations complémentaires</p>
+            </div>
+          </div>
+
+          <div class="parent-fields-grid">
+
+            <div class="parent-field">
+              <label for="profession">Profession</label>
+              <div class="parent-input-wrapper">
+                <i class="bi bi-briefcase"></i>
+                <input
+                  id="profession"
+                  type="text"
+                  formControlName="profession"
+                  placeholder="Profession du parent">
+              </div>
+            </div>
+
+            <div class="parent-field">
+              <label for="statut">Statut du parent</label>
+              <div class="parent-input-wrapper">
+                <i class="bi bi-toggle-on"></i>
+                <select id="statut" formControlName="statut">
+                  <option value="actif">Actif</option>
+                  <option value="inactif">Inactif</option>
+                </select>
+                <i class="bi bi-chevron-down parent-select-arrow"></i>
+              </div>
+            </div>
+
+            <div class="parent-field parent-field--full">
+              <label for="observation">Observations</label>
+              <textarea
+                id="observation"
+                formControlName="observation"
+                rows="3"
+                placeholder="Ajouter une remarque ou une information utile...">
+              </textarea>
+            </div>
+
+          </div>
+        </section>
+
+      </div>
+    </div>
+
+    <!-- Barre d'actions -->
+    <div class="parent-form-actions">
+      <span class="parent-form-actions__hint">
+        <i class="bi bi-shield-check"></i>
+        Les informations seront enregistrées dans e-Sikolo.
+      </span>
+
+      <div class="parent-form-actions__buttons">
+        <button
+          type="button"
+          class="parent-btn-cancel"
+          (click)="close()">
+          Annuler
+        </button>
+
+        <button
+          type="submit"
+          class="parent-btn-submit"
+          [disabled]="isSubmit">
+
+          @if (isSubmit) {
+            <span class="parent-loading-spinner"></span>
+            Enregistrement...
+          } @else {
+            <i class="bi bi-check2-circle"></i>
+            {{ isEdit ? 'Enregistrer les modifications' : 'Enregistrer le parent' }}
+          }
+
+        </button>
+      </div>
+    </div>
+
+  </form>
+</div>

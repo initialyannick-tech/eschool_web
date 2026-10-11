@@ -1,0 +1,330 @@
+
+<div class="assign-modal">
+
+  <!-- HEADER -->
+  <div class="assign-modal__header">
+    <div class="assign-modal__identity">
+      <div class="assign-modal__icon">
+        <i class="bi bi-person-plus-fill"></i>
+      </div>
+
+      <div class="assign-modal__heading">
+        <div class="assign-modal__eyebrow">
+          Administration scolaire
+        </div>
+
+        <h4>Assigner un élève</h4>
+
+        <p>
+          Associez un élève à un parent et définissez les responsabilités.
+        </p>
+      </div>
+    </div>
+
+    <button
+      type="button"
+      class="assign-modal__close"
+      (click)="close()"
+      aria-label="Fermer">
+      <i class="bi bi-x-lg"></i>
+    </button>
+  </div>
+
+  <form
+    [formGroup]="assignationForm"
+    (ngSubmit)="submit()"
+    class="assign-modal__form">
+
+    <div class="assign-modal__body">
+
+      <!-- PANNEAU PARENT ET RELATION -->
+      <section class="assign-panel assign-panel--general">
+
+        <div class="assign-section__heading">
+          <div class="assign-section__icon">
+            <i class="bi bi-person-vcard"></i>
+          </div>
+
+          <div>
+            <h5>Informations générales</h5>
+            <p>Parent sélectionné et nature de la relation</p>
+          </div>
+        </div>
+
+        <!-- Parent sélectionné -->
+        <div class="assign-parent-card">
+          <div class="assign-parent-card__avatar">
+            <i class="bi bi-person-fill"></i>
+          </div>
+
+          <div class="assign-parent-card__content">
+            <span class="assign-field__eyebrow">PARENT À ASSOCIER</span>
+
+            <strong>
+              {{ parent?.nom }} {{ parent?.prenom }}
+            </strong>
+
+            <span>
+              <i class="bi bi-telephone me-1"></i>
+              {{ parent?.telephone || 'Téléphone non renseigné' }}
+            </span>
+          </div>
+
+          <i class="bi bi-check-circle-fill assign-parent-card__check"></i>
+        </div>
+
+        <div class="assign-fields">
+
+          <!-- Relation -->
+          <div class="assign-field assign-field--full">
+            <label for="relation">
+              Relation avec l'élève <span>*</span>
+            </label>
+
+            <div class="assign-select">
+              <i class="bi bi-people"></i>
+
+              <select
+                id="relation"
+                formControlName="relation">
+
+                <option value="">Sélectionner une relation</option>
+                <option value="Père">Père</option>
+                <option value="Mère">Mère</option>
+                <option value="Tuteur">Tuteur</option>
+                <option value="Tutrice">Tutrice</option>
+                <option value="Autre">Autre</option>
+              </select>
+
+              <i class="bi bi-chevron-down assign-select__arrow"></i>
+            </div>
+
+            @if (assignationForm.get('relation')?.invalid &&
+            assignationForm.get('relation')?.touched) {
+              <small class="assign-field__error">
+                Veuillez sélectionner une relation.
+              </small>
+            }
+
+            @if (backendErrors['relation']) {
+              <small class="assign-field__error">
+                {{ backendErrors['relation'][0] }}
+              </small>
+            }
+          </div>
+
+          <!-- Responsable principal -->
+          <div class="assign-field assign-field--full">
+            <label class="assign-responsibility"
+                   [class.assign-responsibility--selected]="assignationForm.get('responsable_principal')?.value">
+
+              <input
+                type="checkbox"
+                formControlName="responsable_principal">
+
+              <span class="assign-responsibility__check">
+                <i class="bi bi-check"></i>
+              </span>
+
+              <span class="assign-responsibility__icon">
+                <i class="bi bi-person-check"></i>
+              </span>
+
+              <span class="assign-responsibility__content">
+                <strong>Responsable principal</strong>
+                <small>Contact principal et référent de l'élève</small>
+              </span>
+            </label>
+          </div>
+
+          <!-- Responsable financier -->
+          <div class="assign-field assign-field--full">
+            <label class="assign-responsibility"
+                   [class.assign-responsibility--selected]="assignationForm.get('responsable_financier')?.value">
+
+              <input
+                type="checkbox"
+                formControlName="responsable_financier">
+
+              <span class="assign-responsibility__check">
+                <i class="bi bi-check"></i>
+              </span>
+
+              <span class="assign-responsibility__icon assign-responsibility__icon--finance">
+                <i class="bi bi-wallet2"></i>
+              </span>
+
+              <span class="assign-responsibility__content">
+                <strong>Responsable financier</strong>
+                <small>Responsable du paiement des frais scolaires</small>
+              </span>
+            </label>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- PANNEAU ÉLÈVES -->
+      <section class="assign-panel assign-panel--students">
+
+        <div class="assign-section__heading">
+          <div class="assign-section__icon">
+            <i class="bi bi-mortarboard"></i>
+          </div>
+
+          <div>
+            <h5>Sélection de l'élève</h5>
+            <p>Recherchez puis sélectionnez l'élève à associer</p>
+          </div>
+        </div>
+
+        <!-- Recherche -->
+        <div class="assign-field">
+          <label for="searchEleve">
+            Rechercher un élève
+          </label>
+
+          <div class="assign-input">
+            <i class="bi bi-search"></i>
+
+            <input
+              id="searchEleve"
+              type="text"
+              [(ngModel)]="searchTerm"
+              [ngModelOptions]="{standalone: true}"
+              (ngModelChange)="rechercherEleve()"
+              placeholder="Nom, prénom ou matricule...">
+          </div>
+        </div>
+
+        <!-- Compteur -->
+        <div class="assign-student-header">
+          <div class="assign-student-info">
+            <span class="assign-student-count">
+              {{ elevesFiltres.length }}
+            </span>
+
+            <span>
+              élève{{ elevesFiltres.length > 1 ? 's' : '' }}
+              disponible{{ elevesFiltres.length > 1 ? 's' : '' }}
+            </span>
+          </div>
+
+          @if (assignationForm.get('eleve_id')?.value) {
+            <span class="assign-student-selected">
+              <i class="bi bi-check-circle-fill"></i>
+              Élève sélectionné
+            </span>
+          }
+        </div>
+
+        <!-- Liste -->
+        <div class="assign-student-list">
+
+          @if (isLoad) {
+            <div class="assign-empty">
+              <span class="spinner-border spinner-border-sm"></span>
+              <strong>Chargement des élèves...</strong>
+            </div>
+          } @else if (elevesFiltres.length === 0) {
+            <div class="assign-empty">
+              <div class="assign-empty__icon">
+                <i class="bi bi-journal-x"></i>
+              </div>
+
+              <strong>Aucun élève disponible</strong>
+              <span>
+                Modifiez votre recherche ou vérifiez la liste des élèves.
+              </span>
+            </div>
+          } @else {
+            @for (eleve of elevesFiltres; track eleve.id) {
+              <label
+                class="assign-student"
+                [class.assign-student--selected]="assignationForm.get('eleve_id')?.value === eleve.id">
+
+                <input
+                  type="radio"
+                  name="eleve_id_selection"
+                  [value]="eleve.id"
+                  [checked]="assignationForm.get('eleve_id')?.value === eleve.id"
+                  (change)="assignationForm.patchValue({eleve_id: eleve.id})">
+
+                <span class="assign-student__check">
+                  <i class="bi bi-check"></i>
+                </span>
+
+                <span class="assign-student__avatar">
+                  <i class="bi bi-person"></i>
+                </span>
+
+                <span class="assign-student__content">
+                  <strong>{{ eleve.nom }} {{ eleve.prenom }}</strong>
+
+                  <span>
+                    <i class="bi bi-card-text me-1"></i>
+                    {{ eleve.matricule || 'Matricule non renseigné' }}
+                  </span>
+                </span>
+
+                <i class="bi bi-chevron-right assign-student__arrow"></i>
+              </label>
+            }
+          }
+
+        </div>
+
+        @if (assignationForm.get('eleve_id')?.invalid &&
+        assignationForm.get('eleve_id')?.touched) {
+          <div class="assign-field__error assign-error--bottom">
+            Veuillez sélectionner un élève.
+          </div>
+        }
+
+        @if (backendErrors['eleve_id']) {
+          <div class="assign-field__error assign-error--bottom">
+            {{ backendErrors['eleve_id'][0] }}
+          </div>
+        }
+
+        @if (backendErrors['parent_id']) {
+          <div class="assign-field__error assign-error--bottom">
+            {{ backendErrors['parent_id'][0] }}
+          </div>
+        }
+
+      </section>
+    </div>
+
+    <!-- FOOTER -->
+    <div class="assign-modal__footer">
+
+      <div class="assign-footer-info">
+        <i class="bi bi-info-circle"></i>
+
+        @if (assignationForm.get('eleve_id')?.value) {
+          <span>Élève sélectionné, prêt à être associé</span>
+        } @else {
+          <span>Sélectionnez un élève pour continuer</span>
+        }
+      </div>
+
+      <div class="assign-footer-actions">
+        <button
+          type="submit"
+          class="btn-assign-submit"
+          [disabled]="assignationForm.invalid || isSubmit || isLoad">
+
+          @if (isSubmit) {
+            <span class="assign-submit-spinner"></span>
+            Enregistrement...
+          } @else {
+            <i class="bi bi-link-45deg"></i>
+            Confirmer
+          }
+        </button>
+      </div>
+
+    </div>
+  </form>
+</div>

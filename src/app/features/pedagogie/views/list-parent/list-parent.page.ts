@@ -6,6 +6,7 @@ import {Parent} from '../../models/parent';
 import {ModalParentComponent} from '../../components/modals/modal-parent/modal-parent.component';
 import {PageHeaderComponent} from '../../../../shared/components/page-header/page-header.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {ModalAssigneEleveComponent} from '../../components/modal-assigne-eleve/modal-assigne-eleve.component';
 
 
 @Component({
@@ -45,6 +46,54 @@ export class ListParentPage {
         this.getParents()
       }
     })
+  }
+
+  edit(edit: any) {
+    const modal = this.modal.open(ModalParentComponent, {size: 'xl', backdrop: 'static'})
+    modal.componentInstance.parent = edit
+    modal.componentInstance.isEdit = true
+    modal.result.catch((reason: any) => {
+      if (reason === 'save') {
+        this.isLoad = true
+        this.getParents()
+      }
+    })
+  }
+  AssignerEleve(asigner: any) {
+    const modal = this.modal.open(ModalAssigneEleveComponent, {size: 'xl', backdrop: 'static', centered: true, scrollable: false})
+    modal.componentInstance.parent = asigner
+    modal.result.catch((reason: any) => {
+      if (reason === 'save') {
+        this.isLoad = true
+        this.getParents()
+      }
+    })
+  }
+
+  changePage(url: any) {
+    if (url != null) {
+      this.isLoad = true;
+      this.apiService.getPaginate(url).then((data: any) => {
+        this.parents = data.data;
+        this.pagination = data.meta.links;
+        this.isLoad = false;
+      })
+    }
+  }
+
+  searchAction() {
+    if (this.searchText.length > 3) {
+      this.isLoad = true;
+      this.apiService.get('parents/search/' + this.searchText).then((data: any) => {
+        this.parents = data.data;
+        this.pagination = data.meta.links;
+        this.isLoad = false;
+      })
+    }
+    if (this.searchText.length == 0) {
+      this.isLoad = true;
+      this.getParents()
+    }
   }
 
 }
