@@ -7,8 +7,12 @@
   </div>
   <div class="page-header__body">
     <div class="page-header__identity">
-      <div class="page-header__icon">
-        <i class="fa fa-users"></i>
+      <div class="page-header__icon" [class.page-header__icon--logo]="logo()">
+        @if (logo()) {
+          <img [src]="logo()" alt="Logo eSchool">
+        } @else {
+          <i class="fa fa-users"></i>
+        }
       </div>
       <div class="page-header__information">
         <div class="page-header__title-line">
