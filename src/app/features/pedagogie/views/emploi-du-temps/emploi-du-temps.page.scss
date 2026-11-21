@@ -219,6 +219,26 @@
   color: #18332a;
   font-size: 14px;
   font-weight: 700;
+}
+
+.emploi-card__header {
+  justify-content: center;
+  background: #072544;
+  color: #fff;
+  text-align: center;
+}
+
+.emploi-card__header h4 {
+  color: #fff;
+  font-size: 20px;
+}
+
+.emploi-card__header h4 i {
+  margin-right: 10px;
+}
+
+.users-card__header.emploi-card__header span {
+  color: #d7e4f2;
   line-height: 1.3;
 }
 
@@ -251,206 +271,130 @@
 
 .emploi-wrapper {
   padding: 16px;
+  overflow-x: auto !important;
+  overflow-y: visible !important;
 }
 
 
 /* =========================================================
-   GRILLE EMPLOI DU TEMPS
+   GRILLE HEBDOMADAIRE
 ========================================================= */
 
-.emploi-grid {
-  display: grid;
-
-  grid-template-columns: repeat(6, minmax(0, 1fr));
-
-  gap: 12px;
+.emploi-grid-scroll {
+  width: 100%;
+  overflow-x: auto;
 }
 
-
-/* =========================================================
-   COLONNE JOUR
-========================================================= */
-
-.emploi-jour {
-  display: flex;
-  flex-direction: column;
-
-  min-width: 0;
-
-  background: #f8fbf9;
-
-  border: 1px solid #e5eee9;
-  border-radius: 10px;
-
-  overflow: hidden;
-}
-
-.emploi-jour__header {
-  padding: 10px 8px;
-
-  background: #ffffff;
-
-  border-bottom: 1px solid #e8efeb;
-
-  color: #006b3f;
-
-  font-size: 10px;
-  font-weight: 800;
-
-  text-align: center;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.emploi-jour__body {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-
-  padding: 8px;
-
-  min-height: 90px;
-}
-
-
-/* =========================================================
-   MESSAGE VIDE PAR JOUR
-========================================================= */
-
-.emploi-empty {
-  padding: 14px 6px;
-
-  color: #a5afa9;
-
-  font-size: 10px;
-  font-style: italic;
-
-  text-align: center;
-}
-
-
-/* =========================================================
-   CARTE COURS
-========================================================= */
-
-.cours-card {
-  display: flex;
-  flex-direction: column;
-
-  gap: 5px;
-
-  padding: 9px;
-
-  background: #ffffff;
-
-  border: 1px solid #e0eae5;
-  border-left: 3px solid #006b3f;
-  border-radius: 8px;
-
-  box-shadow: 0 1px 3px rgba(24, 51, 42, 0.04);
-
-  transition: box-shadow 0.2s ease;
-}
-
-.cours-card:hover {
-  box-shadow: 0 3px 8px rgba(24, 51, 42, 0.08);
-}
-
-.cours-card__top {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-
-  gap: 4px;
-
-  flex-wrap: wrap;
-}
-
-.cours-card__matiere {
-  color: #18332a;
-
+.emploi-schedule-table {
+  width: 100%;
+  min-width: 1040px;
+  table-layout: fixed;
+  border-collapse: collapse;
+  color: #17283e;
   font-size: 11px;
+}
+
+.emploi-schedule-table th,
+.emploi-schedule-table td {
+  border: 1px solid #8794a5;
+}
+
+.emploi-schedule-table thead th {
+  height: 42px;
+  padding: 8px;
+  background: #0a3b70;
+  color: #fff;
+  font-size: 12px;
   font-weight: 800;
-
-  line-height: 1.3;
-
-  overflow: hidden;
-  text-overflow: ellipsis;
+  text-align: center;
+  text-transform: capitalize;
 }
 
-.cours-card__info {
+.emploi-schedule-table__time-heading {
+  width: 86px;
+}
+
+.emploi-schedule-table__time {
+  width: 86px;
+  height: 60px;
+  padding: 5px;
+  background: #e4edfc;
+  color: #15263e;
+  font-weight: 800;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.emploi-schedule-table td {
+  height: 60px;
+  padding: 3px;
+  background: #fff;
+  vertical-align: top;
+}
+
+.emploi-schedule-table__course-cell {
+  background: #e2edff !important;
+}
+
+.emploi-course {
   display: flex;
-  align-items: center;
-
-  gap: 5px;
-
-  color: #66776f;
-
+  height: 100%;
+  min-height: 54px;
+  flex-direction: column;
+  gap: 1px;
+  padding: 2px;
+  overflow: hidden;
+  border-left: 3px solid #13518e;
+  border-radius: 3px;
+  color: #283b54;
   font-size: 9px;
-
-  min-width: 0;
+  line-height: 1.05;
 }
 
-.cours-card__info i {
-  color: #006b3f;
-  font-size: 10px;
-  flex-shrink: 0;
-}
-
-.cours-card__info span {
-  white-space: nowrap;
+.emploi-course > span,
+.emploi-course > strong {
   overflow: hidden;
   text-overflow: ellipsis;
-}
-
-.cours-card__actions {
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-
-  gap: 5px;
-
-  margin-top: 4px;
-  padding-top: 5px;
-
-  border-top: 1px solid #f0f5f2;
-}
-
-
-/* =========================================================
-   BADGES COURS
-========================================================= */
-
-.cours-badge {
-  display: inline-flex;
-  align-items: center;
-
-  gap: 3px;
-
-  padding: 3px 6px;
-
-  border-radius: 5px;
-
-  font-size: 8px;
-  font-weight: 700;
-
-  line-height: 1;
-
   white-space: nowrap;
 }
 
-.cours-badge--heure {
-  background: #eaf5ef;
-  color: #006b3f;
+.emploi-course > strong {
+  color: #102d50;
+  font-size: 10px;
 }
 
-.cours-badge--type {
-  background: #eef3f1;
-  color: #526159;
+.emploi-course__time {
+  color: #10477d;
+  font-size: 8px;
+  font-weight: 800;
+}
+
+.emploi-course__actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 5px;
+  margin-top: auto;
+}
+
+.emploi-schedule-empty,
+.emploi-outside-hours {
+  margin: 12px 0 0;
+  color: #66788d;
+  font-size: 12px;
+}
+
+.emploi-outside-hours {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  padding: 10px 12px;
+  border: 1px solid #d5e0ed;
+  border-radius: 7px;
+  background: #f7f9fc;
+}
+
+.emploi-outside-hours strong {
+  color: #193958;
 }
 
 
@@ -494,6 +438,12 @@
 .table-action--delete:hover {
   background: #fff1f0;
   border-color: #f2cccc;
+}
+
+.emploi-course__actions .table-action {
+  width: 18px;
+  height: 18px;
+  font-size: 9px;
 }
 
 
@@ -644,6 +594,12 @@
   font-size: 11px;
 }
 
+.emploi-card__header .parents-count {
+  border-color: rgba(255, 255, 255, 0.3);
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+}
+
 
 /* =========================================================
    RESPONSIVE — TABLETTE
@@ -651,21 +607,8 @@
 
 @media (max-width: 1100px) {
 
-  .emploi-grid {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-  }
-
-  .cours-card__matiere {
-    font-size: 10px;
-  }
-
-  .cours-card__info {
-    font-size: 8px;
-  }
-
-  .cours-badge {
-    font-size: 7px;
-    padding: 3px 5px;
+  .emploi-schedule-table {
+    min-width: 960px;
   }
 }
 
@@ -682,11 +625,6 @@
 
   .users-toolbar__actions {
     flex-wrap: wrap;
-  }
-
-  .emploi-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 10px;
   }
 
   .classe-select {
@@ -747,30 +685,8 @@
     padding: 10px;
   }
 
-  .emploi-grid {
-    grid-template-columns: 1fr;
-    gap: 8px;
-  }
-
-  .emploi-jour__header {
-    font-size: 9px;
-  }
-
-  .cours-card {
-    padding: 7px;
-  }
-
-  .cours-card__matiere {
-    font-size: 10px;
-  }
-
-  .cours-card__info {
-    font-size: 8px;
-  }
-
-  .cours-badge {
-    font-size: 7px;
-    padding: 2px 5px;
+  .emploi-schedule-table {
+    min-width: 900px;
   }
 
   .table-action {

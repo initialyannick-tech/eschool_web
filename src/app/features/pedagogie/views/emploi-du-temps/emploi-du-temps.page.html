@@ -16,12 +16,30 @@
       <select
         class="classe-select__input"
         [(ngModel)]="selectedClasseId"
-        (change)="loadEmploiDuTemps()">
+        (change)="onClasseChange()">
         @for (c of classes; track c.id) {
-          <option [value]="c.id">{{ c.libelle || c.nom }}</option>
+          <option [ngValue]="c.id">{{ c.libelle || c.nom }}</option>
         }
       </select>
     </div>
+
+    <button
+      type="button"
+      class="btn-add-user"
+      [disabled]="!selectedClasseId || isLoad || isExportingPdf"
+      (click)="downloadClassePdf()">
+      <i class="bi bi-file-earmark-pdf"></i>
+      <span>PDF de cette classe</span>
+    </button>
+
+    <button
+      type="button"
+      class="btn-add-user"
+      [disabled]="classes.length === 0 || isExportingPdf"
+      (click)="downloadToutesClassesPdf()">
+      <i class="bi bi-files"></i>
+      <span>PDF toutes les classes</span>
+    </button>
 
     <button
       type="button"
@@ -36,10 +54,10 @@
 
 <!-- Carte principale -->
 <div class="users-card">
-  <div class="users-card__header">
+  <div class="users-card__header emploi-card__header">
     <div>
-      <h4>Emploi du temps</h4>
-      <span>Créneaux de cours de la semaine</span>
+      <h4><i class="bi bi-calendar-week"></i> Emploi du Temps</h4>
+      <span>Grille hebdomadaire des cours</span>
     </div>
     <div class="parents-count">
       <i class="bi bi-calendar-week"></i>
@@ -56,88 +74,78 @@
         </div>
       </div>
     } @else {
-      <div class="emploi-grid">
-        @for (jour of jours; track jour) {
-          <div class="emploi-jour">
-            <div class="emploi-jour__header">
-              {{ jour }}
-            </div>
-            <div class="emploi-jour__body">
-              @let coursJour = getCoursForJour(jour);
-              @if (coursJour.length === 0) {
-                <div class="emploi-empty">Aucun cours</div>
-              } @else {
-                @for (c of coursJour; track c.id) {
-                  <div class="cours-card">
-                    <div class="cours-card__top">
-                      <span class="cours-badge cours-badge--heure">
-                        <i class="bi bi-clock"></i>
-                        {{ c.heure_debut }} - {{ c.heure_fin }}
-                      </span>
-                      @if (c.type_cours) {
-                        <span class="cours-badge cours-badge--type">
-                          {{ c.type_cours }}
-                        </span>
-                      }
-                    </div>
-
-                    <div class="cours-card__matiere">
-                      {{ c.matiere?.libelle || c.matiere?.nom || 'Matière N/A' }}
-                    </div>
-
-                    <div class="cours-card__info">
-                      <i class="bi bi-person"></i>
-                      <span>
-                        {{ c.enseignant?.nom }} {{ c.enseignant?.prenom }}
-                      </span>
-                    </div>
-
-                    <div class="cours-card__info">
-                      <i class="bi bi-door-open"></i>
-                      <span>Salle : {{ c.salle?.code || 'N/A' }}</span>
-                    </div>
-
-                    <div class="cours-card__actions">
-                      <button
-                        type="button"
-                        class="table-action table-action--edit"
-                        title="Modifier ce cours"
-                        (click)="openModal(c)">
-                        <i class="bi bi-pencil"></i>
-                      </button>
-                      <button
-                        type="button"
-                        class="table-action table-action--delete"
-                        title="Supprimer ce cours"
-                        (click)="c.id && deleteCours(c.id)">
-                        <i class="bi bi-trash3"></i>
-                      </button>
-                    </div>
-                  </div>
-                }
+      <div class="emploi-grid-scroll">
+        <table class="emploi-schedule-table">
+          <thead>
+            <tr>
+              <th class="emploi-schedule-table__time-heading">Heure</th>
+              @for (jour of jours; track jour) {
+                <th>{{ jour | titlecase }}</th>
               }
-            </div>
-          </div>
-        }
+            </tr>
+          </thead>
+          <tbody>
+            @for (heure of heures; track heure) {
+              <tr>
+                <th class="emploi-schedule-table__time">
+                  {{ heure }}h - {{ heure + 1 }}h
+                </th>
+                @for (jour of jours; track jour) {
+                  @let cours = getCoursPourHeure(jour, heure);
+                  @if (!cours || !isContinuation(cours, heure)) {
+                    <td [attr.rowspan]="cours ? getCourseRowSpan(cours) : null"
+                        [class.emploi-schedule-table__course-cell]="!!cours">
+                      @if (cours) {
+                        <div class="emploi-course">
+                          <span class="emploi-course__time">
+                            {{ formatHeure(cours.heure_debut) }} - {{ formatHeure(cours.heure_fin) }}
+                            @if (cours.type_cours) { <span>· {{ cours.type_cours }}</span> }
+                          </span>
+                          <strong>{{ cours.matiere?.libelle || cours.matiere?.nom || 'Matière non renseignée' }}</strong>
+                          <span>
+                            {{ cours.enseignant?.nom }} {{ cours.enseignant?.prenom }}
+                            · Salle : {{ cours.salle?.code || cours.salle?.nom || 'N/A' }}
+                          </span>
+                          <div class="emploi-course__actions">
+                            <button
+                              type="button"
+                              class="table-action table-action--edit"
+                              title="Modifier ce cours"
+                              (click)="openModal(cours)">
+                              <i class="bi bi-pencil"></i>
+                            </button>
+                            <button
+                              type="button"
+                              class="table-action table-action--delete"
+                              title="Supprimer ce cours"
+                              (click)="cours.id && deleteCours(cours.id)">
+                              <i class="bi bi-trash3"></i>
+                            </button>
+                          </div>
+                        </div>
+                      }
+                    </td>
+                  }
+                }
+              </tr>
+            }
+          </tbody>
+        </table>
       </div>
 
-      @if (!coursList || coursList.length === 0) {
-        <div class="users-table__empty">
-          <div class="empty-content">
-            <div class="empty-content__icon">
-              <i class="bi bi-calendar-x"></i>
-            </div>
-            <strong>Aucun cours planifié</strong>
-            <span>Aucun créneau n'est défini pour cette classe.</span>
-            <button
-              type="button"
-              class="empty-content__button"
-              [disabled]="!selectedClasseId"
-              (click)="openModal()">
-              <i class="bi bi-plus-lg"></i>
-              Ajouter un cours
-            </button>
-          </div>
+      @if (coursList.length === 0) {
+        <p class="emploi-schedule-empty">Aucun cours n'est planifié pour cette classe.</p>
+      }
+
+      @if (getCoursHorsPlage().length > 0) {
+        <div class="emploi-outside-hours">
+          <strong>Créneaux en dehors de la grille (6 h - 22 h)</strong>
+          @for (cours of getCoursHorsPlage(); track cours.id) {
+            <span>
+              {{ cours.jour_semaine | titlecase }} · {{ formatHeure(cours.heure_debut) }} - {{ formatHeure(cours.heure_fin) }}
+              · {{ cours.matiere?.libelle || cours.matiere?.nom || 'Matière non renseignée' }}
+            </span>
+          }
         </div>
       }
     }

@@ -1,10 +1,13 @@
 import {
   ApplicationConfig,
+  LOCALE_ID,
   importProvidersFrom,
   inject,
   provideBrowserGlobalErrorListeners,
   provideZoneChangeDetection
 } from '@angular/core';
+import { registerLocaleData } from '@angular/common';
+import localeFr from '@angular/common/locales/fr';
 import { provideRouter } from '@angular/router';
 
 import { routes } from './app.routes';
@@ -16,6 +19,7 @@ import {provideAnimations} from '@angular/platform-browser/animations';
 import {provideToastr} from 'ngx-toastr';
 import {NgxPermissionsModule} from 'ngx-permissions';
 
+registerLocaleData(localeFr, 'fr-FR');
 
 
 // INTERCEPTOR TOKEN
@@ -43,6 +47,7 @@ function tokenInterceptor(request: HttpRequest<any>, next: HttpHandlerFn) {
 
 export const appConfig: ApplicationConfig = {
   providers: [
+    { provide: LOCALE_ID, useValue: 'fr-FR' },
     provideHttpClient(withFetch(), withInterceptors([tokenInterceptor])),
     provideAnimations(),
     provideZoneChangeDetection({eventCoalescing: true}),
