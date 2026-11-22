@@ -10,6 +10,7 @@ import {Location} from "@angular/common";
 export class PageHeaderComponent {
   titre = input.required<string>()
   backBtn = input<boolean>(false)
+  logo = input<string | null>(null)
 
   location = inject(Location)
 

@@ -1,0 +1,291 @@
+<app-page-header [backBtn]="true" [titre]="'Communication'" [logo]="'assets/img/eschool_logo.png'"></app-page-header>
+
+<main class="communication-page">
+  <header class="communication-heading">
+    <div>
+      <h1>Communication</h1>
+      <p>Annonces, messages privés et notifications de l’établissement.</p>
+    </div>
+    @if (unreadCount > 0) {
+      <span class="unread-badge"><i class="bi bi-bell-fill"></i> {{ unreadCount }} non lue(s)</span>
+    }
+  </header>
+
+  @if (errorMessage) {
+    <div class="feedback feedback--error" role="alert">
+      <i class="bi bi-exclamation-circle"></i>{{ errorMessage }}
+    </div>
+  }
+  @if (successMessage) {
+    <div class="feedback feedback--success" role="status">
+      <i class="bi bi-check-circle"></i>{{ successMessage }}
+    </div>
+  }
+
+  <nav class="communication-tabs" aria-label="Rubriques de communication">
+    @if (canReadAnnouncements) {
+      <button type="button" [class.active]="activeTab === 'announcements'" (click)="selectTab('announcements')">
+        <i class="bi bi-megaphone"></i>Annonces
+      </button>
+    }
+    @if (canReadMessages || canSendMessages) {
+      <button type="button" [class.active]="activeTab === 'messages'" (click)="selectTab('messages')">
+        <i class="bi bi-chat-dots"></i>Messagerie
+      </button>
+    }
+    <button type="button" [class.active]="activeTab === 'notifications'" (click)="selectTab('notifications')">
+      <i class="bi bi-bell"></i>Notifications
+      @if (unreadCount > 0) { <span class="tab-count">{{ unreadCount }}</span> }
+    </button>
+    @if (isParentOrStudent) {
+      <button type="button" [class.active]="activeTab === 'portal'" (click)="selectTab('portal')">
+        <i class="bi bi-mortarboard"></i>Mon espace
+      </button>
+    }
+  </nav>
+
+  @if (activeTab === 'announcements') {
+    <section class="communication-grid">
+      @if (canManageAnnouncements) {
+        <form class="communication-card announcement-form" (ngSubmit)="publishAnnouncement()">
+          <div class="card-heading">
+            <div class="card-icon"><i class="bi bi-megaphone"></i></div>
+            <div><h2>Publier une annonce</h2><p>Diffusez une information aux utilisateurs concernés.</p></div>
+          </div>
+
+          <label for="announcement-title">Titre</label>
+          <input id="announcement-title" name="title" [(ngModel)]="announcementTitle" maxlength="180" required>
+
+          <label for="announcement-message">Message</label>
+          <textarea id="announcement-message" name="message" [(ngModel)]="announcementText" rows="5" maxlength="10000" required></textarea>
+
+          <div class="form-row">
+            <div>
+              <label for="announcement-audience">Destinataires</label>
+              <select id="announcement-audience" name="audience" [(ngModel)]="announcementAudience">
+                <option value="all">Tous les utilisateurs actifs</option>
+                <option value="role">Un rôle spécifique</option>
+              </select>
+            </div>
+            @if (announcementAudience === 'role') {
+              <div>
+                <label for="announcement-role">Rôle</label>
+                <select id="announcement-role" name="role" [(ngModel)]="announcementRoleId" required>
+                  <option value="">Sélectionner un rôle</option>
+                  @for (role of roles; track role.id) {
+                    <option [value]="role.id">{{ role.libelle }}</option>
+                  }
+                </select>
+              </div>
+            }
+          </div>
+
+          <label class="checkbox-label">
+            <input type="checkbox" name="email" [(ngModel)]="emailAnnouncement">
+            Envoyer également par e-mail
+          </label>
+
+          <button class="primary-button" type="submit" [disabled]="isSending">
+            <i class="bi bi-send"></i>{{ isSending ? 'Publication…' : 'Publier l’annonce' }}
+          </button>
+        </form>
+      }
+
+      <section class="communication-card announcements-list">
+        <div class="card-heading">
+          <div class="card-icon card-icon--gold"><i class="bi bi-megaphone"></i></div>
+          <div><h2>Annonces récentes</h2><p>Informations publiées par l’établissement.</p></div>
+        </div>
+        @if (announcements.length === 0) {
+          <div class="empty-state"><i class="bi bi-inbox"></i><span>Aucune annonce à afficher.</span></div>
+        } @else {
+          @for (announcement of announcements; track announcement.id) {
+            <article class="announcement-item">
+              <div class="announcement-item__top">
+                <h3>{{ announcement.title }}</h3>
+                <time>{{ announcement.published_at | date:'dd/MM/yyyy à HH:mm' }}</time>
+              </div>
+              <p>{{ announcement.message }}</p>
+              <small>
+                {{ announcement.sender?.prenom }} {{ announcement.sender?.nom }}
+                @if (announcement.target_role) { · {{ announcement.target_role }} }
+              </small>
+            </article>
+          }
+        }
+      </section>
+    </section>
+  }
+
+  @if (activeTab === 'messages') {
+    <section class="messaging-layout">
+      @if (canReadMessages) {
+        <aside class="communication-card conversation-list">
+          <div class="card-heading">
+            <div class="card-icon"><i class="bi bi-chat-left-text"></i></div>
+            <div><h2>Conversations</h2><p>Échanges privés</p></div>
+          </div>
+          @for (conversation of conversations; track conversation.id) {
+            <div class="conversation-row" [class.conversation-row--active]="selectedConversation?.id === conversation.id">
+              <button type="button" class="conversation-select" (click)="openConversation(conversation)">
+                <strong>
+                  @for (participant of conversation.participants; track participant.id) {
+                    @if (participant.id !== user?.id) { {{ participant.prenom }} {{ participant.nom }} }
+                  }
+                </strong>
+                <span>{{ conversation.last_message?.body || conversation.last_message?.attachment_name || 'Nouvelle conversation' }}</span>
+              </button>
+              @if (conversation.unread_count > 0) { <span class="conversation-unread">{{ conversation.unread_count }}</span> }
+              <button class="icon-button" type="button" title="Archiver" aria-label="Archiver la conversation" (click)="archiveConversation(conversation)">
+                <i class="bi bi-archive"></i>
+              </button>
+            </div>
+          } @empty {
+            <div class="empty-state"><i class="bi bi-chat"></i><span>Aucune conversation pour le moment.</span></div>
+          }
+        </aside>
+      }
+
+      <section class="communication-card thread-card">
+        <div class="card-heading">
+          <div class="card-icon card-icon--gold"><i class="bi bi-chat-square-text"></i></div>
+          <div>
+            <h2>{{ selectedConversation ? 'Conversation' : 'Nouveau message' }}</h2>
+            <p>{{ selectedConversation ? 'Échange réservé aux participants.' : 'Votre message ne sera visible que par son destinataire.' }}</p>
+          </div>
+        </div>
+
+        @if (selectedConversation && canReadMessages) {
+          <div class="thread-messages">
+            @for (message of threadMessages; track message.id) {
+              <article class="thread-message" [class.thread-message--mine]="message.sender_id === user?.id">
+                <strong>{{ message.sender?.prenom }} {{ message.sender?.nom }}</strong>
+                @if (message.body) { <p>{{ message.body }}</p> }
+                @if (message.attachment_url) {
+                  <button type="button" class="attachment-link" (click)="downloadAttachment(message)">
+                    <i class="bi bi-paperclip"></i>{{ message.attachment_name }}
+                  </button>
+                }
+                <time>{{ message.created_at | date:'dd/MM/yyyy HH:mm' }}</time>
+              </article>
+            } @empty {
+              <div class="empty-state"><span>Cette conversation ne contient aucun message.</span></div>
+            }
+          </div>
+        }
+
+        @if (!selectedConversation && canSendMessages) {
+          <label for="message-recipient">Destinataire</label>
+          <select id="message-recipient" name="recipient" [(ngModel)]="recipientId">
+            <option value="">Sélectionner un contact</option>
+            @for (contact of contacts; track contact.id) {
+              <option [value]="contact.id">{{ contactName(contact) }}</option>
+            }
+          </select>
+        }
+
+        @if (canSendMessages) {
+          <form class="message-composer" (ngSubmit)="sendMessage()">
+            <label for="message-body">{{ selectedConversation ? 'Votre réponse' : 'Message' }}</label>
+            <textarea id="message-body" name="body" [(ngModel)]="messageText" rows="3" maxlength="5000"></textarea>
+            <div class="composer-actions">
+              <label class="file-button">
+                <i class="bi bi-paperclip"></i>
+                {{ attachment?.name || 'Ajouter une pièce jointe' }}
+                <input type="file" accept=".pdf,.jpg,.jpeg,.png,.doc,.docx,.xls,.xlsx" (change)="setAttachment($event)">
+              </label>
+              <button class="primary-button" type="submit" [disabled]="isSending">
+                <i class="bi bi-send"></i>{{ isSending ? 'Envoi…' : 'Envoyer' }}
+              </button>
+            </div>
+            <small>Formats acceptés : PDF, image, Word ou Excel (10 Mo maximum).</small>
+          </form>
+        } @else if (!selectedConversation) {
+          <div class="empty-state"><span>Vous pouvez consulter vos conversations, mais vous ne pouvez pas en envoyer.</span></div>
+        }
+      </section>
+    </section>
+  }
+
+  @if (activeTab === 'notifications') {
+    <section class="communication-card notification-list">
+      <div class="card-heading">
+        <div class="card-icon"><i class="bi bi-bell"></i></div>
+        <div><h2>Notifications</h2><p>Vos annonces et nouveaux messages.</p></div>
+      </div>
+      @for (notification of notifications; track notification.id) {
+        <button type="button" class="notification-item" [class.notification-item--unread]="!notification.read_at" (click)="markNotificationRead(notification)">
+          <span class="notification-item__icon"><i class="bi" [class.bi-chat-dots]="notification.type === 'internal_message'" [class.bi-megaphone]="notification.type !== 'internal_message'"></i></span>
+          <span class="notification-item__content">
+            <strong>{{ notification.title }}</strong>
+            <span>{{ notification.message }}</span>
+            <small>{{ notification.created_at | date:'dd/MM/yyyy à HH:mm' }}</small>
+          </span>
+          @if (!notification.read_at) { <span class="unread-dot" aria-label="Non lue"></span> }
+        </button>
+      } @empty {
+        <div class="empty-state"><i class="bi bi-bell-slash"></i><span>Aucune notification pour le moment.</span></div>
+      }
+    </section>
+  }
+
+  @if (activeTab === 'portal') {
+    <section class="communication-card portal-card">
+      <div class="card-heading">
+        <div class="card-icon card-icon--gold"><i class="bi bi-mortarboard"></i></div>
+        <div><h2>Mon espace</h2><p>Informations du compte et annonces destinées à votre profil.</p></div>
+      </div>
+      @if (!portalData) {
+        <div class="empty-state"><span>Les informations de votre espace ne sont pas disponibles pour le moment.</span></div>
+      } @else {
+        @if (portalData.profile) {
+          <div class="portal-profile">
+            <strong>{{ portalData.profile.prenom }} {{ portalData.profile.nom }}</strong>
+            @if (portalData.profile.matricule) { <span>Matricule : {{ portalData.profile.matricule }}</span> }
+            @if (portalData.profile.email) { <span>{{ portalData.profile.email }}</span> }
+          </div>
+        }
+        @if (portalData.children?.length) {
+          <h3>Mes enfants</h3>
+          <div class="children-grid">
+            @for (child of portalData.children; track child.id) {
+              <article class="child-card">
+                <i class="bi bi-backpack"></i>
+                <strong>{{ child.prenom }} {{ child.nom }}</strong>
+                <span>{{ child.matricule }}</span>
+              </article>
+            }
+          </div>
+        }
+        @if (portalData.type === 'parent' && portalData.children?.length === 0) {
+          <div class="empty-state"><span>Aucun élève n’est encore associé à ce compte parent.</span></div>
+        }
+        @if (portalData.parents?.length) {
+          <h3>Mes responsables légaux</h3>
+          <div class="children-grid">
+            @for (parent of portalData.parents; track parent.id) {
+              <article class="child-card">
+                <i class="bi bi-person-vcard"></i>
+                <strong>{{ parent.prenom }} {{ parent.nom }}</strong>
+                @if (parent.telephone) { <span>{{ parent.telephone }}</span> }
+                @if (parent.email) { <span>{{ parent.email }}</span> }
+              </article>
+            }
+          </div>
+        }
+        @if (portalData.announcements?.length) {
+          <h3>Annonces de l’établissement</h3>
+          @for (announcement of portalData.announcements; track announcement.id) {
+            <article class="announcement-item">
+              <h3>{{ announcement.title }}</h3>
+              <p>{{ announcement.message }}</p>
+              <small>{{ announcement.published_at | date:'dd/MM/yyyy à HH:mm' }}</small>
+            </article>
+          }
+        } @else {
+          <div class="empty-state"><span>Aucune annonce destinée à votre profil.</span></div>
+        }
+      }
+    </section>
+  }
+</main>
